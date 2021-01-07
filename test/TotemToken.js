@@ -61,13 +61,13 @@ contract('TotemToken', function (accounts) {
           error.message.indexOf('revert') >= 0,
           'error message must contain revert'
         );
-        return tokenInstance.transfer.call(accounts[1], 250000, {
+        return tokenInstance.transfer.call(accounts[1], 500000, {
           from: accounts[0],
         });
       })
       .then(function (success) {
         assert.equal(success, true, 'it returns true');
-        return tokenInstance.transfer(accounts[1], 250000, {
+        return tokenInstance.transfer(accounts[1], 500000, {
           from: accounts[0],
         });
       })
@@ -90,7 +90,7 @@ contract('TotemToken', function (accounts) {
         );
         assert.equal(
           receipt.logs[0].args._value,
-          250000,
+          500000,
           'logs the transfer amount'
         );
         return tokenInstance.balanceOf(accounts[1]);
@@ -98,7 +98,7 @@ contract('TotemToken', function (accounts) {
       .then(function (balance) {
         assert.equal(
           balance.toNumber(),
-          250000,
+          500000,
           'adds the amount to the receiving account'
         );
         return tokenInstance.balanceOf(accounts[0]);
