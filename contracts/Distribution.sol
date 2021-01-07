@@ -1,4 +1,4 @@
-pragma solidity 0.5.16;
+pragma solidity 0.7.4;
 
 contract TotemDistribution {
 
@@ -52,7 +52,7 @@ contract TotemDistribution {
         PrivateSale = _address;
     }
 
-    function setAddressTeamAllocation(address _address) public _onlyOwner (bool success){
+    function setAddressTeamAllocation(address _address) public _onlyOwner (bool) {
         TeamAllocation = _address;
     }
 

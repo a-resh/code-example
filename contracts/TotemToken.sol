@@ -1,4 +1,4 @@
-pragma solidity 0.5.16;
+pragma solidity 0.7.4;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/TokenTimelock.sol";
@@ -30,9 +30,23 @@ contract TotemToken {
 
     address payable owner;
 
-    constructor() { owner = msg.sender; }
+    constructor(uint256 _initialSupply) {
+        balanceOf[msg.sender] = _initialSupply;
+        totalSupply = _initialSupply;
 
-        modifier onlyOwner {
+        //Token allocation
+        CommunityDevelopment = ( _initialSupply / 1000 ) * COMMUNITY_DEVELOPMENT;
+        StakingRewards = ( _initialSupply / 1000 ) * STAKING_REWARDS;
+        LiquidityPool = ( _initialSupply / 1000 ) * LIQUIDITY_POOL;
+        PublicSale = ( _initialSupply / 1000 ) * PUBLIC_SALE;
+        Advisors = ( _initialSupply / 1000 ) * ADVISORS;
+        SeedInvestment = ( _initialSupply / 1000 ) * SEED_INVESTMENT;
+        PrivateSale = ( _initialSupply / 1000 ) * PRIVATE_SALE;
+        TeamAllocation = ( _initialSupply / 1000 ) * TEAM_ALLOCATION;
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
         require(
             msg.sender == owner,
             "Only owner can call this function."
@@ -54,21 +68,6 @@ contract TotemToken {
 
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
-
-    function TotemToken (uint256 _initialSupply) public {
-        balanceOf[msg.sender] = _initialSupply;
-        totalSupply = _initialSupply;
-
-        //Token allocation
-        CommunityDevelopment = ( _initialSupply / 1000 ) * COMMUNITY_DEVELOPMENT;
-        StakingRewards = ( _initialSupply / 1000 ) * STAKING_REWARDS;
-        LiquidityPool = ( _initialSupply / 1000 ) * LIQUIDITY_POOL;
-        PublicSale = ( _initialSupply / 1000 ) * PUBLIC_SALE;
-        Advisors = ( _initialSupply / 1000 ) * ADVISORS;
-        SeedInvestment = ( _initialSupply / 1000 ) * SEED_INVESTMENT;
-        PrivateSale = ( _initialSupply / 1000 ) * PRIVATE_SALE;
-        TeamAllocation = ( _initialSupply / 1000 ) * TEAM_ALLOCATION;
-    }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
         require(balanceOf[msg.sender] >= _value);
