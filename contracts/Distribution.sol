@@ -66,8 +66,4 @@ contract TotemDistribution {
       totemToken.transfer(TeamAllocation, totemToken.TeamAllocation);
       return true;
     }
-
-    function getVal() constant public {
-        return totemToken.val();
-    }
 }
