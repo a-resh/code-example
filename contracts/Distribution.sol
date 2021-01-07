@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.7.4;
 
 contract TotemDistribution {
@@ -16,7 +17,7 @@ contract TotemDistribution {
 
     constructor() { owner = msg.sender; }
 
-        modifier onlyOwner {
+    modifier onlyOwner {
         require(
             msg.sender == owner,
             "Only owner can call this function."
@@ -24,46 +25,51 @@ contract TotemDistribution {
         _;
     }
 
-    function setTokenAddress(address _address) _onlyOwner {
+    function setTokenAddress(address _address) onlyOwner public {
         totemToken = TotemToken(_address);
     }
 
-    function setAddressCommunityDevelopment(address _address) public _onlyOwner {
+    function setAddressCommunityDevelopment(address _address) public onlyOwner {
         CommunityDevelopment = _address;
     }
+    
+    function setAddressStakingRewards(address _address) public onlyOwner {
+        StakingRewards = _address;
+    }
 
-    function setAddressLiquidityPool(address _address) public _onlyOwner {
+    function setAddressLiquidityPool(address _address) public onlyOwner {
         LiquidityPool = _address;
     }
 
-    function setAddressPublicSale(address _address) public _onlyOwner {
+    function setAddressPublicSale(address _address) public onlyOwner {
         PublicSale = _address;
     }
 
-    function setAddressAdvisors(address _address) public _onlyOwner {
+    function setAddressAdvisors(address _address) public onlyOwner {
         Advisors = _address;
     }
 
-    function setAddressSeedInvestment(address _address) public _onlyOwner {
+    function setAddressSeedInvestment(address _address) public onlyOwner {
         SeedInvestment = _address;
     }
 
-    function setAddressPrivateSale(address _address) public _onlyOwner {
+    function setAddressPrivateSale(address _address) public onlyOwner {
         PrivateSale = _address;
     }
 
-    function setAddressTeamAllocation(address _address) public _onlyOwner (bool) {
+    function setAddressTeamAllocation(address _address) public onlyOwner {
         TeamAllocation = _address;
     }
 
-    function distibuteTokens () public _onlyOwner {
-      totemToken.transfer(CommunityDevelopment, totemToken.CommunityDevelopment);
-      totemToken.transfer(LiquidityPool, totemToken.LiquidityPool);
-      totemToken.transfer(PublicSale, totemToken.PublicSale);
-      totemToken.transfer(Advisors, totemToken.Advisors);
-      totemToken.transfer(SeedInvestment, totemToken.SeedInvestment);
-      totemToken.transfer(PrivateSale, totemToken.PrivateSale);
-      totemToken.transfer(TeamAllocation, totemToken.TeamAllocation);
+    function distibuteTokens () public onlyOwner returns (bool) {
+      totemToken.transfer(CommunityDevelopment, totemToken.getCommunityDevelopment());
+      totemToken.transfer(StakingRewards, totemToken.getStakingRewards());
+      totemToken.transfer(LiquidityPool, totemToken.getLiquidityPool());
+      totemToken.transfer(PublicSale, totemToken.getPublicSale());
+      totemToken.transfer(Advisors, totemToken.getAdvisors());
+      totemToken.transfer(SeedInvestment, totemToken.getSeedInvestment());
+      totemToken.transfer(PrivateSale, totemToken.getPrivateSale());
+      totemToken.transfer(TeamAllocation, totemToken.getTeamAllocation());
       return true;
     }
 }

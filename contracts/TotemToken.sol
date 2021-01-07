@@ -1,8 +1,5 @@
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.7.4;
-
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/TokenTimelock.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
 
 contract TotemToken {
     string  public name = "Totem Token";
@@ -21,7 +18,7 @@ contract TotemToken {
 
     uint8 COMMUNITY_DEVELOPMENT = 100; // 10% for Community development
     uint8 STAKING_REWARDS = 165; // 16,5% for Staking Revawards
-    uint8 LIQUIDITY_POOL = 25; // 2,5% for Liquidity pool​
+    uint8 LIQUIDITY_POOL = 25; // 2,5% for Liquidity pool
     uint8 PUBLIC_SALE = 250; // 25% for Public Sale
     uint8 ADVISORS = 50; // 5% for Advisors
     uint8 SEED_INVESTMENT = 110; // 11% for Seed investment
@@ -32,7 +29,7 @@ contract TotemToken {
 
     constructor(uint256 _initialSupply) {
         balanceOf[msg.sender] = _initialSupply;
-        totalSupply = _initialSupply;
+        totalSupply = _initialSupply * 10000000000;
 
         //Token allocation
         CommunityDevelopment = ( _initialSupply / 1000 ) * COMMUNITY_DEVELOPMENT;
@@ -43,6 +40,7 @@ contract TotemToken {
         SeedInvestment = ( _initialSupply / 1000 ) * SEED_INVESTMENT;
         PrivateSale = ( _initialSupply / 1000 ) * PRIVATE_SALE;
         TeamAllocation = ( _initialSupply / 1000 ) * TEAM_ALLOCATION;
+        
         owner = msg.sender;
     }
 
@@ -75,7 +73,7 @@ contract TotemToken {
         balanceOf[msg.sender] -= _value;
         balanceOf[_to] += _value;
 
-        Transfer(msg.sender, _to, _value);
+        emit Transfer(msg.sender, _to, _value);
 
         return true;
     }
@@ -88,7 +86,7 @@ contract TotemToken {
         return true;
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public _onlyOwner returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         require(_value <= balanceOf[_from]);
         require(_value <= allowance[_from][msg.sender]);
 
@@ -100,5 +98,37 @@ contract TotemToken {
         Transfer(_from, _to, _value);
 
         return true;
+    }
+    
+    function getCommunityDevelopment() public view returns(uint256) {
+        return CommunityDevelopment;
+    }
+    
+    function getStakingRewards() public view returns(uint256) {
+        return StakingRewards;
+    }
+    
+    function getLiquidityPool() public view returns(uint256) {
+        return LiquidityPool;
+    }
+    
+    function getPublicSale() public view returns(uint256) {
+        return PublicSale;
+    }
+    
+    function getAdvisors() public view returns(uint256) {
+        return Advisors;
+    }
+    
+    function getSeedInvestment() public view returns(uint256) {
+        return SeedInvestment;
+    }
+    
+    function getPrivateSale() public view returns(uint256) {
+        return PrivateSale;
+    }
+    
+    function getTeamAllocation() public view returns(uint256) {
+        return TeamAllocation;
     }
 }
