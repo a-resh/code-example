@@ -84,21 +84,23 @@ contract Draw {
         createWinnersList();
     }
 
-    function createWinnersList () public {
+    function createWinnersList () private {
       uint  _length = players.length;
 
-      TempPlayer[] storage tmpPlayers;
+      TempPlayer[] memory tmpPlayers = new TempPlayer[](_length);
       for (uint i = 0; i < _length; i++) {
         if (players[i].prediction >= finalyBTCPrice) {
-          tmpPlayers.push(TempPlayer(players[i].addr, players[i].prediction - finalyBTCPrice));
+          tmpPlayers[i].addr = players[i].addr;
+          tmpPlayers[i].howClose = players[i].prediction - finalyBTCPrice;
         } else {
-          tmpPlayers.push(TempPlayer(players[i].addr, finalyBTCPrice - players[i].prediction));
+          tmpPlayers[i].addr = players[i].addr;
+          tmpPlayers[i].howClose = finalyBTCPrice - players[i].prediction;
         }
       }
 
-      uint[] storage unsortPrediction;
+      uint[] memory unsortPrediction;
       for (uint i = 0; i < _length; i++){
-        unsortPrediction.push(tmpPlayers[i].howClose);
+        unsortPrediction[i] = tmpPlayers[i].howClose;
       }
 
       uint[] memory sortPrediction = sort(unsortPrediction);
@@ -120,7 +122,7 @@ contract Draw {
     function checkWinner(address _winner) public returns (int) {
       for (uint i = 0; i < winners.length; i++) {
         if (winners[i].addr == _winner) {
-          return int(i);
+         return int(i);
         }
         return -1;
       }
