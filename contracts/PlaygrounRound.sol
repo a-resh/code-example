@@ -28,6 +28,11 @@ contract Draw {
       uint256 prizeTotm;
       uint256 prizeBtc;
     }
+    
+    struct TempPlayer {
+      address addr;
+      uint howClose;
+    }
 
     Winner[] public winners;
 
@@ -36,11 +41,6 @@ contract Draw {
     // Set to true at the end, disallows any change.
     // By default initialized to `false`.
     bool ended;
-    
-    struct TempPlayer {
-      address addr;
-      uint howClose;
-    }
 
     event DrawEnded(uint256 _finalyBTCPrice, uint8 _playersCount);
 
@@ -57,7 +57,7 @@ contract Draw {
 
     function addNewPlayer (address _player, uint256 _stake, uint256 _btcPrediction ) public payable {
         require(
-            now <= drawStartTime,
+            block.timestamp <= drawStartTime,
             "Draw not started."
         );
         require(
@@ -74,7 +74,7 @@ contract Draw {
 
     function endDraw(uint256 _finalyBTCPrice) public {
         // 1. Conditions
-        require(now >= drawEndTime, "Draw not yet ended.");
+        require(block.timestamp >= drawEndTime, "Draw not yet ended.");
         require(!ended, "endDraw has already been called.");
 
         // 2. Effects
@@ -85,7 +85,7 @@ contract Draw {
     }
 
     function createWinnersList () public {
-      uint _length = players.length();
+      uint  _length = players.length;
 
       TempPlayer[] storage tmpPlayers;
       for (uint i = 0; i < _length; i++) {
@@ -96,20 +96,20 @@ contract Draw {
         }
       }
 
-      uint[_length] storage unsortPrediction;
+      uint[] storage unsortPrediction;
       for (uint i = 0; i < _length; i++){
-        unsortPrediction.push(tmpPlayers.howClose);
+        unsortPrediction.push(tmpPlayers[i].howClose);
       }
 
-      uint[_length] storage sortPrediction = sort(unsortPrediction);
+      uint[] memory sortPrediction = sort(unsortPrediction);
 
-      uint8 _winnersLength = 25;
+      uint256 _winnersLength = 25;
       if (_winnersLength > _length) {
         _winnersLength = _length;
       }
       uint8 _nextWinner = 0;
       for (uint i = 0; i < _winnersLength; i++){
-        if (players[i].prediction = sortPrediction[_nextWinner]) {
+        if (players[i].prediction == sortPrediction[_nextWinner]) {
           uint256 _totmPay = poolPrizeTOTM / 1000 * prizes[_nextWinner];
           uint256 _btcPay = poolPrizeBTC / 1000 * prizes[_nextWinner];
           winners.push(Winner(players[i].addr, players[i].prediction, _totmPay, _btcPay));
@@ -117,19 +117,19 @@ contract Draw {
       }
     }
 
-    function checkWinner(address _winner) public returns (uint) {
-      for (uint i = 0; i < winners.length(); i++) {
-        if (winners[i].addr = _winner) {
-          return i;
+    function checkWinner(address _winner) public returns (int) {
+      for (uint i = 0; i < winners.length; i++) {
+        if (winners[i].addr == _winner) {
+          return int(i);
         }
         return -1;
       }
     }
 
     function getPrize() public {
-      uint _winIndex = checkWinner(msg.sender);
+      int _winIndex = checkWinner(msg.sender);
       if ( _winIndex != -1) {
-        totemToken.transfer(winners[_winIndex].prizeTotm, msg.sender);
+        totemToken.transfer( msg.sender, winners[uint256(_winIndex)].prizeTotm);
       }
     }
 
