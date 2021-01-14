@@ -25,11 +25,16 @@ contract TotemToken {
     uint8 PRIVATE_SALE = 150; // 15% for Private Sale
     uint8 TEAM_ALLOCATION = 150; // 15% for Team allocation
 
+    uint8 private _decimals;
+
     address payable owner;
 
-    constructor(uint256 _initialSupply) {
+    constructor(uint256 _initialSupply, uint _decimals) {
+        _decimals = 18;
+        // Mint 10 000 000 tokens to msg.sender
+        // 1 token = 1 * (10 ** decimals)
         balanceOf[msg.sender] = _initialSupply;
-        totalSupply = _initialSupply * 10000000000;
+        totalSupply = _initialSupply * 10 ** _decimals;
 
         //Token allocation
         CommunityDevelopment = ( _initialSupply / 1000 ) * COMMUNITY_DEVELOPMENT;
