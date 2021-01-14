@@ -105,12 +105,12 @@ contract Draw {
 
       uint[] memory sortPrediction = sort(unsortPrediction);
 
-      uint256 _winnersLength = 25;
+      uint8 _winnersLength = 25;
       if (_winnersLength > _length) {
-        _winnersLength = _length;
+        _winnersLength = uint8(_length);
       }
       uint8 _nextWinner = 0;
-      for (uint i = 0; i < _winnersLength; i++){
+      for (uint8 i = 0; i < _winnersLength; i++){
         if (players[i].prediction == sortPrediction[_nextWinner]) {
           uint256 _totmPay = poolPrizeTOTM / 1000 * prizes[_nextWinner];
           uint256 _btcPay = poolPrizeBTC / 1000 * prizes[_nextWinner];
@@ -122,7 +122,7 @@ contract Draw {
     function checkWinner(address _winner) public returns (int) {
       for (uint i = 0; i < winners.length; i++) {
         if (winners[i].addr == _winner) {
-         return int(i);
+          return int(i);
         }
         return -1;
       }
