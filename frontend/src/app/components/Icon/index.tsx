@@ -10,9 +10,11 @@ interface Props {
   url: string;
   width: number
   height: number;
+  margin?: string;
+  cursor?: string;
 }
 
-export function Image(props: Props) {
+export function Icon(props: Props) {
 
   return (
   <Div {...props} >
@@ -22,8 +24,9 @@ export function Image(props: Props) {
 }
 
 const Div = styled.div<Props>`
+  margin: ${props => props.margin || null};
+  cursor: ${props => props.cursor || null};
   width: ${props => props.width}px;
   height: ${props => props.height}px;
-  background-image: url(${ props => props.url});
-  background-repeat: no-repeat;
+  background: center no-repeat url('assets/images/${ props => props.url}');
 `;

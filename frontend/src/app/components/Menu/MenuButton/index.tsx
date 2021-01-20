@@ -3,36 +3,38 @@
  * MenuButton
  *
  */
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 import styled from 'styled-components/macro';
+import {Icon} from '../../Icon'
 
 interface Props {
-  name?: string;
-  icon: string;
+    name?: string;
+    icon: string;
+    color: string;
+    isMobile: boolean;
 }
 
-export const MenuButton = memo(({ name, icon }: Props) => {
-  const buttonColors = {
-    fox: '#FF6600',
-    wolf: '#455461',
-    owl: '#739BA2',
-    uniswap: '#272E38',
-  };
-  return (
-    <Div>
-      {icon}
-      {name || null}
-    </Div>
-  );
+export const MenuButton = memo((props: Props) => {
+    return (
+        <Div {...props}>
+            <Icon url={props.icon} width={30} height={30} margin={`0 20px 0 15px`}/>
+            {props.isMobile ? null : props.name}
+        </Div>
+    );
 });
-interface ButtonProps {
-  color?: string;
-}
-const Div = styled.div<ButtonProps>`
-  height: 100%;
-  width: 50px;
+
+const Div = styled.div<Props>`
+  height: ${props => props.isMobile ? '100%' : '80px'};
+  width: ${props => props.isMobile ? '50px' : '100%'};
+  color: ${props => props.name === 'Uniswap' ? '#272E38' : 'white'};
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
-  background-color: ${props => props.color};
+  cursor: pointer;
+  background-color: ${props => props.isMobile ? props.color : props.name === 'Uniswap' ? props.color : ''};
+
+  :hover {
+    background-color: ${props => props.isMobile ? props.color : props.name === 'Uniswap' ? '#739BA2' : '#121212'};
+    border-right: ${props => props.isMobile ? null : 'solid #FF6700 6px'}
+  }
 `;

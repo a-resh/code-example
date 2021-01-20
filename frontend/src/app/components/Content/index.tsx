@@ -17,4 +17,6 @@ export function Content(props: Props) {
 
 };
 
-const Div = styled.div``;
+const Div = styled.div`
+
+`;

@@ -7,7 +7,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import {Menu} from '../Menu';
 import {LoginButton} from './LoginButton';
-import {Image} from '../Image'
+import {Icon} from '../Icon'
 
 interface Props {
     isMobile: boolean;
@@ -17,9 +17,9 @@ export function Header({isMobile}: Props) {
     return (
         <Div>
             {isMobile ? <Menu isMobile={isMobile}/>
-                : <Image url={'/assets/images/logo-white.svg'}
-                         width={90}
-                         height={25}/>}
+                : <Icon url={'/logo-white.svg'}
+                        width={90}
+                        height={25}/>}
             <LoginButton isMobile={isMobile}/>
         </Div>
     );
@@ -33,5 +33,5 @@ const Div = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 15px;
 `;

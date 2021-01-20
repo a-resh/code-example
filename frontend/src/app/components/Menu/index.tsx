@@ -10,7 +10,7 @@ import { messages } from './messages';
 import { MenuButton } from './MenuButton';
 
 interface Props {
-  isMobile?: boolean;
+  isMobile: boolean;
   isLogin?: boolean;
 }
 
@@ -18,21 +18,21 @@ export const Menu = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   const menuValues = [
-    { name: 'Fox', icon: '' },
-    { name: 'Wolf', icon: '' },
-    { name: 'Owl', icon: '' },
-    { name: 'Uniswap', icon: '' },
+    { name: 'Fox', icon: 'fox-white.svg', color: '#FF6600' },
+    { name: 'Wolf', icon: 'wolf-white.svg', color: '#455461' },
+    { name: 'Owl', icon: 'owl-white.svg', color: '#739BA2' },
+    { name: 'Uniswap', icon: 'uniswap-black.svg', color: '#C4DBE0' },
   ];
   const buttons =
     props.isMobile || !props.isLogin
       ? menuValues
-      : menuValues.concat({ name: 'My Account', icon: '' });
+      : menuValues.concat({ name: 'My Account', icon: '', color: ''});
 
   return (
     <Div>
       <ButtonsContainer {...props}>
-        {buttons.map(value => (
-          <MenuButton {...value} />
+        {buttons.map(({name, icon, color}) => (
+          <MenuButton name={ name} color={color} icon={icon} isMobile={props.isMobile} />
         ))}
       </ButtonsContainer>
       {t('')}

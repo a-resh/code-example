@@ -21,4 +21,6 @@ export const ContentWrapper = memo(({isMobile}: Props) => {
 
 });
 
-const Div = styled.div``;
+const Div = styled.div`
+  background: bottom no-repeat #121212 url('assets/images/desktop-content-background.svg');
+`;

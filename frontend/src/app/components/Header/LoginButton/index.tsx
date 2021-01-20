@@ -7,6 +7,7 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
+import {Icon} from "../../Icon";
 
 interface Props {
   isMobile: boolean;
@@ -20,18 +21,11 @@ export function LoginButton({ isMobile }: Props) {
     <Div>
       {t('')}
       {isMobile ? null : t(...messages.connectWallet)}
-      <Image isMobile={isMobile}/>
-      {isMobile ? <img src="" alt=""/>: <img src="" alt=""/>}
+      <Icon url={isMobile? '' : 'wallet-white.svg'} width={25} height={25} margin={'0 0 0 20px'}/>
     </Div>
   );
 }
-interface ImageProps {isMobile: boolean}
-const Image = styled.div<ImageProps>`
-  width: 25px;
-  height: 25px;
-  margin-left: 20px;
-  background-image: url(${props => props.isMobile? '' :'/assets/images/wallet-white.svg'});
-`
+
 const Div = styled.div`
   height: 100%;
   width: 210px;
@@ -43,4 +37,8 @@ const Div = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  :hover{
+    background-color: #739BA2;
+  }
 `;
