@@ -4,7 +4,7 @@ import { Header } from '../../components/Header';
 import {ContentWrapper} from "../../components/ContentWrapper";
 
 export function HomePage() {
-  const isMobile = false;
+  const isMobile = true;
   return (
     <>
       <Helmet>

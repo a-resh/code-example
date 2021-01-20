@@ -20,8 +20,8 @@ export const Menu = memo((props: Props) => {
   const menuValues = [
     { name: 'Fox', icon: 'fox-white.svg', color: '#FF6600' },
     { name: 'Wolf', icon: 'wolf-white.svg', color: '#455461' },
-    { name: 'Owl', icon: 'owl-white.svg', color: '#739BA2' },
-    { name: 'Uniswap', icon: 'uniswap-black.svg', color: '#C4DBE0' },
+    { name: 'Owl', icon: 'owl-white.svg', color: props.isMobile? '#C4DBE0': '#739BA2' },
+    { name: 'Uniswap', icon: 'uniswap-black.svg', color: props.isMobile? '#739BA2': '#C4DBE0' },
   ];
   const buttons =
     props.isMobile || !props.isLogin

@@ -15,7 +15,7 @@ interface Props {
 
 export function Header({isMobile}: Props) {
     return (
-        <Div>
+        <Div isMobile={isMobile}>
             {isMobile ? <Menu isMobile={isMobile}/>
                 : <Icon url={'/logo-white.svg'}
                         width={90}
@@ -25,13 +25,12 @@ export function Header({isMobile}: Props) {
     );
 }
 
-const Div = styled.div`
+const Div = styled.div<Props>`
   width: 100%;
-  height: 80px;
-  background-color: #272E38;
+  height: ${ props => props.isMobile? '100%' : '80px'};
+  background-color: ${ props => props.isMobile? '#739BA2' : '#272E38'};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-left: 15px;
 `;
