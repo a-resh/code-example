@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Header } from '../../components/Header';
-import { Menu } from '../../components/Menu';
+import {ContentWrapper} from "../../components/ContentWrapper";
 
 export function HomePage() {
-  const isMobile = true;
+  const isMobile = false;
   return (
     <>
       <Helmet>
@@ -12,8 +12,7 @@ export function HomePage() {
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
       <Header isMobile={isMobile} />
-      {isMobile ? null : <Menu />}
-      <span>HomePage container</span>
+      <ContentWrapper isMobile={isMobile}/>
     </>
   );
 }

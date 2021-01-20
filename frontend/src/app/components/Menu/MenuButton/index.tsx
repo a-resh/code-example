@@ -26,7 +26,7 @@ export const MenuButton = memo(({ name, icon }: Props) => {
   );
 });
 interface ButtonProps {
-  color: string;
+  color?: string;
 }
 const Div = styled.div<ButtonProps>`
   height: 100%;

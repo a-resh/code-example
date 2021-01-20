@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { LoginButton } from '../index';
+import { Content } from '..';
 
-describe('<LoginButton  />', () => {
+describe('<Content  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<LoginButton isMobile={false}/>);
+    const loadingIndicator = render(<Content />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

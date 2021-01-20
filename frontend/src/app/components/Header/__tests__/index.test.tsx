@@ -5,7 +5,7 @@ import { Header } from '..';
 
 describe('<Header  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Header />);
+    const loadingIndicator = render(<Header isMobile={false} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
