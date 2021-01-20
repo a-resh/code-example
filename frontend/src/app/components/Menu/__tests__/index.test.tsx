@@ -5,7 +5,7 @@ import { Menu } from '..';
 
 describe('<Menu  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Menu />);
+    const loadingIndicator = render(<Menu isMobile={false} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
