@@ -9,28 +9,44 @@ import {Menu} from '../Menu';
 import {LoginButton} from './LoginButton';
 import {Icon} from '../Icon'
 
-interface Props {
-    isMobile: boolean;
-}
+interface Props {}
 
-export function Header({isMobile}: Props) {
+export function Header({}: Props) {
     return (
-        <Div isMobile={isMobile}>
-            {isMobile ? <Menu isMobile={isMobile}/>
-                : <Icon url={'/logo-white.svg'}
-                        width={90}
-                        height={25}/>}
-            <LoginButton isMobile={isMobile}/>
+        <Div>
+            <MenuWrapper>
+                <Menu isMobile={true}/>
+            </MenuWrapper>
+            <IconWrapper>
+                <Icon url={'/logo-white.svg'}
+                      width={90}
+                      height={25}/>
+            </IconWrapper>
+            <LoginButton/>
         </Div>
     );
 }
 
-const Div = styled.div<Props>`
+const Div = styled.div`
   width: 100%;
-  height: ${ props => props.isMobile? '100%' : '80px'};
-  background-color: ${ props => props.isMobile? '#739BA2' : '#272E38'};
+  height: 80px;
+  background-color: #272E38;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media only screen and (max-width: 600px) {
+    background-color: #739BA2;
+    height: 30px;
+  }
+`;
+const MenuWrapper = styled.div`
+  @media only screen and (min-width: 600px) {
+    display: none;
+  }
+`;
+const IconWrapper = styled.div`
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;

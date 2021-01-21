@@ -10,7 +10,7 @@ import {Icon} from "../Icon";
 
 interface Props {}
 
-export const Sidebar = memo((props: Props) => {
+export const Sidebar = memo(({}: Props) => {
 
   return (
   <Div>
@@ -30,6 +30,9 @@ const Div = styled.div`
   background-color: #272E38;
   display: flex;
   flex-direction: column;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 const SidebarBottom = styled.div`
   width: 100%;

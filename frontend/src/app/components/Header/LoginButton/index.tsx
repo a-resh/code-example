@@ -9,41 +9,65 @@ import {useTranslation} from 'react-i18next';
 import {messages} from './messages';
 import {Icon} from "../../Icon";
 
-interface Props {
-    isMobile: boolean;
-}
+interface Props {}
 
-export function LoginButton({isMobile}: Props) {
+export function LoginButton({}: Props) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {t, i18n} = useTranslation();
 
     return (
-        <Div isMobile={isMobile}>
-            {t('')}
-            {isMobile ? null : t(...messages.connectWallet)}
-            <Icon url={isMobile ? 'login-mobile.svg' : 'wallet-white.svg'}
-                  width={isMobile ? 15: 25}
-                  height={isMobile ? 15: 25}
-                  margin={isMobile ? '7px' : '0 0 0 20px'}/>
+        <Div>
+            <MobileIcon>
+                <Icon
+                    url={'login-mobile.svg'}
+                    width={15}
+                    height={15}
+                    margin={'7px'}
+                />
+            </MobileIcon>
+            <DesktopButton>
+            {t(...messages.connectWallet)}
+            <Icon url={'wallet-white.svg'}
+                  width={25}
+                  height={25}
+                  margin={'0 0 0 20px'}/>
+            </DesktopButton>
         </Div>
     );
 }
 
-const Div = styled.div<Props>`
+const Div = styled.div`
   height: 100%;
-  width: ${props => props.isMobile ? '30px' : '210px'};
+  width: 210px;
   line-height: 2em;
   font-weight: bold;
   font-size: 15px;
   color: #272E38;
-  background-color: ${props => props.isMobile ? null : '#C4DBE0'};
+  background-color: #C4DBE0;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  position: ${props => props.isMobile? 'fixed': null}
-
+  @media only screen and (max-width: 600px) {
+    width: 30px;
+    background-color: #739BA2;
+}
   :hover {
     background-color: #739BA2;
   }
 `;
+
+const MobileIcon = styled.div`
+  @media only screen and (min-width: 600px) {
+    display: none;
+  }
+`
+const DesktopButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`

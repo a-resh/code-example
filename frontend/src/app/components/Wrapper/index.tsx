@@ -8,19 +8,20 @@ import styled from 'styled-components/macro';
 import {Sidebar} from "../Sidebar";
 import {Content} from "../Content";
 
-interface Props {isMobile: boolean}
+interface Props {children: React.ReactNode[]}
 
-export const ContentWrapper = memo(({isMobile}: Props) => {
+export const Wrapper = memo(({children}: Props) => {
 
   return (
   <Div>
-    {isMobile? null: <Sidebar/>}
-    <Content/>
+    {children}
   </Div>
   );
 
 });
 
 const Div = styled.div`
+  display: flex;
+  flex-direction: row;
   background: bottom no-repeat #121212 url('assets/images/desktop-content-background.svg');
 `;
