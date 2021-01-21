@@ -5,8 +5,6 @@
 */
 import React, { memo } from 'react';
 import styled from 'styled-components/macro';
-import {Sidebar} from "../Sidebar";
-import {Content} from "../Content";
 
 interface Props {children: React.ReactNode[]}
 

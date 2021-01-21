@@ -23,4 +23,9 @@ export function Calculator(props: Props) {
 
 };
 
-const Div = styled.div``;
+const Div = styled.div`
+  height: 360px;
+  width: 420px;
+  margin: 40px 10px 0 0;
+  background-color: #FF6701;
+`;

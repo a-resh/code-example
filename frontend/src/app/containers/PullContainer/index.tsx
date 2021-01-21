@@ -53,7 +53,9 @@ const Div = styled.div`
 
 const ContentWrapper = styled.div`
   width: 880px;
-  height: 700px;
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 `

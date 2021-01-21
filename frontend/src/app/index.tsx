@@ -19,6 +19,7 @@ import {Wrapper} from "./components/Wrapper";
 import {Sidebar} from './components/Sidebar';
 import {PullContainer} from "./containers/PullContainer/Loadable";
 import {UserData} from "./containers/UserData/Loadable";
+import {Content} from "./components/Content";
 
 export function App() {
     const {i18n} = useTranslation();
@@ -34,14 +35,16 @@ export function App() {
             <Header/>
             <Wrapper>
                 <Sidebar/>
-                <Switch>
-                    <Route exact path="/" component={PullContainer}/>
-                    <Route exact path="/fox" component={PullContainer}/>
-                    <Route exact path="/wolf" component={PullContainer}/>
-                    <Route exact path="/owl" component={PullContainer}/>
-                    <Route exact path="/user" component={UserData}/>
-                    <Route component={NotFoundPage}/>
-                </Switch>
+                <Content>
+                    <Switch>
+                        <Route exact path="/" component={PullContainer}/>
+                        <Route exact path="/fox" component={PullContainer}/>
+                        <Route exact path="/wolf" component={PullContainer}/>
+                        <Route exact path="/owl" component={PullContainer}/>
+                        <Route exact path="/user" component={UserData}/>
+                        <Route component={NotFoundPage}/>
+                    </Switch>
+                </Content>
             </Wrapper>
             <GlobalStyle/>
         </BrowserRouter>

@@ -23,4 +23,8 @@ export function PoolInfo(props: Props) {
 
 };
 
-const Div = styled.div``;
+const Div = styled.div`
+  height: 220px;
+  width: 420px;
+  background-color: #FF6701;
+`;

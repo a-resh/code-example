@@ -18,7 +18,9 @@ export function Timer(props: Props) {
     <Title>
       {  t(...messages.nextPoolDeparts)  }:
     </Title>
+    <TimerWrapper>
     00:19:54
+    </TimerWrapper>
   </Div>
   );
 
@@ -26,11 +28,19 @@ export function Timer(props: Props) {
 
 const Div = styled.div`
   font-family: Lato;
-  font-size : 90px;
-  color : #FFFFFF;
-  height: 200px;
+  padding-left: 20px;
+  height: 220px;
+  width: 420px;
+  margin-right: 10px;
 `;
 const Title = styled.div`
   font-size : 20px;
   color : #FFFFFF;
+`
+const TimerWrapper = styled.div`
+  
+  font-size : 90px;
+  color : #FFFFFF;
+  display: flex;
+  align-items: center;
 `
