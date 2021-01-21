@@ -5,7 +5,7 @@ import { LoginButton } from '../index';
 
 describe('<LoginButton  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<LoginButton isMobile={false}/>);
+    const loadingIndicator = render(<LoginButton />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
