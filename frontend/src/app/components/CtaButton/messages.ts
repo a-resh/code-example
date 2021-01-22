@@ -7,7 +7,6 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
-    predictorPool: _t(translations.predictorPool,'Predictor Pool'),
-    thisPoolIs: _t(translations.thisPoolIs,'This pool is '),
-    full: _t(translations.full,'full'),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    predictNow: _t(translations.predictNow,'Predict Now'),
 };

@@ -31,8 +31,8 @@ export const Menu = memo((props: Props) => {
   return (
     <Div>
       <ButtonsContainer {...props}>
-        {buttons.map(({name, icon, color}) => (
-          <MenuButton name={ name} color={color} icon={icon} isMobile={props.isMobile} />
+        {buttons.map(({name, icon, color}, index) => (
+          <MenuButton key={index} name={ name} color={color} icon={icon} isMobile={props.isMobile} />
         ))}
       </ButtonsContainer>
       {t('')}

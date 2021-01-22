@@ -23,8 +23,7 @@ export function Reward({}: Props) {
 };
 
 const Div = styled.div`
-  height: 360px;
+  height: 100%;
   width: 420px;
-  margin-top: 40px;
   background-color: #FF6701;
 `;

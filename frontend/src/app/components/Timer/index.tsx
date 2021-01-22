@@ -28,10 +28,8 @@ export function Timer(props: Props) {
 
 const Div = styled.div`
   font-family: Lato;
-  padding-left: 20px;
-  height: 220px;
-  width: 420px;
-  margin-right: 10px;
+  height: 210px;
+  width: 380px;
 `;
 const Title = styled.div`
   font-size : 20px;

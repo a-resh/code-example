@@ -1,7 +1,8 @@
 export type ConvertedToObjectType<T> = {
   [P in keyof T]: T[P] extends string ? string : ConvertedToObjectType<T[P]>;
+} & {
+  [P: string]: any;
 };
-
 /**
  
 If you don't want non-existing keys to throw ts error you can simply do(also keeping the intellisense)

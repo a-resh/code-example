@@ -7,5 +7,11 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
-  // someThing: _t(translations.someThing,'default value'),
+   ifYouStake: _t(translations.ifYouStake,'If you stake'),
+   place: _t(translations.place,'place'),
+   andComeIn: _t(translations.andComeIn,'and come in'),
+   collaborativeRewards: _t(translations.collaborativeRewards,'Collaborative rewards?'),
+   enhancedRewards: _t(translations.enhancedRewards,'Enhanced rewards'),
+   youStandToWin: _t(translations.youStandToWin,'you stand to win'),
+   totalReward: _t(translations.totalReward,'Total reward'),
 };

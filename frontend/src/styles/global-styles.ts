@@ -18,12 +18,26 @@ export const GlobalStyle = createGlobalStyle`
 
   p,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family: Lato, serif;
     line-height: 1.5em;
+    margin: 0;
   }
 
   input, select {
     font-family: inherit;
     font-size: inherit;
+  }
+
+  .calculator-input-number {
+    width: 100px;
+    height: 20px;
+    margin: 0 5px;
+    font-size: 15px;
+  }
+  
+  .calculator-select-place {
+    height: 20px;
+    margin: 0 5px;
+    font-size: 15px;
   }
 `;

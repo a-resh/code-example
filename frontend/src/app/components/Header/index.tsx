@@ -20,7 +20,9 @@ export function Header({}: Props) {
             <IconWrapper>
                 <Icon url={'/logo-white.svg'}
                       width={90}
-                      height={25}/>
+                      height={25}
+                      margin={'15px'}
+                />
             </IconWrapper>
             <LoginButton/>
         </Div>

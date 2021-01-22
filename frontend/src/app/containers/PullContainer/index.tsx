@@ -16,6 +16,7 @@ import {Timer} from "../../components/Timer";
 import {PoolInfo} from "../../components/PoolInfo";
 import {Calculator} from "../../components/Calculator";
 import {Reward} from "../../components/Reward";
+import {CtaButton} from "../../components/CtaButton";
 
 interface Props {
 }
@@ -34,10 +35,19 @@ export function PullContainer(props: Props) {
         <>
             <Div>
                 <ContentWrapper>
-                    <Timer/>
-                    <PoolInfo/>
-                    <Calculator/>
-                    <Reward/>
+                    <TopContentBlocks>
+                        <Timer/>
+                        <PoolInfo/>
+                    </TopContentBlocks>
+                    <BottomContent>
+                        <BottomContentBlocks>
+                            <Calculator/>
+                            <Reward/>
+                        </BottomContentBlocks>
+                        <ButtonWrapper>
+                            <CtaButton background={'#FF6701'} color={'white'}/>
+                        </ButtonWrapper>
+                    </BottomContent>
                 </ContentWrapper>
             </Div>
         </>
@@ -55,7 +65,36 @@ const ContentWrapper = styled.div`
   width: 880px;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  padding-top: 10px;
+`
+
+const TopContentBlocks = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+const BottomContentBlocks = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 340px;
+  width: 100%;
+  padding: 5px 20px 30px 20px;
+  background-color: rgba(39, 46, 56, .4);
+`
+
+const BottomContent = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px 30px 0px;
+`
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  height: 55px;
 `

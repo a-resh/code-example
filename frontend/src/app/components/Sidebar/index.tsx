@@ -26,7 +26,7 @@ export const Sidebar = memo(({}: Props) => {
 
 const Div = styled.div`
   width: 200px;
-  height: calc(100% - 80px);
+  height: calc(100vh - 80px);
   background-color: #272E38;
   display: flex;
   flex-direction: column;
