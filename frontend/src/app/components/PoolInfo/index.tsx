@@ -22,15 +22,15 @@ export function PoolInfo(props: Props) {
   <Div>
     {t('')}
     <Title>
-      <Icon height={25} width={25} url={`${totem.toLowerCase()}-white.svg`}/>
-      {totem} {t(...messages.predictorPool)}
+      <Icon height={40} width={40} url={`${totem.toLowerCase()}-white.svg`}/>
+      <p>{totem} {t(...messages.predictorPool)}</p>
     </Title>
     <ScaleContainer>
-    {t(...messages.thisPoolIs)} 63% {t(...messages.full)}
+    <p><b>{t(...messages.thisPoolIs)} 63% {t(...messages.full)}</b></p>
     <Scale fill={63}/>
     </ScaleContainer>
     <ButtonWrapper>
-      <CtaButton color={'#181818'} background={'#C4DBE0'}/>
+      <CtaButton color={'#181818'} background={'white'}/>
     </ButtonWrapper>
   </Div>
   );
@@ -55,11 +55,17 @@ const Title = styled.div`
   align-items: center;
   padding: 0 15px;
   justify-content: space-between;
+  p {
+    font-size: 20px;
+  };
 `
 const ScaleContainer = styled.div`
   width: 100%;
-  padding: 0 20px;
+  padding: 0 30px;
   text-align: center;
+  p {
+    font-size: 15px;
+  };
 `
 
 const ButtonWrapper = styled.div`

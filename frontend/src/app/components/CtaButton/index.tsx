@@ -11,6 +11,7 @@ import { messages } from './messages';
 interface Props {
   background: string;
   color: string;
+  showModal?: () => void;
 }
 
 export const CtaButton = memo((props: Props) => {
@@ -18,8 +19,8 @@ export const CtaButton = memo((props: Props) => {
   const { t, i18n } = useTranslation();
 
   return (
-  <Div {...props}>
-    {t(...messages.predictNow)}
+  <Div onClick={props.showModal} {...props}>
+    <b>{t(...messages.predictNow)}</b>
   </Div>
   );
 
@@ -34,4 +35,7 @@ const Div = styled.div<Props>`
   color: ${props => props.color};
   background-color: ${props => props.background};
   cursor: pointer;
+  b {
+    font-size: 20px;
+  }
 `;

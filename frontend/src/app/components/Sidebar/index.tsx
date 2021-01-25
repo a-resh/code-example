@@ -26,12 +26,14 @@ export const Sidebar = memo(({}: Props) => {
 
 const Div = styled.div`
   width: 200px;
-  height: calc(100vh - 80px);
   background-color: #272E38;
   display: flex;
   flex-direction: column;
   @media only screen and (max-width: 600px) {
     display: none;
+  }
+  @media only screen and (max-width: 1100px) {
+    width: 80px;
   }
 `;
 const SidebarBottom = styled.div`

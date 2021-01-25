@@ -5,10 +5,7 @@
  */
 import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
-import * as React from "react";
 
 export const messages = {
-   rewardDistribution: _t(translations.rewardDistribution,'Reward distribution'),
-   stakingReturns: _t(translations.stakingReturns,'Staking returns'),
-   totalDistributionToCommunity: _t(translations.totalDistributionToCommunity,'Total Distribution to Community'),
+  // someThing: _t(translations.someThing,'default value'),
 };

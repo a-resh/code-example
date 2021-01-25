@@ -17,6 +17,9 @@ import {PoolInfo} from "../../components/PoolInfo";
 import {Calculator} from "../../components/Calculator";
 import {Reward} from "../../components/Reward";
 import {CtaButton} from "../../components/CtaButton";
+import {PredictModal} from "../../components/PredictModal";
+import {useState} from "react";
+import {Totems} from "../../../types/enums";
 
 interface Props {
 }
@@ -25,29 +28,35 @@ interface Props {
 export function PullContainer(props: Props) {
     useInjectReducer({key: sliceKey, reducer: reducer});
     useInjectSaga({key: sliceKey, saga: pullContainerSaga});
+    const totem = Totems.FOX
+    const [modalIsOpen,setIsOpen] = React.useState(false);
+    const switchIsOpenModal = () => {
+        setIsOpen(!modalIsOpen);
+    }
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const pullContainer = useSelector(selectPullContainer);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const dispatch = useDispatch();
-
     return (
         <>
             <Div>
                 <ContentWrapper>
-                    <TopContentBlocks>
+                    <Top>
                         <Timer/>
                         <PoolInfo/>
-                    </TopContentBlocks>
+                    </Top>
                     <BottomContent>
-                        <BottomContentBlocks>
+                        <Bottom>
                             <Calculator/>
                             <Reward/>
-                        </BottomContentBlocks>
+                        </Bottom>
                         <ButtonWrapper>
-                            <CtaButton background={'#FF6701'} color={'white'}/>
+                            <CtaButton background={'#FF6701'} color={'white'} showModal={switchIsOpenModal}/>
                         </ButtonWrapper>
                     </BottomContent>
+                    <PredictModal isOpen={modalIsOpen} close={switchIsOpenModal} totem={totem}/>
                 </ContentWrapper>
             </Div>
         </>
@@ -71,12 +80,12 @@ const ContentWrapper = styled.div`
   padding-top: 10px;
 `
 
-const TopContentBlocks = styled.div`
+const Top = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `
-const BottomContentBlocks = styled.div`
+const Bottom = styled.div`
   display: flex;
   flex-direction: row;
   height: 340px;

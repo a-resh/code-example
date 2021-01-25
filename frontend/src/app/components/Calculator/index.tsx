@@ -20,10 +20,10 @@ export function Calculator(props: Props) {
 
     return (
         <Div>
-            <ContentTop>
+            <Top>
                 <Row>
                     <p>{t(...messages.ifYouStake)}</p>
-                    <input className={"calculator-input-number"} type="number"/>
+                    <input className={"calculator-input-number"} type="number" value={1000} onChange={() => {}}/>
                     <p> TOTM</p>
                 </Row>
                 <Row>
@@ -47,19 +47,19 @@ export function Calculator(props: Props) {
                         <CustomizedSlider/>
                     </SliderWrapper>
                 </RowSmall>
-            </ContentTop>
-            <ContentBottom>
-                <p>{t(...messages.youStandToWin)}:</p>
+            </Top>
+            <Bottom>
+                <span>{t(...messages.youStandToWin)}:</span>
                 <CurrencyBlock>
                     <AmountCurrency>
                         <h5>BTC</h5>
-                        <h3>0.1347</h3>
+                        <h3>0.135,1347</h3>
                         <h6>(USD 0.16)</h6>
                     </AmountCurrency>
                     <p>&</p>
                     <AmountCurrency>
                         <h5>TOTM</h5>
-                        <h3>100056,56</h3>
+                        <h3>100.056,56</h3>
                         <h6>(USD 0.16)</h6>
                     </AmountCurrency>
                 </CurrencyBlock>
@@ -67,7 +67,7 @@ export function Calculator(props: Props) {
                     <h4>{t(...messages.totalReward)}:</h4>
                     <h2>$ 1500.20</h2>
                 </AmountCurrency>
-            </ContentBottom>
+            </Bottom>
         </Div>
     );
 
@@ -80,7 +80,7 @@ const Div = styled.div`
   color: white;
 `;
 
-const ContentTop = styled.div`
+const Top = styled.div`
   height: calc(100% - 200px);
 `;
 const Row = styled.div`
@@ -110,16 +110,22 @@ const SliderWrapper = styled.div`
   justify-content: center;
 `
 
-const ContentBottom = styled.div`
+const Bottom = styled.div`
   opacity: 1;
+  padding-top: 5px;
   width: 100%;
   height: 200px;
   background-color: #739BA2;
   text-align: center;
   p {
     font-size: 21px;
-    margin-bottom: 10px;
+    margin: 0;
+    line-height: 60px;
     font-weight: 700;
+  }
+  span {
+    font-size: 19px;
+    margin-bottom: 10px;
   }
 `;
 const CurrencyBlock = styled.div`
@@ -134,9 +140,9 @@ const CurrencyBlock = styled.div`
 const AmountCurrency = styled.div`
   display: flex;
   font-family: Lato;
-  margin: 0 20px 0px 20px;
+  margin: 0;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   h5, h3, h4, h6, h2 {
     margin: 0;

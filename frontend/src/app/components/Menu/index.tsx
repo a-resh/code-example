@@ -3,11 +3,12 @@
  * Menu
  *
  */
-import React, { memo } from 'react';
+import React, {memo, useState} from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
 import { MenuButton } from './MenuButton';
+import {TotemsData} from "../../../types/enums";
 
 interface Props {
   isMobile: boolean;
@@ -17,22 +18,16 @@ interface Props {
 export const Menu = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-  const menuValues = [
-    { name: 'Fox', icon: 'fox-white.svg', color: '#FF6600' },
-    { name: 'Wolf', icon: 'wolf-white.svg', color: '#455461' },
-    { name: 'Owl', icon: props.isMobile? 'owl-mobile-menu.svg': 'owl-white.svg', color: props.isMobile? '#C4DBE0': '#739BA2' },
-    { name: 'Uniswap', icon: 'uniswap-black.svg', color: props.isMobile? '#739BA2': '#C4DBE0' },
-  ];
-  const buttons =
-    props.isMobile || !props.isLogin
-      ? menuValues
-      : menuValues.concat({ name: 'My Account', icon: '', color: ''});
+  let menuValues = Object.keys(TotemsData);
+  if(!props.isLogin){
+    menuValues = menuValues.filter(v => v !== 'USER');
+  }
 
   return (
     <Div>
       <ButtonsContainer {...props}>
-        {buttons.map(({name, icon, color}, index) => (
-          <MenuButton key={index} name={ name} color={color} icon={icon} isMobile={props.isMobile} />
+        {menuValues.map((v, index) => (
+          <MenuButton key={index} name={v} />
         ))}
       </ButtonsContainer>
       {t('')}
@@ -46,5 +41,8 @@ const Div = styled.div``;
 const ButtonsContainer = styled.div<Props>`
   height: 100%;
   display: flex;
-  flex-direction: ${props => (props.isMobile ? 'row' : 'column')};
+  flex-direction: column;
+  @media only screen and (max-width: 600px) {
+    flex-direction: row;
+  };
 `;

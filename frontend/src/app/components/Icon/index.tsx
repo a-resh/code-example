@@ -12,12 +12,13 @@ interface Props {
   height: number;
   margin?: string;
   cursor?: string;
+  onClick?: () => void;
 }
 
 export function Icon(props: Props) {
 
   return (
-  <Div {...props} >
+  <Div onClick={props.onClick} {...props} >
   </Div>
   );
 

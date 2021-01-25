@@ -21,5 +21,7 @@ export const Wrapper = memo(({children}: Props) => {
 const Div = styled.div`
   display: flex;
   flex-direction: row;
-  background: bottom no-repeat #121212 url('assets/images/desktop-content-background.svg');
+  width: 100%;
+  height: 100%;
+  background: bottom right no-repeat #121212 url('assets/images/desktop-content-background.svg');
 `;
