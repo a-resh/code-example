@@ -7,9 +7,9 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import {useTranslation} from 'react-i18next';
 import {messages} from './messages';
-import CustomizedSlider from "../CustomSlider";
+import CustomizedSlider from "../../../components/CustomSlider";
 import {Switch} from "@material-ui/core";
-import CustomSwitch from '../CustomSwitch';
+import CustomSwitch from '../../../components/CustomSwitch';
 
 interface Props {
 }

@@ -1,22 +1,24 @@
 /**
-*
-* Scale
-*
-*/
+ *
+ * Scale
+ *
+ */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 
-interface Props {fill: number}
+interface Props {
+    fill: number
+}
 
 export function Scale(props: Props) {
 
-  return (
-  <Div>
-    <ScaleFill {...props}/>
-  </Div>
-  );
+    return (
+        <Div>
+            <ScaleFill {...props}/>
+        </Div>
+    );
 
-};
+}
 
 const Div = styled.div`
   width: 100%;

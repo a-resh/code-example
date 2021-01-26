@@ -1,18 +1,20 @@
 /**
 *
-* Content
+* Centred
 *
 */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 
-interface Props {children: JSX.Element}
+interface Props {
+  children: JSX.Element | JSX.Element[]
+}
 
-export function Content({children}: Props) {
+export function Center(props: Props) {
 
   return (
   <Div>
-    {children}
+    {props.children}
   </Div>
   );
 
@@ -21,9 +23,5 @@ export function Content({children}: Props) {
 const Div = styled.div`
   display: flex;
   justify-content: center;
-  width: calc(100vw - 200px);
   align-items: center;
-  @media only screen and (max-width: 1100px) {
-    width: calc(100vw - 80px);
-  }
 `;

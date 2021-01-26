@@ -18,7 +18,7 @@ export function Reward({}: Props) {
     return (
         <Div>
             <Top>
-                <VerticalBlock>
+                <Column>
                     <p>{t(...messages.rewardDistribution)}:</p>
                     <Row>
                         <LightFont>
@@ -37,11 +37,11 @@ export function Reward({}: Props) {
                             <li><b>7.5%</b></li>
                         </ul>
                     </Row>
-                </VerticalBlock>
-                <VerticalBlock>
+                </Column>
+                <Column>
                     <p>{t(...messages.stakingReturns)}:</p>
                     <h2>40%</h2>
-                </VerticalBlock>
+                </Column>
             </Top>
             <Bottom>
                 <p>{t(...messages.totalDistributionToCommunity)}:</p>
@@ -69,7 +69,7 @@ const Top = styled.div`
   flex-direction: row;
   width: 100%;
 `;
-const VerticalBlock = styled.div`
+const Column = styled.div`
   font-family: Lato;
   display: flex;
   flex-direction: column;

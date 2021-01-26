@@ -13,11 +13,11 @@ import {reducer, sliceKey} from './slice';
 import {selectPullContainer} from './selectors';
 import {pullContainerSaga} from './saga';
 import {Timer} from "../../components/Timer";
-import {PoolInfo} from "../../components/PoolInfo";
-import {Calculator} from "../../components/Calculator";
-import {Reward} from "../../components/Reward";
+import {PoolInfo} from "./PoolInfo";
+import {Calculator} from "./Calculator";
+import {Reward} from "./Reward";
 import {CtaButton} from "../../components/CtaButton";
-import {PredictModal} from "../../components/PredictModal";
+import {PredictModal} from "./PredictModal";
 import {useState} from "react";
 import {Totems} from "../../../types/enums";
 

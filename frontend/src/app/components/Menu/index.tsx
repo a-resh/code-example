@@ -3,38 +3,40 @@
  * Menu
  *
  */
-import React, {memo, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/macro';
-import { useTranslation } from 'react-i18next';
-import { messages } from './messages';
-import { MenuButton } from './MenuButton';
+import {useTranslation} from 'react-i18next';
+import {MenuButton} from './MenuButton';
 import {TotemsData} from "../../../types/enums";
 
 interface Props {
-  isMobile: boolean;
-  isLogin?: boolean;
+    isMobile: boolean;
+    isLogin?: boolean;
 }
 
-export const Menu = memo((props: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { t, i18n } = useTranslation();
-  let menuValues = Object.keys(TotemsData);
-  if(!props.isLogin){
-    menuValues = menuValues.filter(v => v !== 'USER');
-  }
-
-  return (
-    <Div>
-      <ButtonsContainer {...props}>
-        {menuValues.map((v, index) => (
-          <MenuButton key={index} name={v} />
-        ))}
-      </ButtonsContainer>
-      {t('')}
-      {/*  {t(...messages.someThing)}  */}
-    </Div>
-  );
-});
+export const Menu = (props: Props) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {t, i18n} = useTranslation();
+    const pathname = new URL(document.location.href).pathname;
+    const urn = pathname && pathname !== '/' ? pathname.substr(1) : 'fox';
+    const [active, setActive] = useState(urn);
+    let menuValues = Object.keys(TotemsData);
+    console.log(active)
+    if (!props.isLogin) {
+        menuValues = menuValues.filter(v => v !== 'USER');
+    }
+    return (
+        <Div>
+            <ButtonsContainer {...props}>
+                {menuValues.map((v, index) => (
+                    <MenuButton key={index} name={v} isActive={active === v.toLowerCase()} setActive={setActive}/>
+                ))}
+            </ButtonsContainer>
+            {t('')}
+            {/*  {t(...messages.someThing)}  */}
+        </Div>
+    );
+};
 
 const Div = styled.div``;
 

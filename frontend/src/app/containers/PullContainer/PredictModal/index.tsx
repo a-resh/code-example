@@ -8,11 +8,11 @@ import styled from 'styled-components/macro';
 import {useTranslation} from 'react-i18next';
 import {messages} from './messages';
 import Modal from 'react-modal';
-import {Icon} from "../Icon";
-import {Totems} from "../../../types/enums";
+import {Icon} from "../../../components/Icon";
+import {Totems} from "../../../../types/enums";
 import moment from 'moment';
-import {Row} from "../Row";
-import {Center} from "../Center";
+import {Row} from "../../../components/Row";
+import {Center} from "../../../components/Center";
 
 interface Props {
     isOpen: boolean;

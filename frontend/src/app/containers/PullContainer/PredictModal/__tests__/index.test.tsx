@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {render} from '@testing-library/react';
 
-import {PredictModal} from '..';
-import {Totems} from "../../../../types/enums";
+import {PredictModal} from '../index';
+import {Totems} from "../../../../../types/enums";
 
 describe('<PredictModal  />', () => {
   it('should match snapshot', () => {

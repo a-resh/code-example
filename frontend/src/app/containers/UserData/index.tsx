@@ -14,6 +14,8 @@ import { reducer, sliceKey } from './slice';
 import { selectUserData } from './selectors';
 import { userDataSaga } from './saga';
 import { messages } from './messages';
+import {WalletInfo} from "./WalletInfo";
+import {AccountRewards} from "./AccountRewards";
 
 interface Props {}
 
@@ -33,8 +35,8 @@ const { t, i18n } = useTranslation();
 return (
 <>
   <Div>
-      {t('')}
-      {/*  {t(...messages.someThing)}  */}
+      <WalletInfo/>
+      <AccountRewards/>
     </Div>
 </>
 );

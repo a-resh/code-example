@@ -7,9 +7,9 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import {CtaButton} from "../CtaButton";
-import {Icon} from "../Icon";
-import {Scale} from "../Scale";
+import {CtaButton} from "../../../components/CtaButton";
+import {Icon} from "../../../components/Icon";
+import {Scale} from "../../../components/Scale";
 
 interface Props {}
 

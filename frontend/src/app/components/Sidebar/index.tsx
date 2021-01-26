@@ -14,7 +14,7 @@ export const Sidebar = memo(({}: Props) => {
 
   return (
   <Div>
-    <Menu isMobile={false}/>
+    <Menu isMobile={false} isLogin={true}/>
     <SidebarBottom>
       <Icon url={'telegram-dark.svg'} width={30} height={30} margin={'0 0 15px 15px'} cursor={'pointer'}/>
       <Icon url={'twitter-dark.svg'} width={30} height={30} margin={'0 0 0 15px'} cursor={'pointer'}/>
@@ -42,6 +42,7 @@ const SidebarBottom = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
-  padding-top: 100%;
+  justify-content: flex-end;
+  padding-bottom: 20px;
   background-color: #C4DBE0;
 `

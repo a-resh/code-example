@@ -23,5 +23,10 @@ const Div = styled.div`
   flex-direction: row;
   width: 100%;
   height: 100%;
+  min-width: 100vw;
+  min-height: calc(100vh - 80px);
   background: bottom right no-repeat #121212 url('assets/images/desktop-content-background.svg');
+  @media only screen and (max-width: 1100px) {
+    min-height: calc(100vh - 55px);
+  }
 `;

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { Calculator } from '..';
+import { Reward } from '../index';
 
-describe('<Calculator  />', () => {
+describe('<Reward  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Calculator />);
+    const loadingIndicator = render(<Reward />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

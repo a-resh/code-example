@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Lato, serif;
   }
 
   #root {
@@ -18,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 
   p,
   label {
-    font-family: Lato, serif;
     line-height: 1.5em;
     margin: 0;
   }

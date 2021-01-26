@@ -9,7 +9,8 @@ import {Menu} from '../Menu';
 import {LoginButton} from './LoginButton';
 import {Icon} from '../Icon'
 
-interface Props {}
+interface Props {
+}
 
 export function Header({}: Props) {
     return (
@@ -40,6 +41,10 @@ const Div = styled.div`
   @media only screen and (max-width: 600px) {
     background-color: #739BA2;
     height: 30px;
+  }
+  @media only screen and (max-width: 1100px) and (min-width: 600px) {
+    padding-left: calc(50% - 45px);
+    height: 55px;
   }
 `;
 const MenuWrapper = styled.div`
