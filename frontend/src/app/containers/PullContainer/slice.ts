@@ -13,4 +13,8 @@ const pullContainerSlice = createSlice({
   },
 });
 
-export const { actions: pullContainerActions, reducer, name: sliceKey } = pullContainerSlice;
+export const {
+  actions: pullContainerActions,
+  reducer,
+  name: sliceKey,
+} = pullContainerSlice;

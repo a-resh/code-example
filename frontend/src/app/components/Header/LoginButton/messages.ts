@@ -7,5 +7,5 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
-  connectWallet: _t(translations.connectWallet,'Connect Wallet'),
+  connectWallet: _t(translations.connectWallet, 'Connect Wallet'),
 };

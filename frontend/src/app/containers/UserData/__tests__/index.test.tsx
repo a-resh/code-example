@@ -9,13 +9,13 @@ import { UserData } from '..';
 const renderComponent = (store: Store) =>
   render(
     <Provider store={store}>
-        <UserData  />
-    </Provider>
+      <UserData />
+    </Provider>,
   );
 
 describe('<UserData />', () => {
   let store: ReturnType<typeof configureAppStore>;
-  
+
   beforeEach(() => {
     store = configureAppStore();
   });

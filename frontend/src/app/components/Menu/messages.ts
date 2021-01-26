@@ -5,5 +5,5 @@
  */
 
 export const messages = {
-    // someThing: _t(translations.someThing,'default value'),
+  // someThing: _t(translations.someThing,'default value'),
 };

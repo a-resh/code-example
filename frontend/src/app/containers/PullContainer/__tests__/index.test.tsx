@@ -9,13 +9,13 @@ import { PullContainer } from '..';
 const renderComponent = (store: Store) =>
   render(
     <Provider store={store}>
-        <PullContainer  />
-    </Provider>
+      <PullContainer />
+    </Provider>,
   );
 
 describe('<PullContainer />', () => {
   let store: ReturnType<typeof configureAppStore>;
-  
+
   beforeEach(() => {
     store = configureAppStore();
   });

@@ -1,14 +1,14 @@
 /**
-*
-* WalletInfo
-*
-*/
+ *
+ * WalletInfo
+ *
+ */
 import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import {Center} from "../../../components/Center";
-import {Icon} from "../../../components/Icon";
+import { Center } from '../../../components/Center';
+import { Icon } from '../../../components/Icon';
 
 interface Props {}
 
@@ -17,38 +17,49 @@ export const WalletInfo = memo((props: Props) => {
   const { t, i18n } = useTranslation();
 
   return (
-  <Div>
-    <h1>{t('Your Wallet')}</h1>
-    <Column>
-      <Row>
-      <Amount width={'41%'}>
-        <h3>{t('Total balance')}</h3>
-        <Row><h1>1,000</h1><p>TOTM</p></Row>
-      </Amount>
-      <Amount width={'33%'}>
-        <h3>{t('Amount staked')}</h3>
-        <Row><h2>264</h2><p>TOTM</p></Row>
-      </Amount>
-      <Amount>
-        <h3>{t('Available to stake')}</h3>
-        <Row><h2>736</h2><p>TOTM</p></Row>
-      </Amount>
-      </Row>
-      <Row>
-        <AddTotm onClick={() => {}}>
-          <p>{t('Add TOTM')}</p>
-        </AddTotm>
-        <BtcAddress>
-          <label>BTC Address</label>
-          <p>1345678912345678987</p>
-          <Connected><p>{t('Connected')}</p><Icon url={'connected.svg'} width={10} height={10} /></Connected>
-        </BtcAddress>
-      </Row>
-    </Column>
-    {/*  {t(...messages.someThing)}  */}
-  </Div>
+    <Div>
+      <h1>{t('Your Wallet')}</h1>
+      <Column>
+        <Row>
+          <Amount width={'41%'}>
+            <h3>{t('Total balance')}</h3>
+            <Row>
+              <h1>1,000</h1>
+              <p>TOTM</p>
+            </Row>
+          </Amount>
+          <Amount width={'33%'}>
+            <h3>{t('Amount staked')}</h3>
+            <Row>
+              <h2>264</h2>
+              <p>TOTM</p>
+            </Row>
+          </Amount>
+          <Amount>
+            <h3>{t('Available to stake')}</h3>
+            <Row>
+              <h2>736</h2>
+              <p>TOTM</p>
+            </Row>
+          </Amount>
+        </Row>
+        <Row>
+          <AddTotm onClick={() => {}}>
+            <p>{t('Add TOTM')}</p>
+          </AddTotm>
+          <BtcAddress>
+            <label>BTC Address</label>
+            <p>1345678912345678987</p>
+            <Connected>
+              <p>{t('Connected')}</p>
+              <Icon url={'connected.svg'} width={10} height={10} />
+            </Connected>
+          </BtcAddress>
+        </Row>
+      </Column>
+      {/*  {t(...messages.someThing)}  */}
+    </Div>
   );
-
 });
 
 const Div = styled.div`
@@ -68,14 +79,14 @@ const Div = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #272E38;
+  background-color: #272e38;
 `;
 const Row = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-const Amount = styled.div<{width?: string}>`
+const Amount = styled.div<{ width?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -115,7 +126,7 @@ const AddTotm = styled.div`
     font-weight: bold;
     font-size: 15px;
   }
-`
+`;
 
 const BtcAddress = styled.div`
   background-color: #232830;
@@ -145,5 +156,5 @@ const Connected = styled.div`
   margin: 0;
   height: 28px;
   line-height: 28px;
-  padding: 10px; 
+  padding: 10px;
 `;

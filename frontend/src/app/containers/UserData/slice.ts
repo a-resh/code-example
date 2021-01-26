@@ -13,4 +13,8 @@ const userDataSlice = createSlice({
   },
 });
 
-export const { actions: userDataActions, reducer, name: sliceKey } = userDataSlice;
+export const {
+  actions: userDataActions,
+  reducer,
+  name: sliceKey,
+} = userDataSlice;

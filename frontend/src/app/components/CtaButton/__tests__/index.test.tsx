@@ -5,7 +5,9 @@ import { CtaButton } from '..';
 
 describe('<CtaButton  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<CtaButton background={'black'} color={'white'} />);
+    const loadingIndicator = render(
+      <CtaButton background={'black'} color={'white'} />,
+    );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

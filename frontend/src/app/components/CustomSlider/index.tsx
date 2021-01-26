@@ -1,22 +1,22 @@
 /**
-*
-* Slider
-*
-*/
+ *
+ * Slider
+ *
+ */
 import * as React from 'react';
 import Slider from '@material-ui/core/Slider';
-import {createStyles, makeStyles, Theme, withStyles} from "@material-ui/core";
+import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core';
 interface Props {}
 
 const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      root: {
-        width: 50 + theme.spacing(1) * 2,
-      },
-      padding: {
-        height: 0,
-      }
-    }),
+  createStyles({
+    root: {
+      width: 50 + theme.spacing(1) * 2,
+    },
+    padding: {
+      height: 0,
+    },
+  }),
 );
 const PrettoSlider = withStyles({
   root: {
@@ -50,9 +50,12 @@ const PrettoSlider = withStyles({
 export default function CustomizedSlider() {
   const classes = useStyles();
   return (
-      <div className={classes.root}>
-        <PrettoSlider valueLabelDisplay="auto" aria-label="pretto slider" defaultValue={50} />
-      </div>
+    <div className={classes.root}>
+      <PrettoSlider
+        valueLabelDisplay="auto"
+        aria-label="pretto slider"
+        defaultValue={50}
+      />
+    </div>
   );
 }
-

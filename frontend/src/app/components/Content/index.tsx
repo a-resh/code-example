@@ -1,22 +1,18 @@
 /**
-*
-* Content
-*
-*/
+ *
+ * Content
+ *
+ */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 
-interface Props {children: JSX.Element}
+interface Props {
+  children: JSX.Element;
+}
 
-export function Content({children}: Props) {
-
-  return (
-  <Div>
-    {children}
-  </Div>
-  );
-
-};
+export function Content({ children }: Props) {
+  return <Div>{children}</Div>;
+}
 
 const Div = styled.div`
   display: flex;

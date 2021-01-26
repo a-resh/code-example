@@ -3,9 +3,9 @@
  * AND if you are also using the object syntax instead of string syntax. \
  * Check the documentation section i18n for details
  */
-import {translations} from 'locales/translations';
-import {_t} from 'utils/messages';
+import { translations } from 'locales/translations';
+import { _t } from 'utils/messages';
 
 export const messages = {
-    nextPoolDeparts: _t(translations.nextPoolDeparts, 'Next Pool Departs'),
+  nextPoolDeparts: _t(translations.nextPoolDeparts, 'Next Pool Departs'),
 };

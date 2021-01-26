@@ -7,21 +7,15 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 
 interface Props {
-    height?: string;
-    width?: string;
-    align?: string;
-    children?: JSX.Element | JSX.Element [];
-    padding?: string;
+  height?: string;
+  width?: string;
+  align?: string;
+  children?: JSX.Element | JSX.Element[];
+  padding?: string;
 }
 
 export function Row(props: Props) {
-
-    return (
-        <Div {...props}>
-            {props.children}
-        </Div>
-    );
-
+  return <Div {...props}>{props.children}</Div>;
 }
 
 const Div = styled.div<Props>`

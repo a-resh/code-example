@@ -3,75 +3,69 @@
  * AccountRewards
  *
  */
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components/macro';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
-interface Props {
-}
+interface Props {}
 
 export const AccountRewards = memo((props: Props) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {t, i18n} = useTranslation();
-    const values = [{totem: 'fox'}]
-    return (
-        <Div>
-            <h1>{t('Pools and rewards')}</h1>
-            <TableHeader>
-              <IconColumn>
-              </IconColumn>
-              <TimeLeftColumn>
-                <h3>{t('Time left')}</h3>
-              </TimeLeftColumn>
-              <StakeColumn>
-                <h3>{t('Stake')}</h3>
-              </StakeColumn>
-              <YourPredictionColumn>
-                <h3>{t('Your prediction')}</h3>
-              </YourPredictionColumn>
-              <ProjectedReturnsColumn>
-                <h3>{t('Projected returns')}</h3>
-              </ProjectedReturnsColumn>
-              <ActualReturnsColumn>
-                <h3>{t('Actual returns')}</h3>
-              </ActualReturnsColumn>
-              <RoiColumn>
-                <h3>{t('ROI')}</h3>
-              </RoiColumn>
-              <ButtonsColumn>
-              </ButtonsColumn>
-            </TableHeader>
-            <TableBody>
-              { values.map( (value, index) =>
-                (<TableRow key={index}>
-                  <IconColumn>
-                  </IconColumn>
-                  <TimeLeftColumn>
-                    <h3>{t('Time left')}</h3>
-                  </TimeLeftColumn>
-                  <StakeColumn>
-                    <h3>{t('Stake')}</h3>
-                  </StakeColumn>
-                  <YourPredictionColumn>
-                    <h3>{t('Your prediction')}</h3>
-                  </YourPredictionColumn>
-                  <ProjectedReturnsColumn>
-                    <h3>{t('Projected returns')}</h3>
-                  </ProjectedReturnsColumn>
-                  <ActualReturnsColumn>
-                    <h3>{t('Actual returns')}</h3>
-                  </ActualReturnsColumn>
-                  <RoiColumn>
-                    <h3>{t('ROI')}</h3>
-                  </RoiColumn>
-                  <ButtonsColumn>
-                  </ButtonsColumn>
-                </TableRow>
-              ))}
-            </TableBody>
-        </Div>
-    );
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { t, i18n } = useTranslation();
+  const values = [{ totem: 'fox' }];
+  return (
+    <Div>
+      <h1>{t('Pools and rewards')}</h1>
+      <TableHeader>
+        <IconColumn></IconColumn>
+        <TimeLeftColumn>
+          <h3>{t('Time left')}</h3>
+        </TimeLeftColumn>
+        <StakeColumn>
+          <h3>{t('Stake')}</h3>
+        </StakeColumn>
+        <YourPredictionColumn>
+          <h3>{t('Your prediction')}</h3>
+        </YourPredictionColumn>
+        <ProjectedReturnsColumn>
+          <h3>{t('Projected returns')}</h3>
+        </ProjectedReturnsColumn>
+        <ActualReturnsColumn>
+          <h3>{t('Actual returns')}</h3>
+        </ActualReturnsColumn>
+        <RoiColumn>
+          <h3>{t('ROI')}</h3>
+        </RoiColumn>
+        <ButtonsColumn></ButtonsColumn>
+      </TableHeader>
+      <TableBody>
+        {values.map((value, index) => (
+          <TableRow key={index}>
+            <IconColumn></IconColumn>
+            <TimeLeftColumn>
+              <h3>{t('Time left')}</h3>
+            </TimeLeftColumn>
+            <StakeColumn>
+              <h3>{t('Stake')}</h3>
+            </StakeColumn>
+            <YourPredictionColumn>
+              <h3>{t('Your prediction')}</h3>
+            </YourPredictionColumn>
+            <ProjectedReturnsColumn>
+              <h3>{t('Projected returns')}</h3>
+            </ProjectedReturnsColumn>
+            <ActualReturnsColumn>
+              <h3>{t('Actual returns')}</h3>
+            </ActualReturnsColumn>
+            <RoiColumn>
+              <h3>{t('ROI')}</h3>
+            </RoiColumn>
+            <ButtonsColumn></ButtonsColumn>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Div>
+  );
 });
 
 const Div = styled.div`
@@ -109,7 +103,7 @@ const TableBody = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-`
+`;
 const TableRow = styled.div``;
 
 const IconColumn = styled.div`

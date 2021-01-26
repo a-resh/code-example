@@ -7,6 +7,6 @@ import { translations } from 'locales/translations';
 import { _t } from 'utils/messages';
 
 export const messages = {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    predictNow: _t(translations.predictNow,'Predict Now'),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  predictNow: _t(translations.predictNow, 'Predict Now'),
 };

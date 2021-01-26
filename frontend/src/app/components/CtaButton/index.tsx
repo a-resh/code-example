@@ -1,8 +1,8 @@
 /**
-*
-* CtaButton
-*
-*/
+ *
+ * CtaButton
+ *
+ */
 import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
@@ -19,11 +19,10 @@ export const CtaButton = memo((props: Props) => {
   const { t, i18n } = useTranslation();
 
   return (
-  <Div onClick={props.showModal} {...props}>
-    <b>{t(...messages.predictNow)}</b>
-  </Div>
+    <Div onClick={props.showModal} {...props}>
+      <b>{t(...messages.predictNow)}</b>
+    </Div>
   );
-
 });
 
 const Div = styled.div<Props>`
