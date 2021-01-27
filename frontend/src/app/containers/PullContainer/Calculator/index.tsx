@@ -25,7 +25,7 @@ export function Calculator(props: Props) {
           <input
             className={'calculator-input-number'}
             type="number"
-            value={1000}
+            defaultValue={1000}
             onChange={() => {}}
           />
           <p> TOTM</p>
@@ -83,10 +83,14 @@ const Div = styled.div`
   width: 420px;
   margin: 0 30px 0 0;
   color: white;
+  @media only screen and (max-width: 900px){
+    margin: 0 0 30px 0;
+  }
 `;
 
 const Top = styled.div`
-  height: calc(100% - 200px);
+  //height: calc(100% - 200px);
+  padding-bottom: 10px;
 `;
 const Row = styled.div`
   display: flex;
@@ -119,7 +123,7 @@ const Bottom = styled.div`
   opacity: 1;
   padding-top: 5px;
   width: 100%;
-  height: 200px;
+  //height: 200px;
   background-color: #739ba2;
   text-align: center;
   p {

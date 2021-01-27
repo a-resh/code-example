@@ -37,18 +37,17 @@ export function PullContainer(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
   return (
-    <>
+<>
       <Div>
-        <ContentWrapper>
           <Top>
             <Timer />
             <PoolInfo />
           </Top>
-          <BottomContent>
-            <Bottom>
+          <Bottom>
+            <BottomContent>
               <Calculator />
               <Reward />
-            </Bottom>
+            </BottomContent>
             <ButtonWrapper>
               <CtaButton
                 background={'#FF6701'}
@@ -56,58 +55,62 @@ export function PullContainer(props: Props) {
                 showModal={switchIsOpenModal}
               />
             </ButtonWrapper>
-          </BottomContent>
+          </Bottom>
           <PredictModal
             isOpen={modalIsOpen}
             close={switchIsOpenModal}
             totem={totem}
           />
-        </ContentWrapper>
       </Div>
-    </>
+</>
   );
 }
 
 const Div = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ContentWrapper = styled.div`
-  width: 880px;
   height: 100%;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 10px;
 `;
 
 const Top = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-const Bottom = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 340px;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  @media only screen and (max-width: 900px){
+    flex-direction: column;
+  }
+`;
+const BottomContent = styled.div`
+  display: flex;
+  flex-direction: row;
   padding: 5px 20px 30px 20px;
   background-color: rgba(39, 46, 56, 0.4);
+  @media only screen and (max-width: 900px){
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    padding: 10px;
+  }
 `;
 
-const BottomContent = styled.div`
+const Bottom = styled.div`
   margin-top: 20px;
-  width: 100%;
   height: 420px;
   display: flex;
   flex-direction: column;
-  padding: 10px 30px 30px 0px;
+  @media only screen and (max-width: 900px){
+    align-items: center;
+    padding: 0;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   width: 100%;
   height: 55px;
+  @media only screen and (max-width: 900px){
+    display: none;
+  }
 `;

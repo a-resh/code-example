@@ -19,7 +19,11 @@ const Div = styled.div`
   justify-content: center;
   width: calc(100vw - 200px);
   align-items: center;
+  padding: 20px 0;
   @media only screen and (max-width: 1100px) {
     width: calc(100vw - 80px);
+  }
+  @media only screen and (max-width: 900px) {
+    width: calc(100vw - 55px);
   }
 `;
