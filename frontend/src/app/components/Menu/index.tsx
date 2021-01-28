@@ -7,10 +7,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { MenuButton } from './MenuButton';
-import { TotemsData } from '../../../types/enums';
+import { mediaQueries, TotemsData } from '../../../types/constants';
+import media from 'styled-media-query';
 
 interface Props {
-  isMobile: boolean;
   isLogin?: boolean;
 }
 
@@ -21,7 +21,6 @@ export const Menu = (props: Props) => {
   const urn = pathname && pathname !== '/' ? pathname.substr(1) : 'fox';
   const [active, setActive] = useState(urn);
   let menuValues = Object.keys(TotemsData);
-  console.log(active);
   if (!props.isLogin) {
     menuValues = menuValues.filter(v => v !== 'USER');
   }
@@ -32,24 +31,24 @@ export const Menu = (props: Props) => {
           <MenuButton
             key={index}
             name={v}
-            isActive={active === v.toLowerCase()}
+            isActive={active === v.toLowerCase() && window.innerWidth > 450}
             setActive={setActive}
           />
         ))}
       </ButtonsContainer>
-      {t('')}
-      {/*  {t(...messages.someThing)}  */}
     </Div>
   );
 };
 
-const Div = styled.div``;
+const Div = styled.div`
+  height: 100%;
+`;
 
 const ButtonsContainer = styled.div<Props>`
   height: 100%;
   display: flex;
   flex-direction: column;
-  @media only screen and (max-width: 600px) {
+  ${mediaQueries.lessThan('small')`
     flex-direction: row;
-  } ;
+  `};
 `;

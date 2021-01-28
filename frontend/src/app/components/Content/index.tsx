@@ -5,6 +5,8 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../types/constants';
 
 interface Props {
   children: JSX.Element;
@@ -20,10 +22,14 @@ const Div = styled.div`
   width: calc(100vw - 200px);
   align-items: center;
   padding: 20px 0;
-  @media only screen and (max-width: 1100px) {
-    width: calc(100vw - 80px);
-  }
-  @media only screen and (max-width: 900px) {
-    width: calc(100vw - 55px);
-  }
+  ${mediaQueries.greaterThan('large')`
+    width: calc(100% - 200px);
+  `}
+  ${mediaQueries.lessThan('large')`
+    width: calc(100% - 55px);
+  `}
+  ${mediaQueries.lessThan('small')`
+    width: 100%;
+    padding: 45px 0 0 0;
+  `}
 `;

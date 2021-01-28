@@ -7,6 +7,8 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../../types/constants';
 
 interface Props {}
 
@@ -54,26 +56,28 @@ export function Reward({}: Props) {
         <p>{t(...messages.totalDistributionToCommunity)}:</p>
         <h4>$ 1,856,566,875</h4>
       </Bottom>
-      {t('')}
-      {/*  {t(...messages.someThing)}  */}
     </Div>
   );
 }
 
 const Div = styled.div`
   height: 100%;
-  width: 420px;
-  background-color: #ff6701;
+  width: 50%;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 20px;
+  ${mediaQueries.greaterThan('small')`background-color: #ff6701;`}
+  ${mediaQueries.lessThan('medium')`
+    width: 100%
+  `}
 `;
 const Top = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  background-color: #ff6701;
 `;
 const Column = styled.div`
   font-family: Lato;
@@ -110,6 +114,12 @@ const Column = styled.div`
     font-size: 19px;
     text-align: right;
   }
+  ${mediaQueries.lessThan('small')`
+    li {font-size: 12px; padding-top: 5px}
+    p {font-size: 12px;}
+    h1 {font-size: 90px; line-height: 110px;}
+    h2 {font-size: 42px; line-height: 45px;}
+  `}
 `;
 
 const LightFont = styled.div`
@@ -125,6 +135,7 @@ const Bottom = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  background-color: #ff6701;
   p,
   h4 {
     display: block;
@@ -142,4 +153,12 @@ const Bottom = styled.div`
     margin: 0;
     font-family: 'Lato Light';
   }
+
+  ${mediaQueries.lessThan('small')`
+    justify-content: flex-start;
+    p, h4 {text-align: center;}
+    p {font-size: 12px; padding: 20px 10px;}
+    h4 {font-size: 16px; padding: 20px 10px;}
+    background-color: rgba(39, 46, 56, 0.4);
+  `}
 `;

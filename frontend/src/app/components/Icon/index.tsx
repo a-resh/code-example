@@ -5,6 +5,8 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../types/constants';
 
 interface Props {
   url: string;
@@ -25,4 +27,9 @@ const Div = styled.div<Props>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   background: center no-repeat url('assets/images/${props => props.url}');
+  ${mediaQueries.lessThan('small')`
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  `}
 `;

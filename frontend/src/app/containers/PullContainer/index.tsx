@@ -5,21 +5,21 @@
  */
 
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
 import { selectPullContainer } from './selectors';
 import { pullContainerSaga } from './saga';
-import { Timer } from '../../components/Timer';
+import { Timer } from './Timer';
 import { PoolInfo } from './PoolInfo';
 import { Calculator } from './Calculator';
 import { Reward } from './Reward';
 import { CtaButton } from '../../components/CtaButton';
 import { PredictModal } from './PredictModal';
-import { useState } from 'react';
 import { Totems } from '../../../types/enums';
+import { mediaQueries } from '../../../types/constants';
 
 interface Props {}
 
@@ -37,80 +37,100 @@ export function PullContainer(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
   return (
-<>
+    <>
       <Div>
-          <Top>
+        <Top>
+          <TimerWrapper>
             <Timer />
-            <PoolInfo />
-          </Top>
-          <Bottom>
-            <BottomContent>
-              <Calculator />
-              <Reward />
-            </BottomContent>
-            <ButtonWrapper>
-              <CtaButton
-                background={'#FF6701'}
-                color={'white'}
-                showModal={switchIsOpenModal}
-              />
-            </ButtonWrapper>
-          </Bottom>
-          <PredictModal
-            isOpen={modalIsOpen}
-            close={switchIsOpenModal}
-            totem={totem}
-          />
+          </TimerWrapper>
+          <PoolInfo />
+        </Top>
+        <Bottom>
+          <BottomContent>
+            <Calculator />
+            <Reward />
+          </BottomContent>
+          <ButtonWrapper>
+            <CtaButton
+              background={'#FF6701'}
+              color={'white'}
+              showModal={switchIsOpenModal}
+            />
+          </ButtonWrapper>
+        </Bottom>
+        <PredictModal
+          isOpen={modalIsOpen}
+          close={switchIsOpenModal}
+          totem={totem}
+        />
       </Div>
-</>
+    </>
   );
 }
 
 const Div = styled.div`
   display: flex;
   height: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 const Top = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  @media only screen and (max-width: 900px){
+  //justify-content: space-around;
+  min-width: 720px;
+  ${mediaQueries.lessThan('medium')`
+    min-width: auto;
+    width: 100%;
     flex-direction: column;
-  }
+    justify-content: center;
+    align-items: center;
+  `}
+`;
+const TimerWrapper = styled.div`
+  ${mediaQueries.lessThan('small')`
+    display: none;
+  `}
 `;
 const BottomContent = styled.div`
   display: flex;
   flex-direction: row;
   padding: 5px 20px 30px 20px;
   background-color: rgba(39, 46, 56, 0.4);
-  @media only screen and (max-width: 900px){
+  ${mediaQueries.lessThan('medium')`
     flex-direction: column;
     height: 100%;
     align-items: center;
-    padding: 10px;
-  }
+    padding: 10px 20px;
+  `}
+  ${mediaQueries.lessThan('small')`
+    width: 100%;
+    flex-direction: column-reverse;
+  `}
 `;
 
 const Bottom = styled.div`
   margin-top: 20px;
-  height: 420px;
+  //height: 420px;
   display: flex;
   flex-direction: column;
-  @media only screen and (max-width: 900px){
+  align-items: center;
+  ${mediaQueries.lessThan('medium')`
     align-items: center;
     padding: 0;
-  }
+  `}
+  ${mediaQueries.lessThan('medium')`
+    width: 100%;
+  `}
 `;
 
 const ButtonWrapper = styled.div`
   width: 100%;
   height: 55px;
-  @media only screen and (max-width: 900px){
+  ${mediaQueries.lessThan('medium')`
     display: none;
-  }
+  `}
 `;

@@ -10,6 +10,9 @@ import { messages } from './messages';
 import { CtaButton } from '../../../components/CtaButton';
 import { Icon } from '../../../components/Icon';
 import { Scale } from '../../../components/Scale';
+import media from 'styled-media-query';
+import { Timer } from '../Timer';
+import { mediaQueries } from '../../../../types/constants';
 
 interface Props {}
 
@@ -27,6 +30,9 @@ export function PoolInfo(props: Props) {
           {totem} {t(...messages.predictorPool)}
         </p>
       </Title>
+      <TimerContainer>
+        <Timer />
+      </TimerContainer>
       <ScaleContainer>
         <p>
           <b>
@@ -44,12 +50,16 @@ export function PoolInfo(props: Props) {
 
 const Div = styled.div`
   height: 210px;
-  width: 430px;
+  width: 60%;
   background-color: #ff6701;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${mediaQueries.lessThan('small')`
+    width: 100%;
+    height: auto;
+  `}
 `;
 const Title = styled.div`
   width: 100%;
@@ -63,6 +73,16 @@ const Title = styled.div`
   p {
     font-size: 20px;
   }
+  ${mediaQueries.lessThan('small')`
+    height: auto;
+    display: none;
+  `}
+`;
+const TimerContainer = styled.div`
+  margin-bottom: 30px;
+  ${mediaQueries.greaterThan('small')`
+    display: none;
+  `}
 `;
 const ScaleContainer = styled.div`
   width: 100%;
@@ -71,6 +91,10 @@ const ScaleContainer = styled.div`
   p {
     font-size: 15px;
   }
+  ${mediaQueries.lessThan('small')`
+    p {font-size: 10px;}
+    margin-bottom: 20px;
+  `}
 `;
 
 const ButtonWrapper = styled.div`

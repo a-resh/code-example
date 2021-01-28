@@ -8,6 +8,8 @@ import styled from 'styled-components/macro';
 import { Menu } from '../Menu';
 import { LoginButton } from './LoginButton';
 import { Icon } from '../Icon';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../types/constants';
 
 interface Props {}
 
@@ -15,7 +17,7 @@ export function Header({}: Props) {
   return (
     <Div>
       <MenuWrapper>
-        <Menu isMobile={true} />
+        <Menu />
       </MenuWrapper>
       <IconWrapper>
         <Icon url={'/logo-white.svg'} width={90} height={25} margin={'15px'} />
@@ -33,22 +35,24 @@ const Div = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  @media only screen and (max-width: 600px) {
+  ${mediaQueries.lessThan('small')`
     background-color: #739ba2;
-    height: 30px;
-  }
-  @media only screen and (max-width: 1100px) and (min-width: 600px) {
+    height: 45px;
+    position: fixed;
+  `}
+  ${mediaQueries.between('small', 'large')` 
     padding-left: calc(50% - 45px);
     height: 55px;
-  }
+  `}
 `;
 const MenuWrapper = styled.div`
-  @media only screen and (min-width: 600px) {
+  height: 100%;
+  ${mediaQueries.greaterThan('small')`
     display: none;
-  }
+    `}
 `;
 const IconWrapper = styled.div`
-  @media only screen and (max-width: 600px) {
+  ${mediaQueries.lessThan('small')`
     display: none;
-  }
+    `}
 `;

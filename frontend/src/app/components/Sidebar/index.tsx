@@ -7,13 +7,15 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { Menu } from '../Menu';
 import { Icon } from '../Icon';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../types/constants';
 
 interface Props {}
 
 export const Sidebar = memo(({}: Props) => {
   return (
     <Div>
-      <Menu isMobile={false} isLogin={true} />
+      <Menu isLogin={true} />
       <SidebarBottom>
         <Icon
           url={'telegram-dark.svg'}
@@ -39,12 +41,12 @@ const Div = styled.div`
   background-color: #272e38;
   display: flex;
   flex-direction: column;
-  @media only screen and (max-width: 600px) {
+  ${mediaQueries.lessThan('small')`
     display: none;
-  }
-  @media only screen and (max-width: 1100px) {
+  `}
+  ${mediaQueries.lessThan('large')`
     width: 80px;
-  }
+  `}
 `;
 const SidebarBottom = styled.div`
   width: 100%;

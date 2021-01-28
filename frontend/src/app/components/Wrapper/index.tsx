@@ -5,6 +5,8 @@
  */
 import React, { memo } from 'react';
 import styled from 'styled-components/macro';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../types/constants';
 
 interface Props {
   children: React.ReactNode[];
@@ -19,12 +21,14 @@ const Div = styled.div`
   flex-direction: row;
   width: 100%;
   height: 100%;
-  min-width: 100vw;
   min-height: calc(100vh - 80px);
   //overflow: auto;
   background: bottom right no-repeat #121212
     url('assets/images/desktop-content-background.svg');
-  @media only screen and (max-width: 1100px) {
+  ${mediaQueries.lessThan('large')`
     min-height: calc(100vh - 55px);
-  }
+  `}
+  ${mediaQueries.lessThan('small')`
+    min-height: 100%;
+  `}
 `;

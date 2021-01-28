@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { Timer } from '..';
+import { Timer } from '../index';
 
 describe('<Timer  />', () => {
   it('should match snapshot', () => {

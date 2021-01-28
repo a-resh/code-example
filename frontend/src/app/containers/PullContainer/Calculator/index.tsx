@@ -10,6 +10,8 @@ import { messages } from './messages';
 import CustomizedSlider from '../../../components/CustomSlider';
 import { Switch } from '@material-ui/core';
 import CustomSwitch from '../../../components/CustomSwitch';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../../types/constants';
 
 interface Props {}
 
@@ -80,12 +82,13 @@ export function Calculator(props: Props) {
 
 const Div = styled.div`
   height: 100%;
-  width: 420px;
+  width: 50%;
   margin: 0 30px 0 0;
   color: white;
-  @media only screen and (max-width: 900px){
+  ${mediaQueries.lessThan('medium')`
+    width: 100%;
     margin: 0 0 30px 0;
-  }
+  `}
 `;
 
 const Top = styled.div`

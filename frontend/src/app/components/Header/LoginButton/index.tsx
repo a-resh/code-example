@@ -8,6 +8,8 @@ import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
 import { Icon } from '../../Icon';
+import media from 'styled-media-query';
+import { mediaQueries } from '../../../../types/constants';
 
 interface Props {}
 
@@ -45,26 +47,26 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  @media only screen and (max-width: 600px) {
-    width: 30px;
+  ${mediaQueries.lessThan('small')`
+    width: 45px;
     background-color: #739ba2;
-  }
+  `}
   :hover {
     background-color: #739ba2;
   }
 `;
 
 const MobileIcon = styled.div`
-  @media only screen and (min-width: 600px) {
+  ${mediaQueries.greaterThan('small')`
     display: none;
-  }
+  `}
 `;
 const DesktopButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  @media only screen and (max-width: 600px) {
+  ${mediaQueries.lessThan('small')`
     display: none;
-  }
+  `}
 `;
