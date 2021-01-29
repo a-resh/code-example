@@ -7,7 +7,7 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import { Center } from '../../../components/Center';
+import { Center } from '../../../components/blocks/Center';
 import { Icon } from '../../../components/Icon';
 
 interface Props {}

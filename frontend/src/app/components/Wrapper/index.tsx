@@ -30,5 +30,6 @@ const Div = styled.div`
   `}
   ${mediaQueries.lessThan('small')`
     min-height: 100%;
+    background-color: rgb(39,46,56);
   `}
 `;

@@ -5,7 +5,6 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import media from 'styled-media-query';
 import { mediaQueries } from '../../../types/constants';
 
 interface Props {
@@ -31,5 +30,6 @@ const Div = styled.div`
   ${mediaQueries.lessThan('small')`
     width: 100%;
     padding: 45px 0 0 0;
+    background-color: rgba(39,46,56, .4);
   `}
 `;

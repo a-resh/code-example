@@ -14,7 +14,9 @@ import media from 'styled-media-query';
 import { Timer } from '../Timer';
 import { mediaQueries } from '../../../../types/constants';
 
-interface Props {}
+interface Props {
+  showModal: () => void;
+}
 
 export function PoolInfo(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +44,11 @@ export function PoolInfo(props: Props) {
         <Scale fill={63} />
       </ScaleContainer>
       <ButtonWrapper>
-        <CtaButton color={'#181818'} background={'white'} />
+        <CtaButton
+          color={'#181818'}
+          background={'white'}
+          showModal={props.showModal}
+        />
       </ButtonWrapper>
     </Div>
   );

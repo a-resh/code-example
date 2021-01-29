@@ -20,6 +20,8 @@ import { CtaButton } from '../../components/CtaButton';
 import { PredictModal } from './PredictModal';
 import { Totems } from '../../../types/enums';
 import { mediaQueries } from '../../../types/constants';
+import { fromEvent } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 interface Props {}
 
@@ -27,6 +29,14 @@ export function PullContainer(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
   const totem = Totems.FOX;
+  const checkIsMobile = value => value < 450;
+  let isMobile = checkIsMobile(window.innerWidth);
+  fromEvent(window, 'resize')
+    .pipe(
+      map((e: any) => e.currentTarget.innerWidth),
+      filter(width => isMobile !== checkIsMobile(width)),
+    )
+    .subscribe(data => (isMobile = checkIsMobile(data)));
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const switchIsOpenModal = () => {
     setIsOpen(!modalIsOpen);
@@ -43,11 +53,11 @@ export function PullContainer(props: Props) {
           <TimerWrapper>
             <Timer />
           </TimerWrapper>
-          <PoolInfo />
+          <PoolInfo showModal={switchIsOpenModal} />
         </Top>
         <Bottom>
           <BottomContent>
-            <Calculator />
+            <Calculator showModal={switchIsOpenModal} />
             <Reward />
           </BottomContent>
           <ButtonWrapper>
@@ -59,6 +69,7 @@ export function PullContainer(props: Props) {
           </ButtonWrapper>
         </Bottom>
         <PredictModal
+          isMobile={isMobile}
           isOpen={modalIsOpen}
           close={switchIsOpenModal}
           totem={totem}
@@ -80,7 +91,6 @@ const Div = styled.div`
 const Top = styled.div`
   display: flex;
   flex-direction: row;
-  //justify-content: space-around;
   min-width: 720px;
   ${mediaQueries.lessThan('medium')`
     min-width: auto;

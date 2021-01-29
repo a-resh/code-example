@@ -10,8 +10,8 @@ import { mediaQueries } from '../../../types/constants';
 
 interface Props {
   url: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   margin?: string;
   cursor?: string;
   onClick?: () => void;

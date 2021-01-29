@@ -7,7 +7,7 @@ import { Totems } from '../../../../../types/enums';
 describe('<PredictModal  />', () => {
   it('should match snapshot', () => {
     const loadingIndicator = render(
-      <PredictModal close={() => {}} totem={Totems.FOX} isOpen={true} />,
+      <PredictModal close={() => {}} totem={Totems.FOX} isOpen={true} isMobile={true} />,
     );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });

@@ -41,14 +41,16 @@ export const Menu = (props: Props) => {
 };
 
 const Div = styled.div`
-  height: 100%;
+  ${mediaQueries.lessThan('small')`
+    height: 100%;
+  `};
 `;
 
 const ButtonsContainer = styled.div<Props>`
-  height: 100%;
   display: flex;
   flex-direction: column;
   ${mediaQueries.lessThan('small')`
+    height: 100%;
     flex-direction: row;
   `};
 `;
