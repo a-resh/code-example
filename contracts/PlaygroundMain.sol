@@ -22,11 +22,15 @@ contract FactoryDraw {
     uint256 constant btcPrize_30 = 163; //0.163 btc 
     uint256 constant btcPrize_60 = 182; //0.182 btc 
 
+    address payable owner;
+
     constructor() {
       // new draw index will be 0
       currentDraw_15 = -1;
       currentDraw_30 = -1;
       currentDraw_60 = -1;
+
+      owner = msg.sender;
     }
 
     function createNewDraw (bytes32 drawId, uint _launchTime, uint _duration) public {
