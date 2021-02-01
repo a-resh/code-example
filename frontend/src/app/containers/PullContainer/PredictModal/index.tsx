@@ -10,10 +10,8 @@ import Modal from 'react-modal';
 import { Icon } from '../../../components/Icon';
 import { Totems } from '../../../../types/enums';
 import moment from 'moment';
-import { Row } from '../../../components/blocks/Row';
-import { Center } from '../../../components/blocks/Center';
 import { mediaQueries } from '../../../../types/constants';
-import { Column } from '../../../components/blocks/Column';
+import { Center, Column, Row } from '../../../components/blocks';
 
 interface Props {
   isOpen: boolean;
@@ -97,17 +95,17 @@ export const PredictModal = memo((props: Props) => {
               {t('What will the price of bitcoin be when this pool matures?')}
             </h4>
             <DesktopPrediction>
-              <Row width={'100%'}>
+              <RowModal>
                 <p>{t('prediction')}</p>
                 <p>{t('range')}</p>
-              </Row>
-              <Row width={'100%'}>
+              </RowModal>
+              <RowModal>
                 <h2>$ 13,000</h2>
                 <h2>&plusmn;$500</h2>
-              </Row>
-              <Row width={'100%'}>
+              </RowModal>
+              <RowModal>
                 <small>$12,500 - $13,500</small>
-              </Row>
+              </RowModal>
             </DesktopPrediction>
             <MobilePrediction>
               <h2>$13,000</h2>
@@ -123,8 +121,9 @@ export const PredictModal = memo((props: Props) => {
             <h4>{t('How much TOTM are you staking')}?</h4>
             <h2>10,000</h2>
             <PercentBlock>
-              {[25, 50, 75, 100].map(v => (
+              {[25, 50, 75, 100].map((v, index) => (
                 <PercentValue
+                  key={index}
                   opacity={v / 100}
                   onClick={() => changeValue(`${v}%`)}
                 >
@@ -176,10 +175,8 @@ const Top = styled(Row)`
   `}
 `;
 
-const Block = styled.div<{ align?: string }>`
+const Block = styled(Column)<{ align?: string }>`
   width: 50%;
-  display: flex;
-  flex-direction: column;
   font-family: Lato;
   align-items: ${props => props.align};
 
@@ -211,9 +208,7 @@ const Block = styled.div<{ align?: string }>`
   `}
 `;
 
-const PredictionRange = styled.div`
-  display: flex;
-  flex-direction: column;
+const PredictionRange = styled(Column)`
   justify-content: center;
   align-items: center;
   width: 220px;
@@ -273,19 +268,23 @@ const MobilePrediction = styled(Column)`
   width: 130px;
   background-color: #ff6701;
   color: white;
+
   h2,
   p {
     width: 100%;
     font-weight: 100;
     border: none;
   }
+
   h2 {
     font-size: 30px;
     height: 50px;
   }
+
   p {
     font-size: 11px;
   }
+
   ${mediaQueries.greaterThan('small')`
      display: none;
   `}
@@ -310,6 +309,7 @@ const ConfirmPredict = styled.div`
     text-align: center;
     margin: 0;
   }
+
   ${mediaQueries.lessThan('small')`
      display: flex;
      flex-direction: column;
@@ -334,6 +334,7 @@ const StakeButton = styled(Center)`
   p {
     font-weight: bold;
   }
+
   ${mediaQueries.lessThan('small')`
      width: 100%;
      p {font-size: 15px}
@@ -355,5 +356,8 @@ const PercentValue = styled(Center)<{ opacity: number }>`
   `}
 `;
 const Bottom = styled(Top)`
+  width: 100%;
+`;
+const RowModal = styled(Row)`
   width: 100%;
 `;

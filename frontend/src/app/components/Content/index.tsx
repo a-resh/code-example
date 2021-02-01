@@ -6,18 +6,9 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { mediaQueries } from '../../../types/constants';
+import { Center } from '../blocks';
 
-interface Props {
-  children: JSX.Element;
-}
-
-export function Content({ children }: Props) {
-  return <Div>{children}</Div>;
-}
-
-const Div = styled.div`
-  display: flex;
-  justify-content: center;
+export const Content = styled(Center)`
   width: calc(100vw - 200px);
   align-items: center;
   padding: 20px 0;

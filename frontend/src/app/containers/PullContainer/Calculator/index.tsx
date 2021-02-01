@@ -8,13 +8,11 @@ import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
 import CustomizedSlider from '../../../components/CustomSlider';
-import { Switch } from '@material-ui/core';
 import CustomSwitch from '../../../components/CustomSwitch';
-import media from 'styled-media-query';
 import { mediaQueries } from '../../../../types/constants';
 import { Icon } from 'app/components/Icon';
-import { Row } from '../../../components/blocks/Row';
 import { CtaButton } from '../../../components/CtaButton';
+import { Center, Column, Row } from '../../../components/blocks';
 
 interface Props {
   showModal: () => void;
@@ -28,9 +26,9 @@ export function Calculator(props: Props) {
   return (
     <Div>
       <Top>
-        <Row align={'center'} width={'100%'} height={'50px'} justify={'center'}>
+        <IconWrapper>
           <IconMobile url={`${totem}-white.svg`} width={20} height={20} />
-        </Row>
+        </IconWrapper>
         <RowCalc>
           <p>{t(...messages.ifYouStake)}</p>
           <input
@@ -119,6 +117,10 @@ const IconMobile = styled(Icon)`
     display: none
   `}
 `;
+const IconWrapper = styled(Center)`
+  width: 100%;
+  height: 50px;
+`;
 const RowCalc = styled(Row)`
   align-items: center;
   height: 25px;
@@ -142,9 +144,7 @@ const SpaceBetween = styled.div`
     display: none;
   `}
 `;
-const RowSmall = styled.div`
-  display: flex;
-  flex-direction: row;
+const RowSmall = styled(Row)`
   align-items: center;
   height: 20px;
   font-size: 11px;
@@ -155,21 +155,17 @@ const RowSmall = styled.div`
 const SwitchWrapper = styled.div`
   margin-left: 30px;
 `;
-const SliderWrapper = styled.div`
+const SliderWrapper = styled(Center)`
   margin-left: 50px;
   width: 60px;
   height: 20px;
   padding-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Bottom = styled.div`
   opacity: 1;
   padding-top: 5px;
   width: 100%;
-  //height: 200px;
   background-color: #739ba2;
   text-align: center;
   p {
@@ -192,20 +188,16 @@ const Bottom = styled.div`
     background-color: rgba(255, 103, 0, .5);
   `}
 `;
-const CurrencyBlock = styled.div`
-  display: flex;
-  flex-direction: row;
+const CurrencyBlock = styled(Row)`
   justify-content: space-around;
   padding: 0 10px;
   p {
     font-weight: 300;
   }
 `;
-const AmountCurrency = styled.div`
-  display: flex;
+const AmountCurrency = styled(Column)`
   font-family: Lato;
   margin: 0;
-  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   h5,

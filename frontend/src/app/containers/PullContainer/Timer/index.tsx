@@ -7,12 +7,12 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import media from 'styled-media-query';
 import { mediaQueries } from '../../../../types/constants';
+import { Center } from '../../../components/blocks';
 
 interface Props {}
 
-export function Timer(props: Props) {
+export function Timer({}: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   return (
@@ -48,11 +48,9 @@ const Title = styled.div`
     font-size: 15px;
   `}
 `;
-const TimerWrapper = styled.div`
+const TimerWrapper = styled(Center)`
   font-size: 90px;
   color: #ffffff;
-  display: flex;
-  align-items: center;
   ${mediaQueries.lessThan('small')`
     font-size: 45px;
   `}

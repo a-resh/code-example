@@ -7,6 +7,7 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
+import { Center } from '../blocks';
 
 interface Props {
   background: string;
@@ -25,10 +26,7 @@ export const CtaButton = memo((props: Props) => {
   );
 });
 
-const Div = styled.div<Props>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const Div = styled(Center)<Props>`
   height: 100%;
   width: 100%;
   color: ${props => props.color};

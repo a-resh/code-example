@@ -6,8 +6,6 @@
 import * as React from 'react';
 import Slider from '@material-ui/core/Slider';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core';
-//  @typescript-eslint/no-unused-vars
-interface Props {}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

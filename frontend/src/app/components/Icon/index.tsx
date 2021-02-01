@@ -5,7 +5,6 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import media from 'styled-media-query';
 import { mediaQueries } from '../../../types/constants';
 
 interface Props {

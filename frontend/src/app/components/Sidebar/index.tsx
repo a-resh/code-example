@@ -7,8 +7,8 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { Menu } from '../Menu';
 import { Icon } from '../Icon';
-import media from 'styled-media-query';
 import { mediaQueries } from '../../../types/constants';
+import { Column } from '../blocks';
 
 interface Props {}
 
@@ -36,11 +36,9 @@ export const Sidebar = memo(({}: Props) => {
   );
 });
 
-const Div = styled.div`
+const Div = styled(Column)`
   width: 200px;
   background-color: #272e38;
-  display: flex;
-  flex-direction: column;
   ${mediaQueries.lessThan('small')`
     display: none;
   `}
@@ -48,11 +46,9 @@ const Div = styled.div`
     width: 80px;
   `}
 `;
-const SidebarBottom = styled.div`
+const SidebarBottom = styled(Column)`
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: end;
   justify-content: flex-end;
   padding-bottom: 20px;

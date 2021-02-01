@@ -8,7 +8,7 @@ import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { MenuButton } from './MenuButton';
 import { mediaQueries, TotemsData } from '../../../types/constants';
-import media from 'styled-media-query';
+import { Column } from '../blocks';
 
 interface Props {
   isLogin?: boolean;
@@ -46,9 +46,7 @@ const Div = styled.div`
   `};
 `;
 
-const ButtonsContainer = styled.div<Props>`
-  display: flex;
-  flex-direction: column;
+const ButtonsContainer = styled(Column)<Props>`
   ${mediaQueries.lessThan('small')`
     height: 100%;
     flex-direction: row;
