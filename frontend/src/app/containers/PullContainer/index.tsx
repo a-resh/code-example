@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import {reducer, sliceKey, pullContainerActions} from './slice';
 import { selectPullContainer } from './selectors';
 import { pullContainerSaga } from './saga';
 import { Timer } from './Timer';
@@ -20,21 +20,30 @@ import { CtaButton } from '../../components/CtaButton';
 import { PredictModal } from './PredictModal';
 import { Totems } from '../../../types/enums';
 import { mediaQueries } from '../../../types/constants';
+import { fromEvent } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { LoginButton } from '../../components/LoginButton';
+import { Center, Column, Row } from '../../components/blocks';
+import CustomDrawer from "../../components/Drawer";
 
-interface Props {}
-
-export function PullContainer(props: Props) {
+export function PullContainer() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
+  const isShowDrawer = useSelector(selectPullContainer)
+  const { showDrawer } = pullContainerActions;
   const totem = Totems.FOX;
+  const checkIsMobile = value => value < 450;
+  let isMobile = checkIsMobile(window.innerWidth);
+  fromEvent(window, 'resize')
+    .pipe(
+      map((e: any) => e.currentTarget.innerWidth),
+      filter(width => isMobile !== checkIsMobile(width)),
+    )
+    .subscribe(data => (isMobile = checkIsMobile(data)));
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const switchIsOpenModal = () => {
     setIsOpen(!modalIsOpen);
   };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const pullContainer = useSelector(selectPullContainer);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
   return (
     <>
@@ -43,11 +52,11 @@ export function PullContainer(props: Props) {
           <TimerWrapper>
             <Timer />
           </TimerWrapper>
-          <PoolInfo />
+          <PoolInfo showModal={switchIsOpenModal} />
         </Top>
         <Bottom>
           <BottomContent>
-            <Calculator />
+            <Calculator showModal={switchIsOpenModal} />
             <Reward />
           </BottomContent>
           <ButtonWrapper>
@@ -59,28 +68,29 @@ export function PullContainer(props: Props) {
           </ButtonWrapper>
         </Bottom>
         <PredictModal
+          isMobile={isMobile}
           isOpen={modalIsOpen}
           close={switchIsOpenModal}
           totem={totem}
         />
+        <LoginButtonWrapper>
+          <LoginButton />
+        </LoginButtonWrapper>
+        <CustomDrawer isShow={isShowDrawer} setIsShow={() => dispatch(showDrawer())} />
       </Div>
     </>
   );
 }
 
-const Div = styled.div`
-  display: flex;
+const Div = styled(Center)`
   height: 100%;
   width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
-const Top = styled.div`
-  display: flex;
-  flex-direction: row;
-  //justify-content: space-around;
+const Top = styled(Row)`
+  width: 100%;
+  justify-content: center;
   min-width: 720px;
   ${mediaQueries.lessThan('medium')`
     min-width: auto;
@@ -95,9 +105,7 @@ const TimerWrapper = styled.div`
     display: none;
   `}
 `;
-const BottomContent = styled.div`
-  display: flex;
-  flex-direction: row;
+const BottomContent = styled(Row)`
   padding: 5px 20px 30px 20px;
   background-color: rgba(39, 46, 56, 0.4);
   ${mediaQueries.lessThan('medium')`
@@ -112,11 +120,8 @@ const BottomContent = styled.div`
   `}
 `;
 
-const Bottom = styled.div`
+const Bottom = styled(Column)`
   margin-top: 20px;
-  //height: 420px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   ${mediaQueries.lessThan('medium')`
     align-items: center;
@@ -134,3 +139,10 @@ const ButtonWrapper = styled.div`
     display: none;
   `}
 `;
+
+const LoginButtonWrapper = styled.div`
+  ${mediaQueries.greaterThan('small')`
+    display: none;
+  `}
+`;
+

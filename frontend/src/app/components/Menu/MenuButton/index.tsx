@@ -8,7 +8,6 @@ import styled from 'styled-components/macro';
 import { Icon } from '../../Icon';
 import { useHistory } from 'react-router-dom';
 import { mediaQueries, TotemsData } from '../../../../types/constants';
-import media from 'styled-media-query';
 
 interface Props {
   name: string;
@@ -70,7 +69,7 @@ const Div = styled.div<Props>`
       background-color: ${props => TotemsData[props.name].color};
     }
   }
-  @media only screen and (max-width: 1170px) {
+  @media only screen and (max-width: 1100px) {
     flex-direction: column;
     justify-content: center;
     background-color: ${props => TotemsData[props.name].color};

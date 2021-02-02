@@ -4,22 +4,7 @@
  *
  */
 import * as React from 'react';
-import {
-  createStyles,
-  Switch,
-  SwitchClassKey,
-  SwitchProps,
-  Theme,
-  withStyles,
-} from '@material-ui/core';
-
-interface Styles extends Partial<Record<SwitchClassKey, string>> {
-  focusVisible?: string;
-}
-
-interface Props extends SwitchProps {
-  classes: Styles;
-}
+import { Switch, withStyles } from '@material-ui/core';
 
 const OrangeSwitch = withStyles({
   root: {

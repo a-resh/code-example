@@ -7,8 +7,9 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import { Center } from '../../../components/Center';
 import { Icon } from '../../../components/Icon';
+import { mediaQueries } from '../../../../types/constants';
+import { Center, Column, Row } from '../../../components/blocks';
 
 interface Props {}
 
@@ -19,36 +20,38 @@ export const WalletInfo = memo((props: Props) => {
   return (
     <Div>
       <h1>{t('Your Wallet')}</h1>
-      <Column>
+      <ColumnWallet>
         <Row>
-          <Amount width={'41%'}>
+          <TotalBalance>
             <h3>{t('Total balance')}</h3>
             <Row>
               <h1>1,000</h1>
               <p>TOTM</p>
             </Row>
-          </Amount>
-          <Amount width={'33%'}>
+          </TotalBalance>
+          <Staked>
             <h3>{t('Amount staked')}</h3>
             <Row>
               <h2>264</h2>
               <p>TOTM</p>
             </Row>
-          </Amount>
-          <Amount>
+          </Staked>
+          <Available>
             <h3>{t('Available to stake')}</h3>
             <Row>
               <h2>736</h2>
               <p>TOTM</p>
             </Row>
-          </Amount>
+          </Available>
         </Row>
         <Row>
           <AddTotm onClick={() => {}}>
             <p>{t('Add TOTM')}</p>
           </AddTotm>
           <BtcAddress>
-            <label>BTC Address</label>
+            <label>
+              BTC <small>Address</small>
+            </label>
             <p>1345678912345678987</p>
             <Connected>
               <p>{t('Connected')}</p>
@@ -56,7 +59,7 @@ export const WalletInfo = memo((props: Props) => {
             </Connected>
           </BtcAddress>
         </Row>
-      </Column>
+      </ColumnWallet>
       {/*  {t(...messages.someThing)}  */}
     </Div>
   );
@@ -64,7 +67,8 @@ export const WalletInfo = memo((props: Props) => {
 
 const Div = styled.div`
   color: white;
-  width: 820px;
+  width: 100%;
+  max-width: 820px;
   h1 {
     font-size: 50px;
     font-weight: 100;
@@ -76,23 +80,15 @@ const Div = styled.div`
     margin: 15px 0;
   }
 `;
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
+const ColumnWallet = styled(Column)`
   background-color: #272e38;
 `;
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
-const Amount = styled.div<{ width?: string }>`
-  display: flex;
-  flex-direction: column;
+const TotalBalance = styled(Column)`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 0 0 30px 30px;
-  width: ${props => props.width};
+  width: 41%;
   h1 {
     margin: 0 5px 0 0;
     line-height: 18px;
@@ -111,30 +107,50 @@ const Amount = styled.div<{ width?: string }>`
   h3 {
     margin-bottom: 30px;
   }
+  ${mediaQueries.lessThan('medium')`
+    width: 50%;
+    padding: 0 0 15px 15px;
+    h1 {
+      font-size: 36px;
+    }
+  `}
 `;
 
-const AddTotm = styled.div`
+const Staked = styled(TotalBalance)`
+  width: 33%;
+  ${mediaQueries.lessThan('medium')`
+    display: none;
+  `}
+`;
+const Available = styled(TotalBalance)`
+  width: 27%;
+  ${mediaQueries.lessThan('medium')`
+    width: 50%;
+  `}
+`;
+
+const AddTotm = styled(Center)`
   height: 60px;
   color: black;
   background-color: white;
   width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   p {
     font-weight: bold;
     font-size: 15px;
   }
+  ${mediaQueries.lessThan('medium')`
+    p {
+      font-size: 12px;
+    }
+  `}
 `;
 
-const BtcAddress = styled.div`
+const BtcAddress = styled(Row)`
   background-color: #232830;
   width: 80%;
   height: 60px;
-  display: flex;
   justify-content: flex-end;
-  flex-direction: row;
   align-items: center;
   padding-right: 30px;
   label {
@@ -144,17 +160,23 @@ const BtcAddress = styled.div`
     border: solid 2px black;
     padding: 0 10px;
   }
+  ${mediaQueries.lessThan('medium')`
+    padding-right: 10px;
+    small {
+      display: none;
+    }
+  `}
 `;
 
-const Connected = styled.div`
-  display: flex;
+const Connected = styled(Center)`
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   background-color: black;
   font-size: 14px;
   margin: 0;
   height: 28px;
   line-height: 28px;
   padding: 10px;
+  ${mediaQueries.lessThan('medium')`
+    display: none;
+  `}
 `;

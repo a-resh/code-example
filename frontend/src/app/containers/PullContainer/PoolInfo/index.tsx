@@ -10,11 +10,13 @@ import { messages } from './messages';
 import { CtaButton } from '../../../components/CtaButton';
 import { Icon } from '../../../components/Icon';
 import { Scale } from '../../../components/Scale';
-import media from 'styled-media-query';
 import { Timer } from '../Timer';
 import { mediaQueries } from '../../../../types/constants';
+import { Column, Row } from '../../../components/blocks';
 
-interface Props {}
+interface Props {
+  showModal: () => void;
+}
 
 export function PoolInfo(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,31 +44,34 @@ export function PoolInfo(props: Props) {
         <Scale fill={63} />
       </ScaleContainer>
       <ButtonWrapper>
-        <CtaButton color={'#181818'} background={'white'} />
+        <CtaButton
+          color={'#181818'}
+          background={'white'}
+          showModal={props.showModal}
+        />
       </ButtonWrapper>
     </Div>
   );
 }
 
-const Div = styled.div`
+const Div = styled(Column)`
   height: 210px;
   width: 60%;
   background-color: #ff6701;
+  max-width: 420px;
+  margin-left: 30px;
   color: white;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   ${mediaQueries.lessThan('small')`
     width: 100%;
     height: auto;
+    margin-left: 0;
   `}
 `;
-const Title = styled.div`
+const Title = styled(Row)`
   width: 100%;
   height: 70px;
   font-size: 18px;
-  display: flex;
-  flex-direction: row;
   align-items: center;
   padding: 0 15px;
   justify-content: space-between;

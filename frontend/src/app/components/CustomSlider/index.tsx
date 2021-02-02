@@ -6,7 +6,6 @@
 import * as React from 'react';
 import Slider from '@material-ui/core/Slider';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core';
-interface Props {}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

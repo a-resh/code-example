@@ -7,8 +7,8 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import media from 'styled-media-query';
 import { mediaQueries } from '../../../../types/constants';
+import { Column, Row } from '../../../components/blocks';
 
 interface Props {}
 
@@ -19,7 +19,7 @@ export function Reward({}: Props) {
   return (
     <Div>
       <Top>
-        <Column>
+        <ColumnReward>
           <p>{t(...messages.rewardDistribution)}:</p>
           <Row>
             <LightFont>
@@ -30,7 +30,7 @@ export function Reward({}: Props) {
                 <li>11th - 25th</li>
               </ul>
             </LightFont>
-            <h1>|</h1>
+            {/*<h1>|</h1>*/}
             <ul>
               <li>
                 <b>30%</b>
@@ -46,11 +46,11 @@ export function Reward({}: Props) {
               </li>
             </ul>
           </Row>
-        </Column>
-        <Column>
+        </ColumnReward>
+        <ColumnReward>
           <p>{t(...messages.stakingReturns)}:</p>
           <h2>40%</h2>
-        </Column>
+        </ColumnReward>
       </Top>
       <Bottom>
         <p>{t(...messages.totalDistributionToCommunity)}:</p>
@@ -60,12 +60,10 @@ export function Reward({}: Props) {
   );
 }
 
-const Div = styled.div`
+const Div = styled(Column)`
   height: 100%;
   width: 50%;
   color: white;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   padding-bottom: 20px;
   ${mediaQueries.greaterThan('small')`background-color: #ff6701;`}
@@ -73,30 +71,15 @@ const Div = styled.div`
     width: 100%
   `}
 `;
-const Top = styled.div`
-  display: flex;
-  flex-direction: row;
+const Top = styled(Row)`
   width: 100%;
   background-color: #ff6701;
 `;
-const Column = styled.div`
+const ColumnReward = styled(Column)`
   font-family: Lato;
-  display: flex;
-  flex-direction: column;
   width: 50%;
   align-items: center;
   padding-top: 10px;
-
-  h1 {
-    margin: 0;
-    line-height: 120px;
-    font-size: 120px;
-    font-weight: 500;
-    font-family: 'Roboto Thin';
-    margin-block-start: 0;
-    margin-block-end: 0;
-    opacity: 0.4;
-  }
 
   h2 {
     font-size: 69px;
@@ -113,6 +96,7 @@ const Column = styled.div`
     list-style-type: none;
     font-size: 19px;
     text-align: right;
+    padding-left: 5px;
   }
   ${mediaQueries.lessThan('small')`
     li {font-size: 12px; padding-top: 5px}
@@ -124,16 +108,17 @@ const Column = styled.div`
 
 const LightFont = styled.div`
   font-weight: 100;
+  li {
+    border-right: 2px solid white;
+    padding-right: 5px;
+  }
+  ${mediaQueries.greaterThan('large')`
+    li {padding-right: 7px}
+  `}
 `;
 
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-const Bottom = styled.div`
+const Bottom = styled(Row)`
   width: 100%;
-  display: flex;
-  flex-direction: row;
   justify-content: space-around;
   background-color: #ff6701;
   p,

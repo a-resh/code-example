@@ -8,6 +8,8 @@ import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { Icon } from '../../../components/Icon';
+import { mediaQueries } from '../../../../types/constants';
+import { Center, Column, Row } from '../../../components/blocks';
 
 interface Props {}
 
@@ -85,10 +87,15 @@ export const AccountRewards = memo((props: Props) => {
                 <p>{leftTime}</p>
               </TimeLeftColumn>
               <StakeColumn>
-                <p>{value.stake}TOTM</p>
+                <p>
+                  {value.stake}
+                  <small>TOTM</small>
+                </p>
               </StakeColumn>
               <YourPredictionColumn>
-                <p>BTC=${value.prediction}(&#xb1;500)</p>
+                <p>
+                  <small>BTC=</small>${value.prediction}(&#xb1;500)
+                </p>
               </YourPredictionColumn>
               <ProjectedReturnsColumn>
                 <p>{finished ? '-' : `${value.projectedReturns}TOTM`}</p>
@@ -125,7 +132,8 @@ export const AccountRewards = memo((props: Props) => {
 
 const Div = styled.div`
   color: white;
-  width: 900px;
+  width: 100%;
+  max-width: 900px;
 
   h1 {
     font-size: 50px;
@@ -138,16 +146,14 @@ const Div = styled.div`
     font-weight: 100;
   }
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  ${mediaQueries.lessThan('medium')`
+    h1 {
+      margin: 0 0 15px 0;
+    }
+  `}
 `;
 
-const TableHeader = styled.div`
-  display: flex;
-  flex-direction: row;
+const TableHeader = styled(Row)`
   width: 100%;
 
   div {
@@ -159,9 +165,7 @@ const TableHeader = styled.div`
   }
 `;
 
-const TableBody = styled.div`
-  display: flex;
-  flex-direction: column;
+const TableBody = styled(Column)`
   width: 100%;
 `;
 const TableRow = styled.div<{ totem?: string; opacity: number }>`
@@ -171,57 +175,105 @@ const TableRow = styled.div<{ totem?: string; opacity: number }>`
       : props.totem === 'wolf'
       ? `rgba(51,158,176, ${props.opacity})`
       : `rgba(51,158,176, ${props.opacity})`};
+  display: flex !important;
+  flex-direction: row;
+
   div {
     height: 30px;
   }
 
-  p {
+  p,
+  small {
     font-size: 12px;
   }
+  ${mediaQueries.lessThan('medium')`
+   p { font-size: 10px};
+   small {display: none};
+  `}
 `;
 
-const IconColumn = styled.div<{ finished?: boolean }>`
-  display: flex;
+const IconColumn = styled(Center)<{ finished?: boolean }>`
   flex-direction: row;
   justify-content: ${props =>
     props.finished ? 'space-around !important' : null};
   border-right: 2px solid white;
-  width: 70px;
+  width: 8%;
   padding: 0 7px;
+  ${mediaQueries.lessThan('medium')`
+   width: 17%;
+  `}
 `;
-const TimeLeftColumn = styled.div`
+const TimeLeftColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 100px;
+  width: 11%;
+  ${mediaQueries.lessThan('medium')`
+  width: 20%;
+  `}
 `;
-const StakeColumn = styled.div`
+const StakeColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 120px;
+  width: 15%;
+  ${mediaQueries.lessThan('medium')`
+  h3 {font-size: 10px;}
+  `}
 `;
-const YourPredictionColumn = styled.div`
+const YourPredictionColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 160px;
+  width: 20%;
+
+  small {
+    font-size: 12px;
+  }
+
+  ${mediaQueries.lessThan('large')`
+    width: 120px;
+    small {
+      display: none !important;
+    }
+  `}
+  ${mediaQueries.lessThan('medium')`
+  width: 23%;
+    h3 {font-size: 10px;}
+  `}
 `;
-const ProjectedReturnsColumn = styled.div`
+const ProjectedReturnsColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 120px;
+  width: 15%;
+  ${mediaQueries.lessThan('large')`
+  h3 {font-size: 10px;}
+`}
+
+  ${mediaQueries.lessThan('medium')`
+  display: none !important;
+`}
 `;
-const ActualReturnsColumn = styled.div`
+const ActualReturnsColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 120px;
+  width: 15%;
+  ${mediaQueries.lessThan('medium')`
+    display: none !important;
+  `}
 `;
-const RoiColumn = styled.div`
+const RoiColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 50px;
+  width: 5%;
+  ${mediaQueries.lessThan('medium')`
+   width: 12%;
+  `}
 `;
-const ButtonsColumn = styled.div`
+const ButtonsColumn = styled(Center)`
   div {
     height: 20px;
   }
-  width: 90px;
+
+  width: 10%;
   padding: 10px;
+  ${mediaQueries.lessThan('medium')`
+   width: 22%;
+  `}
 `;
 
-const Claim = styled.div<{ totem: string }>`
+const Claim = styled(Center)<{ totem: string }>`
   background-color: ${props =>
     props.totem === 'fox'
       ? '#ff671f'
@@ -231,6 +283,7 @@ const Claim = styled.div<{ totem: string }>`
   color: ${props => (props.totem === 'fox' ? 'white' : '#272E38')};
   width: 90%;
   height: 70%;
+
   h3 {
     font-size: 13px;
     margin: 0;

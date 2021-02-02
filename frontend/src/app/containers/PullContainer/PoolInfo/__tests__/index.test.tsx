@@ -5,7 +5,7 @@ import { PoolInfo } from '../index';
 
 describe('<PoolInfo  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<PoolInfo />);
+    const loadingIndicator = render(<PoolInfo showModal={() => {}} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

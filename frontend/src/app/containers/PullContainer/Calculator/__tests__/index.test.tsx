@@ -5,7 +5,7 @@ import { Calculator } from '../index';
 
 describe('<Calculator  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Calculator />);
+    const loadingIndicator = render(<Calculator showModal={() => {}} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

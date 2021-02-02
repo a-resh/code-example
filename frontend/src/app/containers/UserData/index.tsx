@@ -16,6 +16,7 @@ import { userDataSaga } from './saga';
 import { messages } from './messages';
 import { WalletInfo } from './WalletInfo';
 import { AccountRewards } from './AccountRewards';
+import { Column } from '../../components/blocks';
 
 interface Props {}
 
@@ -41,13 +42,10 @@ export function UserData(props: Props) {
   );
 }
 
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
+const Div = styled(Column)`
   justify-content: space-around;
   align-items: center;
-  //align-content: space-between ;
   height: 100%;
   width: 100%;
-  padding: 10px 0;
+  padding: 15px;
 `;

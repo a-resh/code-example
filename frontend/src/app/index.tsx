@@ -14,7 +14,7 @@ import { GlobalStyle } from 'styles/global-styles';
 
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
-import { Header } from './components/Header';
+import { Header } from './containers/Header';
 import { Wrapper } from './components/Wrapper';
 import { Sidebar } from './components/Sidebar';
 import { PullContainer } from './containers/PullContainer/Loadable';
@@ -50,3 +50,6 @@ export function App() {
     </BrowserRouter>
   );
 }
+export { Row } from './components/blocks';
+export { Column } from './components/blocks';
+export { Center } from './components/blocks';
