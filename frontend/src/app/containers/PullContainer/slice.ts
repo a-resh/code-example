@@ -1,11 +1,11 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { ContainerState } from './types';
-import {useInjectReducer} from "redux-injectors";
+import { useInjectReducer } from 'redux-injectors';
 
 // The initial state of the PullContainer container
 export const initialState: ContainerState = {
-  isShowDrawer: false
+  isShowDrawer: false,
 };
 
 const pullContainerSlice = createSlice({
@@ -13,7 +13,7 @@ const pullContainerSlice = createSlice({
   initialState,
   reducers: {
     showDrawer(state) {
-      state.isShowDrawer = !state.isShowDrawer
+      state.isShowDrawer = !state.isShowDrawer;
     },
   },
 });
@@ -25,6 +25,9 @@ export const {
 } = pullContainerSlice;
 
 export const usePullContainerSlice = () => {
-  useInjectReducer({ key: pullContainerSlice.name, reducer: pullContainerSlice.reducer });
+  useInjectReducer({
+    key: pullContainerSlice.name,
+    reducer: pullContainerSlice.reducer,
+  });
   return { actions: pullContainerSlice.actions };
 };

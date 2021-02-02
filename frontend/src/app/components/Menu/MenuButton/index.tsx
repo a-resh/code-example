@@ -21,7 +21,6 @@ export const MenuButton = memo((props: Props) => {
     props.setActive(url);
     history.push(`/${url}`);
   };
-  console.log(props.isActive);
   return (
     <Div onClick={() => redirect(props.name.toLowerCase())} {...props}>
       <Icon url={TotemsData[props.name].icon} width={30} height={30} />
@@ -73,6 +72,7 @@ const Div = styled.div<Props>`
     flex-direction: column;
     justify-content: center;
     background-color: ${props => TotemsData[props.name].color};
+    padding: 0;
     p {
       font-size: 12px;
       font-weight: bold;

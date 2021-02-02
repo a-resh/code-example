@@ -26,7 +26,9 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     font-size: inherit;
   }
-
+  h1, h2 {
+    font-family: "Lato Light";
+  }
   .calculator-input-number {
     width: 100px;
     height: 20px;

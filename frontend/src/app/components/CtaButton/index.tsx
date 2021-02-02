@@ -34,5 +34,6 @@ const Div = styled(Center)<Props>`
   cursor: pointer;
   b {
     font-size: 20px;
+    font-weight: 700;
   }
 `;

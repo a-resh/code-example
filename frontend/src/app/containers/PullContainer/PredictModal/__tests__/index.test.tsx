@@ -9,7 +9,7 @@ describe('<PredictModal  />', () => {
     const loadingIndicator = render(
       <PredictModal
         close={() => {}}
-        totem={Totems.FOX}
+        totem={'fox'}
         isOpen={true}
         isMobile={true}
       />,

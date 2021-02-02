@@ -143,7 +143,7 @@ const Div = styled.div`
 
   h3 {
     font-size: 15px;
-    font-weight: 100;
+    font-weight: 300;
   }
 
   ${mediaQueries.lessThan('medium')`

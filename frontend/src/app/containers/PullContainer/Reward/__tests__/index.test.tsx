@@ -5,7 +5,7 @@ import { Reward } from '../index';
 
 describe('<Reward  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<Reward />);
+    const loadingIndicator = render(<Reward totem={'fox'} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
