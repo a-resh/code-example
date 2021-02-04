@@ -12,6 +12,7 @@ import moment from 'moment';
 import {mediaQueries, TotemsData} from '../../../../types/constants';
 import {Center, Column, Row} from '../../../components/blocks';
 import {TotemBackground} from 'types/interfaces';
+import {ChartWithBet} from "../../../components/ChartWithBet";
 
 interface Props {
     isOpen: boolean;
@@ -116,7 +117,9 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
                 </Block>
             </Top>
             <Bottom>
-                <Block align={'flex-start'}></Block>
+                <Block align={'flex-start'}>
+                    <ChartWithBet totem={totem}/>
+                </Block>
                 <Block align={'center'}>
                     <ConfirmPredict background={TotemsData[totem].color}>
                         <h4>{t('How much TOTM are you staking')}?</h4>
