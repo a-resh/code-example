@@ -3,7 +3,7 @@
  * PredictModal
  *
  */
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import styled from 'styled-components/macro';
 import {useTranslation} from 'react-i18next';
 import Modal from 'react-modal';
@@ -13,6 +13,9 @@ import {mediaQueries, TotemsData} from '../../../../types/constants';
 import {Center, Column, Row} from '../../../components/blocks';
 import {TotemBackground} from 'types/interfaces';
 import {ChartWithBet} from "../../../components/ChartWithBet";
+import {CustomPointer} from "../../../components/CustomPointer";
+import {BehaviorSubject} from "rxjs";
+import {debounceTime} from "rxjs/operators";
 
 interface Props {
     isOpen: boolean;
@@ -25,7 +28,25 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const changeValue = (value: string | number) => {
     };
+    const [startPosition, setStartPosition] = useState(448);
+    const [position, setPosition] = useState(false);
+    const [lastDrag, setLastDrag] = useState(new Date());
     const {t, i18n} = useTranslation();
+    const startValue = 32000;
+    const [betValue, setBetValue] = useState(32000);
+    const [pixelValue, setPixelValue] = useState(betValue);
+    const convertPointerMoveToBetValue = (newPosition: number) => {
+
+        if( new Date().getTime() - lastDrag.getTime() > 200) {
+            if(betValue <= startValue * 0.5){
+                setPosition(true)
+            }
+            setLastDrag(new Date())
+            console.log(Math.round(Math.abs(startValue + ((startPosition - newPosition) * pixelValue))), startPosition, newPosition, startPosition - newPosition)
+            setBetValue(Math.round(Math.abs(startValue + ((startPosition - newPosition) * pixelValue))));
+        }
+    }
+    const setValueOnPixel = (v) => setPixelValue(Math.round(v))
     let styles: any;
     let customStyles = {
         overlay: {},
@@ -102,15 +123,15 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
                                 <p>{t('range')}</p>
                             </RowModal>
                             <RowModal>
-                                <h2>$ 13,000</h2>
+                                <h2>$ {betValue}</h2>
                                 <h2>&plusmn;$500</h2>
                             </RowModal>
                             <RowModal>
-                                <small>$12,500 - $13,500</small>
+                                <small>${betValue - 500} - ${betValue + 500}</small>
                             </RowModal>
                         </DesktopPrediction>
                         <MobilePrediction background={TotemsData[totem].color}>
-                            <h2>$13,000</h2>
+                            <h2>$ {betValue}</h2>
                             <p>Range &plusmn;$500</p>
                         </MobilePrediction>
                     </PredictionRange>
@@ -118,7 +139,8 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
             </Top>
             <Bottom>
                 <Block align={'flex-start'}>
-                    <ChartWithBet totem={totem}/>
+                    <ChartWithBet
+                        totem={totem} value={32000} newValue={betValue} setPixelValue={setValueOnPixel}/>
                 </Block>
                 <Block align={'center'}>
                     <ConfirmPredict background={TotemsData[totem].color}>
@@ -144,6 +166,12 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
                     </ConfirmPredict>
                 </Block>
             </Bottom>
+            <CustomPointer
+                onDragPointer={convertPointerMoveToBetValue}
+                startPosition={{x: 333, y: -158}}
+                setStartPosition={setStartPosition}
+                // position={position}
+            />
         </Modal>
     );
 });
