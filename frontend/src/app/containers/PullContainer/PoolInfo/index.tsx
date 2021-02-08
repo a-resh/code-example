@@ -5,53 +5,54 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import {useTranslation} from 'react-i18next';
-import {messages} from './messages';
-import {CtaButton} from '../../../components/CtaButton';
-import {Icon} from '../../../components/Icon';
-import {Scale} from '../../../components/Scale';
-import {Timer} from '../Timer';
-import {mediaQueries, TotemsData} from '../../../../types/constants';
-import {Column, Row} from '../../../components/blocks';
-import {TotemBackground} from "../../../../types/interfaces";
+import { useTranslation } from 'react-i18next';
+import { messages } from './messages';
+import { CtaButton } from '../../../components/CtaButton';
+import { Icon } from '../../../components/Icon';
+import { Scale } from '../../../components/Scale';
+import { Timer } from '../Timer';
+import { mediaQueries, TotemsData } from '../../../../types/constants';
+import { Column, Row } from '../../../components/blocks';
+import { TotemBackground } from '../../../../types/interfaces';
 
 interface Props {
-    showModal: () => void;
-    totem: string;
+  showModal: () => void;
+  totem: string;
 }
 
-export function PoolInfo({showModal, totem}: Props) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {t, i18n} = useTranslation();
-    return (
-        <Div background={TotemsData[totem].color}>
-            {t('')}
-            <Title>
-                <Icon height={40} width={40} url={`${totem.toLowerCase()}-white.svg`}/>
-                <p>
-                    {totem.charAt(0).toUpperCase() + totem.substr(1).toLowerCase()} {t(...messages.predictorPool)}
-                </p>
-            </Title>
-            <TimerContainer>
-                <Timer/>
-            </TimerContainer>
-            <ScaleContainer>
-                <p>
-                    <b>
-                        {t(...messages.thisPoolIs)} 63% {t(...messages.full)}
-                    </b>
-                </p>
-                <Scale fill={63}/>
-            </ScaleContainer>
-            <ButtonWrapper>
-                <CtaButton
-                    color={'#181818'}
-                    background={'white'}
-                    showModal={showModal}
-                />
-            </ButtonWrapper>
-        </Div>
-    );
+export function PoolInfo({ showModal, totem }: Props) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { t, i18n } = useTranslation();
+  return (
+    <Div background={TotemsData[totem].color}>
+      {t('')}
+      <Title>
+        <Icon height={40} width={40} url={`${totem.toLowerCase()}-white.svg`} />
+        <p>
+          {totem.charAt(0).toUpperCase() + totem.substr(1).toLowerCase()}{' '}
+          {t(...messages.predictorPool)}
+        </p>
+      </Title>
+      <TimerContainer>
+        <Timer />
+      </TimerContainer>
+      <ScaleContainer>
+        <p>
+          <b>
+            {t(...messages.thisPoolIs)} 63% {t(...messages.full)}
+          </b>
+        </p>
+        <Scale fill={63} />
+      </ScaleContainer>
+      <ButtonWrapper>
+        <CtaButton
+          color={'#181818'}
+          background={'white'}
+          showModal={showModal}
+        />
+      </ButtonWrapper>
+    </Div>
+  );
 }
 
 const Div = styled(Column)<TotemBackground>`

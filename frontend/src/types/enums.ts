@@ -1,4 +1,4 @@
-export type Totems = 'fox' | 'wolf' | 'owl'
+export type Totems = 'fox' | 'wolf' | 'owl';
 
 export enum Urls {
   FOX = 'fox',

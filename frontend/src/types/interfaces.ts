@@ -1,3 +1,3 @@
 export interface TotemBackground {
-    background: string;
+  background: string;
 }

@@ -3,156 +3,179 @@
  * PredictModal
  *
  */
-import React, {memo, useState} from 'react';
+import React, { memo, useState } from 'react';
 import styled from 'styled-components/macro';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Modal from 'react-modal';
-import {Icon} from '../../../components/Icon';
+import { Icon } from '../../../components/Icon';
 import moment from 'moment';
-import {mediaQueries, TotemsData} from '../../../../types/constants';
-import {Center, Column, Row} from '../../../components/blocks';
-import {TotemBackground} from 'types/interfaces';
-import {ChartWithBet} from "../../../components/ChartWithBet";
-import {createStyles, makeStyles, TextField} from "@material-ui/core";
+import { mediaQueries, TotemsData } from '../../../../types/constants';
+import { Center, Column, Row } from '../../../components/blocks';
+import { TotemBackground } from 'types/interfaces';
+import { ChartWithBet } from '../../../components/ChartWithBet';
 
 interface Props {
-    isOpen: boolean;
-    close: () => void;
-    totem: string;
-    isMobile: boolean;
+  isOpen: boolean;
+  close: () => void;
+  totem: string;
+  isMobile: boolean;
 }
 
-
-export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
+export const PredictModal = memo(
+  ({ isOpen, isMobile, totem, close }: Props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const changeValue = (value: string | number) => {
-    };
-    const {t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
     const startValue = 32000;
-    const [betValue, setBetValue] = useState(startValue);
+    const initBetValue = 10000;
+    const changeBetValue = (value: number) => {
+      setBetValue((initBetValue * value) / 100);
+    };
+    const [bitcoinValue, setBitcoinValue] = useState(startValue);
+    const [betValue, setBetValue] = useState(initBetValue);
     let styles: any;
     let customStyles = {
-        overlay: {},
-        content: {
-            width: 800,
-            height: 520,
-            border: 0,
-            padding: 0,
-        },
+      overlay: {},
+      content: {
+        width: 800,
+        height: 520,
+        border: 0,
+        padding: 0,
+      },
     };
     if (isMobile) {
-        styles = {
-            overlay: {backgroundColor: 'rgba(0, 0, 0, 0)'},
-            content: {
-                width: '100%',
-                height: '100vh',
-                top: 0,
-                left: 0,
-            },
-        };
+      styles = {
+        overlay: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+        content: {
+          width: '100%',
+          height: '100vh',
+          top: 0,
+          left: 0,
+        },
+      };
     } else {
-        styles = {
-            overlay: {backgroundColor: 'rgba(0, 0, 0, .4)'},
-            content: {
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                marginRight: '-50%',
-                transform: 'translate(-50%, -50%)',
-            },
-        };
+      styles = {
+        overlay: { backgroundColor: 'rgba(0, 0, 0, .4)' },
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+        },
+      };
     }
     customStyles = {
-        overlay: {...customStyles.overlay, ...styles.overlay},
-        content: {...customStyles.content, ...styles.content},
+      overlay: { ...customStyles.overlay, ...styles.overlay },
+      content: { ...customStyles.content, ...styles.content },
     };
     return (
-        <Modal
-            isOpen={isOpen}
-            shouldCloseOnOverlayClick={true}
-            style={customStyles}
-        >
-            <ModalHeader background={TotemsData[totem].color}>
-                <TotemWrapper background={TotemsData[totem].color}>
-                    <Icon url={`${totem}-white.svg`} height={20} width={20}></Icon>
-                </TotemWrapper>
-                <Icon
-                    url={`close-${isMobile ? 'grey' : 'white'}.svg`}
-                    height={15}
-                    width={15}
-                    cursor={'pointer'}
-                    onClick={close}
-                ></Icon>
-            </ModalHeader>
-            <Top>
-                <Block align={'flex-start'}>
-                    <h3>{t('Your prediction')}</h3>
-                    <p>{t('This pool will mature at')}:</p>
-                    <h2>
-                        {moment(new Date()).format('DD/MM/YY')} at{' '}
-                        {moment(new Date()).format('HH:mm')}
-                    </h2>
-                </Block>
-                <Block align={'center'}>
-                    <PredictionRange>
-                        <h4>
-                            {t('What will the price of bitcoin be when this pool matures?')}
-                        </h4>
-                        <DesktopPrediction>
-                            <RowModal>
-                                <p>{t('prediction')}</p>
-                                <p>{t('range')}</p>
-                            </RowModal>
-                            <RowModal>
-                                <InputWrapper>
-                                $ <input type="number"/>
-                                </InputWrapper>
-                                <h2>&plusmn;$500</h2>
-                            </RowModal>
-                            <RowModal>
-                                <small>${betValue - 500} - ${betValue + 500}</small>
-                            </RowModal>
-                        </DesktopPrediction>
-                        <MobilePrediction background={TotemsData[totem].color}>
-                            <h2>$ {betValue}</h2>
-                            <p>Range &plusmn;$500</p>
-                        </MobilePrediction>
-                    </PredictionRange>
-                </Block>
-            </Top>
-            <Bottom>
-                <Block align={'flex-start'}>
-                    <ChartWithBet
-                        totem={totem} startValue={startValue} setBetValue={setBetValue}/>
-                </Block>
-                <Block align={'center'}>
-                    <ConfirmPredict background={TotemsData[totem].color}>
-                        <h4>{t('How much TOTM are you staking')}?</h4>
-                        <h2>10,000</h2>
-                        <PercentBlock>
-                            {[25, 50, 75, 100].map((v, index) => (
-                                <PercentValue
-                                    key={index}
-                                    background={`${TotemsData[totem].color}${(Math.ceil(v * 2.5)).toString(16)}`}
-                                    onClick={() => changeValue(`${v}%`)}
-                                >
-                                    <p>{v}%</p>
-                                </PercentValue>
-                            ))}
-                        </PercentBlock>
-                        <StakeButton background={TotemsData[totem].color} onClick={() => {
-                        }}>
-                            <Center>
-                                <p>{t('Confirm stake')}</p>
-                            </Center>
-                        </StakeButton>
-                    </ConfirmPredict>
-                </Block>
-            </Bottom>
-        </Modal>
+      <Modal
+        isOpen={isOpen}
+        shouldCloseOnOverlayClick={true}
+        style={customStyles}
+      >
+        <ModalHeader background={TotemsData[totem].color}>
+          <TotemWrapper background={TotemsData[totem].color}>
+            <Icon url={`${totem}-white.svg`} height={20} width={20}></Icon>
+          </TotemWrapper>
+          <Icon
+            url={`close-${isMobile ? 'grey' : 'white'}.svg`}
+            height={15}
+            width={15}
+            cursor={'pointer'}
+            onClick={close}
+          ></Icon>
+        </ModalHeader>
+        <Top>
+          <Block align={'flex-start'}>
+            <h3>{t('Your prediction')}</h3>
+            <p>{t('This pool will mature at')}:</p>
+            <h2>
+              {moment(new Date()).format('DD/MM/YY')} at{' '}
+              {moment(new Date()).format('HH:mm')}
+            </h2>
+          </Block>
+          <Block align={'center'}>
+            <PredictionRange>
+              <h4>
+                {t('What will the price of bitcoin be when this pool matures?')}
+              </h4>
+              <DesktopPrediction>
+                <RowModal>
+                  <p>{t('prediction')}</p>
+                  <p>{t('range')}</p>
+                </RowModal>
+                <RowModal>
+                  <InputWrapper>
+                    ${' '}
+                    <input
+                      type="number"
+                      defaultValue={bitcoinValue}
+                      onChange={e => setBitcoinValue(+e.target.value)}
+                    />
+                  </InputWrapper>
+                  <h2>&plusmn;$500</h2>
+                </RowModal>
+                <RowModal>
+                  <small>
+                    ${bitcoinValue - 500} - ${bitcoinValue + 500}
+                  </small>
+                </RowModal>
+              </DesktopPrediction>
+              <MobilePrediction background={TotemsData[totem].color}>
+                <h2>$ {bitcoinValue}</h2>
+                <p>Range &plusmn;$500</p>
+              </MobilePrediction>
+            </PredictionRange>
+          </Block>
+        </Top>
+        <Bottom>
+          <Block align={'flex-start'}>
+            <ChartWithBet
+              totem={totem}
+              startValue={startValue}
+              betValue={bitcoinValue}
+            />
+          </Block>
+          <Block align={'center'}>
+            <ConfirmPredict background={TotemsData[totem].color}>
+              <h4>{t('How much TOTM are you staking')}?</h4>
+              <InputWrapperBottom>
+                <input
+                  type="number"
+                  value={betValue}
+                  onChange={e => setBetValue(+e.target.value)}
+                />
+              </InputWrapperBottom>
+              <PercentBlock>
+                {[25, 50, 75, 100].map((v, index) => (
+                  <PercentValue
+                    key={index}
+                    background={`${TotemsData[totem].color}${Math.ceil(
+                      v * 2.5,
+                    ).toString(16)}`}
+                    onClick={() => changeBetValue(v)}
+                  >
+                    <p>{v}%</p>
+                  </PercentValue>
+                ))}
+              </PercentBlock>
+              <StakeButton
+                background={TotemsData[totem].color}
+                onClick={() => {}}
+              >
+                <Center>
+                  <p>{t('Confirm stake')}</p>
+                </Center>
+              </StakeButton>
+            </ConfirmPredict>
+          </Block>
+        </Bottom>
+      </Modal>
     );
-});
+  },
+);
 
 const ModalHeader = styled.div<TotemBackground>`
   height: 45px;
@@ -172,6 +195,26 @@ const TotemWrapper = styled(Center)<TotemBackground>`
   width: 45px;
   @media screen and (max-width: 450px) {
     background-color: ${props => props.background};
+  }
+
+  input {
+    text-align: center;
+    border: none;
+    border-bottom: solid 2px #c4dbe0;
+
+    :focus {
+      outline: none;
+    }
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 `;
 
@@ -373,27 +416,38 @@ const RowModal = styled(Row)`
   width: 100%;
 `;
 
-const InputWrapper = styled(Row)`
+const InputWrapper = styled(Center)`
   width: 50%;
   border: solid 2px #c4dbe0;
   border-right: none;
-  align-items: center;
-  justify-content: center;
-  input{
+  font-size: 22px;
+  flex-direction: row;
+
+  input {
+    text-align: center;
     border: none;
     border-bottom: solid 2px #c4dbe0;
     width: 80%;
+
     :focus {
       outline: none;
     }
   }
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
-`
+`;
+
+const InputWrapperBottom = styled(InputWrapper)`
+  width: 202px;
+  border-right: solid 2px #c4dbe0;
+  font-size: 30px;
+  padding-bottom: 10px;
+`;

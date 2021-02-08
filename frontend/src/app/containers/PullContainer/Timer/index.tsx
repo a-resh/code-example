@@ -24,7 +24,7 @@ export function Timer({}: Props) {
 }
 
 const Div = styled.div`
-  font-family: "Lato Light";
+  font-family: 'Lato Light';
   height: 210px;
   width: 40%;
   min-width: 360px;
