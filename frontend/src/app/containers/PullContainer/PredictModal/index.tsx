@@ -13,9 +13,7 @@ import {mediaQueries, TotemsData} from '../../../../types/constants';
 import {Center, Column, Row} from '../../../components/blocks';
 import {TotemBackground} from 'types/interfaces';
 import {ChartWithBet} from "../../../components/ChartWithBet";
-import {CustomPointer} from "../../../components/CustomPointer";
-import {BehaviorSubject} from "rxjs";
-import {debounceTime} from "rxjs/operators";
+import {createStyles, makeStyles, TextField} from "@material-ui/core";
 
 interface Props {
     isOpen: boolean;
@@ -24,29 +22,14 @@ interface Props {
     isMobile: boolean;
 }
 
+
 export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const changeValue = (value: string | number) => {
     };
-    const [startPosition, setStartPosition] = useState(448);
-    const [position, setPosition] = useState(false);
-    const [lastDrag, setLastDrag] = useState(new Date());
     const {t, i18n} = useTranslation();
     const startValue = 32000;
-    const [betValue, setBetValue] = useState(32000);
-    const [pixelValue, setPixelValue] = useState(betValue);
-    const convertPointerMoveToBetValue = (newPosition: number) => {
-
-        if( new Date().getTime() - lastDrag.getTime() > 200) {
-            if(betValue <= startValue * 0.5){
-                setPosition(true)
-            }
-            setLastDrag(new Date())
-            console.log(Math.round(Math.abs(startValue + ((startPosition - newPosition) * pixelValue))), startPosition, newPosition, startPosition - newPosition)
-            setBetValue(Math.round(Math.abs(startValue + ((startPosition - newPosition) * pixelValue))));
-        }
-    }
-    const setValueOnPixel = (v) => setPixelValue(Math.round(v))
+    const [betValue, setBetValue] = useState(startValue);
     let styles: any;
     let customStyles = {
         overlay: {},
@@ -84,7 +67,6 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
         overlay: {...customStyles.overlay, ...styles.overlay},
         content: {...customStyles.content, ...styles.content},
     };
-
     return (
         <Modal
             isOpen={isOpen}
@@ -123,7 +105,9 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
                                 <p>{t('range')}</p>
                             </RowModal>
                             <RowModal>
-                                <h2>$ {betValue}</h2>
+                                <InputWrapper>
+                                $ <input type="number"/>
+                                </InputWrapper>
                                 <h2>&plusmn;$500</h2>
                             </RowModal>
                             <RowModal>
@@ -140,7 +124,7 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
             <Bottom>
                 <Block align={'flex-start'}>
                     <ChartWithBet
-                        totem={totem} value={32000} newValue={betValue} setPixelValue={setValueOnPixel}/>
+                        totem={totem} startValue={startValue} setBetValue={setBetValue}/>
                 </Block>
                 <Block align={'center'}>
                     <ConfirmPredict background={TotemsData[totem].color}>
@@ -166,12 +150,6 @@ export const PredictModal = memo(({isOpen, isMobile, totem, close}: Props) => {
                     </ConfirmPredict>
                 </Block>
             </Bottom>
-            <CustomPointer
-                onDragPointer={convertPointerMoveToBetValue}
-                startPosition={{x: 333, y: -158}}
-                setStartPosition={setStartPosition}
-                // position={position}
-            />
         </Modal>
     );
 });
@@ -394,3 +372,28 @@ const Bottom = styled(Top)`
 const RowModal = styled(Row)`
   width: 100%;
 `;
+
+const InputWrapper = styled(Row)`
+  width: 50%;
+  border: solid 2px #c4dbe0;
+  border-right: none;
+  align-items: center;
+  justify-content: center;
+  input{
+    border: none;
+    border-bottom: solid 2px #c4dbe0;
+    width: 80%;
+    :focus {
+      outline: none;
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+  }
+`

@@ -16,7 +16,7 @@ interface Position {
 interface Props {
     startPosition: Position;
     onDragPointer: (number) => void;
-    setStartPosition: (number) => void;
+    setStartPosition?: (number) => void;
     // position?: boolean;
 }
 
@@ -26,7 +26,7 @@ export function CustomPointer({startPosition, onDragPointer, setStartPosition}: 
     const setFirstPosition = (position: number) => {
         if(!isAlreadyGetStartPosition){
             switchStartPosition(true);
-            setStartPosition(position);
+            // setStartPosition(position);
         }
     }
     const validateDrag = (e: any) => {
@@ -48,11 +48,14 @@ export function CustomPointer({startPosition, onDragPointer, setStartPosition}: 
                     setFirstPosition(touchValue)
                 }
             }}
+            bounds = {{top: 0, bottom: startPosition.y + 120}}
             onDrag={(e: any) => {
                 const touchValue = validateDrag(e);
-                if(touchValue && touchValue > 448 + 130){
-                    switchPosition(true)
-                }
+                console.log(touchValue)
+                // if(touchValue && touchValue > 448 + 130){
+                //     switchPosition(true)
+                //     setTimeout(() => switchPosition(false), 1000)
+                // }
                 if (touchValue) {
                     onDragPointer(touchValue)
                 }
