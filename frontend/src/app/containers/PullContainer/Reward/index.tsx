@@ -7,18 +7,22 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import { mediaQueries } from '../../../../types/constants';
+import {mediaQueries, TotemsData} from '../../../../types/constants';
 import { Column, Row } from '../../../components/blocks';
+import {TotemBackground} from "../../../../types/interfaces";
+import {Chart} from "../../../components/Chart";
 
-interface Props {}
+interface Props {
+  totem: string;
+}
 
-export function Reward({}: Props) {
+export function Reward({totem}: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
   return (
-    <Div>
-      <Top>
+    <Div background={TotemsData[totem].color}>
+      <Top background={TotemsData[totem].color}>
         <ColumnReward>
           <p>{t(...messages.rewardDistribution)}:</p>
           <Row>
@@ -30,7 +34,6 @@ export function Reward({}: Props) {
                 <li>11th - 25th</li>
               </ul>
             </LightFont>
-            {/*<h1>|</h1>*/}
             <ul>
               <li>
                 <b>30%</b>
@@ -50,9 +53,10 @@ export function Reward({}: Props) {
         <ColumnReward>
           <p>{t(...messages.stakingReturns)}:</p>
           <h2>40%</h2>
+          <Chart/>
         </ColumnReward>
       </Top>
-      <Bottom>
+      <Bottom background={TotemsData[totem].color}>
         <p>{t(...messages.totalDistributionToCommunity)}:</p>
         <h4>$ 1,856,566,875</h4>
       </Bottom>
@@ -60,20 +64,22 @@ export function Reward({}: Props) {
   );
 }
 
-const Div = styled(Column)`
+const Div = styled(Column)<TotemBackground>`
   height: 100%;
   width: 50%;
   color: white;
   justify-content: space-between;
   padding-bottom: 20px;
-  ${mediaQueries.greaterThan('small')`background-color: #ff6701;`}
+  @media screen and (min-width: 450px) {
+    background-color: ${props => props.background}
+  }
   ${mediaQueries.lessThan('medium')`
     width: 100%
   `}
 `;
-const Top = styled(Row)`
+const Top = styled(Row)<TotemBackground>`
   width: 100%;
-  background-color: #ff6701;
+  background-color: ${props => props.background};
 `;
 const ColumnReward = styled(Column)`
   font-family: Lato;
@@ -107,7 +113,7 @@ const ColumnReward = styled(Column)`
 `;
 
 const LightFont = styled.div`
-  font-weight: 100;
+  font-weight: 300;
   li {
     border-right: 2px solid white;
     padding-right: 5px;
@@ -117,19 +123,20 @@ const LightFont = styled.div`
   `}
 `;
 
-const Bottom = styled(Row)`
+const Bottom = styled(Row)<TotemBackground>`
   width: 100%;
   justify-content: space-around;
-  background-color: #ff6701;
+  background-color: ${props => props.background};
   p,
   h4 {
     display: block;
   }
   p {
     width: 40%;
-    font-size: 19px;
+    font-size: 18px;
     text-align: right;
     padding-right: 10px;
+    font-weight: 300;
   }
 
   h4 {
@@ -141,7 +148,7 @@ const Bottom = styled(Row)`
 
   ${mediaQueries.lessThan('small')`
     justify-content: flex-start;
-    p, h4 {text-align: center;}
+    p, h4 {text-align: right;}
     p {font-size: 12px; padding: 20px 10px;}
     h4 {font-size: 16px; padding: 20px 10px;}
     background-color: rgba(39, 46, 56, 0.4);

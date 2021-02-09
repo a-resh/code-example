@@ -5,81 +5,87 @@
  */
 
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components/macro';
 
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import {reducer, sliceKey, pullContainerActions} from './slice';
-import { selectPullContainer } from './selectors';
-import { pullContainerSaga } from './saga';
-import { Timer } from './Timer';
-import { PoolInfo } from './PoolInfo';
-import { Calculator } from './Calculator';
-import { Reward } from './Reward';
-import { CtaButton } from '../../components/CtaButton';
-import { PredictModal } from './PredictModal';
-import { Totems } from '../../../types/enums';
-import { mediaQueries } from '../../../types/constants';
-import { fromEvent } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { LoginButton } from '../../components/LoginButton';
-import { Center, Column, Row } from '../../components/blocks';
-import CustomDrawer from "../../components/Drawer";
+import {useInjectReducer, useInjectSaga} from 'utils/redux-injectors';
+import {pullContainerActions, reducer, sliceKey} from './slice';
+import {selectPullContainer} from './selectors';
+import {pullContainerSaga} from './saga';
+import {Timer} from './Timer';
+import {PoolInfo} from './PoolInfo';
+import {Calculator} from './Calculator';
+import {Reward} from './Reward';
+import {CtaButton} from '../../components/CtaButton';
+import {PredictModal} from './PredictModal';
+import {mediaQueries, TotemsData} from '../../../types/constants';
+import {fromEvent} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
+import {LoginButton} from '../../components/LoginButton';
+import {Center, Column, Row} from '../../components/blocks';
+import CustomDrawer from '../../components/Drawer';
+import {useHistory} from "react-router-dom";
+import {Totems} from "../../../types/enums";
 
 export function PullContainer() {
-  useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
-  const isShowDrawer = useSelector(selectPullContainer)
-  const { showDrawer } = pullContainerActions;
-  const totem = Totems.FOX;
-  const checkIsMobile = value => value < 450;
-  let isMobile = checkIsMobile(window.innerWidth);
-  fromEvent(window, 'resize')
-    .pipe(
-      map((e: any) => e.currentTarget.innerWidth),
-      filter(width => isMobile !== checkIsMobile(width)),
-    )
-    .subscribe(data => (isMobile = checkIsMobile(data)));
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const switchIsOpenModal = () => {
-    setIsOpen(!modalIsOpen);
-  };
-  const dispatch = useDispatch();
-  return (
-    <>
-      <Div>
-        <Top>
-          <TimerWrapper>
-            <Timer />
-          </TimerWrapper>
-          <PoolInfo showModal={switchIsOpenModal} />
-        </Top>
-        <Bottom>
-          <BottomContent>
-            <Calculator showModal={switchIsOpenModal} />
-            <Reward />
-          </BottomContent>
-          <ButtonWrapper>
-            <CtaButton
-              background={'#FF6701'}
-              color={'white'}
-              showModal={switchIsOpenModal}
-            />
-          </ButtonWrapper>
-        </Bottom>
-        <PredictModal
-          isMobile={isMobile}
-          isOpen={modalIsOpen}
-          close={switchIsOpenModal}
-          totem={totem}
-        />
-        <LoginButtonWrapper>
-          <LoginButton />
-        </LoginButtonWrapper>
-        <CustomDrawer isShow={isShowDrawer} setIsShow={() => dispatch(showDrawer())} />
-      </Div>
-    </>
-  );
+    useInjectReducer({key: sliceKey, reducer: reducer});
+    useInjectSaga({key: sliceKey, saga: pullContainerSaga});
+    const isShowDrawer = useSelector(selectPullContainer);
+    const {showDrawer} = pullContainerActions;
+    const history = useHistory();
+    const totem = history.location.pathname !== '/' ? history.location.pathname.substr(1).toUpperCase() : 'FOX';
+    console.log(history.location)
+    const checkIsMobile = value => value < 450;
+    let isMobile = checkIsMobile(window.innerWidth);
+    fromEvent(window, 'resize')
+        .pipe(
+            map((e: any) => e.currentTarget.innerWidth),
+            filter(width => isMobile !== checkIsMobile(width)),
+        )
+        .subscribe(data => (isMobile = checkIsMobile(data)));
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const switchIsOpenModal = () => {
+        setIsOpen(!modalIsOpen);
+    };
+    const dispatch = useDispatch();
+    return (
+        <>
+            <Div>
+                <Top>
+                    <TimerWrapper>
+                        <Timer/>
+                    </TimerWrapper>
+                    <PoolInfo totem={totem} showModal={switchIsOpenModal}/>
+                </Top>
+                <Bottom>
+                    <BottomContent>
+                        <Calculator showModal={switchIsOpenModal} totem={totem} currency={15000}/>
+                        <Reward totem={totem}/>
+                    </BottomContent>
+                    <ButtonWrapper>
+                        <CtaButton
+                            background={TotemsData[totem].color}
+                            color={'white'}
+                            showModal={switchIsOpenModal}
+                        />
+                    </ButtonWrapper>
+                </Bottom>
+                <PredictModal
+                    isMobile={isMobile}
+                    isOpen={modalIsOpen}
+                    close={switchIsOpenModal}
+                    totem={totem}
+                />
+                <LoginButtonWrapper>
+                    <LoginButton/>
+                </LoginButtonWrapper>
+                <CustomDrawer
+                    isShow={isShowDrawer}
+                    setIsShow={() => dispatch(showDrawer())}
+                />
+            </Div>
+        </>
+    );
 }
 
 const Div = styled(Center)`
@@ -145,4 +151,3 @@ const LoginButtonWrapper = styled.div`
     display: none;
   `}
 `;
-

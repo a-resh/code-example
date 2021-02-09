@@ -1,11 +1,11 @@
 /* --- STATE --- */
 export interface PullContainerState {
-    isShowDrawer: boolean;
+  isShowDrawer: boolean;
 }
 
 export type ContainerState = PullContainerState;
 
-export const SHOW_DRAWER = "pullContainer/SHOW_DRAWER";
+export const SHOW_DRAWER = 'pullContainer/SHOW_DRAWER';
 export interface ShowDrawerAction {
-    type: typeof SHOW_DRAWER;
+  type: typeof SHOW_DRAWER;
 }

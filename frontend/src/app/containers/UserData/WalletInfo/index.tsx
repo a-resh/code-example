@@ -75,7 +75,7 @@ const Div = styled.div`
     margin: 0 0 15px 0;
   }
   h3 {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 20px;
     margin: 15px 0;
   }

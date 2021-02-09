@@ -26,7 +26,9 @@ export const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     font-size: inherit;
   }
-
+  h1, h2 {
+    font-family: 'Lato Light';
+  }
   .calculator-input-number {
     width: 100px;
     height: 20px;
@@ -38,5 +40,9 @@ export const GlobalStyle = createGlobalStyle`
     height: 20px;
     margin: 0 5px;
     font-size: 15px;
+  }
+  
+  .chart {
+    cursor: url("/assets/images/chart-cursor.svg"), pointer;
   }
 `;
