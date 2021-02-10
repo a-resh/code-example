@@ -8,13 +8,13 @@ import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import CustomizedSlider from '../../../components/CustomSlider';
-import CustomSwitch from '../../../components/CustomSwitch';
-import { mediaQueries, TotemsData } from '../../../../types/constants';
+import CustomizedSlider from '../../../../components/CustomSlider';
+import CustomSwitch from '../../../../components/CustomSwitch';
+import { mediaQueries, TotemsData } from '../../../../../types/constants';
 import { Icon } from 'app/components/Icon';
-import { CtaButton } from '../../../components/CtaButton';
-import { Center, Column, Row } from '../../../components/blocks';
-import { TotemBackground } from '../../../../types/interfaces';
+import { CtaButton } from '../../../../components/CtaButton';
+import { Center, Column, Row } from '../../../../components/blocks';
+import { TotemBackground } from '../../../../../types/interfaces';
 
 interface Props {
   showModal: () => void;

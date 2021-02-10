@@ -10,10 +10,13 @@ import { messages } from './messages';
 import { Icon } from '../../../components/Icon';
 import { mediaQueries } from '../../../../types/constants';
 import { Center, Column, Row } from '../../../components/blocks';
+import { User } from 'types/interfaces';
 
-interface Props {}
+interface Props {
+  user: User;
+}
 
-export const WalletInfo = memo((props: Props) => {
+export const WalletInfo = memo(({ user }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
@@ -25,21 +28,21 @@ export const WalletInfo = memo((props: Props) => {
           <TotalBalance>
             <h3>{t('Total balance')}</h3>
             <Row>
-              <h1>1,000</h1>
+              <h1>{user.balance}</h1>
               <p>TOTM</p>
             </Row>
           </TotalBalance>
           <Staked>
             <h3>{t('Amount staked')}</h3>
             <Row>
-              <h2>264</h2>
+              <h2>{user.inGame}</h2>
               <p>TOTM</p>
             </Row>
           </Staked>
           <Available>
             <h3>{t('Available to stake')}</h3>
             <Row>
-              <h2>736</h2>
+              <h2>{user.balance - user.inGame - user.frozenTokens}</h2>
               <p>TOTM</p>
             </Row>
           </Available>

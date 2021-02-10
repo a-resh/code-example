@@ -7,20 +7,21 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import { CtaButton } from '../../../components/CtaButton';
-import { Icon } from '../../../components/Icon';
-import { Scale } from '../../../components/Scale';
+import { CtaButton } from '../../../../components/CtaButton';
+import { Icon } from '../../../../components/Icon';
+import { Scale } from '../../../../components/Scale';
 import { Timer } from '../Timer';
-import { mediaQueries, TotemsData } from '../../../../types/constants';
-import { Column, Row } from '../../../components/blocks';
-import { TotemBackground } from '../../../../types/interfaces';
+import { mediaQueries, TotemsData } from '../../../../../types/constants';
+import { Column, Row } from '../../../../components/blocks';
+import { TotemBackground } from '../../../../../types/interfaces';
 
 interface Props {
   showModal: () => void;
   totem: string;
+  poolFill?: number;
 }
 
-export function PoolInfo({ showModal, totem }: Props) {
+export function PoolInfo({ showModal, totem, poolFill }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   return (
@@ -39,10 +40,10 @@ export function PoolInfo({ showModal, totem }: Props) {
       <ScaleContainer>
         <p>
           <b>
-            {t(...messages.thisPoolIs)} 63% {t(...messages.full)}
+            {t(...messages.thisPoolIs)} {poolFill}% {t(...messages.full)}
           </b>
         </p>
-        <Scale fill={63} />
+        <Scale fill={poolFill || 0} />
       </ScaleContainer>
       <ButtonWrapper>
         <CtaButton

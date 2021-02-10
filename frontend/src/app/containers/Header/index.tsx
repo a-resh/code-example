@@ -10,14 +10,16 @@ import { LoginButton } from '../../components/LoginButton';
 import { Icon } from '../../components/Icon';
 import { mediaQueries } from '../../../types/constants';
 import { Row } from '../../components/blocks';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePullContainerSlice } from '../PullContainer/slice';
+import { userSelector } from '../Content/selectors';
 
 interface Props {}
 
 export function Header({}: Props) {
   const { actions } = usePullContainerSlice();
   const dispatch = useDispatch();
+  const user = useSelector(userSelector);
   return (
     <Div>
       <MenuWrapper>
