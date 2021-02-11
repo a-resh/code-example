@@ -7,16 +7,16 @@ import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import {mediaQueries, TotemsData} from '../../../../types/constants';
-import { Column, Row } from '../../../components/blocks';
-import {TotemBackground} from "../../../../types/interfaces";
-import {Chart} from "../../../components/Chart";
+import { mediaQueries, TotemsData } from '../../../../../types/constants';
+import { Column, Row } from '../../../../components/blocks';
+import { TotemBackground } from '../../../../../types/interfaces';
+import { Chart } from '../../../../components/Chart';
 
 interface Props {
   totem: string;
 }
 
-export function Reward({totem}: Props) {
+export function Reward({ totem }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
@@ -53,7 +53,7 @@ export function Reward({totem}: Props) {
         <ColumnReward>
           <p>{t(...messages.stakingReturns)}:</p>
           <h2>40%</h2>
-          <Chart/>
+          <Chart />
         </ColumnReward>
       </Top>
       <Bottom background={TotemsData[totem].color}>
@@ -71,7 +71,7 @@ const Div = styled(Column)<TotemBackground>`
   justify-content: space-between;
   padding-bottom: 20px;
   @media screen and (min-width: 450px) {
-    background-color: ${props => props.background}
+    background-color: ${props => props.background};
   }
   ${mediaQueries.lessThan('medium')`
     width: 100%

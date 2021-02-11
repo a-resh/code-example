@@ -17,6 +17,7 @@ import { messages } from './messages';
 import { WalletInfo } from './WalletInfo';
 import { AccountRewards } from './AccountRewards';
 import { Column } from '../../components/blocks';
+import { userSelector } from '../Content/selectors';
 
 interface Props {}
 
@@ -25,7 +26,7 @@ export function UserData(props: Props) {
   useInjectSaga({ key: sliceKey, saga: userDataSaga });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const userData = useSelector(selectUserData);
+  const user = useSelector(userSelector);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ export function UserData(props: Props) {
   return (
     <>
       <Div>
-        <WalletInfo />
+        <WalletInfo user={user} />
         <AccountRewards />
       </Div>
     </>

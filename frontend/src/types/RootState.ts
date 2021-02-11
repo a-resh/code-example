@@ -1,5 +1,7 @@
 import { PullContainerState } from 'app/containers/PullContainer/types';
 import { UserDataState } from 'app/containers/UserData/types';
+import { User } from './interfaces';
+import { ContentState } from 'app/containers/Content/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -9,5 +11,6 @@ import { UserDataState } from 'app/containers/UserData/types';
 export interface RootState {
   pullContainer?: PullContainerState;
   userData?: UserDataState;
+  content?: ContentState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

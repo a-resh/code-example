@@ -9,7 +9,6 @@ interface Props {
 export default function CustomDrawer({ isShow, setIsShow }: Props) {
   // const [show, setIsShow] = useState(isShow)
   const s = () => {
-    console.log('hi!', setIsShow);
     setIsShow();
   };
   return (

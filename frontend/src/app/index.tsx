@@ -19,7 +19,7 @@ import { Wrapper } from './components/Wrapper';
 import { Sidebar } from './components/Sidebar';
 import { PullContainer } from './containers/PullContainer/Loadable';
 import { UserData } from './containers/UserData/Loadable';
-import { Content } from './components/Content';
+import { Content } from './containers/Content';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -50,6 +50,3 @@ export function App() {
     </BrowserRouter>
   );
 }
-export { Row } from './components/blocks';
-export { Column } from './components/blocks';
-export { Center } from './components/blocks';

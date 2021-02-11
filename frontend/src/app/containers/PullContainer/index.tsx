@@ -5,87 +5,113 @@
  */
 
 import * as React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
-import {useInjectReducer, useInjectSaga} from 'utils/redux-injectors';
-import {pullContainerActions, reducer, sliceKey} from './slice';
-import {selectPullContainer} from './selectors';
-import {pullContainerSaga} from './saga';
-import {Timer} from './Timer';
-import {PoolInfo} from './PoolInfo';
-import {Calculator} from './Calculator';
-import {Reward} from './Reward';
-import {CtaButton} from '../../components/CtaButton';
-import {PredictModal} from './PredictModal';
-import {mediaQueries, TotemsData} from '../../../types/constants';
-import {fromEvent} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
-import {LoginButton} from '../../components/LoginButton';
-import {Center, Column, Row} from '../../components/blocks';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { pullContainerActions, reducer, sliceKey } from './slice';
+import {
+  drawDataSelector,
+  isShowDrawerSelector,
+  pollFillSelector,
+  totemSelector,
+} from './selectors';
+import { pullContainerSaga } from './saga';
+import { Timer } from './components/Timer';
+import { PoolInfo } from './components/PoolInfo';
+import { Calculator } from './components/Calculator';
+import { Reward } from './components/Reward';
+import { CtaButton } from '../../components/CtaButton';
+import { PredictModal } from './components/PredictModal';
+import { mediaQueries, TotemsData } from '../../../types/constants';
+import { fromEvent } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { LoginButton } from '../../components/LoginButton';
+import { Center, Column, Row } from '../../components/blocks';
 import CustomDrawer from '../../components/Drawer';
-import {useHistory} from "react-router-dom";
-import {Totems} from "../../../types/enums";
+import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export function PullContainer() {
-    useInjectReducer({key: sliceKey, reducer: reducer});
-    useInjectSaga({key: sliceKey, saga: pullContainerSaga});
-    const isShowDrawer = useSelector(selectPullContainer);
-    const {showDrawer} = pullContainerActions;
-    const history = useHistory();
-    const totem = history.location.pathname !== '/' ? history.location.pathname.substr(1).toUpperCase() : 'FOX';
-    console.log(history.location)
-    const checkIsMobile = value => value < 450;
-    let isMobile = checkIsMobile(window.innerWidth);
-    fromEvent(window, 'resize')
-        .pipe(
-            map((e: any) => e.currentTarget.innerWidth),
-            filter(width => isMobile !== checkIsMobile(width)),
-        )
-        .subscribe(data => (isMobile = checkIsMobile(data)));
-    const [modalIsOpen, setIsOpen] = React.useState(false);
-    const switchIsOpenModal = () => {
-        setIsOpen(!modalIsOpen);
-    };
-    const dispatch = useDispatch();
-    return (
-        <>
-            <Div>
-                <Top>
-                    <TimerWrapper>
-                        <Timer/>
-                    </TimerWrapper>
-                    <PoolInfo totem={totem} showModal={switchIsOpenModal}/>
-                </Top>
-                <Bottom>
-                    <BottomContent>
-                        <Calculator showModal={switchIsOpenModal} totem={totem} currency={15000}/>
-                        <Reward totem={totem}/>
-                    </BottomContent>
-                    <ButtonWrapper>
-                        <CtaButton
-                            background={TotemsData[totem].color}
-                            color={'white'}
-                            showModal={switchIsOpenModal}
-                        />
-                    </ButtonWrapper>
-                </Bottom>
-                <PredictModal
-                    isMobile={isMobile}
-                    isOpen={modalIsOpen}
-                    close={switchIsOpenModal}
-                    totem={totem}
-                />
-                <LoginButtonWrapper>
-                    <LoginButton/>
-                </LoginButtonWrapper>
-                <CustomDrawer
-                    isShow={isShowDrawer}
-                    setIsShow={() => dispatch(showDrawer())}
-                />
-            </Div>
-        </>
-    );
+  const dispatch = useDispatch();
+  const history = useHistory();
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
+  const isShowDrawer = useSelector(isShowDrawerSelector);
+  const drawData = useSelector(drawDataSelector);
+  const totem = useSelector(totemSelector);
+  const poolFill = useSelector(pollFillSelector);
+  const { showDrawer, makePredict, getData, setTotem } = pullContainerActions;
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const path =
+    history.location.pathname !== '/'
+      ? history.location.pathname.substr(1).toUpperCase()
+      : 'FOX';
+  dispatch(setTotem(path));
+  useEffect(() => {
+    dispatch(getData());
+  }, []);
+  const checkIsMobile = value => value < 450;
+  let isMobile = checkIsMobile(window.innerWidth);
+  fromEvent(window, 'resize')
+    .pipe(
+      map((e: any) => e.currentTarget.innerWidth),
+      filter(width => isMobile !== checkIsMobile(width)),
+    )
+    .subscribe(data => (isMobile = checkIsMobile(data)));
+
+  const switchIsOpenModal = () => setIsOpen(!modalIsOpen);
+  const makePredictFromModal = (bitcoinPrice: number, stakeValue: number) => {
+    switchIsOpenModal();
+    dispatch(makePredict({ bitcoinPrice, stakeValue, user: 1 }));
+  };
+  return (
+    <>
+      <Div>
+        <Top>
+          <TimerWrapper>
+            <Timer endTime={drawData?.endTime || new Date().getTime()} />
+          </TimerWrapper>
+          <PoolInfo
+            totem={totem}
+            showModal={switchIsOpenModal}
+            poolFill={poolFill}
+          />
+        </Top>
+        <Bottom>
+          <BottomContent>
+            <Calculator
+              showModal={switchIsOpenModal}
+              totem={totem}
+              currency={15000}
+            />
+            <Reward totem={totem} />
+          </BottomContent>
+          <ButtonWrapper>
+            <CtaButton
+              background={TotemsData[totem].color}
+              color={'white'}
+              showModal={switchIsOpenModal}
+            />
+          </ButtonWrapper>
+        </Bottom>
+        <PredictModal
+          isMobile={isMobile}
+          isOpen={modalIsOpen}
+          close={switchIsOpenModal}
+          totem={totem}
+          makeBet={makePredictFromModal}
+        />
+        <LoginButtonWrapper>
+          <LoginButton />
+        </LoginButtonWrapper>
+        <CustomDrawer
+          isShow={isShowDrawer}
+          setIsShow={() => dispatch(showDrawer())}
+        />
+      </Div>
+    </>
+  );
 }
 
 const Div = styled(Center)`

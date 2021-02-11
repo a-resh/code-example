@@ -5,8 +5,8 @@
  */
 import * as React from 'react';
 import { Switch, withStyles } from '@material-ui/core';
-import {TotemsData} from "../../../types/constants";
-import {useState} from "react";
+import { TotemsData } from '../../../types/constants';
+import { useState } from 'react';
 
 interface Props {
   totem: string;
@@ -14,7 +14,7 @@ interface Props {
   onChangeValue: (boolean) => void;
 }
 
-export default function CustomSwitch({totem, value, onChangeValue}: Props) {
+export default function CustomSwitch({ totem, value, onChangeValue }: Props) {
   const OrangeSwitch = withStyles({
     root: {
       width: 16,
@@ -50,16 +50,12 @@ export default function CustomSwitch({totem, value, onChangeValue}: Props) {
 
   const [isChecked, setIsChecked] = useState(value);
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setIsChecked(event.target.checked);
     onChangeValue(isChecked);
   };
 
   return (
-    <OrangeSwitch
-      checked={isChecked}
-      onChange={handleChange}
-      name="checked"
-    />
+    <OrangeSwitch checked={isChecked} onChange={handleChange} name="checked" />
   );
 }
