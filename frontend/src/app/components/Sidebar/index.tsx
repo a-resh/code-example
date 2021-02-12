@@ -9,13 +9,16 @@ import { Menu } from '../Menu';
 import { Icon } from '../Icon';
 import { mediaQueries } from '../../../types/constants';
 import { Column } from '../blocks';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../../containers/Content/selectors';
 
 interface Props {}
 
 export const Sidebar = memo(({}: Props) => {
+  const user = useSelector(userSelector);
   return (
     <Div>
-      <Menu isLogin={true} />
+      <Menu isLogin={!!user.id} />
       <SidebarBottom>
         <Icon
           url={'telegram-dark.svg'}

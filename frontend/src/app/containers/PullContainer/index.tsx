@@ -14,7 +14,6 @@ import {
   drawDataSelector,
   isShowDrawerSelector,
   pollFillSelector,
-  totemSelector,
 } from './selectors';
 import { pullContainerSaga } from './saga';
 import { Timer } from './components/Timer';
@@ -29,25 +28,20 @@ import { filter, map } from 'rxjs/operators';
 import { LoginButton } from '../../components/LoginButton';
 import { Center, Column, Row } from '../../components/blocks';
 import CustomDrawer from '../../components/Drawer';
-import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { activePageSelector } from '../Content/selectors';
 
 export function PullContainer() {
   const dispatch = useDispatch();
-  const history = useHistory();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
   const isShowDrawer = useSelector(isShowDrawerSelector);
   const drawData = useSelector(drawDataSelector);
-  const totem = useSelector(totemSelector);
+  const totem = useSelector(activePageSelector);
   const poolFill = useSelector(pollFillSelector);
-  const { showDrawer, makePredict, getData, setTotem } = pullContainerActions;
+  const { showDrawer, makePredict, getData } = pullContainerActions;
   const [modalIsOpen, setIsOpen] = useState(false);
-  const path =
-    history.location.pathname !== '/'
-      ? history.location.pathname.substr(1).toUpperCase()
-      : 'FOX';
-  dispatch(setTotem(path));
+
   useEffect(() => {
     dispatch(getData());
   }, []);

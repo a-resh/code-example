@@ -7,7 +7,6 @@ import { useInjectReducer } from 'redux-injectors';
 export const initialState: ContainerState = {
   isShowDrawer: false,
   drawData: [],
-  totem: 'FOX',
 };
 
 const pullContainerSlice = createSlice({
@@ -15,9 +14,6 @@ const pullContainerSlice = createSlice({
   initialState,
   reducers: {
     getData() {},
-    setTotem(state, action: PayloadAction<string>) {
-      state.totem = action.payload;
-    },
     getDataSuccess(state, action: PayloadAction<any[]>) {
       state.drawData = action.payload;
     },

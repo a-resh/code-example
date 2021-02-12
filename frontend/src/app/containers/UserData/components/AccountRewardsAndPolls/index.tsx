@@ -7,13 +7,15 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import { Icon } from '../../../components/Icon';
-import { mediaQueries } from '../../../../types/constants';
-import { Center, Column, Row } from '../../../components/blocks';
+import { Icon } from '../../../../components/Icon';
+import { mediaQueries } from '../../../../../types/constants';
+import { Center, Column, Row } from '../../../../components/blocks';
 
-interface Props {}
+interface Props {
+  isMobile?: boolean;
+}
 
-export const AccountRewards = memo((props: Props) => {
+export const AccountRewardsAndPools = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
@@ -273,7 +275,7 @@ const ButtonsColumn = styled(Center)`
   `}
 `;
 
-const Claim = styled(Center)<{ totem: string }>`
+export const Claim = styled(Center)<{ totem: string }>`
   background-color: ${props =>
     props.totem === 'fox'
       ? '#ff671f'

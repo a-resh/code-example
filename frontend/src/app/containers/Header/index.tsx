@@ -23,7 +23,7 @@ export function Header({}: Props) {
   return (
     <Div>
       <MenuWrapper>
-        <Menu />
+        <Menu isLogin={!!user.id} isMobile={true} />
       </MenuWrapper>
       <IconWrapper>
         <Icon url={'logo-white.svg'} width={90} height={25} />
@@ -32,7 +32,7 @@ export function Header({}: Props) {
         <LoginButton />
       </DesktopButton>
       <MobileButton onClick={() => dispatch(actions.showDrawer())}>
-        <Icon url={'account-mobile.svg'} width={15} height={15} />
+        <Icon url={'uniswap-black.svg'} width={15} height={15} />
       </MobileButton>
     </Div>
   );

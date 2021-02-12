@@ -3,7 +3,7 @@ export interface TotemBackground {
 }
 
 export interface User {
-  id?: string;
+  id: string;
   balance: number;
   frozenTokens: number;
   inGame: number;

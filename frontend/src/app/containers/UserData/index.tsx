@@ -6,18 +6,18 @@
 
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
-import { selectUserData } from './selectors';
 import { userDataSaga } from './saga';
-import { messages } from './messages';
-import { WalletInfo } from './WalletInfo';
-import { AccountRewards } from './AccountRewards';
+import { WalletInfo } from './components/WalletInfo';
+import { AccountRewardsAndPools } from './components/AccountRewardsAndPolls';
 import { Column } from '../../components/blocks';
 import { userSelector } from '../Content/selectors';
+import { mediaQueries } from '../../../types/constants';
+import { YourRewards } from './components/YourRewards';
 
 interface Props {}
 
@@ -36,8 +36,11 @@ export function UserData(props: Props) {
   return (
     <>
       <Div>
+        <YourRewardsWrapper>
+          <YourRewards />
+        </YourRewardsWrapper>
         <WalletInfo user={user} />
-        <AccountRewards />
+        <AccountRewardsAndPools />
       </Div>
     </>
   );
@@ -49,4 +52,14 @@ const Div = styled(Column)`
   height: 100%;
   width: 100%;
   padding: 15px;
+  ${mediaQueries.lessThan('small')`
+     
+  `}
+`;
+
+const YourRewardsWrapper = styled.div`
+  width: 100%;
+  ${mediaQueries.greaterThan('small')`
+     display: none;
+  `}
 `;

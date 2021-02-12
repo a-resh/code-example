@@ -26,7 +26,7 @@ export const TotemsData = {
   OWL: {
     id: 3,
     name: 'Owl',
-    iconMobile: 'owl-mobile-menu.svg',
+    iconMobile: 'owl-white.svg',
     icon: 'owl-white.svg',
     colorMobile: '#C4DBE0',
     color: '#739BA2',
@@ -35,8 +35,10 @@ export const TotemsData = {
   },
   USER: {
     name: 'My Account',
+    iconMobile: 'account-black.svg',
     icon: 'account-white.svg',
-    color: '',
+    color: '#C4DBE0',
+    colorMobile: '#739BA2',
     message: 'Account',
   },
   UNISWAP: {

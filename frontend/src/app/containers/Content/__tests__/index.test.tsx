@@ -9,7 +9,7 @@ import { Content } from '..';
 const renderComponent = (store: Store) =>
   render(
     <Provider store={store}>
-      <Content children={<div></div>}/>
+      <Content children={<div></div>} />
     </Provider>,
   );
 

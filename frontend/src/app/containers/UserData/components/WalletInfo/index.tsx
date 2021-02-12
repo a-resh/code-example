@@ -7,9 +7,9 @@ import React, { memo } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
-import { Icon } from '../../../components/Icon';
-import { mediaQueries } from '../../../../types/constants';
-import { Center, Column, Row } from '../../../components/blocks';
+import { Icon } from '../../../../components/Icon';
+import { mediaQueries } from '../../../../../types/constants';
+import { Center, Column, Row } from '../../../../components/blocks';
 import { User } from 'types/interfaces';
 
 interface Props {
@@ -82,6 +82,11 @@ const Div = styled.div`
     font-size: 20px;
     margin: 15px 0;
   }
+  ${mediaQueries.lessThan('small')`
+    h1 {
+      font-size: 27px;
+    }
+  `}
 `;
 const ColumnWallet = styled(Column)`
   background-color: #272e38;
@@ -115,6 +120,18 @@ const TotalBalance = styled(Column)`
     padding: 0 0 15px 15px;
     h1 {
       font-size: 36px;
+    }
+  `}
+
+  ${mediaQueries.lessThan('small')`
+    h3 {
+      font-size: 12px;
+    }
+    h1 {
+      font-size: 27px;
+    }
+    p {
+      font-size: 8px;
     }
   `}
 `;

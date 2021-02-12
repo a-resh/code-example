@@ -13,6 +13,7 @@ import { contentActions, reducer, sliceKey } from './slice';
 import { contentSaga } from './saga';
 import { Center } from '../../components/blocks';
 import { mediaQueries } from '../../../types/constants';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -21,8 +22,14 @@ interface Props {
 export const Content = memo(({ children }: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: contentSaga });
-  const { init, initSuccess } = contentActions;
+  const { init, setActivePage } = contentActions;
   const dispatch = useDispatch();
+  const history = useHistory();
+  const path =
+    history.location.pathname !== '/'
+      ? history.location.pathname.substr(1).toUpperCase()
+      : 'FOX';
+  dispatch(setActivePage(path));
   dispatch(init());
 
   return (

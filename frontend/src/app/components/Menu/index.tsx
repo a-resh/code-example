@@ -9,30 +9,33 @@ import { useTranslation } from 'react-i18next';
 import { MenuButton } from './MenuButton';
 import { mediaQueries, TotemsData } from '../../../types/constants';
 import { Column } from '../blocks';
+import { useSelector } from 'react-redux';
+import { activePageSelector } from '../../containers/Content/selectors';
 
 interface Props {
   isLogin?: boolean;
+  isMobile?: boolean;
 }
 
-export const Menu = (props: Props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { t, i18n } = useTranslation();
-  const pathname = new URL(document.location.href).pathname;
-  const urn = pathname && pathname !== '/' ? pathname.substr(1) : 'fox';
-  const [active, setActive] = useState(urn);
+export const Menu = ({ isLogin, isMobile }: Props) => {
+  const active = useSelector(activePageSelector);
   let menuValues = Object.keys(TotemsData);
-  if (!props.isLogin) {
+  if (!isLogin) {
     menuValues = menuValues.filter(v => v !== 'USER');
   }
+  if (isMobile) {
+    menuValues = menuValues.filter(v => v !== 'UNISWAP');
+  }
+
   return (
     <Div>
-      <ButtonsContainer {...props}>
+      <ButtonsContainer isLogin={isLogin}>
         {menuValues.map((v, index) => (
           <MenuButton
             key={index}
             name={v}
             isActive={active === v.toLowerCase() && window.innerWidth > 450}
-            setActive={setActive}
+            isMobile={isMobile}
           />
         ))}
       </ButtonsContainer>

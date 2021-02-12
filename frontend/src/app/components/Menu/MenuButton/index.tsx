@@ -12,18 +12,23 @@ import { mediaQueries, TotemsData } from '../../../../types/constants';
 interface Props {
   name: string;
   isActive?: boolean;
-  setActive: (name: string) => void;
+  isMobile?: boolean;
 }
 
 export const MenuButton = memo((props: Props) => {
   const history = useHistory();
-  const redirect = url => {
-    props.setActive(url);
-    history.push(`/${url}`);
-  };
+  const redirect = url => history.push(`/${url}`);
   return (
     <Div onClick={() => redirect(props.name.toLowerCase())} {...props}>
-      <Icon url={TotemsData[props.name].icon} width={30} height={30} />
+      <Icon
+        url={
+          props.isMobile && TotemsData[props.name].iconMobile
+            ? TotemsData[props.name].iconMobile
+            : TotemsData[props.name].icon
+        }
+        width={30}
+        height={30}
+      />
       <Title>{TotemsData[props.name].name}</Title>
       <TabletTitle>{TotemsData[props.name].message}</TabletTitle>
     </Div>
@@ -54,6 +59,7 @@ const Div = styled.div<Props>`
       props.name === 'UNISWAP' ? '#739BA2' : '#121212'};
     border-right: solid #ff6700 6px;
   }
+
   div {
     font-weight: bold;
   }
@@ -77,6 +83,7 @@ const Div = styled.div<Props>`
       font-size: 12px;
       font-weight: bold;
     }
+
     border-right: none;
     :hover {
       border-right: none;

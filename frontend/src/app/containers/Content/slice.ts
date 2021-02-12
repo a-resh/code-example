@@ -6,10 +6,12 @@ import { User } from '../../../types/interfaces';
 // The initial state of the Content container
 export const initialState: ContainerState = {
   user: {
+    id: '',
     balance: 0,
     frozenTokens: 0,
     inGame: 0,
   },
+  activePage: 'FOX',
 };
 
 const contentSlice = createSlice({
@@ -19,6 +21,9 @@ const contentSlice = createSlice({
     init() {},
     initSuccess(state, action: PayloadAction<User>) {
       state.user = action.payload;
+    },
+    setActivePage(state, action: PayloadAction<string>) {
+      state.activePage = action.payload;
     },
   },
 });

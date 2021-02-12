@@ -14,7 +14,6 @@ interface Draw {
 export interface PullContainerState {
   isShowDrawer: boolean;
   drawData: Draw[];
-  totem: string;
 }
 
 export type ContainerState = PullContainerState;
