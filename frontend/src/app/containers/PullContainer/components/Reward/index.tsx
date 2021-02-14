@@ -50,11 +50,11 @@ export function Reward({ totem }: Props) {
             </ul>
           </Row>
         </ColumnReward>
-        <ColumnReward>
-          <p>{t(...messages.stakingReturns)}:</p>
-          <h2>40%</h2>
-          <Chart />
-        </ColumnReward>
+        {/*<ColumnReward>*/}
+        {/*  <p>{t(...messages.stakingReturns)}:</p>*/}
+        {/*  <h2>40%</h2>*/}
+        {/*  <Chart />*/}
+        {/*</ColumnReward>*/}
       </Top>
       <Bottom background={TotemsData[totem].color}>
         <p>{t(...messages.totalDistributionToCommunity)}:</p>

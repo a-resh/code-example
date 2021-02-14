@@ -10,6 +10,7 @@ import moment from 'moment';
 import { Icon } from '../../../../components/Icon';
 import { mediaQueries } from '../../../../../types/constants';
 import { Center, Column, Row } from '../../../../components/blocks';
+import { convertDate } from '../../helpers';
 
 interface Props {
   isMobile?: boolean;
@@ -57,15 +58,10 @@ export const AccountRewardsAndPools = memo((props: Props) => {
       </TableHeader>
       <TableBody>
         {values.map((value, index) => {
-          const now = moment();
-          const stakeDate = moment(value.time);
-          const finished = stakeDate.isBefore(now);
+          const finished = moment(value.time).isBefore(moment());
           let leftTime = 'Matured';
           if (!finished) {
-            const days = stakeDate.diff(now, 'days');
-            const hours = stakeDate.diff(now.add(days, 'days'), 'hours');
-            const minutes = stakeDate.diff(now.add(hours, 'hours'), 'm');
-            leftTime = `${days}d, ${hours}h, ${minutes}m`;
+            leftTime = convertDate(value.time);
           }
           return (
             <TableRow
@@ -152,6 +148,9 @@ const Div = styled.div`
     h1 {
       margin: 0 0 15px 0;
     }
+  `}
+  ${mediaQueries.lessThan('small')`
+    display: none;
   `}
 `;
 

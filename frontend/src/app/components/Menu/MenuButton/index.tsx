@@ -26,8 +26,8 @@ export const MenuButton = memo((props: Props) => {
             ? TotemsData[props.name].iconMobile
             : TotemsData[props.name].icon
         }
-        width={30}
-        height={30}
+        width={props.isMobile ? 20 : 30}
+        height={props.isMobile ? 20 : 30}
       />
       <Title>{TotemsData[props.name].name}</Title>
       <TabletTitle>{TotemsData[props.name].message}</TabletTitle>

@@ -24,7 +24,7 @@ export const WalletInfo = memo(({ user }: Props) => {
     <Div>
       <h1>{t('Your Wallet')}</h1>
       <ColumnWallet>
-        <Row>
+        <RowWalletInfo>
           <TotalBalance>
             <h3>{t('Total balance')}</h3>
             <Row>
@@ -32,21 +32,23 @@ export const WalletInfo = memo(({ user }: Props) => {
               <p>TOTM</p>
             </Row>
           </TotalBalance>
-          <Staked>
-            <h3>{t('Amount staked')}</h3>
-            <Row>
-              <h2>{user.inGame}</h2>
-              <p>TOTM</p>
-            </Row>
-          </Staked>
-          <Available>
-            <h3>{t('Available to stake')}</h3>
-            <Row>
-              <h2>{user.balance - user.inGame - user.frozenTokens}</h2>
-              <p>TOTM</p>
-            </Row>
-          </Available>
-        </Row>
+          <RowAvailableStaked>
+            <Staked>
+              <h3>{t('Amount staked')}</h3>
+              <Row>
+                <h2>{user.inGame}</h2>
+                <p>TOTM</p>
+              </Row>
+            </Staked>
+            <Available>
+              <h3>{t('Available to stake')}</h3>
+              <Row>
+                <h2>{user.balance - user.inGame - user.frozenTokens}</h2>
+                <p>TOTM</p>
+              </Row>
+            </Available>
+          </RowAvailableStaked>
+        </RowWalletInfo>
         <Row>
           <AddTotm onClick={() => {}}>
             <p>{t('Add TOTM')}</p>
@@ -85,6 +87,7 @@ const Div = styled.div`
   ${mediaQueries.lessThan('small')`
     h1 {
       font-size: 27px;
+      margin: 25px 0;
     }
   `}
 `;
@@ -124,11 +127,18 @@ const TotalBalance = styled(Column)`
   `}
 
   ${mediaQueries.lessThan('small')`
+    padding: 15px 0 0 15px;
     h3 {
       font-size: 12px;
+      margin: 0;
     }
     h1 {
       font-size: 27px;
+      line-height: 36px;
+    }
+    h2 {
+      font-size: 27px;
+      line-height: 36px;
     }
     p {
       font-size: 8px;
@@ -137,15 +147,19 @@ const TotalBalance = styled(Column)`
 `;
 
 const Staked = styled(TotalBalance)`
-  width: 33%;
+  width: 50%;
   ${mediaQueries.lessThan('medium')`
     display: none;
   `}
+  ${mediaQueries.lessThan('small')`
+    display: flex;
+    width: 100%;
+  `}
 `;
 const Available = styled(TotalBalance)`
-  width: 27%;
+  width: 50%;
   ${mediaQueries.lessThan('medium')`
-    width: 50%;
+    width: 100%;
   `}
 `;
 
@@ -163,6 +177,9 @@ const AddTotm = styled(Center)`
     p {
       font-size: 12px;
     }
+  `}
+  ${mediaQueries.lessThan('small')`
+    display: none;
   `}
 `;
 
@@ -186,6 +203,18 @@ const BtcAddress = styled(Row)`
       display: none;
     }
   `}
+  ${mediaQueries.lessThan('small')`
+    background-color: #202020;
+    width: 100%;
+    height: 25px;
+    justify-content: center;
+    p, label, small {
+      font-size: 9px;
+    }
+    small {
+      display: inline;
+    }
+  `}
 `;
 
 const Connected = styled(Center)`
@@ -198,5 +227,34 @@ const Connected = styled(Center)`
   padding: 10px;
   ${mediaQueries.lessThan('medium')`
     display: none;
+  `}
+  ${mediaQueries.lessThan('small')`
+    background-color: inherit;
+    height: 17px;
+    font-size: 9px;
+    display: flex;
+    padding: 4px;
+    p {
+      line-height: 7px;
+      border: none;
+      padding: 0 5px;
+    }
+  `}
+`;
+
+const RowWalletInfo = styled(Row)`
+  ${mediaQueries.lessThan('small')`
+    flex-direction: column;
+    background-color: #232830;
+  `}
+`;
+
+const RowAvailableStaked = styled(Row)`
+  width: 59%;
+  ${mediaQueries.lessThan('medium')`
+    width: 50%;
+  `}
+  ${mediaQueries.lessThan('small')`
+    width: 100%;
   `}
 `;

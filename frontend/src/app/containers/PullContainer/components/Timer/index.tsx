@@ -21,6 +21,7 @@ export function Timer({ endTime }: Props) {
   const { t, i18n } = useTranslation();
 
   const updateTime = () => {
+    endTime = endTime ? endTime : new Date().getTime();
     const timeToEnd = moment(endTime);
     const timeToEndForMinutesAndSeconds = moment(endTime);
     const now = moment();

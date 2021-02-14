@@ -38,6 +38,7 @@ export function PullContainer() {
   const isShowDrawer = useSelector(isShowDrawerSelector);
   const drawData = useSelector(drawDataSelector);
   const totem = useSelector(activePageSelector);
+  console.log(totem);
   const poolFill = useSelector(pollFillSelector);
   const { showDrawer, makePredict, getData } = pullContainerActions;
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -64,12 +65,13 @@ export function PullContainer() {
       <Div>
         <Top>
           <TimerWrapper>
-            <Timer endTime={drawData?.endTime || new Date().getTime()} />
+            <Timer endTime={drawData?.endTime} />
           </TimerWrapper>
           <PoolInfo
             totem={totem}
             showModal={switchIsOpenModal}
             poolFill={poolFill}
+            endTime={drawData?.endTime}
           />
         </Top>
         <Bottom>

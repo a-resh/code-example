@@ -27,8 +27,6 @@ const Div = styled.div<Props>`
   height: ${props => props.height}px;
   background: center no-repeat url('assets/images/${props => props.url}');
   ${mediaQueries.lessThan('small')`
-    width: 20px;
-    height: 20px;
     margin: 0;
   `}
 `;

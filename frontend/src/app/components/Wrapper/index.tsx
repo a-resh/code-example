@@ -17,7 +17,8 @@ export const Wrapper = styled(Row)`
     min-height: calc(100vh - 55px);
   `}
   ${mediaQueries.lessThan('small')`
-    min-height: 100%;
+    min-height: 100vh;
+    max-width: 100vw;
     background-color: rgb(39,46,56);
   `}
 `;

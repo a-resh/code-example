@@ -26,6 +26,7 @@ export const Menu = ({ isLogin, isMobile }: Props) => {
   if (isMobile) {
     menuValues = menuValues.filter(v => v !== 'UNISWAP');
   }
+  console.log(active);
 
   return (
     <Div>
@@ -34,7 +35,7 @@ export const Menu = ({ isLogin, isMobile }: Props) => {
           <MenuButton
             key={index}
             name={v}
-            isActive={active === v.toLowerCase() && window.innerWidth > 450}
+            isActive={active === v && window.innerWidth > 450}
             isMobile={isMobile}
           />
         ))}

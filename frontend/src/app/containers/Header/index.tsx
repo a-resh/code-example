@@ -46,6 +46,7 @@ const Div = styled(Row)`
   align-items: center;
   padding-left: 15px;
   ${mediaQueries.lessThan('small')`
+    z-index: 10;
     background-color: #739ba2;
     height: 45px;
     position: fixed;

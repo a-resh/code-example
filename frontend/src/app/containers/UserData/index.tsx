@@ -18,6 +18,7 @@ import { Column } from '../../components/blocks';
 import { userSelector } from '../Content/selectors';
 import { mediaQueries } from '../../../types/constants';
 import { YourRewards } from './components/YourRewards';
+import { ActivePools } from './components/ActivePools';
 
 interface Props {}
 
@@ -41,6 +42,7 @@ export function UserData(props: Props) {
         </YourRewardsWrapper>
         <WalletInfo user={user} />
         <AccountRewardsAndPools />
+        <ActivePools />
       </Div>
     </>
   );

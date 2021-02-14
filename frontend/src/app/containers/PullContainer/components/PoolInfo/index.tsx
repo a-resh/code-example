@@ -19,9 +19,10 @@ interface Props {
   showModal: () => void;
   totem: string;
   poolFill?: number;
+  endTime?: number;
 }
 
-export function PoolInfo({ showModal, totem, poolFill }: Props) {
+export function PoolInfo({ showModal, totem, poolFill, endTime }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   return (
@@ -35,7 +36,7 @@ export function PoolInfo({ showModal, totem, poolFill }: Props) {
         </p>
       </Title>
       <TimerContainer>
-        <Timer />
+        <Timer endTime={endTime} />
       </TimerContainer>
       <ScaleContainer>
         <p>

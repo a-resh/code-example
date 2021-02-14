@@ -25,11 +25,13 @@ export const Content = memo(({ children }: Props) => {
   const { init, setActivePage } = contentActions;
   const dispatch = useDispatch();
   const history = useHistory();
-  const path =
-    history.location.pathname !== '/'
-      ? history.location.pathname.substr(1).toUpperCase()
-      : 'FOX';
-  dispatch(setActivePage(path));
+  history.listen(location => {
+    const path =
+      location.pathname !== '/'
+        ? location.pathname.substr(1).toUpperCase()
+        : 'FOX';
+    dispatch(setActivePage(path));
+  });
   dispatch(init());
 
   return (
