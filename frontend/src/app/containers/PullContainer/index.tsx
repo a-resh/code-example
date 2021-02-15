@@ -12,7 +12,7 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { pullContainerActions, reducer, sliceKey } from './slice';
 import {
   drawDataSelector,
-  isShowDrawerSelector,
+  isShowModalSelector,
   pollFillSelector,
 } from './selectors';
 import { pullContainerSaga } from './saga';
@@ -25,24 +25,22 @@ import { PredictModal } from './components/PredictModal';
 import { mediaQueries, TotemsData } from '../../../types/constants';
 import { fromEvent } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { LoginButton } from '../../components/LoginButton';
 import { Center, Column, Row } from '../../components/blocks';
-import CustomDrawer from '../../components/Drawer';
 import { useEffect, useState } from 'react';
-import { activePageSelector } from '../Content/selectors';
+import { activePageSelector, userSelector } from '../Wrapper/selectors';
+import { wrapperActions } from '../Wrapper/slice';
 
 export function PullContainer() {
   const dispatch = useDispatch();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
-  const isShowDrawer = useSelector(isShowDrawerSelector);
   const drawData = useSelector(drawDataSelector);
   const totem = useSelector(activePageSelector);
-  console.log(totem);
   const poolFill = useSelector(pollFillSelector);
-  const { showDrawer, makePredict, getData } = pullContainerActions;
-  const [modalIsOpen, setIsOpen] = useState(false);
-
+  const user = useSelector(userSelector);
+  const isShowModal = useSelector(isShowModalSelector);
+  const { makePredict, getData, showModal } = pullContainerActions;
+  const { setUserAddress } = wrapperActions;
   useEffect(() => {
     dispatch(getData());
   }, []);
@@ -54,10 +52,8 @@ export function PullContainer() {
       filter(width => isMobile !== checkIsMobile(width)),
     )
     .subscribe(data => (isMobile = checkIsMobile(data)));
-
-  const switchIsOpenModal = () => setIsOpen(!modalIsOpen);
   const makePredictFromModal = (bitcoinPrice: number, stakeValue: number) => {
-    switchIsOpenModal();
+    dispatch(showModal());
     dispatch(makePredict({ bitcoinPrice, stakeValue, user: 1 }));
   };
   return (
@@ -69,7 +65,9 @@ export function PullContainer() {
           </TimerWrapper>
           <PoolInfo
             totem={totem}
-            showModal={switchIsOpenModal}
+            showModal={() =>
+              user.id ? dispatch(showModal()) : dispatch(setUserAddress(true))
+            }
             poolFill={poolFill}
             endTime={drawData?.endTime}
           />
@@ -77,7 +75,7 @@ export function PullContainer() {
         <Bottom>
           <BottomContent>
             <Calculator
-              showModal={switchIsOpenModal}
+              showModal={() => dispatch(showModal())}
               totem={totem}
               currency={15000}
             />
@@ -87,23 +85,18 @@ export function PullContainer() {
             <CtaButton
               background={TotemsData[totem].color}
               color={'white'}
-              showModal={switchIsOpenModal}
+              showModal={() =>
+                user.id ? dispatch(showModal()) : dispatch(setUserAddress(true))
+              }
             />
           </ButtonWrapper>
         </Bottom>
         <PredictModal
           isMobile={isMobile}
-          isOpen={modalIsOpen}
-          close={switchIsOpenModal}
+          isOpen={isShowModal}
+          close={() => dispatch(showModal())}
           totem={totem}
           makeBet={makePredictFromModal}
-        />
-        <LoginButtonWrapper>
-          <LoginButton />
-        </LoginButtonWrapper>
-        <CustomDrawer
-          isShow={isShowDrawer}
-          setIsShow={() => dispatch(showDrawer())}
         />
       </Div>
     </>
@@ -164,12 +157,6 @@ const ButtonWrapper = styled.div`
   width: 100%;
   height: 55px;
   ${mediaQueries.lessThan('medium')`
-    display: none;
-  `}
-`;
-
-const LoginButtonWrapper = styled.div`
-  ${mediaQueries.greaterThan('small')`
     display: none;
   `}
 `;

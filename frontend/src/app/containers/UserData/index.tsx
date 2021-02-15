@@ -15,10 +15,10 @@ import { userDataSaga } from './saga';
 import { WalletInfo } from './components/WalletInfo';
 import { AccountRewardsAndPools } from './components/AccountRewardsAndPolls';
 import { Column } from '../../components/blocks';
-import { userSelector } from '../Content/selectors';
 import { mediaQueries } from '../../../types/constants';
 import { YourRewards } from './components/YourRewards';
 import { ActivePools } from './components/ActivePools';
+import { userSelector } from '../Wrapper/selectors';
 
 interface Props {}
 

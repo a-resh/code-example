@@ -15,7 +15,7 @@ import { GlobalStyle } from 'styles/global-styles';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
 import { Header } from './containers/Header';
-import { Wrapper } from './components/Wrapper';
+import { Wrapper } from './containers/Wrapper';
 import { Sidebar } from './components/Sidebar';
 import { PullContainer } from './containers/PullContainer/Loadable';
 import { UserData } from './containers/UserData/Loadable';

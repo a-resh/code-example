@@ -11,21 +11,32 @@ import { Icon } from '../Icon';
 import { mediaQueries } from '../../../types/constants';
 import { Center } from '../blocks';
 
-interface Props {}
+interface Props {
+  onConnectWallet: () => void;
+  address?: string;
+}
 
-export function LoginButton({}: Props) {
+export function ConnectButton({ onConnectWallet, address }: Props) {
+  const showAddress =
+    address && address.length
+      ? `${address.substr(0, 5)}...${address.substr(
+          address.length - 4,
+          address.length - 1,
+        )}`
+      : null;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-
   return (
-    <Div>
-      <p>{t(...messages.connectWallet)}</p>
-      <Icon
-        url={'wallet-white.svg'}
-        width={25}
-        height={25}
-        margin={'0 0 0 20px'}
-      />
+    <Div onClick={() => (!address ? onConnectWallet() : null)}>
+      <p>{!address ? t(...messages.connectWallet) : showAddress}</p>
+      {!address ? (
+        <Icon
+          url={'wallet-white.svg'}
+          width={25}
+          height={25}
+          margin={'0 0 0 20px'}
+        />
+      ) : null}
     </Div>
   );
 }
@@ -38,12 +49,12 @@ const Div = styled(Center)`
   color: #272e38;
   background-color: #c4dbe0;
   cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 
   ${mediaQueries.lessThan('medium')`
-  width: 60px;
-  p {
-   display: none;
-  }
+  width: 100px;
   div {
     margin: 0;
   }

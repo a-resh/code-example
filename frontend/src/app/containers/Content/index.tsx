@@ -5,15 +5,16 @@
  */
 
 import React, { memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { contentActions, reducer, sliceKey } from './slice';
-import { contentSaga } from './saga';
+import { useInjectReducer } from 'utils/redux-injectors';
+import { reducer, sliceKey } from './slice';
 import { Center } from '../../components/blocks';
 import { mediaQueries } from '../../../types/constants';
-import { useHistory } from 'react-router-dom';
+import { ConnectButton } from '../../components/ConnectButton';
+import { userSelector } from '../Wrapper/selectors';
+import { wrapperActions } from '../Wrapper/slice';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -21,22 +22,21 @@ interface Props {
 
 export const Content = memo(({ children }: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: contentSaga });
-  const { init, setActivePage } = contentActions;
   const dispatch = useDispatch();
-  const history = useHistory();
-  history.listen(location => {
-    const path =
-      location.pathname !== '/'
-        ? location.pathname.substr(1).toUpperCase()
-        : 'FOX';
-    dispatch(setActivePage(path));
-  });
-  dispatch(init());
+  const user = useSelector(userSelector);
+  const { setUserAddress } = wrapperActions;
 
   return (
     <>
-      <Div>{children}</Div>
+      <Div>
+        {children}
+        <LoginButtonWrapper isShow={!user.id}>
+          <ConnectButton
+            address={user.id}
+            onConnectWallet={() => dispatch(setUserAddress(false))}
+          />
+        </LoginButtonWrapper>
+      </Div>
     </>
   );
 });
@@ -55,5 +55,11 @@ const Div = styled(Center)`
     width: 100%;
     padding: 45px 0 0 0;
     background-color: rgba(39,46,56, .4);
+  `}
+`;
+const LoginButtonWrapper = styled.div<{ isShow: boolean }>`
+  display: ${props => (props.isShow ? 'block' : 'none')};
+  ${mediaQueries.greaterThan('small')`
+    display: none;
   `}
 `;

@@ -5,7 +5,7 @@ import { useInjectReducer } from 'redux-injectors';
 
 // The initial state of the PullContainer container
 export const initialState: ContainerState = {
-  isShowDrawer: false,
+  isShowModal: false,
   drawData: [],
 };
 
@@ -17,8 +17,8 @@ const pullContainerSlice = createSlice({
     getDataSuccess(state, action: PayloadAction<any[]>) {
       state.drawData = action.payload;
     },
-    showDrawer(state) {
-      state.isShowDrawer = !state.isShowDrawer;
+    showModal(state) {
+      state.isShowModal = !state.isShowModal;
     },
     makePredict(
       state,

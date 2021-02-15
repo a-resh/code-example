@@ -5,26 +5,18 @@ import { User } from '../../../types/interfaces';
 
 // The initial state of the Content container
 export const initialState: ContainerState = {
-  user: {
-    id: '',
-    balance: 0,
-    frozenTokens: 0,
-    inGame: 0,
-  },
-  activePage: 'FOX',
+  showConnectMetamaskModal: false,
 };
 
 const contentSlice = createSlice({
   name: 'content',
   initialState,
   reducers: {
-    init() {},
-    initSuccess(state, action: PayloadAction<User>) {
-      state.user = action.payload;
+    showConnectMetamaskModal(state) {
+      console.log(state.showConnectMetamaskModal);
+      state.showConnectMetamaskModal = !state.showConnectMetamaskModal;
     },
-    setActivePage(state, action: PayloadAction<string>) {
-      state.activePage = action.payload;
-    },
+    error() {},
   },
 });
 

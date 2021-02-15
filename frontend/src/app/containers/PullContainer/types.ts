@@ -12,7 +12,7 @@ interface Draw {
 }
 
 export interface PullContainerState {
-  isShowDrawer: boolean;
+  isShowModal: boolean;
   drawData: Draw[];
 }
 

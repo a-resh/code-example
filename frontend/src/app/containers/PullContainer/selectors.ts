@@ -3,18 +3,12 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'types';
 import { initialState } from './slice';
 import { TotemsData } from '../../../types/constants';
-import { useSelector } from 'react-redux';
-import { activePageSelector } from '../Content/selectors';
+import { activePageSelector } from '../Wrapper/selectors';
 
-// const selectDomain = (state: RootState) => state.pullContainer || initialState;
-const isShowDrawer = (state: RootState) =>
-  state.pullContainer?.isShowDrawer || initialState.isShowDrawer;
+const isShowModal = (state: RootState) =>
+  state?.pullContainer?.isShowModal || initialState.isShowModal;
 const drawData = (state: RootState) =>
   state.pullContainer?.drawData || initialState.drawData;
-export const isShowDrawerSelector = createSelector(
-  isShowDrawer,
-  state => state,
-);
 
 export const drawDataSelector = createSelector(
   activePageSelector,
@@ -38,8 +32,7 @@ export const pollFillSelector = createSelector(
       : 0,
 );
 
-// export const Selectors = {
-//     pollFill: useSelector(pollFillSelector),
-//     totem: useSelector(totemSelector),
-//     drawData: useSelector(drawDataSelector),
-// }
+export const isShowModalSelector = createSelector(
+  isShowModal,
+  isShowModal => isShowModal,
+);

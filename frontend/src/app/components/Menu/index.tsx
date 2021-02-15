@@ -3,14 +3,14 @@
  * Menu
  *
  */
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { MenuButton } from './MenuButton';
 import { mediaQueries, TotemsData } from '../../../types/constants';
 import { Column } from '../blocks';
 import { useSelector } from 'react-redux';
-import { activePageSelector } from '../../containers/Content/selectors';
+import { activePageSelector } from '../../containers/Wrapper/selectors';
 
 interface Props {
   isLogin?: boolean;

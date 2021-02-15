@@ -1,9 +1,6 @@
 /* --- STATE --- */
-import { User } from '../../../types/interfaces';
-
 export interface ContentState {
-  user: User;
-  activePage: string;
+  showConnectMetamaskModal: boolean;
 }
 
 export type ContainerState = ContentState;

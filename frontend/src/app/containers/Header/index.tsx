@@ -6,18 +6,18 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { Menu } from '../../components/Menu';
-import { LoginButton } from '../../components/LoginButton';
+import { ConnectButton } from '../../components/ConnectButton';
 import { Icon } from '../../components/Icon';
 import { mediaQueries } from '../../../types/constants';
 import { Row } from '../../components/blocks';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePullContainerSlice } from '../PullContainer/slice';
-import { userSelector } from '../Content/selectors';
+import { userSelector } from '../Wrapper/selectors';
+import { wrapperActions } from '../Wrapper/slice';
 
 interface Props {}
 
 export function Header({}: Props) {
-  const { actions } = usePullContainerSlice();
+  const { setUserAddress } = wrapperActions;
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
   return (
@@ -29,9 +29,12 @@ export function Header({}: Props) {
         <Icon url={'logo-white.svg'} width={90} height={25} />
       </IconWrapper>
       <DesktopButton>
-        <LoginButton />
+        <ConnectButton
+          address={user.id}
+          onConnectWallet={() => dispatch(setUserAddress(false))}
+        />
       </DesktopButton>
-      <MobileButton onClick={() => dispatch(actions.showDrawer())}>
+      <MobileButton onClick={() => {}}>
         <Icon url={'uniswap-black.svg'} width={15} height={15} />
       </MobileButton>
     </Div>

@@ -10,7 +10,7 @@ import { Icon } from '../Icon';
 import { mediaQueries } from '../../../types/constants';
 import { Column } from '../blocks';
 import { useSelector } from 'react-redux';
-import { userSelector } from '../../containers/Content/selectors';
+import { userSelector } from '../../containers/Wrapper/selectors';
 
 interface Props {}
 
@@ -26,6 +26,7 @@ export const Sidebar = memo(({}: Props) => {
           height={30}
           margin={'0 0 15px 15px'}
           cursor={'pointer'}
+          onClick={() => window.open('https://t.me/totemfi', '_blank')}
         />
         <Icon
           url={'twitter-dark.svg'}
@@ -33,6 +34,7 @@ export const Sidebar = memo(({}: Props) => {
           height={30}
           margin={'0 0 0 15px'}
           cursor={'pointer'}
+          onClick={() => window.open('https://twitter.com/TotemFi', '_blank')}
         />
       </SidebarBottom>
     </Div>

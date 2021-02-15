@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { LoginButton } from '../index';
+import { ConnectButton } from '../index';
 
 describe('<LoginButton  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<LoginButton />);
+    const loadingIndicator = render(
+      <ConnectButton onConnectWallet={() => {}} />,
+    );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });
