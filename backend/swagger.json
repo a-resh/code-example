@@ -14,7 +14,7 @@
   "tags": [
     {
       "name": "Users",
-      "description": "API for Totem projct"
+      "description": "API for Totem project"
     }
   ],
   "shemes": [
@@ -34,6 +34,36 @@
         "responses": {
           "200": {
             "description": "main page of project"
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "description": "Returns list of current users in Totem project",
+        "responses": {
+          "200": {
+            "description": "list of users"
+          }
+        }
+      }
+    },
+    "/draws" : {
+      "get" : {
+        "description": "Returns list of current draws in Totem project",
+        "responses": {
+          "200": {
+            "description": "list of draws"
+          }
+        }
+      }
+    },
+    "/lastPrice" : {
+      "get" : {
+        "description": "Returns last price of BTC",
+        "responses": {
+          "200": {
+            "description": "last BTC price"
           }
         }
       }
