@@ -6,7 +6,8 @@ const swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger.json');
 
 const indexRouter = require('./routes/index');
-const userRouter = require('./routes/users');
+const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 const drawRouter = require('./routes/draws');
 const lastPriceRouter = require('./routes/lastPrice');
 
@@ -21,8 +22,11 @@ app.use(bodyParser.json());
 // Index route
 app.use('/', indexRouter);
 
-// User route
-app.use('/users', userRouter);
+// Users route
+app.use('/users', usersRouter);
+
+// Users route
+app.use('/user', userRouter);
 
 // Draws route
 app.use('/draws', drawRouter);
