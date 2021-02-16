@@ -2,7 +2,7 @@
   "id": "cg2pwijpo5lqyu1w29lu",
   "userPhone": "5555555555",
   "protocol": "https",
-  "url": "twitter.com",
+  "url": "https://ropsten.etherscan.io/address/0x7b77467301957b068ada3a8ffd44782b963e5699",
   "method": "get",
   "successCodes": [
   200,

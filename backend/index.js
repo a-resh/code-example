@@ -13,8 +13,17 @@ var fs = require('fs');
 var handlers = require('./lib/handlers');
 var helpers = require('./lib/helpers');
 
+const express = require('express');
+// Swagger
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger.json');
+
+const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Instantiate the HTTP server
-var httpServer = http.createServer(function (req, res) {
+var httpServer = app.createServer(function (req, res) {
   unifiedServer(req, res);
 });
 
@@ -25,8 +34,8 @@ httpServer.listen(config.httpPort, function () {
 
 // Instantiate the HTTPS server
 var httpsServerOptions = {
-  'key': fs.readFileSync('./https/key.pem'),
-  'cert': fs.readFileSync('./https/cert.pem')
+  key: fs.readFileSync('./https/key.pem'),
+  cert: fs.readFileSync('./https/cert.pem'),
 };
 var httpsServer = https.createServer(httpsServerOptions, function (req, res) {
   unifiedServer(req, res);
@@ -101,8 +110,8 @@ var unifiedServer = function (req, res) {
 
 // Define the request router
 var router = {
-  'ping' : handlers.ping,
-  'users' : handlers.users,
-  'tokens' : handlers.tokens,
-  'checks' : handlers.checks
+  ping: handlers.ping,
+  users: handlers.users,
+  tokens: handlers.tokens,
+  checks: handlers.checks,
 };
