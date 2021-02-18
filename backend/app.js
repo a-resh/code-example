@@ -10,6 +10,8 @@ const usersRouter = require('./routes/users');
 const userRouter = require('./routes/user');
 const drawRouter = require('./routes/draws');
 const lastPriceRouter = require('./routes/lastPrice');
+const payoutsRouter = require('./routes/payouts');
+const btcDataRouter = require('./routes/btcData');
 
 const app = express();
 
@@ -33,6 +35,12 @@ app.use('/draws', drawRouter);
 
 // Last BTC price route
 app.use('/lastPrice', lastPriceRouter);
+
+// BTC data
+app.use('/btcData', btcDataRouter);
+
+// Summary amout of payouts
+app.use('/allPayouts', payoutsRouter);
 
 const port = 5000;
 

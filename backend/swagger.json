@@ -87,6 +87,16 @@
           }
         }
       }
+    },
+    "/allPayouts" : {
+      "get" : {
+        "description": "Returns all Totem token payouts",
+        "responses": {
+          "200": {
+            "description": "All payouts"
+          }
+        }
+      }
     }
   }
 }
