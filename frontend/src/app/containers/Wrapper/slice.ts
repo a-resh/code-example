@@ -12,12 +12,19 @@ export const initialState: ContainerState = {
     frozenTokens: 0,
     inGame: 0,
   },
+  tokenPrice: 0,
 };
 
 const wrapperSlice = createSlice({
   name: 'wrapper',
   initialState,
   reducers: {
+    getTokenPrice() {
+      console.log(1111111111111111111);
+    },
+    getTokenPriceSuccess(state, action: PayloadAction<number>) {
+      state.tokenPrice = action.payload;
+    },
     setActivePage(state, action: PayloadAction<string>) {
       state.activePage = action.payload;
     },

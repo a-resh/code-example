@@ -7,12 +7,17 @@ import { useInjectReducer } from 'redux-injectors';
 export const initialState: ContainerState = {
   isShowModal: false,
   drawData: [],
+  graphicsData: [],
 };
 
 const pullContainerSlice = createSlice({
   name: 'pullContainer',
   initialState,
   reducers: {
+    getGraphicsData() {},
+    getGraphicsDataSuccess(state, action: PayloadAction<any>) {
+      state.graphicsData = action.payload;
+    },
     getData() {},
     getDataSuccess(state, action: PayloadAction<any[]>) {
       state.drawData = action.payload;

@@ -5,6 +5,16 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { contentActions } from '../Content/slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { pullContainerActions } from '../PullContainer/slice';
+import { ChainId, Fetcher, Route, Token, WETH } from '@uniswap/sdk';
+
+function* getTokenPriceUniswap() {
+  const DAI = new Token(
+    ChainId.MAINNET,
+    '0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13',
+    18,
+  );
+  console.log(`The chainId of mainnet is ${ChainId.MAINNET}.`, DAI);
+}
 
 declare const window: any;
 const initUserAddress = async () => {
@@ -70,10 +80,14 @@ function* initSaga() {
   yield takeLatest(wrapperActions.init.type, initUser);
 }
 
+function* getTokenPrice() {
+  yield takeLatest(wrapperActions.getTokenPrice.type, getTokenPriceUniswap);
+}
+
 function* setUserSaga() {
   yield takeLatest(wrapperActions.setUserAddress.type, setUser);
 }
 
 export function* wrapperSaga() {
-  yield all([initSaga(), setUserSaga()]);
+  yield all([initSaga(), setUserSaga(), getTokenPrice()]);
 }

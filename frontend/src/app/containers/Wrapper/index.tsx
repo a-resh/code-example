@@ -22,9 +22,10 @@ interface Props {
 export const Wrapper = memo(({ children }: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: wrapperSaga });
-  const { setActivePage, init } = wrapperActions;
+  const { setActivePage, init, getTokenPrice } = wrapperActions;
   const dispatch = useDispatch();
   dispatch(init());
+  dispatch(getTokenPrice());
   const history = useHistory();
   history.listen(location => {
     const path =

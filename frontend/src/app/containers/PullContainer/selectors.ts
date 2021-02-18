@@ -5,8 +5,10 @@ import { initialState } from './slice';
 import { TotemsData } from '../../../types/constants';
 import { activePageSelector } from '../Wrapper/selectors';
 
+const graphicsData = (state: RootState) =>
+  state.pullContainer?.graphicsData || initialState.graphicsData;
 const isShowModal = (state: RootState) =>
-  state?.pullContainer?.isShowModal || initialState.isShowModal;
+  state.pullContainer?.isShowModal || initialState.isShowModal;
 const drawData = (state: RootState) =>
   state.pullContainer?.drawData || initialState.drawData;
 
@@ -36,3 +38,4 @@ export const isShowModalSelector = createSelector(
   isShowModal,
   isShowModal => isShowModal,
 );
+export const graphicsDataSelector = createSelector(graphicsData, data => data);

@@ -4,6 +4,7 @@
  *
  */
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import {
   HorizontalGridLines,
   LineSeries,
@@ -15,17 +16,47 @@ import { curveCatmullRom } from 'd3-shape';
 import { TotemsData } from '../../../types/constants';
 import { Row } from '../blocks';
 import styled from 'styled-components/macro';
+import { GraphicData } from '../../containers/PullContainer/types';
+import moment from 'moment';
 
 interface Props {
   totem: string;
   startValue: number;
   betValue: number;
+  data: GraphicData[];
 }
 
-export function ChartWithBet({ totem, startValue, betValue }: Props) {
-  const maxValue = startValue * 1.5;
-  const minValue = startValue * 0.5;
-  const step = (maxValue - minValue) / 8;
+export function ChartWithBet({ totem, startValue, betValue, data }: Props) {
+  const [maxValue, setMaxValue] = useState(startValue * 1.5);
+  const [minValue, setMinValue] = useState(startValue * 0.5);
+  const [stepY, setStepY] = useState((maxValue - minValue) / 8);
+  const [graphicsData, setGraphicsData] = useState([] as number[]);
+  const [tickValues, setTickValues] = useState(
+    initTicksValues(minValue, stepY),
+  );
+  useEffect(() => {
+    if (data.length) {
+      const totemValue = data.slice(
+        data.length - TotemsData[totem].days * 4,
+        data.length - 1,
+      );
+      const btcPrices = totemValue.map(v => +v.close);
+      const max = Math.max(...btcPrices);
+      setMaxValue(max * 1.5);
+      const min = Math.min(...btcPrices);
+      setMinValue(min * 0.5);
+      setStepY((minValue - maxValue) / 8);
+      setTickValues(initTicksValues(minValue, stepY));
+      console.log(minValue, maxValue, tickValues, stepY, btcPrices);
+      const stepX = Math.ceil(TotemsData[totem].days);
+      let arrData = [+Math.round(data[data.length - 1].close)] as number[];
+      for (let i = 0; i < 4; i++) {
+        arrData.push(+Math.round(data[data.length - 1 - i * stepX].close));
+      }
+      setGraphicsData(arrData.reverse());
+    }
+  }, [data, totem]);
+
   const validateBetValue = (v: number) => {
     if (v >= maxValue) {
       return maxValue - 4000;
@@ -35,38 +66,37 @@ export function ChartWithBet({ totem, startValue, betValue }: Props) {
     }
     return v;
   };
-  const initValues = (): number[] => {
-    return Array.apply(null, new Array(8)).reduce((acc: any, v, index) => {
-      if (!acc[index - 1]) {
-        acc.push(minValue);
-      } else {
-        acc.push(+acc[index - 1] + step);
-      }
-      return acc;
-    }, []) as number[];
-  };
-  const values = initValues();
+  // const values = initValues();
 
   return (
     <Div>
       <XYPlot
-        width={250}
+        width={240}
         height={240}
         margin={{ left: 40, top: 5, bottom: 5, right: 0 }}
       >
         <HorizontalGridLines
           style={{ stroke: 'black', opacity: '0.2' }}
-          tickValues={values}
+          tickValues={tickValues}
         />
         <XAxis
           style={{
             line: { stroke: 'black' },
             ticks: {},
-            text: { display: 'none', fontWeight: 300, fontSize: '8px' },
+            text: { fontWeight: 300, fontSize: '8px' },
           }}
-          tickSizeOuter={5}
+          tickTotal={5}
+          tickFormat={v =>
+            `${moment()
+              .subtract(
+                TotemsData[totem].days * 4 - TotemsData[totem].days * v,
+                'd',
+              )
+              .format('DD.MM')}`
+          }
+          tickSizeOuter={4}
           tickSizeInner={null}
-          top={250 - 5}
+          top={210}
         />
         <YAxis
           style={{
@@ -74,23 +104,24 @@ export function ChartWithBet({ totem, startValue, betValue }: Props) {
             ticks: { stroke: 'none' },
             text: { fontSize: '8px' },
           }}
-          tickValues={values}
-          tickTotal={10}
+          tickValues={tickValues}
+          tickTotal={8}
         />
         <LineSeries
           curve={curveCatmullRom.alpha(0.5)}
           data={[
-            { x: 0, y: values[3] },
-            { x: 2, y: values[2] },
-            { x: 3, y: values[5] },
-            { x: 8, y: startValue },
+            { x: 0, y: graphicsData[0] },
+            { x: 1, y: graphicsData[1] },
+            { x: 2, y: graphicsData[2] },
+            { x: 3, y: graphicsData[3] },
+            { x: 4, y: graphicsData[4] },
           ]}
           color={TotemsData[totem].color}
         />
         <LineSeries
           data={[
-            { x: 0, y: values[0] },
-            { x: 8, y: values[7] },
+            { x: 0, y: minValue },
+            { x: 4, y: maxValue },
           ]}
           color={TotemsData[totem].color}
           style={{ opacity: 0 }}
@@ -98,27 +129,33 @@ export function ChartWithBet({ totem, startValue, betValue }: Props) {
       </XYPlot>
       <XYPlot
         height={240}
-        width={40}
-        margin={{ left: 0, top: 5, bottom: 5, right: 0 }}
+        width={60}
+        margin={{ left: 0, top: 5, bottom: 5, right: 10 }}
       >
         <HorizontalGridLines
           style={{ stroke: 'black', opacity: '0.2' }}
-          tickValues={values}
+          tickValues={tickValues}
         />
         <XAxis
           style={{
             line: { stroke: 'black' },
             tick: { stroke: 'none' },
-            text: { display: 'none', fontWeight: 300, fontSize: '8px' },
+            text: { fontWeight: 300, fontSize: '8px' },
           }}
-          tickSizeOuter={null}
+          tickTotal={1}
+          tickFormat={v =>
+            `${moment()
+              .add(TotemsData[totem].days * v, 'd')
+              .format('DD.MM')}`
+          }
+          tickSizeOuter={4}
           tickSizeInner={null}
-          top={250 - 5}
+          top={210}
         />
         <LineSeries
           curve={curveCatmullRom.alpha(0.5)}
           data={[
-            { x: 0, y: startValue },
+            { x: 0, y: graphicsData[graphicsData.length - 1] },
             { x: 1, y: validateBetValue(betValue) },
           ]}
           color={'grey'}
@@ -126,8 +163,8 @@ export function ChartWithBet({ totem, startValue, betValue }: Props) {
         />
         <LineSeries
           data={[
-            { x: 0, y: values[0] },
-            { x: 1, y: values[7] },
+            { x: 0, y: minValue },
+            { x: 1, y: maxValue },
           ]}
           color={TotemsData[totem].color}
           style={{ opacity: 0 }}
@@ -135,6 +172,17 @@ export function ChartWithBet({ totem, startValue, betValue }: Props) {
       </XYPlot>
     </Div>
   );
+}
+
+function initTicksValues(minValue: number, stepY: number): number[] {
+  return Array.apply(null, new Array(8)).reduce((acc: any, v, index) => {
+    if (!acc[index - 1]) {
+      acc.push(minValue);
+    } else {
+      acc.push(+acc[index - 1] + stepY);
+    }
+    return acc;
+  }, []) as number[];
 }
 
 const Div = styled(Row)``;

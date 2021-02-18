@@ -6,6 +6,7 @@ import { User } from '../../../types/interfaces';
 // The initial state of the Content container
 export const initialState: ContainerState = {
   showConnectMetamaskModal: false,
+  tokenPrice: 0,
 };
 
 const contentSlice = createSlice({
@@ -13,7 +14,6 @@ const contentSlice = createSlice({
   initialState,
   reducers: {
     showConnectMetamaskModal(state) {
-      console.log(state.showConnectMetamaskModal);
       state.showConnectMetamaskModal = !state.showConnectMetamaskModal;
     },
     error() {},

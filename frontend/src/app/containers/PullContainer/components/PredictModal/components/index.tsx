@@ -46,6 +46,9 @@ export const TotemWrapper = styled(Center)<TotemBackground>`
 export const Top = styled(Row)`
   width: 100%;
   padding: 0 50px;
+  ${mediaQueries.lessThan('medium')`
+    padding: 0 0 0 20px;
+  `}
   ${mediaQueries.lessThan('small')`
   flex-direction: column;
   background-color: #EBF3F5;

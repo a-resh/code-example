@@ -35,7 +35,17 @@ export function Header({}: Props) {
         />
       </DesktopButton>
       <MobileButton onClick={() => {}}>
-        <Icon url={'uniswap-black.svg'} width={15} height={15} />
+        <Icon
+          url={'uniswap-black.svg'}
+          width={15}
+          height={15}
+          onClick={() =>
+            window.open(
+              `https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13`,
+              '_blank',
+            )
+          }
+        />
       </MobileButton>
     </Div>
   );

@@ -20,17 +20,19 @@ export const AccountRewardsAndPools = memo((props: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
-  const values = Array.apply(null, Array(5)).map(() => {
-    const totems = ['fox', 'wolf', 'owl'];
-    return {
-      totem: totems[Math.round(Math.random() + 0.6)],
-      stake: Math.ceil(1000 * Math.random() * 100),
-      time: new Date(`202${Math.round(Math.random())}-10-20`),
-      prediction: Math.ceil(12000 + Math.random() * 100),
-      projectedReturns: Math.ceil(1500 * Math.random() * 100),
-      actualReturns: Math.ceil(1200 * Math.random() * 100),
-    };
-  });
+  const values = Array.apply(null, Array(5))
+    .map(() => {
+      const totems = ['fox', 'wolf', 'owl'];
+      return {
+        totem: totems[Math.round(Math.random() + 0.6)],
+        stake: Math.ceil(1000 * Math.random() * 100),
+        time: new Date(`202${Math.round(Math.random())}-10-20`),
+        prediction: Math.ceil(12000 + Math.random() * 100),
+        projectedReturns: Math.ceil(1500 * Math.random() * 100),
+        actualReturns: Math.ceil(1200 * Math.random() * 100),
+      };
+    })
+    .sort((a, b) => a.time.getTime() - b.time.getTime());
   return (
     <Div>
       <h1>{t('Pools and rewards')}</h1>
@@ -116,9 +118,7 @@ export const AccountRewardsAndPools = memo((props: Props) => {
                   <Claim totem={value.totem}>
                     <h3> CLAIM</h3>
                   </Claim>
-                ) : (
-                  <p>{t('Cancel')}</p>
-                )}
+                ) : null}
               </ButtonsColumn>
             </TableRow>
           );
@@ -187,6 +187,7 @@ const TableRow = styled.div<{ totem?: string; opacity: number }>`
   small {
     font-size: 12px;
   }
+
   ${mediaQueries.lessThan('medium')`
    p { font-size: 10px};
    small {display: none};
@@ -284,7 +285,7 @@ export const Claim = styled(Center)<{ totem: string }>`
   color: ${props => (props.totem === 'fox' ? 'white' : '#272E38')};
   width: 90%;
   height: 70%;
-
+  cursor: pointer;
   h3 {
     font-size: 13px;
     margin: 0;

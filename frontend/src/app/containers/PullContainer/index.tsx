@@ -5,6 +5,7 @@
  */
 
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
@@ -12,6 +13,7 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { pullContainerActions, reducer, sliceKey } from './slice';
 import {
   drawDataSelector,
+  graphicsDataSelector,
   isShowModalSelector,
   pollFillSelector,
 } from './selectors';
@@ -26,9 +28,13 @@ import { mediaQueries, TotemsData } from '../../../types/constants';
 import { fromEvent } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Center, Column, Row } from '../../components/blocks';
-import { useEffect, useState } from 'react';
-import { activePageSelector, userSelector } from '../Wrapper/selectors';
+import {
+  activePageSelector,
+  tokenPriceSelector,
+  userSelector,
+} from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
+import { ConnectMetamaskModal } from '../Content/components/ConnectMetamaskModal';
 
 export function PullContainer() {
   const dispatch = useDispatch();
@@ -39,22 +45,21 @@ export function PullContainer() {
   const poolFill = useSelector(pollFillSelector);
   const user = useSelector(userSelector);
   const isShowModal = useSelector(isShowModalSelector);
-  const { makePredict, getData, showModal } = pullContainerActions;
+  const graphicsData = useSelector(graphicsDataSelector);
+  const tokenPrice = useSelector(tokenPriceSelector);
+  const {
+    makePredict,
+    getData,
+    showModal,
+    getGraphicsData,
+  } = pullContainerActions;
   const { setUserAddress } = wrapperActions;
   useEffect(() => {
     dispatch(getData());
   }, []);
-  const checkIsMobile = value => value < 450;
-  let isMobile = checkIsMobile(window.innerWidth);
-  fromEvent(window, 'resize')
-    .pipe(
-      map((e: any) => e.currentTarget.innerWidth),
-      filter(width => isMobile !== checkIsMobile(width)),
-    )
-    .subscribe(data => (isMobile = checkIsMobile(data)));
   const makePredictFromModal = (bitcoinPrice: number, stakeValue: number) => {
     dispatch(showModal());
-    dispatch(makePredict({ bitcoinPrice, stakeValue, user: 1 }));
+    dispatch(makePredict({ bitcoinPrice, stakeValue, user: user.id }));
   };
   return (
     <>
@@ -77,7 +82,8 @@ export function PullContainer() {
             <Calculator
               showModal={() => dispatch(showModal())}
               totem={totem}
-              currency={15000}
+              tokenPrice={8.8}
+              currency={48000}
             />
             <Reward totem={totem} />
           </BottomContent>
@@ -92,8 +98,11 @@ export function PullContainer() {
           </ButtonWrapper>
         </Bottom>
         <PredictModal
-          isMobile={isMobile}
+          endTime={drawData?.endTime || new Date().getTime()}
           isOpen={isShowModal}
+          initBet={user.balance}
+          graphicsData={graphicsData}
+          getGraphicsData={() => dispatch(getGraphicsData())}
           close={() => dispatch(showModal())}
           totem={totem}
           makeBet={makePredictFromModal}

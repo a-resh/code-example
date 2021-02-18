@@ -6,7 +6,12 @@ import { Calculator } from '../index';
 describe('<Calculator  />', () => {
   it('should match snapshot', () => {
     const loadingIndicator = render(
-      <Calculator showModal={() => {}} totem={'fox'} currency={15000} />,
+      <Calculator
+        showModal={() => {}}
+        totem={'fox'}
+        currency={15000}
+        tokenPrice={8}
+      />,
     );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });

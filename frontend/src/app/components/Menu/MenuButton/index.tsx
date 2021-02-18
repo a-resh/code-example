@@ -17,7 +17,16 @@ interface Props {
 
 export const MenuButton = memo((props: Props) => {
   const history = useHistory();
-  const redirect = url => history.push(`/${url}`);
+  const redirect = url => {
+    if (url === 'uniswap') {
+      window.open(
+        `https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13`,
+        '_blank',
+      );
+      return;
+    }
+    history.push(`/${url}`);
+  };
   return (
     <Div onClick={() => redirect(props.name.toLowerCase())} {...props}>
       <Icon
