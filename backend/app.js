@@ -13,6 +13,9 @@ const lastPriceRouter = require('./routes/lastPrice');
 const payoutsRouter = require('./routes/payouts');
 const btcDataRouter = require('./routes/btcData');
 
+// constants
+const rootRoute = '/api';
+
 const app = express();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -25,22 +28,22 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 
 // Users route
-app.use('/users', usersRouter);
+app.use(`${rootRoute}/users`, usersRouter);
 
 // Users route
-app.use('/user', userRouter);
+app.use(`${rootRoute}/user`, userRouter);
 
 // Draws route
-app.use('/draws', drawRouter);
+app.use(`${rootRoute}/draws`, drawRouter);
 
 // Last BTC price route
-app.use('/lastPrice', lastPriceRouter);
+app.use(`${rootRoute}/lastPrice`, lastPriceRouter);
 
 // BTC data
-app.use('/btcData', btcDataRouter);
+app.use(`${rootRoute}/btcData`, btcDataRouter);
 
 // Summary amout of payouts
-app.use('/allPayouts', payoutsRouter);
+app.use(`${rootRoute}/allPayouts`, payoutsRouter);
 
 const port = 5000;
 
