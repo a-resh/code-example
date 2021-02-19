@@ -68,6 +68,26 @@
         }
       }
     },
+    "/user/payStakingBonus" : {
+      "post" : {
+        "description": "Create payment of Totem tokens for staked amout",
+        "parameters": [{
+          "name": "id",
+          "in": "body",
+          "description": "ID of user to return",
+          "required": true,
+          "type": "object"
+        }],
+        "responses": {
+          "200": {
+            "description": "Payment done"
+          },
+          "404": {
+            "description": "Totem user for payment not found"
+          }
+        }
+      }
+    },
     "/draws" : {
       "get" : {
         "description": "Returns list of current draws in Totem project",
@@ -94,6 +114,16 @@
         "responses": {
           "200": {
             "description": "All payouts"
+          }
+        }
+      }
+    },
+    "/btcData" : {
+      "get" : {
+        "description": "Returns information about BTC price for last 356 days",
+        "responses": {
+          "200": {
+            "description": "BTC price for last year"
           }
         }
       }

@@ -46,4 +46,24 @@ router.get('/:id', (req, res, next) => {
   res.status(code).json(user);
 });
 
+router.post('/payStakingBonus', (req, res, next) => {
+  console.log('req:', req.body);
+  let code = 200;
+  let user = users.filter((item) => item.id === req.body.id);
+  let responseObj = {};
+  if (user.length === 0) {
+    responseObj = {
+      Error: 'User not found',
+    };
+    code = 404;
+  } else {
+    responseObj = {
+      paymentStatus: 'DONE',
+      stakedAmont: Number(user[0].inGame),
+      amount: user[0].inGame * 0.1,
+    };
+  }
+  res.status(code).json(responseObj);
+});
+
 module.exports = router;
