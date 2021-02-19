@@ -10,7 +10,6 @@ import { messages } from './messages';
 import { mediaQueries, TotemsData } from '../../../../../types/constants';
 import { Column, Row } from '../../../../components/blocks';
 import { TotemBackground } from '../../../../../types/interfaces';
-import { Chart } from '../../../../components/Chart';
 
 interface Props {
   totem: string;

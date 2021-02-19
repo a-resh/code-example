@@ -26,7 +26,6 @@ export const Menu = ({ isLogin, isMobile }: Props) => {
   if (isMobile) {
     menuValues = menuValues.filter(v => v !== 'UNISWAP');
   }
-  console.log(active);
 
   return (
     <Div>

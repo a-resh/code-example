@@ -13,7 +13,6 @@ function* getTokenPriceUniswap() {
     '0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13',
     18,
   );
-  console.log(`The chainId of mainnet is ${ChainId.MAINNET}.`, DAI);
 }
 
 declare const window: any;

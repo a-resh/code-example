@@ -34,7 +34,7 @@ export const TotemsData = {
     color: '#739BA2',
     message: '45 days',
     maxPoolSize: 125000,
-    days: 60,
+    days: 45,
   },
   USER: {
     name: 'My Account',

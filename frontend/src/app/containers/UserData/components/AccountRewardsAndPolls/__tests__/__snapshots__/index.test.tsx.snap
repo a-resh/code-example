@@ -1,0 +1,826 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AccountRewards  /> should match snapshot 1`] = `
+.c13 {
+  width: 15px;
+  height: 15px;
+  background: center no-repeat url('assets/images/wolf-warning.svg');
+}
+
+.c0 {
+  color: white;
+  width: 100%;
+  max-width: 900px;
+}
+
+.c0 h1 {
+  font-size: 50px;
+  font-weight: 100;
+  margin: 0 0 15px 30px;
+}
+
+.c0 h3 {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+}
+
+.c1 div {
+  height: 30px;
+}
+
+.c1 h3 {
+  margin: 0;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c11 {
+  color: rgba(51,158,176,1);
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c11 div {
+  height: 30px;
+}
+
+.c11 p,
+.c11 small {
+  font-size: 12px;
+}
+
+.c15 {
+  color: rgba(51,158,176,0.5);
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c15 div {
+  height: 30px;
+}
+
+.c15 p,
+.c15 small {
+  font-size: 12px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-right: 2px solid white;
+  width: 8%;
+  padding: 0 7px;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: space-around !important;
+  -webkit-justify-content: space-around !important;
+  -ms-flex-pack: space-around !important;
+  justify-content: space-around !important;
+  border-right: 2px solid white;
+  width: 8%;
+  padding: 0 7px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 2px solid white;
+  width: 11%;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 2px solid white;
+  width: 15%;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 2px solid white;
+  width: 20%;
+}
+
+.c5 small {
+  font-size: 12px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 2px solid white;
+  width: 15%;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 2px solid white;
+  width: 15%;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 2px solid white;
+  width: 5%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10%;
+  padding: 10px;
+}
+
+.c9 div {
+  height: 20px;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #739ba2;
+  color: #272E38;
+  width: 90%;
+  height: 70%;
+  cursor: pointer;
+}
+
+.c14 h3 {
+  font-size: 13px;
+  margin: 0;
+}
+
+@media (max-width:450px) {
+  .c13 {
+    margin: 0;
+  }
+}
+
+@media (max-width:800px) {
+  .c0 h1 {
+    margin: 0 0 15px 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c0 {
+    display: none;
+  }
+}
+
+@media (max-width:800px) {
+  .c11 p {
+    font-size: 10px;
+  }
+
+  .c11 small {
+    display: none;
+  }
+}
+
+@media (max-width:800px) {
+  .c15 p {
+    font-size: 10px;
+  }
+
+  .c15 small {
+    display: none;
+  }
+}
+
+@media (max-width:800px) {
+  .c2 {
+    width: 17%;
+  }
+}
+
+@media (max-width:800px) {
+  .c12 {
+    width: 17%;
+  }
+}
+
+@media (max-width:800px) {
+  .c3 {
+    width: 20%;
+  }
+}
+
+@media (max-width:800px) {
+  .c4 h3 {
+    font-size: 10px;
+  }
+}
+
+@media (max-width:1100px) {
+  .c5 {
+    width: 120px;
+  }
+
+  .c5 small {
+    display: none !important;
+  }
+}
+
+@media (max-width:800px) {
+  .c5 {
+    width: 23%;
+  }
+
+  .c5 h3 {
+    font-size: 10px;
+  }
+}
+
+@media (max-width:1100px) {
+  .c6 h3 {
+    font-size: 10px;
+  }
+}
+
+@media (max-width:800px) {
+  .c6 {
+    display: none !important;
+  }
+}
+
+@media (max-width:800px) {
+  .c7 {
+    display: none !important;
+  }
+}
+
+@media (max-width:800px) {
+  .c8 {
+    width: 12%;
+  }
+}
+
+@media (max-width:800px) {
+  .c9 {
+    width: 22%;
+  }
+}
+
+<div
+  class="c0"
+>
+  <h1>
+    Pools and rewards
+  </h1>
+  <div
+    class="blocks__Row-sarv4y-0 c1"
+  >
+    <div
+      class="blocks__Center-sarv4y-2 c2"
+    />
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <h3>
+        Time left
+      </h3>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <h3>
+        Stake
+      </h3>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <h3>
+        Your prediction
+      </h3>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    >
+      <h3>
+        Projected returns
+      </h3>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c7"
+    >
+      <h3>
+        Actual returns
+      </h3>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c8"
+    >
+      <h3>
+        ROI
+      </h3>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c9"
+    />
+  </div>
+  <div
+    class="blocks__Column-sarv4y-1 c10"
+  >
+    <div
+      class="c11"
+      opacity="1"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 c12"
+      >
+        <div
+          class="c13"
+          height="15"
+          width="15"
+        />
+        <p>
+          Wolf
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c3"
+      >
+        <p>
+          Matured
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c4"
+      >
+        <p>
+          42712
+          <small>
+            TOTM
+          </small>
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c5"
+      >
+        <p>
+          <small>
+            BTC=
+          </small>
+          $
+          12080
+          (±500)
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c6"
+      >
+        <p>
+          -
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c7"
+      >
+        <p>
+          119791TOTM
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c8"
+      >
+        <p>
+          280
+          %
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c9"
+      >
+        <div
+          class="blocks__Center-sarv4y-2 c14"
+        >
+          <h3>
+             CLAIM
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c11"
+      opacity="1"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 c12"
+      >
+        <div
+          class="c13"
+          height="15"
+          width="15"
+        />
+        <p>
+          Wolf
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c3"
+      >
+        <p>
+          Matured
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c4"
+      >
+        <p>
+          60932
+          <small>
+            TOTM
+          </small>
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c5"
+      >
+        <p>
+          <small>
+            BTC=
+          </small>
+          $
+          12052
+          (±500)
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c6"
+      >
+        <p>
+          -
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c7"
+      >
+        <p>
+          76443TOTM
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c8"
+      >
+        <p>
+          125
+          %
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c9"
+      >
+        <div
+          class="blocks__Center-sarv4y-2 c14"
+        >
+          <h3>
+             CLAIM
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c15"
+      opacity="0.5"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 c2"
+      >
+        <p>
+          Wolf
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c3"
+      >
+        <p>
+          242d, 12h, 2m
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c4"
+      >
+        <p>
+          45106
+          <small>
+            TOTM
+          </small>
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c5"
+      >
+        <p>
+          <small>
+            BTC=
+          </small>
+          $
+          12093
+          (±500)
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c6"
+      >
+        <p>
+          54915TOTM
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c7"
+      >
+        <p>
+          -
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c8"
+      >
+        <p>
+          122
+          %
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c9"
+      />
+    </div>
+    <div
+      class="c15"
+      opacity="0.5"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 c2"
+      >
+        <p>
+          Wolf
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c3"
+      >
+        <p>
+          242d, 12h, 2m
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c4"
+      >
+        <p>
+          10030
+          <small>
+            TOTM
+          </small>
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c5"
+      >
+        <p>
+          <small>
+            BTC=
+          </small>
+          $
+          12080
+          (±500)
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c6"
+      >
+        <p>
+          45265TOTM
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c7"
+      >
+        <p>
+          -
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c8"
+      >
+        <p>
+          451
+          %
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c9"
+      />
+    </div>
+    <div
+      class="c15"
+      opacity="0.5"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 c2"
+      >
+        <p>
+          Wolf
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c3"
+      >
+        <p>
+          242d, 12h, 2m
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c4"
+      >
+        <p>
+          30678
+          <small>
+            TOTM
+          </small>
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c5"
+      >
+        <p>
+          <small>
+            BTC=
+          </small>
+          $
+          12027
+          (±500)
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c6"
+      >
+        <p>
+          8241TOTM
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c7"
+      >
+        <p>
+          -
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c8"
+      >
+        <p>
+          27
+          %
+        </p>
+      </div>
+      <div
+        class="blocks__Center-sarv4y-2 c9"
+      />
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CtaButton  /> should match snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.c0 b {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+<div
+  class="blocks__Center-sarv4y-2 c0"
+  color="white"
+>
+  <b>
+    _NOT_TRANSLATED_
+  </b>
+</div>
+`;

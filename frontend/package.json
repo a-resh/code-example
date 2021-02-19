@@ -45,6 +45,7 @@
     "react-draggable": "4.4.3",
     "react-helmet-async": "1.0.6",
     "react-i18next": "11.7.2",
+    "react-loadable": "5.5.0",
     "react-modal": "3.12.1",
     "react-redux": "7.2.1",
     "react-router-dom": "5.2.0",
@@ -71,11 +72,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts for-deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test:generators": "ts-node --project=./internals/ts-node.tsconfig.json ./internals/testing/test-generators.ts",
-    "start:prod": "npm run build && serve -s build",
+    "start:prod": "npm run build && serve -s for-deploy",
     "checkTs": "tsc --noEmit",
     "eslint": "eslint --ext js,ts,tsx",
     "lint": "npm run eslint src",
@@ -108,11 +109,6 @@
     "*.{md,json}": [
       "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run checkTs && lint-staged"
-    }
   },
   "jest": {
     "collectCoverageFrom": [

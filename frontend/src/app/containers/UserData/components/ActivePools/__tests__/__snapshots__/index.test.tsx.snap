@@ -1,0 +1,308 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActivePools  /> should match snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  color: white;
+}
+
+.c0 h1,
+.c0 h2 {
+  font-weight: 100;
+}
+
+.c0 h1 {
+  font-size: 27px;
+  margin: 25px 0 0 0;
+}
+
+.c0 h2 {
+  margin: 25px 0 15px 0;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #45546199;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+}
+
+.c4 {
+  padding-left: 30px;
+  font-size: 11px;
+  width: 50%;
+  height: 25px;
+}
+
+.c5 {
+  padding-left: 30px;
+  font-size: 11px;
+  width: 50%;
+  height: 25px;
+  border-left: solid 1px #acb5bf;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+@media (min-width:450px) {
+  .c0 {
+    display: none;
+  }
+}
+
+<div
+  class="blocks__Column-sarv4y-1 c0"
+>
+  <h1>
+    Active pools
+  </h1>
+  <div
+    class="blocks__Column-sarv4y-1 c1"
+  >
+    <h2>
+      wolf
+    </h2>
+    <div
+      class="blocks__Column-sarv4y-1 c2"
+    >
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Time left
+        </div>
+        <div
+          class="c5"
+        >
+          224d, 9h, 2m
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Stake
+        </div>
+        <div
+          class="c5"
+        >
+          3881
+           TOTM
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Your Prediction
+        </div>
+        <div
+          class="c5"
+        >
+          $
+          12054
+          (±500)
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Projected returns
+        </div>
+        <div
+          class="c5"
+        >
+          87894
+           TOTM
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Column-sarv4y-1 c1"
+  >
+    <h2>
+      wolf
+    </h2>
+    <div
+      class="blocks__Column-sarv4y-1 c2"
+    >
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Time left
+        </div>
+        <div
+          class="c5"
+        >
+          227d, 9h, 2m
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Stake
+        </div>
+        <div
+          class="c5"
+        >
+          48583
+           TOTM
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Your Prediction
+        </div>
+        <div
+          class="c5"
+        >
+          $
+          12002
+          (±500)
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Projected returns
+        </div>
+        <div
+          class="c5"
+        >
+          62430
+           TOTM
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Column-sarv4y-1 c1"
+  >
+    <h2>
+      wolf
+    </h2>
+    <div
+      class="blocks__Column-sarv4y-1 c2"
+    >
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Time left
+        </div>
+        <div
+          class="c5"
+        >
+          226d, 9h, 2m
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Stake
+        </div>
+        <div
+          class="c5"
+        >
+          83589
+           TOTM
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Your Prediction
+        </div>
+        <div
+          class="c5"
+        >
+          $
+          12005
+          (±500)
+        </div>
+      </div>
+      <div
+        class="blocks__Row-sarv4y-0 c3"
+      >
+        <div
+          class="c4"
+        >
+          Projected returns
+        </div>
+        <div
+          class="c5"
+        >
+          18172
+           TOTM
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

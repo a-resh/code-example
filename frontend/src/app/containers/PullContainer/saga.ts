@@ -5,7 +5,7 @@ import { contentActions } from '../Content/slice';
 import { take } from 'rxjs/operators';
 const b = () => {
   return fetch(
-    'http://ec2-13-58-248-197.us-east-2.compute.amazonaws.com/btcData',
+    'http://ec2-13-58-248-197.us-east-2.compute.amazonaws.com/api/btcData',
     // 'https://pure-plateau-85418.herokuapp.com/https://nomics.com/data/candles?currency=BTC&interval=365d',
     { method: 'GET' },
   ).then(v => v.json());
@@ -13,7 +13,6 @@ const b = () => {
 function* getGraphicsData() {
   try {
     const payload = yield call(b);
-    console.log(payload);
     yield put({
       type: pullContainerActions.getGraphicsDataSuccess.type,
       payload,

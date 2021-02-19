@@ -8,6 +8,7 @@ import styled from 'styled-components/macro';
 import { Icon } from '../../Icon';
 import { useHistory } from 'react-router-dom';
 import { mediaQueries, TotemsData } from '../../../../types/constants';
+import {Center} from "../../blocks";
 
 interface Props {
   name: string;
@@ -44,13 +45,11 @@ export const MenuButton = memo((props: Props) => {
   );
 });
 
-const Div = styled.div<Props>`
+const Div = styled(Center)<Props>`
   height: 80px;
   width: 100%;
   color: ${props => (props.name === 'UNISWAP' ? '#272E38' : 'white')};
-  display: flex;
   justify-content: left;
-  align-items: center;
   cursor: pointer;
   padding: 15px;
   background-color: ${props =>

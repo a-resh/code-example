@@ -19,9 +19,7 @@ const wrapperSlice = createSlice({
   name: 'wrapper',
   initialState,
   reducers: {
-    getTokenPrice() {
-      console.log(1111111111111111111);
-    },
+    getTokenPrice() {},
     getTokenPriceSuccess(state, action: PayloadAction<number>) {
       state.tokenPrice = action.payload;
     },

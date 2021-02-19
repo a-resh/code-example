@@ -45,4 +45,12 @@ export const GlobalStyle = createGlobalStyle`
   .chart {
     cursor: url("/assets/images/chart-cursor.svg"), pointer;
   }
+  .MuiCircularProgress-colorPrimary {
+    color: #739ba2 !important;
+  }
+  .MuiCircularProgress-root {
+    left: 43%;
+    position: absolute;
+    top: 44vh;
+  }
 `;

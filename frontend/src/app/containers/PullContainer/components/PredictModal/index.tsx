@@ -238,18 +238,19 @@ function setModalStyle(isMobile: boolean) {
   };
   if (isMobile) {
     styles = {
-      overlay: { backgroundColor: 'rgba(0, 0, 0, 0)' },
+      overlay: { backgroundColor: 'rgba(0, 0, 0, 0, 0.7)' },
       content: {
         width: '100%',
-        height: '100vh',
         maxHeight: '100vh',
-        top: 45,
+        height: 'auto',
+        inset: 'auto',
         left: 0,
+        top: 0,
       },
     };
   } else {
     styles = {
-      overlay: { backgroundColor: 'rgba(0, 0, 0, .4)' },
+      overlay: { backgroundColor: 'rgba(0, 0, 0, 0.7)' },
       content: {
         top: '50%',
         left: '50%',
