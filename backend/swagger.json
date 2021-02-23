@@ -38,6 +38,47 @@
         }
       }
     },
+    "/auth" : {
+      "get" : {
+        "description": "Return Nonce value for registered user to sign in Metatask",
+        "parameters": [{
+          "publicAddress": "publicAddress",
+          "in": "path",
+          "description": "Public Address of user from MetaMask",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Nonce value for MetaMask sign"
+          }
+        }
+      },
+      "post" : {
+        "description": "Check signature from MetaMask and return token",
+        "parameters": [
+          {
+          "publicAddress": "publicAddress",
+          "in": "path",
+          "description": "Public Address of user from MetaMask",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "signature": "signature",
+          "in": "path",
+          "description": "Signed message from MetaMask",
+          "required": true,
+          "type": "string"
+        }
+      ],
+        "responses": {
+          "200": {
+            "description": "Check sign and token generation"
+          }
+        }
+      }
+    },
     "/users" : {
       "get" : {
         "description": "Returns list of current users in Totem project",

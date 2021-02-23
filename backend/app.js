@@ -6,6 +6,7 @@ const swaggerUi = require('swagger-ui-express'),
   swaggerDocument = require('./swagger.json');
 
 const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const userRouter = require('./routes/user');
 const drawRouter = require('./routes/draws');
@@ -26,6 +27,9 @@ app.use(bodyParser.json());
 
 // Index route
 app.use('/', indexRouter);
+
+// Auth route
+app.use(`${rootRoute}/auth`, authRouter);
 
 // Users route
 app.use(`${rootRoute}/users`, usersRouter);
