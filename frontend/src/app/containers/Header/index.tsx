@@ -13,7 +13,7 @@ import { Row } from '../../components/blocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
-import {isShowModalSelector} from "../PullContainer/selectors";
+import { isShowModalSelector } from '../PullContainer/selectors';
 
 interface Props {}
 
@@ -53,7 +53,7 @@ export function Header({}: Props) {
   );
 }
 
-const Div = styled(Row)<{hidden?: boolean}>`
+const Div = styled(Row)<{ hidden?: boolean }>`
   width: 100%;
   height: 80px;
   background-color: #272e38;
@@ -71,9 +71,9 @@ const Div = styled(Row)<{hidden?: boolean}>`
     padding-left: calc(50% - 45px);
     height: 55px;
   `}
-  @media screen and (max-width: 450px){
-  display: ${props => props.hidden? 'none': 'flex'};
-}
+  @media screen and (max-width: 450px) {
+    display: ${props => (props.hidden ? 'none' : 'flex')};
+  }
 `;
 const MenuWrapper = styled.div`
   height: 100%;

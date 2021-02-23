@@ -5,40 +5,40 @@
  */
 import * as React from 'react';
 import styled from 'styled-components/macro';
-import {useTranslation} from 'react-i18next';
-import {messages} from './messages';
-import {Icon} from '../Icon';
-import {mediaQueries} from '../../../types/constants';
-import {Center} from '../blocks';
+import { useTranslation } from 'react-i18next';
+import { messages } from './messages';
+import { Icon } from '../Icon';
+import { mediaQueries } from '../../../types/constants';
+import { Center } from '../blocks';
 
 interface Props {
-    onConnectWallet: () => void;
-    address?: string;
+  onConnectWallet: () => void;
+  address?: string;
 }
 
-export function ConnectButton({onConnectWallet, address}: Props) {
-    const showAddress =
-        address && address.length
-            ? `${address.substr(0, 5)}...${address.substr(
-            address.length - 4,
-            address.length - 1,
-            )}`
-            : null;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {t, i18n} = useTranslation();
-    return (
-        <Div onClick={() => (!address ? onConnectWallet() : null)}>
-            <p>{!address ? t(...messages.connectWallet) : showAddress}</p>
-            {!address ? (
-                <Icon
-                    url={'wallet-white.svg'}
-                    width={25}
-                    height={25}
-                    margin={'0 0 0 20px'}
-                />
-            ) : null}
-        </Div>
-    );
+export function ConnectButton({ onConnectWallet, address }: Props) {
+  const showAddress =
+    address && address.length
+      ? `${address.substr(0, 5)}...${address.substr(
+          address.length - 4,
+          address.length - 1,
+        )}`
+      : null;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { t, i18n } = useTranslation();
+  return (
+    <Div onClick={() => (!address ? onConnectWallet() : null)}>
+      <p>{!address ? t(...messages.connectWallet) : showAddress}</p>
+      {!address ? (
+        <Icon
+          url={'wallet-white.svg'}
+          width={25}
+          height={25}
+          margin={'0 0 0 20px'}
+        />
+      ) : null}
+    </Div>
+  );
 }
 
 const Div = styled(Center)`

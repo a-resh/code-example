@@ -13,12 +13,17 @@ export const initialState: ContainerState = {
     inGame: 0,
   },
   tokenPrice: 0,
+  btcLastPrice: 32000,
 };
 
 const wrapperSlice = createSlice({
   name: 'wrapper',
   initialState,
   reducers: {
+    getLastBtcPrice() {},
+    getLastBtcPriceSuccess(state, action: PayloadAction<number>) {
+      state.btcLastPrice = action.payload;
+    },
     getTokenPrice() {},
     getTokenPriceSuccess(state, action: PayloadAction<number>) {
       state.tokenPrice = action.payload;

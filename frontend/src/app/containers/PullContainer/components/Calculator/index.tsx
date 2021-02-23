@@ -18,12 +18,17 @@ import { TotemBackground } from '../../../../../types/interfaces';
 
 interface Props {
   showModal: () => void;
-  currency: number;
+  btcLastPrice: number;
   tokenPrice: number;
   totem: string;
 }
 
-export function Calculator({ showModal, currency, tokenPrice, totem }: Props) {
+export function Calculator({
+  showModal,
+  btcLastPrice,
+  tokenPrice,
+  totem,
+}: Props) {
   const [selectValue, setSelectValue] = useState(1);
   const [inputValue, setInputValue] = useState(1000);
   const [checkBoxValue, setCheckBoxValue] = useState(true);
@@ -42,7 +47,7 @@ export function Calculator({ showModal, currency, tokenPrice, totem }: Props) {
       +inputValue + +((inputValue * selectValues[+selectValue]) / 100);
     setTokensValue(Math.round(tokens));
     setDollarsValue(Math.round(tokens * tokenPrice));
-    setBtcValue(+((tokens * tokenPrice) / currency).toFixed(5));
+    setBtcValue(+((tokens * tokenPrice) / btcLastPrice).toFixed(5));
   };
   useEffect(() => {
     calculate();

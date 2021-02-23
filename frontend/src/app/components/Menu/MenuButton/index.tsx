@@ -8,7 +8,7 @@ import styled from 'styled-components/macro';
 import { Icon } from '../../Icon';
 import { useHistory } from 'react-router-dom';
 import { mediaQueries, TotemsData } from '../../../../types/constants';
-import {Center} from "../../blocks";
+import { Center } from '../../blocks';
 
 interface Props {
   name: string;

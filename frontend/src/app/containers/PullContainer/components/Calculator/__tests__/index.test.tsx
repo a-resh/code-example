@@ -9,7 +9,7 @@ describe('<Calculator  />', () => {
       <Calculator
         showModal={() => {}}
         totem={'fox'}
-        currency={15000}
+        btcLastPrice={15000}
         tokenPrice={8}
       />,
     );

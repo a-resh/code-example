@@ -10,7 +10,7 @@ import { Icon } from '../../../../components/Icon';
 import moment from 'moment';
 import { TotemsData } from '../../../../../types/constants';
 import { Center } from '../../../../components/blocks';
-import { ChartWithBet } from '../../../../components/ChartWithBet';
+import { GraphWithBet } from '../../../../components/GraphWithBet';
 import {
   Block,
   Bottom,
@@ -175,7 +175,7 @@ export const PredictModal = memo(
         </Top>
         <Bottom>
           <Block align={'flex-start'}>
-            <ChartWithBet
+            <GraphWithBet
               totem={totem}
               startValue={bitcoinValue}
               betValue={bitcoinValue}

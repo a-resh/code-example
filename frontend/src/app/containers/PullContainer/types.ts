@@ -15,6 +15,7 @@ export interface PullContainerState {
   isShowModal: boolean;
   drawData: Draw[];
   graphicsData: GraphicData[];
+  allPayouts: number;
 }
 
 export type ContainerState = PullContainerState;

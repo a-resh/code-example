@@ -82,7 +82,7 @@ const Div = styled.div`
 
   h1 {
     font-size: 50px;
-    font-weight: 100;
+    font-weight: 300;
     margin: 0 0 15px 0;
   }
 

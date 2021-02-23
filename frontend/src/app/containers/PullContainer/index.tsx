@@ -12,6 +12,7 @@ import styled from 'styled-components/macro';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { pullContainerActions, reducer, sliceKey } from './slice';
 import {
+  allPayoutsSelector,
   drawDataSelector,
   graphicsDataSelector,
   isShowModalSelector,
@@ -30,6 +31,7 @@ import { filter, map } from 'rxjs/operators';
 import { Center, Column, Row } from '../../components/blocks';
 import {
   activePageSelector,
+  btcLastPriceSelector,
   tokenPriceSelector,
   userSelector,
 } from '../Wrapper/selectors';
@@ -46,6 +48,8 @@ export function PullContainer() {
   const user = useSelector(userSelector);
   const isShowModal = useSelector(isShowModalSelector);
   const graphicsData = useSelector(graphicsDataSelector);
+  const btcLastPrice = useSelector(btcLastPriceSelector);
+  const allPayouts = useSelector(allPayoutsSelector);
   const tokenPrice = useSelector(tokenPriceSelector);
   const {
     makePredict,
@@ -66,7 +70,7 @@ export function PullContainer() {
       <Div>
         <Top>
           <TimerWrapper>
-            <Timer endTime={drawData?.endTime} />
+            <Timer endTime={+drawData?.endTime} />
           </TimerWrapper>
           <PoolInfo
             totem={totem}
@@ -74,7 +78,7 @@ export function PullContainer() {
               user.id ? dispatch(showModal()) : dispatch(setUserAddress(true))
             }
             poolFill={poolFill}
-            endTime={drawData?.endTime}
+            endTime={+drawData?.endTime}
           />
         </Top>
         <Bottom>
@@ -83,9 +87,9 @@ export function PullContainer() {
               showModal={() => dispatch(showModal())}
               totem={totem}
               tokenPrice={8.8}
-              currency={48000}
+              btcLastPrice={btcLastPrice}
             />
-            <Reward totem={totem} />
+            <Reward totem={totem} allPayouts={allPayouts} />
           </BottomContent>
           <ButtonWrapper>
             <CtaButton
@@ -98,7 +102,7 @@ export function PullContainer() {
           </ButtonWrapper>
         </Bottom>
         <PredictModal
-          endTime={drawData?.endTime || new Date().getTime()}
+          endTime={+drawData?.endTime || new Date().getTime()}
           isOpen={isShowModal}
           initBet={user.balance}
           graphicsData={graphicsData}
@@ -137,6 +141,7 @@ const TimerWrapper = styled.div`
 `;
 const BottomContent = styled(Row)`
   padding: 5px 20px 30px 20px;
+  width: 100%;
   background-color: rgba(39, 46, 56, 0.4);
   ${mediaQueries.lessThan('medium')`
     flex-direction: column;
@@ -152,6 +157,8 @@ const BottomContent = styled(Row)`
 
 const Bottom = styled(Column)`
   margin-top: 20px;
+  width: 100%;
+  max-width: 820px;
   align-items: center;
   ${mediaQueries.lessThan('medium')`
     align-items: center;

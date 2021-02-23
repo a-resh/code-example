@@ -19,7 +19,7 @@ import { mediaQueries } from '../../../types/constants';
 import { YourRewards } from './components/YourRewards';
 import { ActivePools } from './components/ActivePools';
 import { userSelector } from '../Wrapper/selectors';
-import {useHistory} from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 interface Props {}
 
@@ -30,8 +30,8 @@ export function UserData(props: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user = useSelector(userSelector);
   const history = useHistory();
-  if(!user.id){
-    history.push('fox')
+  if (!user.id) {
+    history.push('fox');
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
