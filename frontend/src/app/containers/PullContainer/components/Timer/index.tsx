@@ -50,10 +50,11 @@ export function Timer({ endTime }: Props) {
 }
 
 const Div = styled.div`
-  font-family: 'Lato Light';
+  font-family: Lato;
   height: 210px;
   width: 40%;
   min-width: 360px;
+  font-weight: 300;
   ${mediaQueries.lessThan('medium')`
     width: 100%;
   `}

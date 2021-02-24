@@ -3,14 +3,14 @@
  * PredictModal
  *
  */
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-modal';
 import { Icon } from '../../../../components/Icon';
 import moment from 'moment';
 import { TotemsData } from '../../../../../types/constants';
 import { Center } from '../../../../components/blocks';
-import { ChartWithBet } from '../../../../components/ChartWithBet';
+import { GraphWithBet } from '../../../../components/GraphWithBet';
 import {
   Block,
   Bottom,
@@ -28,31 +28,69 @@ import {
   Top,
   TotemWrapper,
 } from './components';
+import { GraphicData } from '../../types';
+import { fromEvent } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 interface Props {
+  endTime: number;
   isOpen: boolean;
   close: () => void;
   totem: string;
-  isMobile: boolean;
+  initBet: number;
   makeBet: (bitcoinValue: number, betValue: number) => void;
+  graphicsData: GraphicData[];
+  getGraphicsData: () => void;
 }
 
 export const PredictModal = memo(
-  ({ isOpen, isMobile, totem, close, makeBet }: Props) => {
+  ({
+    endTime,
+    isOpen,
+    initBet,
+    totem,
+    close,
+    makeBet,
+    graphicsData,
+    getGraphicsData,
+  }: Props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { t, i18n } = useTranslation();
-    const startValue = 32000;
+    let startValue = 32000;
     const initBetValue = 10000;
     const [bitcoinValue, setBitcoinValue] = useState(startValue);
     const [isActivePercent, setIsActivePercent] = useState(50);
-    const [betValue, setBetValue] = useState(
-      initBetValue ? (initBetValue * 50) / 100 : 0,
-    );
+    const [betValue, setBetValue] = useState((initBet * 50) / 100);
     const [betError, setBetError] = useState('');
     const [bitcoinError, setBitcoinError] = useState('');
+    const checkIsMobile = value => value < 600;
+    const [isMobile, setIsMobile] = useState(checkIsMobile(window.innerWidth));
+    const [customStyles, setCustomStyles] = useState(setModalStyle(isMobile));
+    const subscribe = fromEvent(window, 'resize')
+      .pipe(
+        map((e: any) => e.currentTarget.innerWidth),
+        filter(width => isMobile !== checkIsMobile(width)),
+      )
+      .subscribe(data => {
+        setIsMobile(checkIsMobile(data));
+        setCustomStyles(setModalStyle(isMobile));
+      });
+    if (!graphicsData?.length) {
+      getGraphicsData();
+    }
+
+    useEffect(() => {
+      if (graphicsData.length) {
+        setBitcoinValue(
+          Math.round(+graphicsData[graphicsData.length - 1].close),
+        );
+      }
+      return () => subscribe.unsubscribe();
+    }, [graphicsData, totem]);
+
     const changeBetValue = (value: number) => {
       setIsActivePercent(value);
-      setBetValue((initBetValue * value) / 100);
+      setBetValue(Math.ceil((initBet * value) / 100));
     };
     const makeStake = () => {
       if (betValue > initBetValue) {
@@ -66,52 +104,16 @@ export const PredictModal = memo(
       makeBet(bitcoinValue, betValue);
     };
 
-    let styles: any;
-    let customStyles = {
-      overlay: {},
-      content: {
-        width: 800,
-        height: 520,
-        border: 0,
-        padding: 0,
-      },
-    };
-    if (isMobile) {
-      styles = {
-        overlay: { backgroundColor: 'rgba(0, 0, 0, 0)' },
-        content: {
-          width: '100%',
-          height: '100vh',
-          top: 0,
-          left: 0,
-        },
-      };
-    } else {
-      styles = {
-        overlay: { backgroundColor: 'rgba(0, 0, 0, .4)' },
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-        },
-      };
-    }
-    customStyles = {
-      overlay: { ...customStyles.overlay, ...styles.overlay },
-      content: { ...customStyles.content, ...styles.content },
-    };
     return (
       <Modal
         isOpen={isOpen}
         shouldCloseOnOverlayClick={true}
         style={customStyles}
+        ariaHideApp={false}
       >
         <ModalHeader background={TotemsData[totem].color}>
           <TotemWrapper background={TotemsData[totem].color}>
-            <Icon url={`${totem}-white.svg`} height={20} width={20}></Icon>
+            <Icon url={`${totem}-white.svg`} height={20} width={20} />
           </TotemWrapper>
           <Icon
             url={`close-${isMobile ? 'grey' : 'white'}.svg`}
@@ -119,15 +121,15 @@ export const PredictModal = memo(
             width={15}
             cursor={'pointer'}
             onClick={close}
-          ></Icon>
+          />
         </ModalHeader>
         <Top>
           <Block align={'flex-start'}>
             <h3>{t('Your prediction')}</h3>
             <p>{t('This pool will mature at')}:</p>
             <h2>
-              {moment(new Date()).format('DD/MM/YY')} at{' '}
-              {moment(new Date()).format('HH:mm')}
+              {moment(endTime).format('DD/MM/YY')} at{' '}
+              {moment(endTime).format('HH:mm')}
             </h2>
           </Block>
           <Block align={'center'}>
@@ -173,10 +175,11 @@ export const PredictModal = memo(
         </Top>
         <Bottom>
           <Block align={'flex-start'}>
-            <ChartWithBet
+            <GraphWithBet
               totem={totem}
-              startValue={startValue}
+              startValue={bitcoinValue}
               betValue={bitcoinValue}
+              data={graphicsData}
             />
           </Block>
           <Block align={'center'}>
@@ -218,3 +221,48 @@ export const PredictModal = memo(
     );
   },
 );
+
+function setModalStyle(isMobile: boolean) {
+  let styles: any;
+
+  let customStyles = {
+    overlay: {},
+    content: {
+      width: '100%',
+      maxWidth: 800,
+      height: '100%',
+      maxHeight: 520,
+      border: 0,
+      padding: 0,
+    },
+  };
+  if (isMobile) {
+    styles = {
+      overlay: { backgroundColor: 'rgba(0, 0, 0, 0, 0.7)' },
+      content: {
+        width: '100%',
+        maxHeight: '100vh',
+        height: 'auto',
+        inset: 'auto',
+        left: 0,
+        top: 0,
+      },
+    };
+  } else {
+    styles = {
+      overlay: { backgroundColor: 'rgba(0, 0, 0, 0.7)' },
+      content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+      },
+    };
+  }
+  return {
+    overlay: { ...customStyles.overlay, ...styles.overlay },
+    content: { ...customStyles.content, ...styles.content },
+  };
+}

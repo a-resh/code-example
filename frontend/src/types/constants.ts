@@ -14,6 +14,7 @@ export const TotemsData = {
     color: '#FF6600',
     message: '15 days',
     maxPoolSize: 90000,
+    days: 15,
   },
   WOLF: {
     id: 2,
@@ -22,6 +23,7 @@ export const TotemsData = {
     color: '#455461',
     message: '30 days',
     maxPoolSize: 110000,
+    days: 30,
   },
   OWL: {
     id: 3,
@@ -32,6 +34,7 @@ export const TotemsData = {
     color: '#739BA2',
     message: '45 days',
     maxPoolSize: 125000,
+    days: 45,
   },
   USER: {
     name: 'My Account',

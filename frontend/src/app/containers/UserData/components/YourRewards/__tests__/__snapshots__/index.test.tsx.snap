@@ -1,0 +1,627 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<YourReward  /> should match snapshot 1`] = `
+.c8 {
+  width: 15px;
+  height: 15px;
+  background: center no-repeat url('assets/images/wolf-white.svg');
+}
+
+.c11 {
+  width: 15px;
+  height: 15px;
+  background: center no-repeat url('assets/images/fox-white.svg');
+}
+
+.c0 {
+  width: 100%;
+  color: white;
+  font-size: 8px;
+}
+
+.c0 h1 {
+  font-weight: 100;
+  font-size: 27px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.c1 p {
+  opacity: 0.4;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  height: 25px;
+  background-color: #455461;
+  margin-bottom: 5px;
+  font-weight: bold;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  height: 25px;
+  background-color: #FF6600;
+  margin-bottom: 5px;
+  font-weight: bold;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 40%;
+  padding: 0 0 0 5px;
+}
+
+.c2 select,
+.c2 option {
+  width: calc(100% - 30px);
+  margin-left: 5px;
+  background-color: #272e38;
+  border: none;
+  color: white;
+  padding: 0 5px;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10%;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10%;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10%;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #739ba2;
+  color: #272E38;
+  width: 90%;
+  height: 70%;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #3B424B;
+}
+
+.c9 h3 {
+  font-size: 13px;
+  margin: 0;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ff671f;
+  color: white;
+  width: 90%;
+  height: 70%;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #FB8331;
+}
+
+.c12 h3 {
+  font-size: 13px;
+  margin: 0;
+}
+
+@media (max-width:450px) {
+  .c8 {
+    margin: 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c11 {
+    margin: 0;
+  }
+}
+
+<div
+  class="c0"
+>
+  <h1>
+    Your rewards
+  </h1>
+  <div
+    class="blocks__Row-sarv4y-0 c1"
+  >
+    <div
+      class="blocks__Row-sarv4y-0 c2"
+    >
+      <p>
+        Staking poll
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <p>
+        TOTM
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <p>
+        BTC
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <p>
+        Total
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    />
+  </div>
+  <div
+    class="blocks__Center-sarv4y-2 c7"
+  >
+    <div
+      class="blocks__Row-sarv4y-0 c2"
+    >
+      <div
+        class="c8"
+        height="15"
+        width="15"
+      />
+      <select
+        id=""
+        name="totem"
+      >
+        <option
+          value="wolf"
+        >
+          wolf
+        </option>
+        <option
+          value="wolf"
+        >
+          wolf
+        </option>
+        <option
+          value="wolf"
+        >
+          wolf
+        </option>
+      </select>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <p>
+        100
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <p>
+        0.03
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <p>
+        $300
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 AccountRewardsAndPolls__Claim-sc-1mvrx9m-12 c9"
+      >
+        <h3>
+          Claim
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Center-sarv4y-2 c10"
+  >
+    <div
+      class="blocks__Row-sarv4y-0 c2"
+    >
+      <div
+        class="c11"
+        height="15"
+        width="15"
+      />
+      <select
+        id=""
+        name="totem"
+      >
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+      </select>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <p>
+        100
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <p>
+        0.03
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <p>
+        $300
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 AccountRewardsAndPolls__Claim-sc-1mvrx9m-12 c12"
+      >
+        <h3>
+          Claim
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Center-sarv4y-2 c10"
+  >
+    <div
+      class="blocks__Row-sarv4y-0 c2"
+    >
+      <div
+        class="c11"
+        height="15"
+        width="15"
+      />
+      <select
+        id=""
+        name="totem"
+      >
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+      </select>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <p>
+        100
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <p>
+        0.03
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <p>
+        $300
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 AccountRewardsAndPolls__Claim-sc-1mvrx9m-12 c12"
+      >
+        <h3>
+          Claim
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Center-sarv4y-2 c10"
+  >
+    <div
+      class="blocks__Row-sarv4y-0 c2"
+    >
+      <div
+        class="c11"
+        height="15"
+        width="15"
+      />
+      <select
+        id=""
+        name="totem"
+      >
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+        <option
+          value="fox"
+        >
+          fox
+        </option>
+      </select>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <p>
+        100
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <p>
+        0.03
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <p>
+        $300
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 AccountRewardsAndPolls__Claim-sc-1mvrx9m-12 c12"
+      >
+        <h3>
+          Claim
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Center-sarv4y-2 c7"
+  >
+    <div
+      class="blocks__Row-sarv4y-0 c2"
+    >
+      <div
+        class="c8"
+        height="15"
+        width="15"
+      />
+      <select
+        id=""
+        name="totem"
+      >
+        <option
+          value="wolf"
+        >
+          wolf
+        </option>
+        <option
+          value="wolf"
+        >
+          wolf
+        </option>
+        <option
+          value="wolf"
+        >
+          wolf
+        </option>
+      </select>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c3"
+    >
+      <p>
+        100
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c4"
+    >
+      <p>
+        0.03
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c5"
+    >
+      <p>
+        $300
+      </p>
+    </div>
+    <div
+      class="blocks__Center-sarv4y-2 c6"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 AccountRewardsAndPolls__Claim-sc-1mvrx9m-12 c9"
+      >
+        <h3>
+          Claim
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+`;

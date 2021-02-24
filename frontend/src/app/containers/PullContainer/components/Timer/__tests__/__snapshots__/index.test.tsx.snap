@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Timer  /> should match snapshot 1`] = `
+.c0 {
+  font-family: 'Lato Light';
+  height: 210px;
+  width: 40%;
+  min-width: 360px;
+}
+
+.c1 {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 70px;
+  color: #ffffff;
+}
+
+@media (max-width:800px) {
+  .c0 {
+    width: 100%;
+  }
+}
+
+@media (max-width:450px) {
+  .c0 {
+    height: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 20px;
+    min-width: auto;
+  }
+}
+
+@media (max-width:450px) {
+  .c1 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width:450px) {
+  .c2 {
+    font-size: 45px;
+  }
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="c1"
+  >
+    _NOT_TRANSLATED_
+    :
+  </div>
+  <div
+    class="blocks__Center-sarv4y-2 c2"
+  >
+    0:59:59
+  </div>
+</div>
+`;

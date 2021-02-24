@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> should render and match the snapshot 1`] = `
+<BrowserRouter>
+  <Helmet
+    defaultTitle="Totem Defy"
+    defer={true}
+    encodeSpecialCharacters={true}
+    htmlAttributes={
+      Object {
+        "lang": undefined,
+      }
+    }
+    titleTemplate="Totem Defy"
+  >
+    <meta
+      content="Totem"
+      name="description"
+    />
+  </Helmet>
+  <Header />
+  <Unknown>
+    <Memo />
+    <Memo>
+      <Switch>
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/"
+        />
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/fox"
+        />
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/wolf"
+        />
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/owl"
+        />
+        <Route
+          component={[Function]}
+          exact={true}
+          path="/user"
+        />
+        <Route
+          component={[Function]}
+        />
+      </Switch>
+    </Memo>
+  </Unknown>
+  <Memo(GlobalStyleComponent) />
+</BrowserRouter>
+`;

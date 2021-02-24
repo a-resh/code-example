@@ -2,7 +2,6 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 
 import { PredictModal } from '../index';
-import { Totems } from '../../../../../../types/enums';
 
 describe('<PredictModal  />', () => {
   it('should match snapshot', () => {
@@ -11,7 +10,10 @@ describe('<PredictModal  />', () => {
         close={() => {}}
         totem={'fox'}
         isOpen={true}
-        isMobile={true}
+        getGraphicsData={() => {}}
+        graphicsData={[]}
+        endTime={1}
+        initBet={32000}
         makeBet={() => {}}
       />,
     );

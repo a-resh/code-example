@@ -10,13 +10,13 @@ import { messages } from './messages';
 import { mediaQueries, TotemsData } from '../../../../../types/constants';
 import { Column, Row } from '../../../../components/blocks';
 import { TotemBackground } from '../../../../../types/interfaces';
-import { Chart } from '../../../../components/Chart';
 
 interface Props {
   totem: string;
+  allPayouts: number;
 }
 
-export function Reward({ totem }: Props) {
+export function Reward({ totem, allPayouts }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
@@ -58,7 +58,7 @@ export function Reward({ totem }: Props) {
       </Top>
       <Bottom background={TotemsData[totem].color}>
         <p>{t(...messages.totalDistributionToCommunity)}:</p>
-        <h4>$ 1,856,566,875</h4>
+        <h4>$ {allPayouts}</h4>
       </Bottom>
     </Div>
   );
@@ -135,15 +135,14 @@ const Bottom = styled(Row)<TotemBackground>`
     width: 40%;
     font-size: 18px;
     text-align: right;
-    padding-right: 10px;
     font-weight: 300;
   }
 
   h4 {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 26px;
     margin: 0;
-    font-family: 'Lato Light';
+    font-family: Lato;
   }
 
   ${mediaQueries.lessThan('small')`

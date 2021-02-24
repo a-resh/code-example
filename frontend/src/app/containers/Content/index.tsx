@@ -8,13 +8,16 @@ import React, { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
-import { useInjectReducer } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { contentActions, reducer, sliceKey } from './slice';
 import { Center } from '../../components/blocks';
-import { mediaQueries } from '../../../types/constants';
+import { mediaQueries, TotemsData } from '../../../types/constants';
 import { ConnectButton } from '../../components/ConnectButton';
-import { userSelector } from '../Wrapper/selectors';
+import { activePageSelector, userSelector } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
+import { contentSaga } from './saga';
+import { ConnectMetamaskModal } from './components/ConnectMetamaskModal';
+import { showConMetamaskModalSelector } from './selectors';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -22,9 +25,16 @@ interface Props {
 
 export const Content = memo(({ children }: Props) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
+  useInjectSaga({ key: sliceKey, saga: contentSaga });
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
+  let totem = useSelector(activePageSelector);
+  if (!TotemsData[totem]) {
+    totem = 'FOX';
+  }
+  const isShowConnectMetamaskModal = useSelector(showConMetamaskModalSelector);
   const { setUserAddress } = wrapperActions;
+  const { showConnectMetamaskModal } = contentActions;
 
   return (
     <>
@@ -36,6 +46,11 @@ export const Content = memo(({ children }: Props) => {
             onConnectWallet={() => dispatch(setUserAddress(false))}
           />
         </LoginButtonWrapper>
+        <ConnectMetamaskModal
+          isOpen={isShowConnectMetamaskModal}
+          close={() => dispatch(showConnectMetamaskModal())}
+          totem={totem}
+        />
       </Div>
     </>
   );
