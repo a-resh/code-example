@@ -3,58 +3,78 @@ const router = express.Router();
 const USERS = require('../data/users');
 const sigUtil = require('eth-sig-util');
 const createNewToken = require('../utils/jwt');
+const uniqid = require('uniqid');
 
-router.get('/', (req, res, next) => {
+// db
+const User = require('../models/user');
+
+router.get('/', async (req, res, next) => {
+  const publicAddress = req.query.publicAddress;
   let code = 200;
   let responseObj = {};
-  let user = USERS.filter((item) => item.id === req.query.publicAddress);
 
-  if (user.length === 0) {
-    responseObj = {
-      Error: 'User not found',
-    };
-    code = 404;
-  } else {
-    let respNonce = user[0].nonce;
-    if (respNonce === '' || respNonce === undefined) {
-      respNonce = user[0].id + Date.now();
-      // set user nonce
+  try {
+    let user = await User.findOne({ publicAddress: publicAddress });
+    if (user) {
+      responseObj = {
+        nonce: user.nonce,
+      };
+    } else {
+      const id = uniqid();
+      const accessToken = createNewToken(id, publicAddress);
+      const nonce = Date.now();
+
+      const newUser = new User({
+        id,
+        publicAddress,
+        nonce,
+        accessToken,
+      });
+
+      await newUser.save();
+
+      responseObj = {
+        nonce: newUser.nonce,
+      };
     }
-    responseObj = {
-      nonce: respNonce,
-    };
+
+    res.status(code).json(responseObj);
+  } catch (error) {
+    console.log('Auth GET error', error);
   }
-  res.status(code).json(responseObj);
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
   const { signature, publicAddress } = req.body;
   if (!signature || !publicAddress)
     return res
       .status(400)
       .send({ error: 'Request should have signature and publicAddress' });
 
-  let user = USERS.filter((item) => item.id === publicAddress);
+  try {
+    let user = await User.findOne({ publicAddress });
+    if (user) {
+      const msgBufferHex = Buffer.from(signature, 'utf8').toString('hex');
+      const address = sigUtil.recoverPersonalSignature({
+        data: msgBufferHex,
+        sig: signature,
+      });
+      if (address.toLowerCase() === publicAddress.toLowerCase()) {
+        const token = createNewToken(user.publicAddress, publicAddress);
 
-  if (user.length === 0) {
-    res.status(401).send({
-      error: `User with publicAddress ${publicAddress} is not found in database`,
-    });
-  } else {
-    const msgBufferHex = Buffer.from(signature, 'utf8').toString('hex');
-    const address = sigUtil.recoverPersonalSignature({
-      data: msgBufferHex,
-      sig: signature,
-    });
-    if (address.toLowerCase() === publicAddress.toLowerCase()) {
-      const token = createNewToken(user[0].id, publicAddress);
-
-      res.status(200).send({ auth: true, token: token });
+        res.status(200).send({ auth: true, token: token });
+      } else {
+        res.status(401).send({
+          error: 'Signature verification failed',
+        });
+      }
     } else {
       res.status(401).send({
-        error: 'Signature verification failed',
+        error: `User with publicAddress ${publicAddress} is not found in database`,
       });
     }
+  } catch (error) {
+    console.log('Auth POST error: ', JSON.stringify(error));
   }
 });
 
