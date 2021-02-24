@@ -13,6 +13,7 @@ import { Row } from '../../components/blocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
+import { isShowModalSelector } from '../PullContainer/selectors';
 
 interface Props {}
 
@@ -20,8 +21,9 @@ export function Header({}: Props) {
   const { setUserAddress } = wrapperActions;
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
+  const isShowModal = useSelector(isShowModalSelector);
   return (
-    <Div>
+    <Div hidden={isShowModal}>
       <MenuWrapper>
         <Menu isLogin={!!user.id} isMobile={true} />
       </MenuWrapper>
@@ -35,13 +37,23 @@ export function Header({}: Props) {
         />
       </DesktopButton>
       <MobileButton onClick={() => {}}>
-        <Icon url={'uniswap-black.svg'} width={15} height={15} />
+        <Icon
+          url={'uniswap-black.svg'}
+          width={15}
+          height={15}
+          onClick={() =>
+            window.open(
+              `https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13`,
+              '_blank',
+            )
+          }
+        />
       </MobileButton>
     </Div>
   );
 }
 
-const Div = styled(Row)`
+const Div = styled(Row)<{ hidden?: boolean }>`
   width: 100%;
   height: 80px;
   background-color: #272e38;
@@ -59,6 +71,9 @@ const Div = styled(Row)`
     padding-left: calc(50% - 45px);
     height: 55px;
   `}
+  @media screen and (max-width: 450px) {
+    display: ${props => (props.hidden ? 'none' : 'flex')};
+  }
 `;
 const MenuWrapper = styled.div`
   height: 100%;

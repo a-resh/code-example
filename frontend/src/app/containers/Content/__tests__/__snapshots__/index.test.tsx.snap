@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Content /> should match the snapshot 1`] = `
+.c3 {
+  margin: 0 0 0 20px;
+  width: 25px;
+  height: 25px;
+  background: center no-repeat url('assets/images/wallet-white.svg');
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 210px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #272e38;
+  background-color: #c4dbe0;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.c2:hover {
+  background-color: #739ba2;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: calc(100vw - 200px);
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.c1 {
+  display: block;
+}
+
+@media (max-width:450px) {
+  .c3 {
+    margin: 0;
+  }
+}
+
+@media (max-width:800px) {
+  .c2 {
+    width: 100px;
+  }
+
+  .c2 div {
+    margin: 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c2 {
+    position: fixed;
+    height: 45px;
+    width: 45px;
+    top: 85%;
+    left: 80%;
+    border-radius: 50%;
+    width: 45px;
+    background-color: #739ba2;
+  }
+}
+
+@media (min-width:1100px) {
+  .c0 {
+    width: calc(100% - 200px);
+  }
+}
+
+@media (max-width:1100px) {
+  .c0 {
+    width: calc(100% - 55px);
+  }
+}
+
+@media (max-width:450px) {
+  .c0 {
+    width: 100%;
+    padding: 45px 0 0 0;
+    background-color: rgba(39,46,56,.4);
+  }
+}
+
+@media (min-width:450px) {
+  .c1 {
+    display: none;
+  }
+}
+
+<div
+  class="blocks__Center-sarv4y-2 c0"
+>
+  <div />
+  <div
+    class="c1"
+  >
+    <div
+      class="blocks__Center-sarv4y-2 c2"
+    >
+      <p>
+        _NOT_TRANSLATED_
+      </p>
+      <div
+        class="c3"
+        height="25"
+        width="25"
+      />
+    </div>
+  </div>
+</div>
+`;

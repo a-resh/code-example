@@ -1,0 +1,1282 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PullContainer /> should match the snapshot 1`] = `
+.c35 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c3 {
+  font-family: 'Lato Light';
+  height: 210px;
+  width: 40%;
+  min-width: 360px;
+}
+
+.c4 {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 70px;
+  color: #ffffff;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: #181818;
+  background-color: white;
+  cursor: pointer;
+}
+
+.c14 b {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.c30 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: #FF6600;
+  cursor: pointer;
+}
+
+.c30 b {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.c8 {
+  width: 40px;
+  height: 40px;
+  background: center no-repeat url('assets/images/fox-white.svg');
+}
+
+.c20 {
+  width: 20px;
+  height: 20px;
+  background: center no-repeat url('assets/images/FOX-white.svg');
+}
+
+.c11 {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(256,256,256,0.4);
+}
+
+.c12 {
+  width: 0%;
+  height: 100%;
+  background-color: white;
+  border-radius: 4px 0 0 4px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 210px;
+  width: 60%;
+  background-color: #FF6600;
+  max-width: 420px;
+  margin-left: 30px;
+  color: white;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  height: 70px;
+  font-size: 18px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 15px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c7 p {
+  font-size: 20px;
+}
+
+.c9 {
+  margin-bottom: 30px;
+}
+
+.c10 {
+  width: 100%;
+  padding: 0 30px;
+  text-align: center;
+}
+
+.c10 p {
+  font-size: 15px;
+}
+
+.c13 {
+  width: 100%;
+  height: 50px;
+  -webkit-align-self: end;
+  -ms-flex-item-align: end;
+  align-self: end;
+}
+
+.c17 {
+  height: 100%;
+  width: 50%;
+  margin: 0 30px 0 0;
+  color: white;
+}
+
+.c18 {
+  padding-bottom: 10px;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+.c22 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 25px;
+  font-size: 19px;
+}
+
+.c23 {
+  width: 100%;
+  height: 20px;
+}
+
+.c24 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 20px;
+  font-size: 11px;
+}
+
+.c25 {
+  margin-left: 30px;
+}
+
+.c26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 50px;
+  width: 60px;
+  height: 20px;
+  padding-top: 12px;
+}
+
+.c27 {
+  opacity: 1;
+  padding-top: 5px;
+  width: 100%;
+  background-color: #FF6600;
+  text-align: center;
+}
+
+.c27 p {
+  font-size: 21px;
+  margin: 0;
+  line-height: 60px;
+  font-weight: 700;
+}
+
+.c27 span {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: space-around;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: space-around;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+.c28 p {
+  font-weight: 300;
+}
+
+.c29 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-family: Lato;
+  margin: 0;
+  -webkit-box-pack: space-around;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: space-around;
+  justify-content: space-around;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c29 h5,
+.c29 h3,
+.c29 h4,
+.c29 h6,
+.c29 h2 {
+  margin: 0;
+}
+
+.c29 h3 {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.c29 h2 {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.c29 h5,
+.c29 h4 {
+  font-weight: 300;
+}
+
+.c29 h6 {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.c31 {
+  height: 40px;
+  font-size: 15px;
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+  color: white;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.c33 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  background-color: #FF6600;
+}
+
+.c34 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-family: Lato;
+  width: 50%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.c34 h2 {
+  font-size: 69px;
+  line-height: 69px;
+  font-weight: 100;
+  margin: 0;
+}
+
+.c34 ul {
+  padding: 0;
+}
+
+.c34 li {
+  list-style-type: none;
+  font-size: 19px;
+  text-align: right;
+  padding-left: 5px;
+}
+
+.c36 {
+  font-weight: 300;
+}
+
+.c36 li {
+  border-right: 2px solid white;
+  padding-right: 5px;
+}
+
+.c37 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: space-around;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: space-around;
+  justify-content: space-around;
+  background-color: #FF6600;
+}
+
+.c37 p,
+.c37 h4 {
+  display: block;
+}
+
+.c37 p {
+  width: 40%;
+  font-size: 18px;
+  text-align: right;
+  padding-right: 10px;
+  font-weight: 300;
+}
+
+.c37 h4 {
+  font-weight: 100;
+  font-size: 26px;
+  margin: 0;
+  font-family: 'Lato Light';
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-width: 720px;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 5px 20px 30px 20px;
+  background-color: rgba(39,46,56,0.4);
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 20px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c38 {
+  width: 100%;
+  height: 55px;
+}
+
+@media (max-width:800px) {
+  .c3 {
+    width: 100%;
+  }
+}
+
+@media (max-width:450px) {
+  .c3 {
+    height: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 20px;
+    min-width: auto;
+  }
+}
+
+@media (max-width:450px) {
+  .c4 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width:450px) {
+  .c5 {
+    font-size: 45px;
+  }
+}
+
+@media (max-width:450px) {
+  .c8 {
+    margin: 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c20 {
+    margin: 0;
+  }
+}
+
+@media (max-width:800px) {
+  .c6 {
+    min-width: 80%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c6 {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c7 {
+    height: auto;
+    display: none;
+  }
+}
+
+@media (min-width:450px) {
+  .c9 {
+    display: none;
+  }
+}
+
+@media (max-width:450px) {
+  .c10 {
+    margin-bottom: 20px;
+  }
+
+  .c10 p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width:800px) {
+  .c17 {
+    width: 100%;
+    margin: 0 0 30px 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c18 {
+    background-color: black;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width:450px) {
+  .c21 {
+    display: none;
+  }
+}
+
+@media (max-width:450px) {
+  .c22 {
+    font-size: 11px;
+    padding: 0 0 0 30px;
+  }
+
+  .c22 input {
+    width: 50px;
+  }
+
+  .c22 select,
+  .c22 input {
+    height: 15px;
+    font-size: 10px;
+  }
+}
+
+@media (min-width:450px) {
+  .c23 {
+    display: none;
+  }
+}
+
+@media (max-width:450px) {
+  .c24 {
+    padding: 0 0 0 30px;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .c27 {
+    background-color: #FF660080;
+  }
+
+  .c27 span {
+    display: none;
+  }
+
+  .c27 p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width:450px) {
+  .c29 h3 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .c29 h4 {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .c29 h6,
+  .c29 h5 {
+    font-size: 8px;
+  }
+
+  .c29 h5 {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .c29 h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width:450px) {
+  .c31 {
+    display: none;
+  }
+}
+
+@media screen and (min-width:450px) {
+  .c32 {
+    background-color: #FF6600;
+  }
+}
+
+@media (max-width:800px) {
+  .c32 {
+    width: 100%;
+  }
+}
+
+@media (max-width:450px) {
+  .c34 li {
+    font-size: 12px;
+    padding-top: 5px;
+  }
+
+  .c34 p {
+    font-size: 12px;
+  }
+
+  .c34 h1 {
+    font-size: 90px;
+    line-height: 110px;
+  }
+
+  .c34 h2 {
+    font-size: 42px;
+    line-height: 45px;
+  }
+}
+
+@media (min-width:1100px) {
+  .c36 li {
+    padding-right: 7px;
+  }
+}
+
+@media (max-width:450px) {
+  .c37 {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    background-color: rgba(39,46,56,0.4);
+  }
+
+  .c37 p,
+  .c37 h4 {
+    text-align: right;
+  }
+
+  .c37 p {
+    font-size: 12px;
+    padding: 20px 10px;
+  }
+
+  .c37 h4 {
+    font-size: 16px;
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width:800px) {
+  .c1 {
+    min-width: auto;
+    width: 100%;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+@media (max-width:450px) {
+  .c2 {
+    display: none;
+  }
+}
+
+@media (max-width:800px) {
+  .c16 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width:450px) {
+  .c16 {
+    width: 100%;
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width:800px) {
+  .c15 {
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0;
+  }
+}
+
+@media (max-width:800px) {
+  .c15 {
+    width: 100%;
+  }
+}
+
+@media (max-width:800px) {
+  .c38 {
+    display: none;
+  }
+}
+
+<div
+  class="blocks__Center-sarv4y-2 c0"
+>
+  <div
+    class="c1"
+  >
+    <div
+      class="c2"
+    >
+      <div
+        class="c3"
+      >
+        <div
+          class="c4"
+        >
+          _NOT_TRANSLATED_
+          :
+        </div>
+        <div
+          class="blocks__Center-sarv4y-2 c5"
+        >
+          1308:02:35
+        </div>
+      </div>
+    </div>
+    <div
+      class="blocks__Column-sarv4y-1 c6"
+    >
+      
+      <div
+        class="c7"
+      >
+        <div
+          class="c8"
+          height="40"
+          width="40"
+        />
+        <p>
+          Fox
+           
+          _NOT_TRANSLATED_
+        </p>
+      </div>
+      <div
+        class="c9"
+      >
+        <div
+          class="c3"
+        >
+          <div
+            class="c4"
+          >
+            _NOT_TRANSLATED_
+            :
+          </div>
+          <div
+            class="blocks__Center-sarv4y-2 c5"
+          >
+            1308:02:35
+          </div>
+        </div>
+      </div>
+      <div
+        class="c10"
+      >
+        <p>
+          <b>
+            _NOT_TRANSLATED_
+             
+            0
+            % 
+            _NOT_TRANSLATED_
+          </b>
+        </p>
+        <div
+          class="c11"
+        >
+          <div
+            class="c12"
+            fill="0"
+          />
+        </div>
+      </div>
+      <div
+        class="c13"
+      >
+        <div
+          class="blocks__Center-sarv4y-2 c14"
+          color="#181818"
+        >
+          <b>
+            _NOT_TRANSLATED_
+          </b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="blocks__Column-sarv4y-1 c15"
+  >
+    <div
+      class="c16"
+    >
+      <div
+        class="c17"
+      >
+        <div
+          class="c18"
+        >
+          <div
+            class="blocks__Center-sarv4y-2 c19"
+          >
+            <div
+              class="c20 c21"
+              height="20"
+              width="20"
+            />
+          </div>
+          <div
+            class="c22"
+          >
+            <p>
+              _NOT_TRANSLATED_
+            </p>
+            <input
+              class="calculator-input-number"
+              type="number"
+              value="1000"
+            />
+            <p>
+               TOTM
+            </p>
+          </div>
+          <div
+            class="c22"
+          >
+            <p>
+              _NOT_TRANSLATED_
+            </p>
+            <select
+              class="calculator-select-place"
+            >
+              <option
+                value="1"
+              >
+                1st
+              </option>
+              <option
+                value="2"
+              >
+                2nd
+              </option>
+              <option
+                value="3"
+              >
+                4-10th
+              </option>
+              <option
+                value="4"
+              >
+                11-25th
+              </option>
+            </select>
+            <p>
+              _NOT_TRANSLATED_
+              ...
+            </p>
+          </div>
+          <div
+            class="c23"
+          />
+          <div
+            class="c24"
+          >
+            <p>
+              _NOT_TRANSLATED_
+            </p>
+            <div
+              class="c25"
+            >
+              <span
+                class="MuiSwitch-root WithStyles(ForwardRef(Switch))-root-23"
+              >
+                <span
+                  aria-disabled="false"
+                  class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-6 MuiSwitch-switchBase WithStyles(ForwardRef(Switch))-switchBase-24 MuiSwitch-colorSecondary PrivateSwitchBase-checked-7 Mui-checked WithStyles(ForwardRef(Switch))-checked-27"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <input
+                      checked=""
+                      class="PrivateSwitchBase-input-9 MuiSwitch-input"
+                      name="checked"
+                      type="checkbox"
+                      value=""
+                    />
+                    <span
+                      class="MuiSwitch-thumb WithStyles(ForwardRef(Switch))-thumb-25"
+                    />
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </span>
+                <span
+                  class="MuiSwitch-track WithStyles(ForwardRef(Switch))-track-26"
+                />
+              </span>
+            </div>
+          </div>
+          <div
+            class="c24"
+          >
+            <p>
+              _NOT_TRANSLATED_
+            </p>
+            <div
+              class="blocks__Center-sarv4y-2 c26"
+            >
+              <div
+                class="makeStyles-root-10"
+              >
+                <span
+                  class="MuiSlider-root WithStyles(ForwardRef(Slider))-root-28 MuiSlider-colorPrimary"
+                >
+                  <span
+                    class="MuiSlider-rail WithStyles(ForwardRef(Slider))-rail-33"
+                  />
+                  <span
+                    class="MuiSlider-track WithStyles(ForwardRef(Slider))-track-32"
+                    style="left: 0%; width: 50%;"
+                  />
+                  <input
+                    type="hidden"
+                    value="50"
+                  />
+                  <span
+                    aria-label="slider"
+                    aria-orientation="horizontal"
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="50"
+                    class="MuiSlider-thumb WithStyles(ForwardRef(Slider))-thumb-29 MuiSlider-thumbColorPrimary PrivateValueLabel-thumb-18"
+                    data-index="0"
+                    role="slider"
+                    style="left: 50%;"
+                    tabindex="0"
+                  >
+                    <span
+                      class="PrivateValueLabel-offset-20 MuiSlider-valueLabel WithStyles(ForwardRef(Slider))-valueLabel-31"
+                    >
+                      <span
+                        class="PrivateValueLabel-circle-21"
+                      >
+                        <span
+                          class="PrivateValueLabel-label-22"
+                        >
+                          50
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c27"
+        >
+          <span>
+            _NOT_TRANSLATED_
+            :
+          </span>
+          <div
+            class="c28"
+          >
+            <div
+              class="blocks__Column-sarv4y-1 c29"
+            >
+              <h5>
+                BTC
+              </h5>
+              <h3>
+                0.23833
+              </h3>
+              <h6>
+                (USD 0.16)
+              </h6>
+            </div>
+            <p>
+              &
+            </p>
+            <div
+              class="blocks__Column-sarv4y-1 c29"
+            >
+              <h5>
+                TOTM
+              </h5>
+              <h3>
+                1300
+              </h3>
+              <h6>
+                (USD 0.16)
+              </h6>
+            </div>
+          </div>
+          <div
+            class="blocks__Column-sarv4y-1 c29"
+          >
+            <h4>
+              _NOT_TRANSLATED_
+              :
+            </h4>
+            <h2>
+              $ 
+              11440
+            </h2>
+          </div>
+          <div
+            class="blocks__Center-sarv4y-2 c30 c31"
+            color="white"
+          >
+            <b>
+              _NOT_TRANSLATED_
+            </b>
+          </div>
+        </div>
+      </div>
+      <div
+        class="blocks__Column-sarv4y-1 c32"
+      >
+        <div
+          class="c33"
+        >
+          <div
+            class="blocks__Column-sarv4y-1 c34"
+          >
+            <p>
+              _NOT_TRANSLATED_
+              :
+            </p>
+            <div
+              class="c35"
+            >
+              <div
+                class="c36"
+              >
+                <ul>
+                  <li>
+                    1st
+                  </li>
+                  <li>
+                    2nd
+                  </li>
+                  <li>
+                    4th - 10th
+                  </li>
+                  <li>
+                    11th - 25th
+                  </li>
+                </ul>
+              </div>
+              <ul>
+                <li>
+                  <b>
+                    30%
+                  </b>
+                </li>
+                <li>
+                  <b>
+                    20%
+                  </b>
+                </li>
+                <li>
+                  <b>
+                    7.5%
+                  </b>
+                </li>
+                <li>
+                  <b>
+                    7.5%
+                  </b>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c37"
+        >
+          <p>
+            _NOT_TRANSLATED_
+            :
+          </p>
+          <h4>
+            $ 1,856,566,875
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c38"
+    >
+      <div
+        class="blocks__Center-sarv4y-2 c30"
+        color="white"
+      >
+        <b>
+          _NOT_TRANSLATED_
+        </b>
+      </div>
+    </div>
+  </div>
+</div>
+`;

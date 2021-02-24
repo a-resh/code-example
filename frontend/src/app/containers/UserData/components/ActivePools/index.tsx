@@ -68,7 +68,7 @@ const Div = styled(Column)`
 
   h1,
   h2 {
-    font-weight: 100;
+    font-weight: 300;
   }
   h1 {
     font-size: 27px;

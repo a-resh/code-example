@@ -5,13 +5,16 @@
  */
 
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { pullContainerActions, reducer, sliceKey } from './slice';
 import {
+  allPayoutsSelector,
   drawDataSelector,
+  graphicsDataSelector,
   isShowModalSelector,
   pollFillSelector,
 } from './selectors';
@@ -26,9 +29,14 @@ import { mediaQueries, TotemsData } from '../../../types/constants';
 import { fromEvent } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Center, Column, Row } from '../../components/blocks';
-import { useEffect, useState } from 'react';
-import { activePageSelector, userSelector } from '../Wrapper/selectors';
+import {
+  activePageSelector,
+  btcLastPriceSelector,
+  tokenPriceSelector,
+  userSelector,
+} from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
+import { ConnectMetamaskModal } from '../Content/components/ConnectMetamaskModal';
 
 export function PullContainer() {
   const dispatch = useDispatch();
@@ -39,29 +47,30 @@ export function PullContainer() {
   const poolFill = useSelector(pollFillSelector);
   const user = useSelector(userSelector);
   const isShowModal = useSelector(isShowModalSelector);
-  const { makePredict, getData, showModal } = pullContainerActions;
+  const graphicsData = useSelector(graphicsDataSelector);
+  const btcLastPrice = useSelector(btcLastPriceSelector);
+  const allPayouts = useSelector(allPayoutsSelector);
+  const tokenPrice = useSelector(tokenPriceSelector);
+  const {
+    makePredict,
+    getData,
+    showModal,
+    getGraphicsData,
+  } = pullContainerActions;
   const { setUserAddress } = wrapperActions;
   useEffect(() => {
     dispatch(getData());
   }, []);
-  const checkIsMobile = value => value < 450;
-  let isMobile = checkIsMobile(window.innerWidth);
-  fromEvent(window, 'resize')
-    .pipe(
-      map((e: any) => e.currentTarget.innerWidth),
-      filter(width => isMobile !== checkIsMobile(width)),
-    )
-    .subscribe(data => (isMobile = checkIsMobile(data)));
   const makePredictFromModal = (bitcoinPrice: number, stakeValue: number) => {
     dispatch(showModal());
-    dispatch(makePredict({ bitcoinPrice, stakeValue, user: 1 }));
+    dispatch(makePredict({ bitcoinPrice, stakeValue, user: user.id }));
   };
   return (
     <>
       <Div>
         <Top>
           <TimerWrapper>
-            <Timer endTime={drawData?.endTime} />
+            <Timer endTime={+drawData?.endTime} />
           </TimerWrapper>
           <PoolInfo
             totem={totem}
@@ -69,7 +78,7 @@ export function PullContainer() {
               user.id ? dispatch(showModal()) : dispatch(setUserAddress(true))
             }
             poolFill={poolFill}
-            endTime={drawData?.endTime}
+            endTime={+drawData?.endTime}
           />
         </Top>
         <Bottom>
@@ -77,9 +86,10 @@ export function PullContainer() {
             <Calculator
               showModal={() => dispatch(showModal())}
               totem={totem}
-              currency={15000}
+              tokenPrice={8.8}
+              btcLastPrice={btcLastPrice}
             />
-            <Reward totem={totem} />
+            <Reward totem={totem} allPayouts={allPayouts} />
           </BottomContent>
           <ButtonWrapper>
             <CtaButton
@@ -92,8 +102,11 @@ export function PullContainer() {
           </ButtonWrapper>
         </Bottom>
         <PredictModal
-          isMobile={isMobile}
+          endTime={+drawData?.endTime || new Date().getTime()}
           isOpen={isShowModal}
+          initBet={user.balance}
+          graphicsData={graphicsData}
+          getGraphicsData={() => dispatch(getGraphicsData())}
           close={() => dispatch(showModal())}
           totem={totem}
           makeBet={makePredictFromModal}
@@ -128,6 +141,7 @@ const TimerWrapper = styled.div`
 `;
 const BottomContent = styled(Row)`
   padding: 5px 20px 30px 20px;
+  width: 100%;
   background-color: rgba(39, 46, 56, 0.4);
   ${mediaQueries.lessThan('medium')`
     flex-direction: column;
@@ -143,6 +157,8 @@ const BottomContent = styled(Row)`
 
 const Bottom = styled(Column)`
   margin-top: 20px;
+  width: 100%;
+  max-width: 820px;
   align-items: center;
   ${mediaQueries.lessThan('medium')`
     align-items: center;

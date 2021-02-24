@@ -4,7 +4,7 @@
  *
  */
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
@@ -18,17 +18,48 @@ import { TotemBackground } from '../../../../../types/interfaces';
 
 interface Props {
   showModal: () => void;
-  currency?: number;
+  btcLastPrice: number;
+  tokenPrice: number;
   totem: string;
 }
 
-export function Calculator({ showModal, currency, totem }: Props) {
+export function Calculator({
+  showModal,
+  btcLastPrice,
+  tokenPrice,
+  totem,
+}: Props) {
   const [selectValue, setSelectValue] = useState(1);
   const [inputValue, setInputValue] = useState(1000);
   const [checkBoxValue, setCheckBoxValue] = useState(true);
   const [sliderValue, setSliderValue] = useState(50);
-  const onChangeSelect = e => setSelectValue(e.target.value);
-  const onChangeInput = e => setInputValue(e.target.value);
+  const [btcValue, setBtcValue] = useState(0);
+  const [tokensValue, setTokensValue] = useState(0);
+  const [dollarsValue, setDollarsValue] = useState(0);
+  const selectValues = {
+    1: 30,
+    2: 20,
+    3: 7.5,
+    4: 7.5,
+  };
+  const calculate = () => {
+    const tokens =
+      +inputValue + +((inputValue * selectValues[+selectValue]) / 100);
+    setTokensValue(Math.round(tokens));
+    setDollarsValue(Math.round(tokens * tokenPrice));
+    setBtcValue(+((tokens * tokenPrice) / btcLastPrice).toFixed(5));
+  };
+  useEffect(() => {
+    calculate();
+  });
+  const onChangeSelect = e => {
+    calculate();
+    setSelectValue(e.target.value);
+  };
+  const onChangeInput = e => {
+    calculate();
+    setInputValue(e.target.value);
+  };
   const onChangeCheckBox = (e: boolean) => setCheckBoxValue(e);
   const onChangeSlider = (e: number) => setSliderValue(e);
 
@@ -60,7 +91,8 @@ export function Calculator({ showModal, currency, totem }: Props) {
           >
             <option value="1">1st</option>
             <option value="2">2nd</option>
-            <option value="3">3th</option>
+            <option value="3">4-10th</option>
+            <option value="4">11-25th</option>
           </select>
           <p>{t(...messages.place)}...</p>
         </RowCalc>
@@ -91,19 +123,19 @@ export function Calculator({ showModal, currency, totem }: Props) {
         <CurrencyBlock>
           <AmountCurrency>
             <h5>BTC</h5>
-            <h3>0.135,1347</h3>
+            <h3>{btcValue}</h3>
             <h6>(USD 0.16)</h6>
           </AmountCurrency>
           <p>&</p>
           <AmountCurrency>
             <h5>TOTM</h5>
-            <h3>100.056,56</h3>
+            <h3>{tokensValue}</h3>
             <h6>(USD 0.16)</h6>
           </AmountCurrency>
         </CurrencyBlock>
         <AmountCurrency>
           <h4>{t(...messages.totalReward)}:</h4>
-          <h2>$ 1500.20</h2>
+          <h2>$ {dollarsValue}</h2>
         </AmountCurrency>
         <ButtonWrapper
           color={'white'}

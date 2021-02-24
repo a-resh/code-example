@@ -7,15 +7,24 @@ import { useInjectReducer } from 'redux-injectors';
 export const initialState: ContainerState = {
   isShowModal: false,
   drawData: [],
+  graphicsData: [],
+  allPayouts: 1568522,
 };
 
 const pullContainerSlice = createSlice({
   name: 'pullContainer',
   initialState,
   reducers: {
+    getGraphicsData() {},
+    getGraphicsDataSuccess(state, action: PayloadAction<any>) {
+      state.graphicsData = action.payload;
+    },
     getData() {},
-    getDataSuccess(state, action: PayloadAction<any[]>) {
+    getDataDrawSuccess(state, action: PayloadAction<any[]>) {
       state.drawData = action.payload;
+    },
+    getAllPayoutSuccess(state, action: PayloadAction<number>) {
+      state.allPayouts = action.payload;
     },
     showModal(state) {
       state.isShowModal = !state.isShowModal;

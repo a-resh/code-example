@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: inherit;
   }
   h1, h2 {
-    font-family: 'Lato Light';
+    font-family: 'Lato';
   }
   .calculator-input-number {
     width: 100px;
@@ -44,5 +44,13 @@ export const GlobalStyle = createGlobalStyle`
   
   .chart {
     cursor: url("/assets/images/chart-cursor.svg"), pointer;
+  }
+  .MuiCircularProgress-colorPrimary {
+    color: #739ba2 !important;
+  }
+  .MuiCircularProgress-root {
+    left: 43%;
+    position: absolute;
+    top: 44vh;
   }
 `;

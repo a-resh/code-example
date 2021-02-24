@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginButton  /> should match snapshot 1`] = `
+.c1 {
+  margin: 0 0 0 20px;
+  width: 25px;
+  height: 25px;
+  background: center no-repeat url('assets/images/wallet-white.svg');
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  width: 210px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #272e38;
+  background-color: #c4dbe0;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.c0:hover {
+  background-color: #739ba2;
+}
+
+@media (max-width:450px) {
+  .c1 {
+    margin: 0;
+  }
+}
+
+@media (max-width:800px) {
+  .c0 {
+    width: 100px;
+  }
+
+  .c0 div {
+    margin: 0;
+  }
+}
+
+@media (max-width:450px) {
+  .c0 {
+    position: fixed;
+    height: 45px;
+    width: 45px;
+    top: 85%;
+    left: 80%;
+    border-radius: 50%;
+    width: 45px;
+    background-color: #739ba2;
+  }
+}
+
+<div
+  class="blocks__Center-sarv4y-2 c0"
+>
+  <p>
+    _NOT_TRANSLATED_
+  </p>
+  <div
+    class="c1"
+    height="25"
+    width="25"
+  />
+</div>
+`;

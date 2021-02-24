@@ -68,6 +68,9 @@ const Div = styled(Center)`
   border-radius: 50%;
   width: 45px;
   background-color: #739ba2;
+  p {
+    display: none;
+  }
 `}
   :hover {
     background-color: #739ba2;
