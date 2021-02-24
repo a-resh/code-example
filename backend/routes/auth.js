@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const USERS = require('../data/users');
 const sigUtil = require('eth-sig-util');
-const jwt = require('jsonwebtoken');
-const jwtConfig = require('../config/jwt');
+const createNewToken = require('../utils/jwt');
 
 router.get('/', (req, res, next) => {
   let code = 200;
@@ -48,19 +47,8 @@ router.post('/', (req, res, next) => {
       sig: signature,
     });
     if (address.toLowerCase() === publicAddress.toLowerCase()) {
-      const token = jwt.sign(
-        {
-          payload: {
-            id: user[0].id,
-            publicAddress,
-          },
-        },
-        jwtConfig.secret,
-        {
-          algorithm: jwtConfig.algorithms[0],
-          expiresIn: 86400, // expires in 24 hours
-        }
-      );
+      const token = createNewToken(user[0].id, publicAddress);
+
       res.status(200).send({ auth: true, token: token });
     } else {
       res.status(401).send({

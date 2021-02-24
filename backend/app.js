@@ -13,6 +13,7 @@ const drawRouter = require('./routes/draws');
 const lastPriceRouter = require('./routes/lastPrice');
 const payoutsRouter = require('./routes/payouts');
 const btcDataRouter = require('./routes/btcData');
+const connectDb = require('./config/db');
 
 // constants
 const rootRoute = '/api';
@@ -49,8 +50,14 @@ app.use(`${rootRoute}/btcData`, btcDataRouter);
 // Summary amout of payouts
 app.use(`${rootRoute}/allPayouts`, payoutsRouter);
 
-const port = 5000;
+const port = 5000 || process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
+connectDb()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server started on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log('Mongo error: ', JSON.stringify(err));
+  });

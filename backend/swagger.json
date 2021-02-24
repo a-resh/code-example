@@ -109,6 +109,33 @@
         }
       }
     },
+    "/user/register" : {
+      "post" : {
+        "description": "Create new user of Totem project",
+        "parameters": [{
+          "name": "publicAddress",
+          "in": "body",
+          "description": "ETH adress of new user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "btcAddress",
+          "in": "body",
+          "description": "BTC adress of new user",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "User created"
+          },
+          "404": {
+            "description": "Can't create Totem user "
+          }
+        }
+      }
+    },
     "/user/payStakingBonus" : {
       "post" : {
         "description": "Create payment of Totem tokens for staked amout",
