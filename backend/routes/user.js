@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const USERS = require('../data/users');
 const createNewToken = require('../utils/jwt');
+const uniqid = require('uniqid');
 
 // db
 const User = require('../models/user');
@@ -26,6 +27,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   console.log('request: ', req.body);
+  const id = uniqid();
   const publicAddress = req.body.publicAddress;
   const btcAddress = req.body.btcAddress;
   const accessToken = createNewToken(id, publicAddress);
@@ -40,7 +42,8 @@ router.post('/register', async (req, res, next) => {
   }
 
   const newUser = new User({
-    id: publicAddress,
+    id,
+    publicAddress,
     btcAddress,
     nonce,
     accessToken,
