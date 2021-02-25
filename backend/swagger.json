@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Totem Project CRUD",
+    "description": "Totem Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for Totem project"
+    }
+  ],
+  "shemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+    ],
+  "produces": [
+  "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Returns the homepage",
+        "responses": {
+          "200": {
+            "description": "main page of project"
+          }
+        }
+      }
+    },
+    "/auth" : {
+      "get" : {
+        "description": "Return Nonce value for registered user to sign in Metatask",
+        "parameters": [{
+          "publicAddress": "publicAddress",
+          "in": "path",
+          "description": "Public Address of user from MetaMask",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Nonce value for MetaMask sign"
+          }
+        }
+      },
+      "post" : {
+        "description": "Check signature from MetaMask and return token",
+        "parameters": [
+          {
+          "publicAddress": "publicAddress",
+          "in": "path",
+          "description": "Public Address of user from MetaMask",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "signature": "signature",
+          "in": "path",
+          "description": "Signed message from MetaMask",
+          "required": true,
+          "type": "string"
+        }
+      ],
+        "responses": {
+          "200": {
+            "description": "Check sign and token generation"
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "description": "Returns list of current users in Totem project",
+        "responses": {
+          "200": {
+            "description": "list of users"
+          }
+        }
+      }
+    },
+    "/user/{id}" : {
+      "get" : {
+        "description": "Returns user bi ID in Totem project",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "ID of user to return",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "Totem user found"
+          },
+          "404": {
+            "description": "Totem user not found"
+          }
+        }
+      }
+    },
+    "/user/register" : {
+      "post" : {
+        "description": "Create new user of Totem project",
+        "parameters": [{
+          "name": "publicAddress",
+          "in": "body",
+          "description": "ETH adress of new user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "btcAddress",
+          "in": "body",
+          "description": "BTC adress of new user",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "User created"
+          },
+          "404": {
+            "description": "Can't create Totem user "
+          }
+        }
+      }
+    },
+    "/user/payStakingBonus" : {
+      "post" : {
+        "description": "Create payment of Totem tokens for staked amout",
+        "parameters": [{
+          "name": "id",
+          "in": "body",
+          "description": "ID of user to return",
+          "required": true,
+          "type": "object"
+        }],
+        "responses": {
+          "200": {
+            "description": "Payment done"
+          },
+          "404": {
+            "description": "Totem user for payment not found"
+          }
+        }
+      }
+    },
+    "/draws" : {
+      "get" : {
+        "description": "Returns list of current draws in Totem project",
+        "responses": {
+          "200": {
+            "description": "list of draws"
+          }
+        }
+      }
+    },
+    "/lastPrice" : {
+      "get" : {
+        "description": "Returns last price of BTC",
+        "responses": {
+          "200": {
+            "description": "last BTC price"
+          }
+        }
+      }
+    },
+    "/allPayouts" : {
+      "get" : {
+        "description": "Returns all Totem token payouts",
+        "responses": {
+          "200": {
+            "description": "All payouts"
+          }
+        }
+      }
+    },
+    "/btcData" : {
+      "get" : {
+        "description": "Returns information about BTC price for last 356 days",
+        "responses": {
+          "200": {
+            "description": "BTC price for last year"
+          }
+        }
+      }
+    }
+  }
+}
