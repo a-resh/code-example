@@ -40,9 +40,9 @@ export const Content = memo(({ children }: Props) => {
     <>
       <Div>
         {children}
-        <LoginButtonWrapper isShow={!user.id}>
+        <LoginButtonWrapper isShow={!user.publicAddress}>
           <ConnectButton
-            address={user.id}
+            address={user.publicAddress}
             onConnectWallet={() => dispatch(setUserAddress(false))}
           />
         </LoginButtonWrapper>

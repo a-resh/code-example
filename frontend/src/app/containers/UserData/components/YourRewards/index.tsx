@@ -6,79 +6,91 @@
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
-import { Center, Row } from '../../../../components/blocks';
+import { Center, Column, Row } from '../../../../components/blocks';
 import { TotemBackground } from '../../../../../types/interfaces';
 import { Icon } from '../../../../components/Icon';
 import { TotemsData } from '../../../../../types/constants';
 import { Claim } from '../AccountRewardsAndPolls';
+import { TableData } from '../../types';
 
-interface Props {}
+interface Props {
+  stakes: TableData[];
+}
 
-export function YourRewards(props: Props) {
+export function YourRewards({ stakes }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-  const values = Array.apply(null, Array(5)).map(() => {
-    const totems = ['fox', 'wolf', 'owl'];
-    return {
-      totem: totems[Math.round(Math.random() + 0.3)],
-      stake: Math.ceil(1000 * Math.random() * 100),
-      time: new Date(`202${Math.round(Math.random())}-10-20`),
-      prediction: Math.ceil(12000 + Math.random() * 100),
-      projectedReturns: Math.ceil(1500 * Math.random() * 100),
-      actualReturns: Math.ceil(1200 * Math.random() * 100),
-    };
-  });
+  // const values = Array.apply(null, Array(5)).map(() => {
+  //   const totems = ['fox', 'wolf', 'owl'];
+  //   return {
+  //     totem: totems[Math.round(Math.random() + 0.3)],
+  //     stake: Math.ceil(1000 * Math.random() * 100),
+  //     time: new Date(`202${Math.round(Math.random())}-10-20`),
+  //     prediction: Math.ceil(12000 + Math.random() * 100),
+  //     projectedReturns: Math.ceil(1500 * Math.random() * 100),
+  //     actualReturns: Math.ceil(1200 * Math.random() * 100),
+  //   };
+  // });
 
   return (
     <Div>
       <h1>{t('Your rewards')}</h1>
-      <TableHeader>
-        <StakingPool>
-          <p>{t('Staking poll')}</p>
-        </StakingPool>
-        <TOTM>
-          <p>TOTM</p>
-        </TOTM>
-        <BTC>
-          <p>BTC</p>
-        </BTC>
-        <Total>
-          <p>{t('Total')}</p>
-        </Total>
-        <ButtonBlock></ButtonBlock>
-      </TableHeader>
-      {values.map(v => {
-        return (
-          <TableRow background={TotemsData[v.totem.toUpperCase()].color}>
+      {stakes.length ? (
+        <Table>
+          <TableHeader>
             <StakingPool>
-              <Icon
-                url={TotemsData[v.totem.toUpperCase()].icon}
-                width={15}
-                height={15}
-              />
-              <select name="totem" id="">
-                <option value={v.totem}>{v.totem}</option>
-                <option value={v.totem}>{v.totem}</option>
-                <option value={v.totem}>{v.totem}</option>
-              </select>
+              <p>{t('Staking poll')}</p>
             </StakingPool>
             <TOTM>
-              <p>100</p>
+              <p>TOTM</p>
             </TOTM>
             <BTC>
-              <p>0.03</p>
+              <p>BTC</p>
             </BTC>
             <Total>
-              <p>$300</p>
+              <p>{t('Total')}</p>
             </Total>
-            <ButtonBlock>
-              <ClaimMobile totem={v.totem}>
-                <h3>Claim</h3>
-              </ClaimMobile>
-            </ButtonBlock>
-          </TableRow>
-        );
-      })}
+            <ButtonBlock></ButtonBlock>
+          </TableHeader>
+          {stakes.map((v, index) => {
+            return (
+              <TableRow
+                key={index}
+                background={TotemsData[v.totem.toUpperCase()].color}
+              >
+                <StakingPool>
+                  <Icon
+                    url={TotemsData[v.totem.toUpperCase()].icon}
+                    width={15}
+                    height={15}
+                  />
+                  <select name="totem" id="">
+                    <option value={v.totem}>{v.totem}</option>
+                    <option value={v.totem}>{v.totem}</option>
+                    <option value={v.totem}>{v.totem}</option>
+                  </select>
+                </StakingPool>
+                <TOTM>
+                  <p>100</p>
+                </TOTM>
+                <BTC>
+                  <p>0.03</p>
+                </BTC>
+                <Total>
+                  <p>$300</p>
+                </Total>
+                <ButtonBlock>
+                  <ClaimMobile totem={v.totem}>
+                    <h3>Claim</h3>
+                  </ClaimMobile>
+                </ButtonBlock>
+              </TableRow>
+            );
+          })}
+        </Table>
+      ) : (
+        <h3>{t(`You don't have a reward`)}</h3>
+      )}
     </Div>
   );
 }
@@ -87,18 +99,27 @@ const Div = styled.div`
   width: 100%;
   color: white;
   font-size: 8px;
+
   h1 {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 27px;
   }
+  h3 {
+    font-weight: 300;
+    font-size: 15px;
+  }
 `;
+
+const Table = styled(Column)``;
 
 const TableHeader = styled(Row)`
   width: 100%;
   justify-content: space-between;
+
   p {
     opacity: 0.4;
   }
+
   margin-bottom: 10px;
 `;
 const TableRow = styled(Center)<TotemBackground>`
@@ -113,6 +134,7 @@ const TableRow = styled(Center)<TotemBackground>`
 const StakingPool = styled(Row)`
   width: 40%;
   padding: 0 0 0 5px;
+
   select,
   option {
     width: calc(100% - 30px);

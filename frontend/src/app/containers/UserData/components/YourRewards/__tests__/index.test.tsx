@@ -5,7 +5,7 @@ import { YourRewards } from '..';
 
 describe('<YourReward  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<YourRewards />);
+    const loadingIndicator = render(<YourRewards stakes={[]} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

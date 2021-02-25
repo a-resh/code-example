@@ -1,19 +1,9 @@
 /* --- STATE --- */
-interface Prediction {
-  id: string;
-  bet: number;
-  prediction: number;
-}
-interface Draw {
-  id: number;
-  type: string;
-  endTime: number;
-  users: Prediction[];
-}
+
+import { Draw } from '../../../types/interfaces';
 
 export interface PullContainerState {
   isShowModal: boolean;
-  drawData: Draw[];
   graphicsData: GraphicData[];
   allPayouts: number;
 }

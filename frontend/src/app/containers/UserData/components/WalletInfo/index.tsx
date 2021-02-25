@@ -3,22 +3,47 @@
  * WalletInfo
  *
  */
-import React, { memo } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { Icon } from '../../../../components/Icon';
 import { mediaQueries } from '../../../../../types/constants';
 import { Center, Column, Row } from '../../../../components/blocks';
 import { User } from 'types/interfaces';
+import { validate, getAddressInfo } from 'bitcoin-address-validation';
 
 interface Props {
   user: User;
+  setBtcAddress: (a: string, b: string) => void;
 }
 
-export const WalletInfo = memo(({ user }: Props) => {
+export const WalletInfo = ({ user, setBtcAddress }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-
+  const prevBtcAddress = usePrevious(user.btcAddress);
+  const [btcAddressError, setBtcAddressError] = useState(false);
+  const [editBtcAddress, setEditBtcAddress] = useState(false);
+  const [btcAddress, setBtcAddr] = useState('');
+  useEffect(() => {
+    if (user.btcAddress !== prevBtcAddress) {
+      setEditBtcAddress(false);
+    }
+  }, [user]);
+  const handleInput = (value: string) => {
+    setBtcAddr(value);
+    setBtcAddressError(false);
+    setEditBtcAddress(!!value);
+  };
+  const setBitcoinAddress = () => {
+    if (btcAddress === user.btcAddress || !btcAddress) {
+      return;
+    }
+    if (validate(btcAddress)) {
+      setBtcAddress(user.publicAddress, btcAddress);
+    } else {
+      setBtcAddressError(true);
+    }
+  };
   return (
     <Div>
       <h1>{t('Your Wallet')}</h1>
@@ -42,7 +67,7 @@ export const WalletInfo = memo(({ user }: Props) => {
             <Available>
               <h3>{t('Available to stake')}</h3>
               <Row>
-                <h2>{user.balance - user.inGame - user.frozenTokens}</h2>
+                <h2>{user.balance - user.inGame}</h2>
                 <p>TOTM</p>
               </Row>
             </Available>
@@ -59,21 +84,41 @@ export const WalletInfo = memo(({ user }: Props) => {
           >
             <p>{t('Add TOTM')}</p>
           </AddTotm>
-          <BtcAddress>
+          <BtcAddress
+            onClick={() => setBitcoinAddress()}
+            error={btcAddressError}
+          >
             <label>
               BTC <small>Address</small>
             </label>
-            <p>1345678912345678987</p>
+            <input
+              type="text"
+              // disabled={!!user.btcAddress}
+              placeholder={
+                user.btcAddress
+                  ? user.btcAddress
+                  : (t('please input your btc address') as string)
+              }
+              onChange={e => handleInput(e.target.value)}
+            />
             <Connected>
-              <p>{t('Connected')}</p>
-              <Icon url={'connected.svg'} width={10} height={10} />
+              <p>
+                {user.btcAddress && !editBtcAddress
+                  ? (t('Connected') as string)
+                  : editBtcAddress
+                  ? t('Edit')
+                  : (t('Not Connected') as string)}
+              </p>
+              {user.btcAddress && !editBtcAddress ? (
+                <Icon url={'connected.svg'} width={10} height={10} />
+              ) : null}
             </Connected>
           </BtcAddress>
         </Row>
       </ColumnWallet>
     </Div>
   );
-});
+};
 
 const Div = styled.div`
   color: white;
@@ -198,21 +243,36 @@ const AddTotm = styled(Center)`
   `}
 `;
 
-const BtcAddress = styled(Row)`
+const BtcAddress = styled(Row)<{ error: boolean }>`
   background-color: #232830;
   width: 80%;
   height: 60px;
   justify-content: flex-end;
   align-items: center;
   padding-right: 30px;
+  cursor: pointer;
 
   label {
     margin: 10px;
   }
 
   p {
-    border: solid 2px black;
     padding: 0 10px;
+  }
+
+  input[type='text'] {
+    border-radius: 0;
+    background-color: #232830;
+    border: solid 2px ${props => (props.error ? 'red' : 'black')};
+    padding: 0 5px;
+    color: white;
+    width: 340px;
+    height: 28px;
+  }
+
+  input:focus {
+    outline: none;
+    border-radius: 0;
   }
 
   ${mediaQueries.lessThan('medium')`
@@ -226,8 +286,12 @@ const BtcAddress = styled(Row)`
     width: 100%;
     height: 25px;
     justify-content: center;
-    p, label, small {
+    p, label, small, input[type='text'] {
       font-size: 9px;
+    }
+    input[type='text']{
+        width: 135px;
+        height: 25px;
     }
     small {
       display: inline;
@@ -241,6 +305,7 @@ const Connected = styled(Center)`
   font-size: 14px;
   margin: 0;
   height: 28px;
+  width: 120px;
   line-height: 28px;
   padding: 10px;
   ${mediaQueries.lessThan('medium')`
@@ -276,3 +341,11 @@ const RowAvailableStaked = styled(Row)`
     width: 100%;
   `}
 `;
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}

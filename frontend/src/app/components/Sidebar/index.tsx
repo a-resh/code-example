@@ -18,7 +18,7 @@ export const Sidebar = memo(({}: Props) => {
   const user = useSelector(userSelector);
   return (
     <Div>
-      <Menu isLogin={!!user.id} />
+      <Menu isLogin={!!user.publicAddress} />
       <SidebarBottom>
         <Icon
           url={'telegram-dark.svg'}

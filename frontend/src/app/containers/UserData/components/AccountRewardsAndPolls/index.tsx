@@ -11,119 +11,130 @@ import { Icon } from '../../../../components/Icon';
 import { mediaQueries } from '../../../../../types/constants';
 import { Center, Column, Row } from '../../../../components/blocks';
 import { convertDate } from '../../helpers';
+import { TableData } from '../../types';
 
 interface Props {
-  isMobile?: boolean;
+  rewards: TableData[];
 }
 
-export const AccountRewardsAndPools = memo((props: Props) => {
+export const AccountRewardsAndPools = memo(({ rewards }: Props) => {
+  console.log(rewards);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-
-  const values = Array.apply(null, Array(5))
-    .map(() => {
-      const totems = ['fox', 'wolf', 'owl'];
-      return {
-        totem: totems[Math.round(Math.random() + 0.6)],
-        stake: Math.ceil(1000 * Math.random() * 100),
-        time: new Date(`202${Math.round(Math.random())}-10-20`),
-        prediction: Math.ceil(12000 + Math.random() * 100),
-        projectedReturns: Math.ceil(1500 * Math.random() * 100),
-        actualReturns: Math.ceil(1200 * Math.random() * 100),
-      };
-    })
-    .sort((a, b) => a.time.getTime() - b.time.getTime());
+  // const totems = ['fox', 'wolf', 'owl'];
+  // const values = Array.apply(null, Array(5))
+  //   .map(() => {
+  //     const totems = ['fox', 'wolf', 'owl'];
+  //     return {
+  //       totem: totems[Math.round(Math.random() + 0.6)],
+  //       stake: Math.ceil(1000 * Math.random() * 100),
+  //       time: new Date(`202${Math.round(Math.random())}-10-20`),
+  //       prediction: Math.ceil(12000 + Math.random() * 100),
+  //       projectedReturns: Math.ceil(1500 * Math.random() * 100),
+  //       actualReturns: Math.ceil(1200 * Math.random() * 100),
+  //     };
+  //   })
+  //   .sort((a, b) => a.time.getTime() - b.time.getTime());
   return (
     <Div>
       <h1>{t('Pools and rewards')}</h1>
-      <TableHeader>
-        <IconColumn></IconColumn>
-        <TimeLeftColumn>
-          <h3>{t('Time left')}</h3>
-        </TimeLeftColumn>
-        <StakeColumn>
-          <h3>{t('Stake')}</h3>
-        </StakeColumn>
-        <YourPredictionColumn>
-          <h3>{t('Your prediction')}</h3>
-        </YourPredictionColumn>
-        <ProjectedReturnsColumn>
-          <h3>{t('Projected returns')}</h3>
-        </ProjectedReturnsColumn>
-        <ActualReturnsColumn>
-          <h3>{t('Actual returns')}</h3>
-        </ActualReturnsColumn>
-        <RoiColumn>
-          <h3>{t('ROI')}</h3>
-        </RoiColumn>
-        <ButtonsColumn></ButtonsColumn>
-      </TableHeader>
-      <TableBody>
-        {values.map((value, index) => {
-          const finished = moment(value.time).isBefore(moment());
-          let leftTime = 'Matured';
-          if (!finished) {
-            leftTime = convertDate(value.time);
-          }
-          return (
-            <TableRow
-              key={index}
-              totem={value.totem}
-              opacity={finished ? 1 : 0.5}
-            >
-              <IconColumn finished={finished}>
-                {finished ? (
-                  <Icon
-                    url={`${value.totem}-warning.svg`}
-                    width={15}
-                    height={15}
-                  />
-                ) : null}
-                <p>
-                  {value.totem.charAt(0).toUpperCase() + value.totem.slice(1)}
-                </p>
-              </IconColumn>
-              <TimeLeftColumn>
-                <p>{leftTime}</p>
-              </TimeLeftColumn>
-              <StakeColumn>
-                <p>
-                  {value.stake}
-                  <small>TOTM</small>
-                </p>
-              </StakeColumn>
-              <YourPredictionColumn>
-                <p>
-                  <small>BTC=</small>${value.prediction}(&#xb1;500)
-                </p>
-              </YourPredictionColumn>
-              <ProjectedReturnsColumn>
-                <p>{finished ? '-' : `${value.projectedReturns}TOTM`}</p>
-              </ProjectedReturnsColumn>
-              <ActualReturnsColumn>
-                <p>{finished ? `${value.actualReturns}TOTM` : '-'}</p>
-              </ActualReturnsColumn>
-              <RoiColumn>
-                <p>
-                  {Math.round(
-                    ((finished ? value.actualReturns : value.projectedReturns) *
-                      100) /
-                      value.stake,
-                  )}
-                  %
-                </p>
-              </RoiColumn>
-              <ButtonsColumn>
-                {finished ? (
-                  <Claim totem={value.totem}>
-                    <h3> CLAIM</h3>
-                  </Claim>
-                ) : null}
-              </ButtonsColumn>
-            </TableRow>
-          );
-        })}
-      </TableBody>
+      {rewards.length ? (
+        <Table>
+          <TableHeader>
+            <IconColumn></IconColumn>
+            <TimeLeftColumn>
+              <h3>{t('Time left')}</h3>
+            </TimeLeftColumn>
+            <StakeColumn>
+              <h3>{t('Stake')}</h3>
+            </StakeColumn>
+            <YourPredictionColumn>
+              <h3>{t('Your prediction')}</h3>
+            </YourPredictionColumn>
+            <ProjectedReturnsColumn>
+              <h3>{t('Projected returns')}</h3>
+            </ProjectedReturnsColumn>
+            <ActualReturnsColumn>
+              <h3>{t('Actual returns')}</h3>
+            </ActualReturnsColumn>
+            <RoiColumn>
+              <h3>{t('ROI')}</h3>
+            </RoiColumn>
+            <ButtonsColumn></ButtonsColumn>
+          </TableHeader>
+          <TableBody>
+            {rewards.map((value, index) => {
+              const finished = moment(value.time).isBefore(moment());
+              let leftTime = 'Matured';
+              if (!finished) {
+                leftTime = convertDate(value.time);
+              }
+              return (
+                <TableRow
+                  key={index}
+                  totem={value.totem}
+                  opacity={finished ? 1 : 0.5}
+                >
+                  <IconColumn finished={finished}>
+                    {finished ? (
+                      <Icon
+                        url={`${value.totem}-warning.svg`}
+                        width={15}
+                        height={15}
+                      />
+                    ) : null}
+                    <p>
+                      {value.totem.charAt(0).toUpperCase() +
+                        value.totem.slice(1)}
+                    </p>
+                  </IconColumn>
+                  <TimeLeftColumn>
+                    <p>{leftTime}</p>
+                  </TimeLeftColumn>
+                  <StakeColumn>
+                    <p>
+                      {value.stake}
+                      <small>TOTM</small>
+                    </p>
+                  </StakeColumn>
+                  <YourPredictionColumn>
+                    <p>
+                      <small>BTC=</small>${value.prediction}(&#xb1;500)
+                    </p>
+                  </YourPredictionColumn>
+                  <ProjectedReturnsColumn>
+                    <p>{finished ? '-' : `${value.projectedReturns}TOTM`}</p>
+                  </ProjectedReturnsColumn>
+                  <ActualReturnsColumn>
+                    <p>{finished ? `${value.actualReturns}TOTM` : '-'}</p>
+                  </ActualReturnsColumn>
+                  <RoiColumn>
+                    <p>
+                      {Math.round(
+                        ((finished
+                          ? value.actualReturns
+                          : value.projectedReturns) *
+                          100) /
+                          value.stake,
+                      )}
+                      %
+                    </p>
+                  </RoiColumn>
+                  <ButtonsColumn>
+                    {finished ? (
+                      <Claim totem={value.totem}>
+                        <h3> CLAIM</h3>
+                      </Claim>
+                    ) : null}
+                  </ButtonsColumn>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      ) : (
+        <h3>{t(`You don't have a reward`)}</h3>
+      )}
     </Div>
   );
 });
@@ -153,6 +164,7 @@ const Div = styled.div`
     display: none;
   `}
 `;
+const Table = styled(Column)``;
 
 const TableHeader = styled(Row)`
   width: 100%;
@@ -175,7 +187,7 @@ const TableRow = styled.div<{ totem?: string; opacity: number }>`
       ? `rgba(255, 103, 31, ${props.opacity})`
       : props.totem === 'wolf'
       ? `rgba(51,158,176, ${props.opacity})`
-      : `rgba(51,158,176, ${props.opacity})`};
+      : `rgba(256,256,256, ${props.opacity})`};
   display: flex !important;
   flex-direction: row;
 

@@ -6,7 +6,7 @@ import { WalletInfo } from '../index';
 describe('<WalletInfo  />', () => {
   it('should match snapshot', () => {
     const loadingIndicator = render(
-      <WalletInfo user={{ id: '', balance: 0, frozenTokens: 0, inGame: 0 }} />,
+      <WalletInfo user={{ publicAddress: '', balance: 0, inGame: 0, btcAddress: '' }} setBtcAddress={() => {}}/>,
     );
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });

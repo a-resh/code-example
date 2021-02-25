@@ -10,54 +10,61 @@ import { mediaQueries, TotemsData } from '../../../../../types/constants';
 import { Center, Column, Row } from '../../../../components/blocks';
 import { convertDate } from '../../helpers';
 import { TotemBackground } from '../../../../../types/interfaces';
+import { TableData } from '../../types';
 
-interface Props {}
+interface Props {
+  stakes: TableData[];
+}
 
-export function ActivePools(props: Props) {
+export function ActivePools({ stakes }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
 
-  const values = Array.apply(null, Array(3)).map(() => {
-    const totems = ['fox', 'wolf', 'owl'];
-    return {
-      totem: totems[Math.round(Math.random() + 0.3)],
-      stake: Math.ceil(1000 * Math.random() * 100),
-      time: new Date(`2021-10-${Math.round(Math.random() * 10)}`),
-      prediction: Math.ceil(12000 + Math.random() * 100),
-      projectedReturns: Math.ceil(1500 * Math.random() * 100),
-      actualReturns: Math.ceil(1200 * Math.random() * 100),
-    };
-  });
+  // const values = Array.apply(null, Array(3)).map(() => {
+  //   const totems = ['fox', 'wolf', 'owl'];
+  //   return {
+  //     totem: totems[Math.round(Math.random() + 0.3)],
+  //     stake: Math.ceil(1000 * Math.random() * 100),
+  //     time: new Date(`2021-10-${Math.round(Math.random() * 10)}`),
+  //     prediction: Math.ceil(12000 + Math.random() * 100),
+  //     projectedReturns: Math.ceil(1500 * Math.random() * 100),
+  //     actualReturns: Math.ceil(1200 * Math.random() * 100),
+  //   };
+  // });
   return (
     <Div>
       <h1>{t('Active pools')}</h1>
-      {values.map((v, index) => {
-        return (
-          <PullData key={index}>
-            <h2>{v.totem}</h2>
-            <DataWrapper
-              background={`${TotemsData[v.totem.toUpperCase()].color}99`}
-            >
-              <DataRow>
-                <Left>{t('Time left')}</Left>
-                <Right>{convertDate(v.time)}</Right>
-              </DataRow>
-              <DataRow>
-                <Left>{t('Stake')}</Left>
-                <Right>{v.stake} TOTM</Right>
-              </DataRow>
-              <DataRow>
-                <Left>{t('Your Prediction')}</Left>
-                <Right>${v.prediction}(&#xb1;500)</Right>
-              </DataRow>
-              <DataRow>
-                <Left>{t('Projected returns')}</Left>
-                <Right>{v.projectedReturns} TOTM</Right>
-              </DataRow>
-            </DataWrapper>
-          </PullData>
-        );
-      })}
+      {stakes.length ? (
+        stakes.map((v, index) => {
+          return (
+            <PullData key={index}>
+              <h2>{v.totem}</h2>
+              <DataWrapper
+                background={`${TotemsData[v.totem.toUpperCase()].color}99`}
+              >
+                <DataRow>
+                  <Left>{t('Time left')}</Left>
+                  <Right>{convertDate(v.time)}</Right>
+                </DataRow>
+                <DataRow>
+                  <Left>{t('Stake')}</Left>
+                  <Right>{v.stake} TOTM</Right>
+                </DataRow>
+                <DataRow>
+                  <Left>{t('Your Prediction')}</Left>
+                  <Right>${v.prediction}(&#xb1;500)</Right>
+                </DataRow>
+                <DataRow>
+                  <Left>{t('Projected returns')}</Left>
+                  <Right>{v.projectedReturns} TOTM</Right>
+                </DataRow>
+              </DataWrapper>
+            </PullData>
+          );
+        })
+      ) : (
+        <h3>{t(`You don't have a stakes`)}</h3>
+      )}
     </Div>
   );
 }
@@ -70,10 +77,12 @@ const Div = styled(Column)`
   h2 {
     font-weight: 300;
   }
+
   h1 {
     font-size: 27px;
     margin: 25px 0 0 0;
   }
+
   h2 {
     margin: 25px 0 15px 0;
   }

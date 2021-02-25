@@ -2,6 +2,10 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from 'types';
 import { initialState } from './slice';
+const drawsData = (state: RootState) =>
+  state.wrapper?.drawsData || initialState.drawsData;
+
+export const drawsSelector = createSelector(drawsData, drawsData => drawsData);
 const btcLastPrice = (state: RootState) =>
   state.wrapper?.btcLastPrice || initialState.btcLastPrice;
 const tokenPrice = (state: RootState) =>

@@ -3,7 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'types';
 import { initialState } from './slice';
 import { TotemsData } from '../../../types/constants';
-import { activePageSelector } from '../Wrapper/selectors';
+import { activePageSelector, drawsSelector } from '../Wrapper/selectors';
 
 const graphicsData = (state: RootState) =>
   state.pullContainer?.graphicsData || initialState.graphicsData;
@@ -11,15 +11,12 @@ const allPayouts = (state: RootState) =>
   state.pullContainer?.allPayouts || initialState.allPayouts;
 const isShowModal = (state: RootState) =>
   state?.pullContainer?.isShowModal || initialState.isShowModal;
-const drawData = (state: RootState) =>
-  state.pullContainer?.drawData || initialState.drawData;
 
 export const drawDataSelector = createSelector(
   activePageSelector,
-  drawData,
+  drawsSelector,
   (totem, drawData: any[]) => drawData.find(v => v.id === TotemsData[totem].id),
 );
-
 export const pollFillSelector = createSelector(
   activePageSelector,
   drawDataSelector,

@@ -25,14 +25,14 @@ export function Header({}: Props) {
   return (
     <Div hidden={isShowModal}>
       <MenuWrapper>
-        <Menu isLogin={!!user.id} isMobile={true} />
+        <Menu isLogin={!!user.publicAddress} isMobile={true} />
       </MenuWrapper>
       <IconWrapper>
         <Icon url={'logo-white.svg'} width={90} height={25} />
       </IconWrapper>
       <DesktopButton>
         <ConnectButton
-          address={user.id}
+          address={user.publicAddress}
           onConnectWallet={() => dispatch(setUserAddress(false))}
         />
       </DesktopButton>

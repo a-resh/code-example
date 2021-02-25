@@ -11,3 +11,7 @@ export interface Totem {
   color: string;
   mobileColor: string;
 }
+
+export enum LocalStorageKeys {
+  AUTH_TOKEN = 'authToken',
+}

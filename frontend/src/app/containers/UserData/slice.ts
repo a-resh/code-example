@@ -9,7 +9,10 @@ const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-    someAction(state, action: PayloadAction<any>) {},
+    setBtcAddress(
+      state,
+      action: PayloadAction<{ publicAddress: string; btcAddress: string }>,
+    ) {},
   },
 });
 

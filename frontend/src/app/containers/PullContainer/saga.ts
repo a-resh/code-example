@@ -17,14 +17,7 @@ function* getGraphicsData() {
 }
 function* getData() {
   try {
-    let payload = yield call(api.getDrawsData);
-    if (payload) {
-      yield put({
-        type: pullContainerActions.getDataDrawSuccess.type,
-        payload,
-      });
-    }
-    payload = yield call(api.getAllPayouts);
+    const payload = yield call(api.getAllPayouts);
     if (payload) {
       yield put({
         type: pullContainerActions.getAllPayoutSuccess.type,

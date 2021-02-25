@@ -5,7 +5,7 @@ import { ActivePools } from '..';
 
 describe('<ActivePools  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<ActivePools />);
+    const loadingIndicator = render(<ActivePools stakes={[]} />);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

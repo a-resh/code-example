@@ -5,7 +5,7 @@ import { AccountRewardsAndPools } from '../index';
 
 describe('<AccountRewards  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<AccountRewardsAndPools />);
+    const loadingIndicator = render(<AccountRewardsAndPools rewards={[]}/>);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

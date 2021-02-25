@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { reducer, sliceKey, userDataActions } from './slice';
 import { userDataSaga } from './saga';
 import { WalletInfo } from './components/WalletInfo';
 import { AccountRewardsAndPools } from './components/AccountRewardsAndPolls';
@@ -20,19 +20,27 @@ import { YourRewards } from './components/YourRewards';
 import { ActivePools } from './components/ActivePools';
 import { userSelector } from '../Wrapper/selectors';
 import { useHistory } from 'react-router-dom';
+import {
+  activeStakesSelector,
+  oldStakesSelector,
+  stakesAndRewardsSelector,
+} from './selectors';
 
 interface Props {}
 
 export function UserData(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: userDataSaga });
-
+  const { setBtcAddress } = userDataActions;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user = useSelector(userSelector);
   const history = useHistory();
-  if (!user.id) {
+  if (!user.publicAddress) {
     history.push('fox');
   }
+  const rewards = useSelector(stakesAndRewardsSelector);
+  const activeStakes = useSelector(activeStakesSelector);
+  const oldStakes = useSelector(oldStakesSelector);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
 
@@ -43,11 +51,16 @@ export function UserData(props: Props) {
     <>
       <Div>
         <YourRewardsWrapper>
-          <YourRewards />
+          <YourRewards stakes={oldStakes} />
         </YourRewardsWrapper>
-        <WalletInfo user={user} />
-        <AccountRewardsAndPools />
-        <ActivePools />
+        <WalletInfo
+          user={user}
+          setBtcAddress={(publicAddress, btcAddress) =>
+            dispatch(setBtcAddress({ publicAddress, btcAddress }))
+          }
+        />
+        <AccountRewardsAndPools rewards={rewards} />
+        <ActivePools stakes={activeStakes} />
       </Div>
     </>
   );

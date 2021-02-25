@@ -7,13 +7,14 @@ import { User } from '../../../types/interfaces';
 export const initialState: ContainerState = {
   activePage: 'FOX',
   user: {
-    id: '',
+    publicAddress: '',
     balance: 0,
-    frozenTokens: 0,
     inGame: 0,
+    btcAddress: '',
   },
   tokenPrice: 0,
   btcLastPrice: 32000,
+  drawsData: [],
 };
 
 const wrapperSlice = createSlice({
@@ -23,6 +24,9 @@ const wrapperSlice = createSlice({
     getLastBtcPrice() {},
     getLastBtcPriceSuccess(state, action: PayloadAction<number>) {
       state.btcLastPrice = action.payload;
+    },
+    getDataDrawSuccess(state, action: PayloadAction<any[]>) {
+      state.drawsData = action.payload;
     },
     getTokenPrice() {},
     getTokenPriceSuccess(state, action: PayloadAction<number>) {
@@ -36,6 +40,9 @@ const wrapperSlice = createSlice({
       state.user = action.payload;
     },
     setUserAddress(state, action: PayloadAction<boolean>) {},
+    setBtcAddress(state, action: PayloadAction<string>) {
+      state.user.btcAddress = action.payload;
+    },
   },
 });
 

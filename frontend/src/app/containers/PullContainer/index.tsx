@@ -63,7 +63,9 @@ export function PullContainer() {
   }, []);
   const makePredictFromModal = (bitcoinPrice: number, stakeValue: number) => {
     dispatch(showModal());
-    dispatch(makePredict({ bitcoinPrice, stakeValue, user: user.id }));
+    dispatch(
+      makePredict({ bitcoinPrice, stakeValue, user: user.publicAddress }),
+    );
   };
   return (
     <>
@@ -75,7 +77,9 @@ export function PullContainer() {
           <PoolInfo
             totem={totem}
             showModal={() =>
-              user.id ? dispatch(showModal()) : dispatch(setUserAddress(true))
+              user.publicAddress
+                ? dispatch(showModal())
+                : dispatch(setUserAddress(true))
             }
             poolFill={poolFill}
             endTime={+drawData?.endTime}
@@ -96,7 +100,9 @@ export function PullContainer() {
               background={TotemsData[totem].color}
               color={'white'}
               showModal={() =>
-                user.id ? dispatch(showModal()) : dispatch(setUserAddress(true))
+                user.publicAddress
+                  ? dispatch(showModal())
+                  : dispatch(setUserAddress(true))
               }
             />
           </ButtonWrapper>
