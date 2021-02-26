@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 
-import { AccountRewardsAndPools } from '../index';
+import { ErrorModal } from '..';
 
-describe('<AccountRewards  />', () => {
+describe('<ErrorModal  />', () => {
   it('should match snapshot', () => {
-    const loadingIndicator = render(<AccountRewardsAndPools rewards={[]} />);
+    const loadingIndicator = render(<ErrorModal close={() => {} } isOpen={true} totem={'fox'}/>);
     expect(loadingIndicator.container.firstChild).toMatchSnapshot();
   });
 });

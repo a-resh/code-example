@@ -206,19 +206,9 @@ const TotalBalance = styled(Column)`
 
 const Staked = styled(TotalBalance)`
   width: 50%;
-  ${mediaQueries.lessThan('medium')`
-    display: none;
-  `}
-  ${mediaQueries.lessThan('small')`
-    display: flex;
-    width: 100%;
-  `}
 `;
 const Available = styled(TotalBalance)`
   width: 50%;
-  ${mediaQueries.lessThan('medium')`
-    width: 100%;
-  `}
 `;
 
 const AddTotm = styled(Center)`
@@ -234,11 +224,6 @@ const AddTotm = styled(Center)`
   }
 
   ${mediaQueries.lessThan('medium')`
-    p {
-      font-size: 12px;
-    }
-  `}
-  ${mediaQueries.lessThan('small')`
     display: none;
   `}
 `;
@@ -253,7 +238,7 @@ const BtcAddress = styled(Row)<{ error: boolean }>`
   cursor: pointer;
 
   label {
-    margin: 10px;
+    margin-right: 10px;
   }
 
   p {
@@ -274,27 +259,38 @@ const BtcAddress = styled(Row)<{ error: boolean }>`
     outline: none;
     border-radius: 0;
   }
+  
+  @media screen and (max-width: 850px) {
+    padding-right: 20px;
+    input[type='text'] {
+      width: 300px;
+    }
+  }
 
   ${mediaQueries.lessThan('medium')`
-    padding-right: 10px;
-    small {
-      display: none;
-    }
-  `}
-  ${mediaQueries.lessThan('small')`
+  padding-right: 0;
     background-color: #202020;
     width: 100%;
     height: 25px;
     justify-content: center;
     p, label, small, input[type='text'] {
-      font-size: 9px;
+      font-size: 12px;
     }
     input[type='text']{
-        width: 135px;
-        height: 25px;
+        width: 170px;
+        height: 20px;
     }
     small {
       display: inline;
+    }
+  `}
+  ${mediaQueries.lessThan('small')`
+        p, label, small, input[type='text'] {
+      font-size: 9px;
+    }
+        input[type='text']{
+        width: 135px;
+        height: 20px;
     }
   `}
 `;
@@ -305,16 +301,13 @@ const Connected = styled(Center)`
   font-size: 14px;
   margin: 0;
   height: 28px;
-  width: 120px;
+  width: 135px;
   line-height: 28px;
-  padding: 10px;
   ${mediaQueries.lessThan('medium')`
-    display: none;
-  `}
-  ${mediaQueries.lessThan('small')`
     background-color: inherit;
     height: 17px;
-    font-size: 9px;
+    width: 100px;
+    font-size: 12px;
     display: flex;
     padding: 4px;
     p {
@@ -323,10 +316,14 @@ const Connected = styled(Center)`
       padding: 0 5px;
     }
   `}
+  ${mediaQueries.lessThan('small')`
+    font-size: 9px;
+    width: 80px;
+  `}
 `;
 
 const RowWalletInfo = styled(Row)`
-  ${mediaQueries.lessThan('small')`
+  ${mediaQueries.lessThan('medium')`
     flex-direction: column;
     background-color: #232830;
   `}
@@ -335,9 +332,6 @@ const RowWalletInfo = styled(Row)`
 const RowAvailableStaked = styled(Row)`
   width: 59%;
   ${mediaQueries.lessThan('medium')`
-    width: 50%;
-  `}
-  ${mediaQueries.lessThan('small')`
     width: 100%;
   `}
 `;

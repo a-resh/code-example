@@ -49,7 +49,7 @@ export const ConnectMetamaskModal = ({ isOpen, close, totem }: Props) => {
       style={customStyles}
       ariaHideApp={false}
     >
-      <ModalHeaderMetamask background={TotemsData[totem].color}>
+      <TotemModalHeader background={TotemsData[totem].color}>
         <TotemWrapper background={TotemsData[totem].color}>
           <Icon url={`${totem}-white.svg`} height={20} width={20}></Icon>
         </TotemWrapper>
@@ -61,7 +61,7 @@ export const ConnectMetamaskModal = ({ isOpen, close, totem }: Props) => {
           cursor={'pointer'}
           onClick={close}
         ></Icon>
-      </ModalHeaderMetamask>
+      </TotemModalHeader>
       <ModalContent>
         <WrapperLink
           background={TotemsData[totem].color}
@@ -79,7 +79,7 @@ export const ConnectMetamaskModal = ({ isOpen, close, totem }: Props) => {
   );
 };
 
-const ModalHeaderMetamask = styled(ModalHeader)`
+export const TotemModalHeader = styled(ModalHeader)`
   color: white;
   font-weight: 300;
   @media screen and (max-width: 450px) {

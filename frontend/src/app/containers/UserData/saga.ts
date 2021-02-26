@@ -9,18 +9,22 @@ import { contentActions } from '../Content/slice';
 export function* _setBtcAddress(
   action: PayloadAction<{ publicAddress: string; btcAddress: string }>,
 ) {
-  const result = yield call(
-    api.setBtcAddress,
-    action.payload.publicAddress,
-    action.payload.btcAddress,
-  );
-  if (result) {
-    yield put({
-      type: wrapperActions.setBtcAddress.type,
-      payload: action.payload.btcAddress,
-    });
-  } else {
-    yield put({ type: contentActions.error.type });
+  try {
+    const result = yield call(
+        api.setBtcAddress,
+        action.payload.publicAddress,
+        action.payload.btcAddress,
+    );
+    if (result) {
+      yield put({
+        type: wrapperActions.setBtcAddress.type,
+        payload: action.payload.btcAddress,
+      });
+    } else {
+      yield put({type: contentActions.error.type});
+    }
+  } catch (e) {
+    yield put({type: contentActions.error.type});
   }
 }
 

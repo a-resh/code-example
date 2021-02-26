@@ -17,7 +17,8 @@ import { activePageSelector, userSelector } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
 import { contentSaga } from './saga';
 import { ConnectMetamaskModal } from './components/ConnectMetamaskModal';
-import { showConMetamaskModalSelector } from './selectors';
+import {showConMetamaskModalSelector, showErrorModalSelector} from './selectors';
+import {ErrorModal} from "./components/ErrorModal";
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -33,8 +34,9 @@ export const Content = memo(({ children }: Props) => {
     totem = 'FOX';
   }
   const isShowConnectMetamaskModal = useSelector(showConMetamaskModalSelector);
+  const isShowErrorModal = useSelector(showErrorModalSelector);
   const { setUserAddress } = wrapperActions;
-  const { showConnectMetamaskModal } = contentActions;
+  const { showConnectMetamaskModal, error } = contentActions;
 
   return (
     <>
@@ -50,6 +52,11 @@ export const Content = memo(({ children }: Props) => {
           isOpen={isShowConnectMetamaskModal}
           close={() => dispatch(showConnectMetamaskModal())}
           totem={totem}
+        />
+        <ErrorModal
+            isOpen={isShowErrorModal}
+            close={() => dispatch(error(false))}
+            totem={totem}
         />
       </Div>
     </>
