@@ -15,10 +15,7 @@ export const api = {
       .then(res => res.nonce);
   },
   authGetToken: (publicAddress: string, signature: string): Promise<string> => {
-    return fetch(`${apiUrl}/auth`, {
-      method: 'POST',
-      body: JSON.stringify({ publicAddress, signature }),
-    })
+    return _post(`${apiUrl}/auth`, { publicAddress, signature })
       .then(res => res.json())
       .then(res => {
         if (res.error) {
@@ -44,17 +41,22 @@ export const api = {
     ).then(res => res.json());
   },
   setBtcAddress: (publicAddress: string, btcAddress: string) => {
-    return fetch(`${apiUrl}/user/setBTCaddress`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem(
-          LocalStorageKeys.AUTH_TOKEN,
-        )}`,
-      },
-      body: JSON.stringify({
-        publicAddress,
-        btcAddress,
-      }),
-    }).then(res => res.ok);
+    return _post(`${apiUrl}/user/setBTCaddress`, {publicAddress, btcAddress}, true)
   },
 };
+
+function _post(url: string, body: any, auth = false){
+  let headers = {
+    "Content-Type": 'application/json'
+  }
+  if(auth){
+    headers['Authorization'] = `Bearer ${localStorage.getItem(
+        LocalStorageKeys.AUTH_TOKEN
+    )}`
+  }
+  return fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  })
+}

@@ -15,16 +15,16 @@ export function* _setBtcAddress(
         action.payload.publicAddress,
         action.payload.btcAddress,
     );
-    if (result) {
+    if (result.ok) {
       yield put({
         type: wrapperActions.setBtcAddress.type,
         payload: action.payload.btcAddress,
       });
     } else {
-      yield put({type: contentActions.error.type});
+      yield put({type: contentActions.error.type, payload: result});
     }
   } catch (e) {
-    yield put({type: contentActions.error.type});
+    yield put({type: contentActions.error.type, payload: e});
   }
 }
 

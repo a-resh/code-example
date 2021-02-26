@@ -18,6 +18,7 @@ const contentSlice = createSlice({
       state.showConnectMetamaskModal = !state.showConnectMetamaskModal;
     },
     error(state, action?: PayloadAction<any>) {
+      console.log(action?.payload)
       state.showErrorModal = !state.showErrorModal;
     },
   },
