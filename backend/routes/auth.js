@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
   let responseObj = {};
 
   try {
-    let user = await User.findOne({ publicAddress: publicAddress });
+    let user = await User.findOne({ publicAddress });
     if (user) {
       responseObj = {
         nonce: user.nonce,
