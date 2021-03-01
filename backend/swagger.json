@@ -109,29 +109,29 @@
         }
       }
     },
-    "/user/register" : {
+    "/user/setBTCaddress" : {
       "post" : {
-        "description": "Create new user of Totem project",
+        "description": "Update BTC address for user of Totem project",
         "parameters": [{
           "name": "publicAddress",
           "in": "body",
-          "description": "ETH adress of new user",
+          "description": "ETH adress of exist user",
           "required": true,
           "type": "string"
         },
         {
           "name": "btcAddress",
           "in": "body",
-          "description": "BTC adress of new user",
+          "description": "BTC adress to set",
           "required": true,
           "type": "string"
         }],
         "responses": {
           "200": {
-            "description": "User created"
+            "description": "BTC address upodated"
           },
-          "404": {
-            "description": "Can't create Totem user "
+          "400": {
+            "description": "Can't update BTC address"
           }
         }
       }

@@ -26,7 +26,6 @@ router.get('/:id', async (req, res, next) => {
 });
 
 router.post('/register', async (req, res, next) => {
-  console.log('request: ', req.body);
   const id = uniqid();
   const publicAddress = req.body.publicAddress;
   const btcAddress = req.body.btcAddress;
@@ -54,6 +53,44 @@ router.post('/register', async (req, res, next) => {
   return res.json(newUser);
 });
 
+router.post('/setBTCaddress', async (req, res, next) => {
+  const { publicAddress, btcAddress } = req.body;
+  let code = 200;
+  let responseObj = {};
+
+  if (!btcAddress) {
+    responseObj = {
+      error: `BTC addres couldn't be empty!`,
+    };
+    res.status(400).json(responseObj);
+  }
+
+  try {
+    let user = await User.findOne({ publicAddress });
+    if (user) {
+      user.btcAddress = btcAddress;
+      await user.save();
+
+      responseObj = {
+        publicAddress: user.publicAddress,
+        btcAddress: user.btcAddress,
+        message: 'BTC address updated',
+      };
+    } else {
+      code = 404;
+      responseObj = {
+        publicAddress,
+        btcAddress,
+        error: `User with publicAddress ${publicAddress} not found in DB`,
+      };
+    }
+
+    res.status(code).json(responseObj);
+  } catch (error) {
+    console.log('Update BTC address error', error);
+  }
+});
+
 router.post('/payStakingBonus', (req, res, next) => {
   console.log('req:', req.body);
   let code = 200;
@@ -61,7 +98,7 @@ router.post('/payStakingBonus', (req, res, next) => {
   let responseObj = {};
   if (user.length === 0) {
     responseObj = {
-      Error: 'User not found',
+      error: 'User not found',
     };
     code = 404;
   } else {
