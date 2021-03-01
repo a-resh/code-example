@@ -14,11 +14,14 @@ router.get('/', async (req, res, next) => {
   let responseObj = {};
 
   try {
-    let user = await User.findOne({ publicAddress: publicAddress });
+    let user = await User.findOne({ publicAddress });
     if (user) {
+      const newNonce = Date.now().toString();
       responseObj = {
-        nonce: user.nonce,
+        nonce: newNonce,
       };
+      user.nonce = newNonce;
+      await user.save();
     } else {
       const id = uniqid();
       const accessToken = createNewToken(id, publicAddress);
@@ -54,12 +57,20 @@ router.post('/', async (req, res, next) => {
   try {
     let user = await User.findOne({ publicAddress });
     if (user) {
-      const msgBufferHex = Buffer.from(signature, 'utf8').toString('hex');
-      const address = sigUtil.recoverPersonalSignature({
-        data: msgBufferHex,
+      // const msgBufferHex = `0x${Buffer.from(user.nonce, 'utf-8').toString('hex')}`;
+      const msgParams = [
+        {
+          type: 'string',
+          name: "I a'm sign one-time nonce for auth",
+          value: user.nonce.toString(),
+        },
+      ];
+      const keyMsg = sigUtil.recoverTypedSignatureLegacy({
+        data: msgParams,
         sig: signature,
       });
-      if (address.toLowerCase() === publicAddress.toLowerCase()) {
+      console.log('keyMsg: ', keyMsg);
+      if (keyMsg.toLowerCase() === user.publicAddress.toLowerCase()) {
         const token = createNewToken(user.publicAddress, publicAddress);
 
         res.status(200).send({ auth: true, token: token });
