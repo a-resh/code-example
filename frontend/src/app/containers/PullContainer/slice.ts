@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { ContainerState } from './types';
+import { ContainerState, MakePredictData } from './types';
 import { useInjectReducer } from 'redux-injectors';
 
 // The initial state of the PullContainer container
@@ -25,16 +25,7 @@ const pullContainerSlice = createSlice({
     showModal(state) {
       state.isShowModal = !state.isShowModal;
     },
-    makePredict(
-      state,
-      action: PayloadAction<{
-        bitcoinPrice: number;
-        stakeValue: number;
-        user: any;
-      }>,
-    ) {
-      return state;
-    },
+    makePredict(state, action: PayloadAction<MakePredictData>) {},
   },
 });
 

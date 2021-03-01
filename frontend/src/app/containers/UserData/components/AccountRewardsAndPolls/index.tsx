@@ -18,7 +18,6 @@ interface Props {
 }
 
 export const AccountRewardsAndPools = memo(({ rewards }: Props) => {
-  console.log(rewards);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   // const totems = ['fox', 'wolf', 'owl'];
@@ -133,7 +132,7 @@ export const AccountRewardsAndPools = memo(({ rewards }: Props) => {
           </TableBody>
         </Table>
       ) : (
-        <h3>{t(`You don't have a reward`)}</h3>
+        <h3>{t(`You don't have active pools and rewards`)}</h3>
       )}
     </Div>
   );
@@ -151,8 +150,9 @@ const Div = styled.div`
   }
 
   h3 {
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 300;
+    margin-left: 40px;
   }
 
   ${mediaQueries.lessThan('medium')`

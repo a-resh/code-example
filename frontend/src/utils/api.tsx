@@ -41,22 +41,33 @@ export const api = {
     ).then(res => res.json());
   },
   setBtcAddress: (publicAddress: string, btcAddress: string) => {
-    return _post(`${apiUrl}/user/setBTCaddress`, {publicAddress, btcAddress}, true)
+    return _post(
+      `${apiUrl}/user/setBTCaddress`,
+      { publicAddress, btcAddress },
+      true,
+    );
+  },
+  getEthPrice: (): Promise<number> => {
+    return fetch(
+      'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',
+    )
+      .then(res => res.json())
+      .then(res => res.USD);
   },
 };
 
-function _post(url: string, body: any, auth = false){
+function _post(url: string, body: any, auth = false) {
   let headers = {
-    "Content-Type": 'application/json'
-  }
-  if(auth){
+    'Content-Type': 'application/json',
+  };
+  if (auth) {
     headers['Authorization'] = `Bearer ${localStorage.getItem(
-        LocalStorageKeys.AUTH_TOKEN
-    )}`
+      LocalStorageKeys.AUTH_TOKEN,
+    )}`;
   }
   return fetch(url, {
     method: 'POST',
     headers,
     body: JSON.stringify(body),
-  })
+  });
 }

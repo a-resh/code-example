@@ -21,10 +21,13 @@ export function Timer({ endTime }: Props) {
   const { t, i18n } = useTranslation();
 
   const updateTime = () => {
-    endTime = endTime ? endTime : new Date().getTime();
+    const now = moment();
+    endTime =
+      endTime && !moment(endTime).isBefore(now)
+        ? endTime
+        : new Date().getTime();
     const timeToEnd = moment(endTime);
     const timeToEndForMinutesAndSeconds = moment(endTime);
-    const now = moment();
     const minutesAndSeconds = moment(
       timeToEndForMinutesAndSeconds.diff(now),
     ).format('mm:ss');

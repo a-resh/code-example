@@ -8,8 +8,7 @@ const showConnectMetamaskModal = (state: RootState) =>
   initialState.showConnectMetamaskModal;
 
 const showErrorModal = (state: RootState) =>
-    state.content?.showErrorModal ||
-    initialState.showErrorModal;
+  state.content?.showErrorModal || initialState.showErrorModal;
 
 export const showConMetamaskModalSelector = createSelector(
   showConnectMetamaskModal,
@@ -17,6 +16,6 @@ export const showConMetamaskModalSelector = createSelector(
 );
 
 export const showErrorModalSelector = createSelector(
-    showErrorModal,
-    show => show,
+  showErrorModal,
+  show => show,
 );

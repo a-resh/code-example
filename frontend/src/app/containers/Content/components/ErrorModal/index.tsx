@@ -1,19 +1,21 @@
 /**
-*
-* ErrorModal
-*
-*/
+ *
+ * ErrorModal
+ *
+ */
 import * as React from 'react';
 import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
 import { messages } from './messages';
 import Modal from 'react-modal';
-import {TotemsData} from "../../../../../types/constants";
-import {ModalHeader, TotemWrapper} from "../../../PullContainer/components/PredictModal/components";
-import {Icon} from "../../../../components/Icon";
-import {TotemModalHeader} from "../ConnectMetamaskModal";
-import {Center} from "../../../../components/blocks";
-
+import { TotemsData } from '../../../../../types/constants';
+import {
+  ModalHeader,
+  TotemWrapper,
+} from '../../../PullContainer/components/PredictModal/components';
+import { Icon } from '../../../../components/Icon';
+import { TotemModalHeader } from '../ConnectMetamaskModal';
+import { Center } from '../../../../components/blocks';
 
 interface Props {
   isOpen: boolean;
@@ -42,29 +44,29 @@ export const ErrorModal = ({ isOpen, close, totem }: Props) => {
     },
   };
   return (
-      <Modal
-          isOpen={isOpen}
-          shouldCloseOnOverlayClick={true}
-          style={customStyles}
-          ariaHideApp={false}
-      >
-        <TotemModalHeader background={TotemsData.WOLF.color}>
-          <TotemWrapper background={TotemsData.WOLF.color}>
-            <Icon url={`wolf-white.svg`} height={20} width={20}></Icon>
-          </TotemWrapper>
-          <p>Error</p>
-          <Icon
-              url={`close-${isMobile ? 'grey' : 'white'}.svg`}
-              height={15}
-              width={15}
-              cursor={'pointer'}
-              onClick={close}
-          ></Icon>
-        </TotemModalHeader>
-        <ModalContent>
-          <p>Something went terribly wrong...</p>
-        </ModalContent>
-      </Modal>
+    <Modal
+      isOpen={isOpen}
+      shouldCloseOnOverlayClick={true}
+      style={customStyles}
+      ariaHideApp={false}
+    >
+      <TotemModalHeader background={TotemsData.WOLF.color}>
+        <TotemWrapper background={TotemsData.WOLF.color}>
+          <Icon url={`wolf-white.svg`} height={20} width={20}></Icon>
+        </TotemWrapper>
+        <p>Error</p>
+        <Icon
+          url={`close-${isMobile ? 'grey' : 'white'}.svg`}
+          height={15}
+          width={15}
+          cursor={'pointer'}
+          onClick={close}
+        ></Icon>
+      </TotemModalHeader>
+      <ModalContent>
+        <p>Something went terribly wrong...</p>
+      </ModalContent>
+    </Modal>
   );
 };
 
@@ -75,4 +77,4 @@ const ModalContent = styled(Center)`
     font-family: Lato;
     font-size: 20px;
   }
-`
+`;

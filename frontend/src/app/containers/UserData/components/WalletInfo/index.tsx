@@ -259,7 +259,7 @@ const BtcAddress = styled(Row)<{ error: boolean }>`
     outline: none;
     border-radius: 0;
   }
-  
+
   @media screen and (max-width: 850px) {
     padding-right: 20px;
     input[type='text'] {

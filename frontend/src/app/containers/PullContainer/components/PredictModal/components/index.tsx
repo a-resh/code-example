@@ -64,6 +64,7 @@ export const Block = styled(Column)<{ align?: string }>`
   h2 {
     font-size: 35px;
     margin: 10px 0;
+    font-weight: 300;
   }
 
   h4 {

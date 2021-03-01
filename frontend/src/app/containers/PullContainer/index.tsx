@@ -90,7 +90,7 @@ export function PullContainer() {
             <Calculator
               showModal={() => dispatch(showModal())}
               totem={totem}
-              tokenPrice={8.8}
+              tokenPrice={tokenPrice}
               btcLastPrice={btcLastPrice}
             />
             <Reward totem={totem} allPayouts={allPayouts} />

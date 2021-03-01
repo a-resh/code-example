@@ -11,9 +11,9 @@ export function* _setBtcAddress(
 ) {
   try {
     const result = yield call(
-        api.setBtcAddress,
-        action.payload.publicAddress,
-        action.payload.btcAddress,
+      api.setBtcAddress,
+      action.payload.publicAddress,
+      action.payload.btcAddress,
     );
     if (result.ok) {
       yield put({
@@ -21,10 +21,10 @@ export function* _setBtcAddress(
         payload: action.payload.btcAddress,
       });
     } else {
-      yield put({type: contentActions.error.type, payload: result});
+      yield put({ type: contentActions.error.type, payload: result });
     }
   } catch (e) {
-    yield put({type: contentActions.error.type, payload: e});
+    yield put({ type: contentActions.error.type, payload: e });
   }
 }
 

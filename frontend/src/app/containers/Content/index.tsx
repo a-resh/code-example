@@ -17,8 +17,11 @@ import { activePageSelector, userSelector } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
 import { contentSaga } from './saga';
 import { ConnectMetamaskModal } from './components/ConnectMetamaskModal';
-import {showConMetamaskModalSelector, showErrorModalSelector} from './selectors';
-import {ErrorModal} from "./components/ErrorModal";
+import {
+  showConMetamaskModalSelector,
+  showErrorModalSelector,
+} from './selectors';
+import { ErrorModal } from './components/ErrorModal';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -54,9 +57,9 @@ export const Content = memo(({ children }: Props) => {
           totem={totem}
         />
         <ErrorModal
-            isOpen={isShowErrorModal}
-            close={() => dispatch(error(false))}
-            totem={totem}
+          isOpen={isShowErrorModal}
+          close={() => dispatch(error(false))}
+          totem={totem}
         />
       </Div>
     </>

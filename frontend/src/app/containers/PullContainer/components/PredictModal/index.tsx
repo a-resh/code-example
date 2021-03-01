@@ -59,7 +59,7 @@ export const PredictModal = memo(
     let startValue = 32000;
     const initBetValue = 10000;
     const [bitcoinValue, setBitcoinValue] = useState(startValue);
-    const [isActivePercent, setIsActivePercent] = useState(50);
+    const [activePercent, setIsActivePercent] = useState(50);
     const [betValue, setBetValue] = useState((initBet * 50) / 100);
     const [betError, setBetError] = useState('');
     const [bitcoinError, setBitcoinError] = useState('');
@@ -85,8 +85,9 @@ export const PredictModal = memo(
           Math.round(+graphicsData[graphicsData.length - 1].close),
         );
       }
+      setBetValue((initBet * activePercent) / 100);
       return () => subscribe.unsubscribe();
-    }, [graphicsData, totem]);
+    }, [graphicsData, totem, initBet]);
 
     const changeBetValue = (value: number) => {
       setIsActivePercent(value);
@@ -189,7 +190,9 @@ export const PredictModal = memo(
                 <input
                   type="number"
                   value={betValue}
-                  onChange={e => setBetValue(+e.target.value)}
+                  onChange={e =>
+                    +e.target.value ? setBetValue(+e.target.value) : null
+                  }
                 />
               </InputWrapperBottom>
               <PercentBlock>
@@ -200,7 +203,7 @@ export const PredictModal = memo(
                       v * 2.5,
                     ).toString(16)}`}
                     onClick={() => changeBetValue(v)}
-                    isActive={isActivePercent === v}
+                    isActive={activePercent === v}
                   >
                     <p>{v}%</p>
                   </PercentValue>

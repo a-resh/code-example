@@ -74,7 +74,8 @@ const Div = styled(Column)`
   color: white;
 
   h1,
-  h2 {
+  h2,
+  h3 {
     font-weight: 300;
   }
 

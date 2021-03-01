@@ -24,3 +24,9 @@ export interface GraphicData {
   transparent_volume: number;
   volume_transparency: any;
 }
+
+export interface MakePredictData {
+  bitcoinPrice: number;
+  stakeValue: number;
+  user: any;
+}

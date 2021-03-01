@@ -64,11 +64,9 @@ export function YourRewards({ stakes }: Props) {
                     width={15}
                     height={15}
                   />
-                  <select name="totem" id="">
-                    <option value={v.totem}>{v.totem}</option>
-                    <option value={v.totem}>{v.totem}</option>
-                    <option value={v.totem}>{v.totem}</option>
-                  </select>
+                  <p>{`${v.totem.charAt(0).toUpperCase()}${v.totem.substr(
+                    1,
+                  )}`}</p>
                 </StakingPool>
                 <TOTM>
                   <p>100</p>
@@ -81,7 +79,7 @@ export function YourRewards({ stakes }: Props) {
                 </Total>
                 <ButtonBlock>
                   <ClaimMobile totem={v.totem}>
-                    <h3>Claim</h3>
+                    <h3>{t('Claim')}</h3>
                   </ClaimMobile>
                 </ButtonBlock>
               </TableRow>
@@ -106,7 +104,7 @@ const Div = styled.div`
   }
   h3 {
     font-weight: 300;
-    font-size: 15px;
+    font-size: 20px;
   }
 `;
 
@@ -135,16 +133,16 @@ const StakingPool = styled(Row)`
   width: 40%;
   padding: 0 0 0 5px;
 
-  select,
-  option {
+  p {
     width: calc(100% - 30px);
     margin-left: 5px;
-    background-color: #272e38;
+    //background-color: #272e38;
     border: none;
     color: white;
     padding: 0 5px;
     font-weight: bold;
     border-radius: 2px;
+    text-align: center;
   }
 `;
 const TOTM = styled(Center)`

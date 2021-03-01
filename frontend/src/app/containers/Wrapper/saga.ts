@@ -10,14 +10,18 @@ import { api } from '../../../utils/api';
 import { LocalStorageKeys } from '../../../types/enums';
 import { abi } from '../../../types/abis';
 import { User } from '../../../types/interfaces';
+
 declare const window: any;
+export let generalContract;
 
 async function getUserBalance(address) {
-  const contract = new window.web3.eth.Contract(
+  generalContract = new window.web3.eth.Contract(
     abi.general,
-    '0x5755ba0BE69bF681447322CFb87fBa117B9905ad',
+    process.env.REACT_APP_GENERAL_CONTRACT_ADDRESS,
   );
-  return contract.methods.balanceOf(address).call((error, balance) => balance);
+  return generalContract.methods
+    .balanceOf(address)
+    .call((error, balance) => balance);
 }
 
 function* getData() {
@@ -61,12 +65,17 @@ function* getLastBtcPrice() {
   }
 }
 
-function* getTokenPrice() {
+async function getTokenPrice() {
   const DAI = new Token(
     ChainId.MAINNET,
-    '0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13',
+    process.env.REACT_APP_UNISWAP_CONTRACT_ADDRESS ||
+      '0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13',
     18,
   );
+  const pair = await Fetcher.fetchPairData(DAI, WETH[DAI.chainId]);
+  const ethPrice = await api.getEthPrice();
+  const route = new Route([pair], WETH[DAI.chainId]);
+  return ethPrice / +route.midPrice.toSignificant(6);
 }
 
 const initUserAddress = async () => {
@@ -89,6 +98,16 @@ const setUserAddress = async () => {
   return await window.web3.eth.getAccounts().then(([account]) => account);
 };
 
+function* initTokenPrice() {
+  try {
+    const payload = yield call(getTokenPrice);
+    if (payload) {
+      yield put({ type: wrapperActions.getTokenPriceSuccess.type, payload });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
 function* initUser() {
   const data = yield call(initUserAddress);
   if (data) {
@@ -129,16 +148,16 @@ function* _initUser() {
   yield takeLatest(wrapperActions.init.type, initUser);
 }
 
-function* _getTokenPrice() {
-  yield takeLatest(wrapperActions.getTokenPrice.type, getTokenPrice);
-}
-
 function* _getLastBtcPrice() {
   yield takeLatest(wrapperActions.getLastBtcPrice.type, getLastBtcPrice);
 }
 
 function* _setUserSaga() {
   yield takeLatest(wrapperActions.setUserAddress.type, setUserEthAddress);
+}
+
+function* _getTokenPrice() {
+  yield takeLatest(wrapperActions.getTokenPrice.type, initTokenPrice);
 }
 
 export function* wrapperSaga() {
@@ -148,5 +167,6 @@ export function* wrapperSaga() {
     _getTokenPrice(),
     _getLastBtcPrice(),
     _getDrawData(),
+    _getTokenPrice(),
   ]);
 }
