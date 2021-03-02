@@ -7,6 +7,15 @@ contract TotemToken {
     string public standard = "Totem Token v1.0";
     uint256 public totalSupply;
 
+    address public CommunityDevelopmentAddr;
+    address public StakingRewardsAddr;
+    address public LiquidityPoolAddr;
+    address public PublicSaleAddr;
+    address public AdvisorsAddr;
+    address public SeedInvestmentAddr;
+    address public PrivateSaleAddr;
+    address public TeamAllocationAddr;
+
     uint256 public CommunityDevelopment;
     uint256 public StakingRewards;
     uint256 public LiquidityPool;
@@ -25,15 +34,67 @@ contract TotemToken {
     uint8 PRIVATE_SALE = 150; // 15% for Private Sale
     uint8 TEAM_ALLOCATION = 150; // 15% for Team allocation
 
+    uint256 private _startTokenDate = block.timestamp; // time when token deployed
+    uint8 _currentMonthOfBlockedTokens = 0;
+    uint256 private ONE_MONTH = 2629746; // 1 month in seconds
+    uint8 private BLOCKING_PERIOD = 12; // blocking period in months
+
+    uint8 PrivateSaleBlockValue = 85; // 85% of locked tokens
+    uint8 SeedInvestmentBlockValue = 85; // 85% of locked tokens
+    uint8 TeamAllocationBlockValue = 85; // 85% of locked tokens
+    uint8 AdvisorsBlockValue = 85; // 85% of locked tokens
+
+    uint256 PrivateSaleBlockBalance;
+
+    uint256[13] PrivateSalePayOuts = [
+        0,
+        0,
+        0,
+        0,
+        1500,
+        1000,
+        2000,
+        1000,
+        1000,
+        1000,
+        1000,
+        0,
+        0
+    ];
+    uint256[13] SeedTeamAdvisorsPayOuts = [
+        0,
+        0,
+        0,
+        0,
+        1500,
+        875,
+        1500,
+        771,
+        771,
+        771,
+        771,
+        771,
+        771
+    ];
+
     uint8 private _decimals;
 
-    address payable owner;
+    address owner;
 
-    constructor(uint256 _initialSupply) {
+    constructor(
+        uint256 _initialSupply,
+        address _CommunityDevelopmentAddr,
+        address _StakingRewardsAddr,
+        address _LiquidityPoolAddr,
+        address _PublicSaleAddr,
+        address _AdvisorsAddr,
+        address _SeedInvestmentAddr,
+        address _PrivateSaleAddr,
+        address _TeamAllocationAddr
+    ) {
         _decimals = 18;
         // Mint 10 000 000 tokens to msg.sender
         // 1 token = 1 * (10 ** decimals)
-        balanceOf[msg.sender] = _initialSupply;
         totalSupply = _initialSupply * 10**_decimals;
 
         //Token allocation
@@ -45,6 +106,55 @@ contract TotemToken {
         SeedInvestment = (_initialSupply / 1000) * SEED_INVESTMENT;
         PrivateSale = (_initialSupply / 1000) * PRIVATE_SALE;
         TeamAllocation = (_initialSupply / 1000) * TEAM_ALLOCATION;
+
+        // set parnters addresses
+        CommunityDevelopmentAddr = _CommunityDevelopmentAddr;
+        StakingRewardsAddr = _StakingRewardsAddr;
+        LiquidityPoolAddr = _LiquidityPoolAddr;
+        PublicSaleAddr = _PublicSaleAddr;
+        AdvisorsAddr = _AdvisorsAddr;
+        SeedInvestmentAddr = _SeedInvestmentAddr;
+        PrivateSaleAddr = _PrivateSaleAddr;
+        TeamAllocationAddr = _TeamAllocationAddr;
+
+        // set partners balances
+        balanceOf[CommunityDevelopmentAddr] = CommunityDevelopment;
+        balanceOf[StakingRewardsAddr] = StakingRewards;
+        balanceOf[LiquidityPoolAddr] = LiquidityPool;
+        balanceOf[PublicSaleAddr] = PublicSale;
+        balanceOf[AdvisorsAddr] = Advisors;
+        balanceOf[SeedInvestmentAddr] = SeedInvestment;
+        balanceOf[PrivateSaleAddr] = PrivateSale;
+        balanceOf[TeamAllocationAddr] = TeamAllocation;
+
+        // correction for accounts with bblocked tokens
+        balanceOf[PrivateSaleAddr] -=
+            (balanceOf[PrivateSaleAddr] * PrivateSaleBlockValue) /
+            100;
+        balanceOf[SeedInvestmentAddr] -=
+            (balanceOf[SeedInvestmentAddr] * SeedInvestmentBlockValue) /
+            100;
+        balanceOf[TeamAllocationAddr] -=
+            (balanceOf[TeamAllocationAddr] * TeamAllocationBlockValue) /
+            100;
+        balanceOf[AdvisorsAddr] -=
+            (balanceOf[AdvisorsAddr] * AdvisorsBlockValue) /
+            100;
+
+        totalSupply =
+            totalSupply -
+            CommunityDevelopment -
+            StakingRewards -
+            LiquidityPool -
+            PublicSale;
+        totalSupply =
+            totalSupply -
+            balanceOf[PrivateSaleAddr] -
+            balanceOf[SeedInvestmentAddr] -
+            balanceOf[TeamAllocationAddr] -
+            balanceOf[AdvisorsAddr];
+
+        balanceOf[msg.sender] = totalSupply;
 
         owner = msg.sender;
     }
@@ -63,6 +173,7 @@ contract TotemToken {
     );
 
     mapping(address => uint256) public balanceOf;
+    mapping(address => uint256) public balanceOfLockedTokens;
     mapping(address => mapping(address => uint256)) public allowance;
 
     function transfer(address _to, uint256 _value)
@@ -108,35 +219,23 @@ contract TotemToken {
         return true;
     }
 
-    function getCommunityDevelopment() public view returns (uint256) {
-        return CommunityDevelopment;
-    }
+    function addNextBlockedTokens() public returns (bool success) {
+        uint256 monthsElapsed = (block.timestamp - _startTokenDate) / ONE_MONTH;
 
-    function getStakingRewards() public view returns (uint256) {
-        return StakingRewards;
-    }
-
-    function getLiquidityPool() public view returns (uint256) {
-        return LiquidityPool;
-    }
-
-    function getPublicSale() public view returns (uint256) {
-        return PublicSale;
-    }
-
-    function getAdvisors() public view returns (uint256) {
-        return Advisors;
-    }
-
-    function getSeedInvestment() public view returns (uint256) {
-        return SeedInvestment;
-    }
-
-    function getPrivateSale() public view returns (uint256) {
-        return PrivateSale;
-    }
-
-    function getTeamAllocation() public view returns (uint256) {
-        return TeamAllocation;
+        if (monthsElapsed > _currentMonthOfBlockedTokens) {
+            _currentMonthOfBlockedTokens += 1;
+            balanceOf[PrivateSaleAddr] +=
+                (PrivateSale / 10000) *
+                PrivateSalePayOuts[_currentMonthOfBlockedTokens];
+            balanceOf[SeedInvestmentAddr] +=
+                (SeedInvestment / 10000) *
+                SeedTeamAdvisorsPayOuts[_currentMonthOfBlockedTokens];
+            balanceOf[TeamAllocationAddr] +=
+                (TeamAllocation / 10000) *
+                SeedTeamAdvisorsPayOuts[_currentMonthOfBlockedTokens];
+            balanceOf[AdvisorsAddr] +=
+                (Advisors / 10000) *
+                SeedTeamAdvisorsPayOuts[_currentMonthOfBlockedTokens];
+        }
     }
 }
