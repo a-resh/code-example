@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const USERS = require('../data/users');
 const createNewToken = require('../utils/jwt');
+const jwtConfig = require('../config/jwt');
 const uniqid = require('uniqid');
 
 // db
@@ -54,6 +55,23 @@ router.post('/register', async (req, res, next) => {
 });
 
 router.post('/setBTCaddress', async (req, res, next) => {
+  const headerExists = req.headers.authorization;
+  if (headerExists) {
+    const token = req.headers.authorization.split(' ')[1]; // Authorization Bearer xxx
+    jwt.verify(token, jwtConfig.secret, function (error, decoded) {
+      if (error) {
+        console.log(error);
+        res.status(401).json('Unauthorized');
+      } else {
+        console.log('Auth ok: ', decoded.publicAddress);
+      }
+    });
+  } else {
+    res.status(403).json('Token not provided');
+  }
+
+  if (headerExists) {
+  }
   const { publicAddress, btcAddress } = req.body;
   let code = 200;
   let responseObj = {};

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const USERS = require('../data/users');
 const sigUtil = require('eth-sig-util');
 const createNewToken = require('../utils/jwt');
 const uniqid = require('uniqid');
