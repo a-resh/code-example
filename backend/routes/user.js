@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const USERS = require('../data/users');
+const jwt = require('jsonwebtoken');
 const createNewToken = require('../utils/jwt');
 const jwtConfig = require('../config/jwt');
 const uniqid = require('uniqid');
@@ -70,8 +70,6 @@ router.post('/setBTCaddress', async (req, res, next) => {
     res.status(403).json('Token not provided');
   }
 
-  if (headerExists) {
-  }
   const { publicAddress, btcAddress } = req.body;
   let code = 200;
   let responseObj = {};
@@ -107,26 +105,6 @@ router.post('/setBTCaddress', async (req, res, next) => {
   } catch (error) {
     console.log('Update BTC address error', error);
   }
-});
-
-router.post('/payStakingBonus', (req, res, next) => {
-  console.log('req:', req.body);
-  let code = 200;
-  let user = USERS.filter((item) => item.id === req.body.id);
-  let responseObj = {};
-  if (user.length === 0) {
-    responseObj = {
-      error: 'User not found',
-    };
-    code = 404;
-  } else {
-    responseObj = {
-      paymentStatus: 'DONE',
-      stakedAmont: Number(user[0].inGame),
-      amount: user[0].inGame * 0.1,
-    };
-  }
-  res.status(code).json(responseObj);
 });
 
 module.exports = router;
