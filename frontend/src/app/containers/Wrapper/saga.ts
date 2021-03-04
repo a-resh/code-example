@@ -13,12 +13,19 @@ import { User } from '../../../types/interfaces';
 
 declare const window: any;
 export let generalContract;
+export let predictContract;
 
-async function getUserBalance(address) {
+function initContracts() {
   generalContract = new window.web3.eth.Contract(
     abi.general,
     process.env.REACT_APP_GENERAL_CONTRACT_ADDRESS,
   );
+  predictContract = new window.web3.eth.Contract(
+    abi.predict,
+    process.env.REACT_APP_PREDICT_CONTRACT_ADDRESS,
+  );
+}
+async function getUserBalance(address) {
   return generalContract.methods
     .balanceOf(address)
     .call((error, balance) => balance);
@@ -113,6 +120,7 @@ function* initUser() {
   if (data) {
     try {
       const payload: User = yield call(api.getUserData, data);
+      yield call(initContracts);
       payload.balance = +(yield call(getUserBalance, data));
       yield put({ type: wrapperActions.initSuccess.type, payload });
     } catch (e) {
@@ -129,10 +137,11 @@ function* setUserEthAddress(action: PayloadAction<boolean>) {
     try {
       yield call(getAuthToken, data);
       const payload: User = yield call(api.getUserData, data);
+      yield call(initContracts);
       payload.balance = +(yield call(getUserBalance, data));
       yield put({ type: wrapperActions.initSuccess.type, payload });
       if (action.payload) {
-        yield put({ type: pullContainerActions.showModal.type });
+        yield put({ type: pullContainerActions.showPredictModal.type });
       }
     } catch (e) {
       yield put({ type: contentActions.error.type, payload: e });

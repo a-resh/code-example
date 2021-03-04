@@ -54,6 +54,7 @@ export const api = {
       .then(res => res.json())
       .then(res => res.USD);
   },
+  payout: id => _post(`${apiUrl}/user/payStakingBonus`, { id }),
 };
 
 function _post(url: string, body: any, auth = false) {

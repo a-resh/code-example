@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 
@@ -15,7 +15,9 @@ import {
   allPayoutsSelector,
   drawDataSelector,
   graphicsDataSelector,
-  isShowModalSelector,
+  isShowConfirmModalSelector,
+  isShowPredictModalSelector,
+  loadingSelector,
   pollFillSelector,
 } from './selectors';
 import { pullContainerSaga } from './saga';
@@ -37,35 +39,53 @@ import {
 } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
 import { ConnectMetamaskModal } from '../Content/components/ConnectMetamaskModal';
+import { Draw } from '../../../types/interfaces';
+import { ConfirmModal } from 'app/components/ConfirmModal';
+import { MakePredictData } from './types';
 
 export function PullContainer() {
   const dispatch = useDispatch();
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: pullContainerSaga });
-  const drawData = useSelector(drawDataSelector);
+  const drawData = useSelector(drawDataSelector) as Draw;
   const totem = useSelector(activePageSelector);
   const poolFill = useSelector(pollFillSelector);
   const user = useSelector(userSelector);
-  const isShowModal = useSelector(isShowModalSelector);
+  const isShowPredictModal = useSelector(isShowPredictModalSelector);
+  const isShowConfirmModal = useSelector(isShowConfirmModalSelector);
   const graphicsData = useSelector(graphicsDataSelector);
   const btcLastPrice = useSelector(btcLastPriceSelector);
   const allPayouts = useSelector(allPayoutsSelector);
   const tokenPrice = useSelector(tokenPriceSelector);
+  const loading = useSelector(loadingSelector);
   const {
     makePredict,
     getData,
-    showModal,
+    showPredictModal,
+    showConfirmModal,
     getGraphicsData,
   } = pullContainerActions;
   const { setUserAddress } = wrapperActions;
+  const [confirmMessage, setConfirmMessage] = useState('');
+  const [predictValue, setPredictValue] = useState({});
   useEffect(() => {
     dispatch(getData());
   }, []);
   const makePredictFromModal = (bitcoinPrice: number, stakeValue: number) => {
-    dispatch(showModal());
-    dispatch(
-      makePredict({ bitcoinPrice, stakeValue, user: user.publicAddress }),
+    dispatch(showPredictModal());
+    setPredictValue({
+      bitcoinPrice,
+      stakeValue,
+      address: user.publicAddress,
+      days: TotemsData[totem].days,
+    });
+    setConfirmMessage(
+      `You want stake ${stakeValue} TOTM. BTC will cost $${bitcoinPrice}`,
     );
+    dispatch(showConfirmModal(true));
+    // dispatch(
+    //   makePredict({ bitcoinPrice, stakeValue, address: user.publicAddress, days: TotemsData[totem].days }),
+    // );
   };
   return (
     <>
@@ -78,7 +98,7 @@ export function PullContainer() {
             totem={totem}
             showModal={() =>
               user.publicAddress
-                ? dispatch(showModal())
+                ? dispatch(showPredictModal())
                 : dispatch(setUserAddress(true))
             }
             poolFill={poolFill}
@@ -88,7 +108,7 @@ export function PullContainer() {
         <Bottom>
           <BottomContent>
             <Calculator
-              showModal={() => dispatch(showModal())}
+              showModal={() => dispatch(showPredictModal())}
               totem={totem}
               tokenPrice={tokenPrice}
               btcLastPrice={btcLastPrice}
@@ -101,7 +121,7 @@ export function PullContainer() {
               color={'white'}
               showModal={() =>
                 user.publicAddress
-                  ? dispatch(showModal())
+                  ? dispatch(showPredictModal())
                   : dispatch(setUserAddress(true))
               }
             />
@@ -109,13 +129,23 @@ export function PullContainer() {
         </Bottom>
         <PredictModal
           endTime={+drawData?.endTime || new Date().getTime()}
-          isOpen={isShowModal}
+          isOpen={isShowPredictModal}
           initBet={user.balance}
           graphicsData={graphicsData}
           getGraphicsData={() => dispatch(getGraphicsData())}
-          close={() => dispatch(showModal())}
+          close={() => dispatch(showPredictModal())}
           totem={totem}
-          makeBet={makePredictFromModal}
+          makeBet={(bitcoinValue, betValue) =>
+            makePredictFromModal(bitcoinValue, betValue)
+          }
+        />
+        <ConfirmModal
+          totem={totem}
+          isOpen={isShowConfirmModal}
+          close={() => dispatch(showConfirmModal(false))}
+          message={confirmMessage}
+          confirm={() => dispatch(makePredict(predictValue as MakePredictData))}
+          loading={loading}
         />
       </Div>
     </>

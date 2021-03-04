@@ -442,4 +442,63 @@ export const abi = {
       type: 'function',
     },
   ],
+  predict: [
+    {
+      inputs: [
+        {
+          internalType: 'contract TotemToken',
+          name: '_token',
+          type: 'address',
+        },
+      ],
+      stateMutability: 'nonpayable',
+      type: 'constructor',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: '_stake',
+          type: 'uint256',
+        },
+        {
+          internalType: 'uint256',
+          name: '_btcPrediction',
+          type: 'uint256',
+        },
+        {
+          internalType: 'uint256',
+          name: '_duration',
+          type: 'uint256',
+        },
+      ],
+      name: 'addNewPlayer',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'bytes32',
+          name: 'drawId',
+          type: 'bytes32',
+        },
+        {
+          internalType: 'uint256',
+          name: '_launchTime',
+          type: 'uint256',
+        },
+        {
+          internalType: 'uint256',
+          name: '_duration',
+          type: 'uint256',
+        },
+      ],
+      name: 'createNewDraw',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+  ],
 };

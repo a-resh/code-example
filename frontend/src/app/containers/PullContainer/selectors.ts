@@ -7,10 +7,14 @@ import { activePageSelector, drawsSelector } from '../Wrapper/selectors';
 
 const graphicsData = (state: RootState) =>
   state.pullContainer?.graphicsData || initialState.graphicsData;
+const loading = (state: RootState) =>
+  state.pullContainer?.loading || initialState.loading;
 const allPayouts = (state: RootState) =>
   state.pullContainer?.allPayouts || initialState.allPayouts;
-const isShowModal = (state: RootState) =>
-  state?.pullContainer?.isShowModal || initialState.isShowModal;
+const isShowPredictModal = (state: RootState) =>
+  state?.pullContainer?.isShowPredictModal || initialState.isShowPredictModal;
+const isShowConfirmModal = (state: RootState) =>
+  state?.pullContainer?.isShowConfirmModal || initialState.isShowConfirmModal;
 
 export const drawDataSelector = createSelector(
   activePageSelector,
@@ -33,8 +37,12 @@ export const pollFillSelector = createSelector(
       : 0,
 );
 
-export const isShowModalSelector = createSelector(
-  isShowModal,
+export const isShowPredictModalSelector = createSelector(
+  isShowPredictModal,
+  isShowModal => isShowModal,
+);
+export const isShowConfirmModalSelector = createSelector(
+  isShowConfirmModal,
   isShowModal => isShowModal,
 );
 export const allPayoutsSelector = createSelector(
@@ -42,3 +50,4 @@ export const allPayoutsSelector = createSelector(
   allPayouts => allPayouts,
 );
 export const graphicsDataSelector = createSelector(graphicsData, data => data);
+export const loadingSelector = createSelector(loading, data => data);

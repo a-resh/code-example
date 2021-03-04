@@ -94,14 +94,14 @@ export const PredictModal = memo(
       setBetValue(Math.ceil((initBet * value) / 100));
     };
     const makeStake = () => {
-      if (betValue > initBetValue) {
-        setBetError(t('To big bet'));
-        return;
-      }
-      if (bitcoinValue < 0) {
-        setBitcoinError('To small');
-        return;
-      }
+      // if (betValue > initBetValue) {
+      //   setBetError(t('To big bet'));
+      //   return;
+      // }
+      // if (bitcoinValue < 0) {
+      //   setBitcoinError('To small');
+      //   return;
+      // }
       makeBet(bitcoinValue, betValue);
     };
 
@@ -149,6 +149,7 @@ export const PredictModal = memo(
                     <input
                       type="number"
                       defaultValue={bitcoinValue}
+                      pattern="([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]"
                       onChange={e => setBitcoinValue(+e.target.value)}
                     />
                   </InputWrapper>
@@ -165,6 +166,7 @@ export const PredictModal = memo(
                   ${' '}
                   <input
                     type="number"
+                    pattern="([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]"
                     defaultValue={bitcoinValue}
                     onChange={e => setBitcoinValue(+e.target.value)}
                   />
@@ -190,9 +192,16 @@ export const PredictModal = memo(
                 <input
                   type="number"
                   value={betValue}
-                  onChange={e =>
-                    +e.target.value ? setBetValue(+e.target.value) : null
-                  }
+                  onChange={e => {
+                    console.log(
+                      +e.target.value,
+                      e.target.value,
+                      !!+e.target.value.charAt(0),
+                    );
+                    e.target.value && +e.target.value.charAt(0)
+                      ? setBetValue(+e.target.value)
+                      : setBetValue(+e.target.value.substr(1) || 0);
+                  }}
                 />
               </InputWrapperBottom>
               <PercentBlock>

@@ -1,11 +1,10 @@
 /* --- STATE --- */
-
-import { Draw } from '../../../types/interfaces';
-
 export interface PullContainerState {
-  isShowModal: boolean;
+  isShowPredictModal: boolean;
+  isShowConfirmModal: boolean;
   graphicsData: GraphicData[];
   allPayouts: number;
+  loading: boolean;
 }
 
 export type ContainerState = PullContainerState;
@@ -28,5 +27,6 @@ export interface GraphicData {
 export interface MakePredictData {
   bitcoinPrice: number;
   stakeValue: number;
-  user: any;
+  address: string;
+  days: number;
 }

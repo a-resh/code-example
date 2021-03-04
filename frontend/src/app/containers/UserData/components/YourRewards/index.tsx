@@ -15,9 +15,10 @@ import { TableData } from '../../types';
 
 interface Props {
   stakes: TableData[];
+  payout: () => void;
 }
 
-export function YourRewards({ stakes }: Props) {
+export function YourRewards({ stakes, payout }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   // const values = Array.apply(null, Array(5)).map(() => {
@@ -78,7 +79,7 @@ export function YourRewards({ stakes }: Props) {
                   <p>$300</p>
                 </Total>
                 <ButtonBlock>
-                  <ClaimMobile totem={v.totem}>
+                  <ClaimMobile totem={v.totem} onClick={payout}>
                     <h3>{t('Claim')}</h3>
                   </ClaimMobile>
                 </ButtonBlock>

@@ -1,4 +1,4 @@
-import { take, call, put, select, takeLatest } from 'redux-saga/effects';
+import { take, call, put, select, takeLatest, all } from 'redux-saga/effects';
 import { userDataActions } from './slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { api } from '../../../utils/api';
@@ -6,7 +6,7 @@ import { wrapperSaga } from '../Wrapper/saga';
 import { wrapperActions } from '../Wrapper/slice';
 import { contentActions } from '../Content/slice';
 
-export function* _setBtcAddress(
+function* setBtcAddress(
   action: PayloadAction<{ publicAddress: string; btcAddress: string }>,
 ) {
   try {
@@ -27,7 +27,19 @@ export function* _setBtcAddress(
     yield put({ type: contentActions.error.type, payload: e });
   }
 }
-
+function* payout(action: PayloadAction<string>) {
+  try {
+    yield call(api.payout, action.payload);
+  } catch (e) {
+    put({ type: contentActions.error.type, payload: e });
+  }
+}
+function* _payout() {
+  yield takeLatest(userDataActions.payout.type, payout);
+}
+function* _setBtcAddress() {
+  yield takeLatest(userDataActions.setBtcAddress.type, setBtcAddress);
+}
 export function* userDataSaga() {
-  yield takeLatest(userDataActions.setBtcAddress.type, _setBtcAddress);
+  yield all([_setBtcAddress(), _payout()]);
 }

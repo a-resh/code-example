@@ -4,16 +4,45 @@ import { contentActions } from '../Content/slice';
 import { api } from '../../../utils/api';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { MakePredictData } from './types';
-import { generalContract } from '../Wrapper/saga';
+import { generalContract, predictContract } from '../Wrapper/saga';
+
+function predict(action: PayloadAction<MakePredictData>) {
+  return predictContract.methods
+    .addNewPlayer(
+      action.payload.stakeValue,
+      action.payload.bitcoinPrice,
+      action.payload.days,
+    )
+    .send({ from: action.payload.address });
+}
+function approve(action: PayloadAction<MakePredictData>) {
+  return generalContract.methods
+    .approve(action.payload.address, action.payload.stakeValue)
+    .send({ from: action.payload.address }, (err, result) =>
+      err ? null : result.blockHash,
+    );
+}
 
 function* makePredict(action: PayloadAction<MakePredictData>) {
   try {
-    yield call(
-      generalContract.methods.approve,
-      action.payload.user.publicAddress,
-      action.payload.stakeValue,
-    );
-  } catch (e) {}
+    yield put({ type: pullContainerActions.loading.type });
+    const result = yield call(approve, action);
+    console.log(result);
+    if (result) {
+      yield call(predict, action);
+      yield put({
+        type: pullContainerActions.showConfirmModal.type,
+        payload: false,
+      });
+      yield put({ type: pullContainerActions.loading.type });
+    }
+  } catch (e) {
+    yield put({
+      type: pullContainerActions.showConfirmModal.type,
+      payload: false,
+    });
+    yield put({ type: pullContainerActions.loading.type });
+  }
 }
 function* getGraphicsData() {
   try {

@@ -15,9 +15,10 @@ import { TableData } from '../../types';
 
 interface Props {
   rewards: TableData[];
+  payout: () => void;
 }
 
-export const AccountRewardsAndPools = memo(({ rewards }: Props) => {
+export const AccountRewardsAndPools = memo(({ rewards, payout }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   // const totems = ['fox', 'wolf', 'owl'];
@@ -121,7 +122,7 @@ export const AccountRewardsAndPools = memo(({ rewards }: Props) => {
                   </RoiColumn>
                   <ButtonsColumn>
                     {finished ? (
-                      <Claim totem={value.totem}>
+                      <Claim totem={value.totem} onClick={payout}>
                         <h3> CLAIM</h3>
                       </Claim>
                     ) : null}
@@ -252,7 +253,7 @@ const YourPredictionColumn = styled(Center)`
 `;
 const ProjectedReturnsColumn = styled(Center)`
   border-right: 2px solid white;
-  width: 15%;
+  width: 18%;
   ${mediaQueries.lessThan('large')`
   h3 {font-size: 10px;}
 `}

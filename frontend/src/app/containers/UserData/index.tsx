@@ -31,7 +31,7 @@ interface Props {}
 export function UserData(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: userDataSaga });
-  const { setBtcAddress } = userDataActions;
+  const { setBtcAddress, payout } = userDataActions;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user = useSelector(userSelector);
   const history = useHistory();
@@ -51,7 +51,10 @@ export function UserData(props: Props) {
     <>
       <Div>
         <YourRewardsWrapper>
-          <YourRewards stakes={oldStakes} />
+          <YourRewards
+            stakes={oldStakes}
+            payout={() => dispatch(payout(user.publicAddress))}
+          />
         </YourRewardsWrapper>
         <WalletInfo
           user={user}
@@ -59,7 +62,10 @@ export function UserData(props: Props) {
             dispatch(setBtcAddress({ publicAddress, btcAddress }))
           }
         />
-        <AccountRewardsAndPools rewards={rewards} />
+        <AccountRewardsAndPools
+          rewards={rewards}
+          payout={() => dispatch(payout(user.publicAddress))}
+        />
         <ActivePools stakes={activeStakes} />
       </Div>
     </>

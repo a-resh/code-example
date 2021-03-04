@@ -13,7 +13,7 @@ import { Row } from '../../components/blocks';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../Wrapper/selectors';
 import { wrapperActions } from '../Wrapper/slice';
-import { isShowModalSelector } from '../PullContainer/selectors';
+import { isShowPredictModalSelector } from '../PullContainer/selectors';
 
 interface Props {}
 
@@ -21,7 +21,7 @@ export function Header({}: Props) {
   const { setUserAddress } = wrapperActions;
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
-  const isShowModal = useSelector(isShowModalSelector);
+  const isShowModal = useSelector(isShowPredictModalSelector);
   return (
     <Div hidden={isShowModal}>
       <MenuWrapper>

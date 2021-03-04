@@ -13,6 +13,7 @@ const userDataSlice = createSlice({
       state,
       action: PayloadAction<{ publicAddress: string; btcAddress: string }>,
     ) {},
+    payout(state, action: PayloadAction<string>) {},
   },
 });
 
