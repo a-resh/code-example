@@ -17,6 +17,7 @@ contract Draw {
         address addr;
         uint256 prediction;
         uint256 stake;
+        uint256 stakeTime;
     }
 
     Player[] public players;
@@ -63,6 +64,9 @@ contract Draw {
         10
     ];
 
+    mapping(uint256 => uint256) public enhancedRewards;
+    uint256 ONE_HOUR = 3600;
+
     // Set to true at the end, disallows any change.
     // By default initialized to `false`.
     bool ended;
@@ -85,6 +89,14 @@ contract Draw {
         maxPoolSize = _maxPoolSize;
         poolPrizeTOTM = _totemPrize;
         poolPrizeBTC = _btcPrize;
+
+        // enchancedRewards mapping
+        enhancedRewards[1] = 0;
+        enhancedRewards[2] = 1;
+        enhancedRewards[3] = 2;
+        enhancedRewards[4] = 3;
+        enhancedRewards[5] = 4;
+        enhancedRewards[6] = 5;
     }
 
     function addNewPlayer(
@@ -95,7 +107,7 @@ contract Draw {
         require(block.timestamp <= drawStartTime, "Draw not started.");
         require(maxPoolSize <= _stake + currentPoolSize, "Pool already full.");
 
-        players.push(Player(_player, _btcPrediction, _stake));
+        players.push(Player(_player, _btcPrediction, _stake, block.timestamp));
         playersCount = playersCount + 1;
         currentPoolSize = currentPoolSize + _stake;
     }
@@ -143,6 +155,11 @@ contract Draw {
                 if (players[i].prediction == sortPrediction[_nextWinner]) {
                     uint256 _totmPay =
                         (poolPrizeTOTM / 1000) * prizes[_nextWinner];
+                    _totmPay += ((_totmPay / 100) *
+                        enhancedRewards[
+                            (players[winners[_nextWinner].addr].stakeTime -
+                                drawStartTime) / ONE_HOUR
+                        ]);
                     uint256 _btcPay =
                         (poolPrizeBTC / 1000) * prizes[_nextWinner];
                     winners.push(
