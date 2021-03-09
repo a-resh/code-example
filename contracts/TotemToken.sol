@@ -15,15 +15,17 @@ contract TotemToken {
     address public SeedInvestmentAddr;
     address public PrivateSaleAddr;
     address public TeamAllocationAddr;
+    address public StrategicRoundAddr;
 
-    uint256 public CommunityDevelopment;
-    uint256 public StakingRewards;
-    uint256 public LiquidityPool;
-    uint256 public PublicSale;
-    uint256 public Advisors;
-    uint256 public SeedInvestment;
-    uint256 public PrivateSale;
-    uint256 public TeamAllocation;
+    uint256 public CommunityDevelopmentAmount;
+    uint256 public StakingRewardsAmount;
+    uint256 public LiquidityPoolAmount;
+    uint256 public PublicSaleAmount;
+    uint256 public AdvisorsAmount;
+    uint256 public SeedInvestmentAmount;
+    uint256 public PrivateSaleAmount;
+    uint256 public TeamAllocationAmount;
+    uint256 public StrategicRoundAmount;
 
     uint8 COMMUNITY_DEVELOPMENT = 100; // 10% for Community development
     uint8 STAKING_REWARDS = 165; // 16,5% for Staking Revawards
@@ -33,126 +35,32 @@ contract TotemToken {
     uint8 SEED_INVESTMENT = 110; // 11% for Seed investment
     uint8 PRIVATE_SALE = 150; // 15% for Private Sale
     uint8 TEAM_ALLOCATION = 150; // 15% for Team allocation
+    uint8 STRATEGIC_ROUND = 150; // 15% for Strategic Round
 
-    uint256 private _startTokenDate = block.timestamp; // time when token deployed
-    uint8 _currentMonthOfBlockedTokens = 0;
-    uint256 private ONE_MONTH = 2629746; // 1 month in seconds
-    uint8 private BLOCKING_PERIOD = 12; // blocking period in months
-
-    uint8 PrivateSaleBlockValue = 85; // 85% of locked tokens
-    uint8 SeedInvestmentBlockValue = 85; // 85% of locked tokens
-    uint8 TeamAllocationBlockValue = 85; // 85% of locked tokens
-    uint8 AdvisorsBlockValue = 85; // 85% of locked tokens
-
-    uint256 PrivateSaleBlockBalance;
-
-    uint256[13] PrivateSalePayOuts = [
-        0,
-        0,
-        0,
-        0,
-        1500,
-        1000,
-        2000,
-        1000,
-        1000,
-        1000,
-        1000,
-        0,
-        0
-    ];
-    uint256[13] SeedTeamAdvisorsPayOuts = [
-        0,
-        0,
-        0,
-        0,
-        1500,
-        875,
-        1500,
-        771,
-        771,
-        771,
-        771,
-        771,
-        771
-    ];
+    bool private _isDispributionComplete = false;
 
     uint8 private _decimals;
 
     address owner;
 
-    constructor(
-        uint256 _initialSupply,
-        address _CommunityDevelopmentAddr,
-        address _StakingRewardsAddr,
-        address _LiquidityPoolAddr,
-        address _PublicSaleAddr,
-        address _AdvisorsAddr,
-        address _SeedInvestmentAddr,
-        address _PrivateSaleAddr,
-        address _TeamAllocationAddr
-    ) {
+    constructor(uint256 _initialSupply) {
         _decimals = 18;
         // Mint 10 000 000 tokens to msg.sender
         // 1 token = 1 * (10 ** decimals)
         totalSupply = _initialSupply * 10**_decimals;
 
         //Token allocation
-        CommunityDevelopment = (_initialSupply / 1000) * COMMUNITY_DEVELOPMENT;
-        StakingRewards = (_initialSupply / 1000) * STAKING_REWARDS;
-        LiquidityPool = (_initialSupply / 1000) * LIQUIDITY_POOL;
-        PublicSale = (_initialSupply / 1000) * PUBLIC_SALE;
-        Advisors = (_initialSupply / 1000) * ADVISORS;
-        SeedInvestment = (_initialSupply / 1000) * SEED_INVESTMENT;
-        PrivateSale = (_initialSupply / 1000) * PRIVATE_SALE;
-        TeamAllocation = (_initialSupply / 1000) * TEAM_ALLOCATION;
-
-        // set parnters addresses
-        CommunityDevelopmentAddr = _CommunityDevelopmentAddr;
-        StakingRewardsAddr = _StakingRewardsAddr;
-        LiquidityPoolAddr = _LiquidityPoolAddr;
-        PublicSaleAddr = _PublicSaleAddr;
-        AdvisorsAddr = _AdvisorsAddr;
-        SeedInvestmentAddr = _SeedInvestmentAddr;
-        PrivateSaleAddr = _PrivateSaleAddr;
-        TeamAllocationAddr = _TeamAllocationAddr;
-
-        // set partners balances
-        balanceOf[CommunityDevelopmentAddr] = CommunityDevelopment;
-        balanceOf[StakingRewardsAddr] = StakingRewards;
-        balanceOf[LiquidityPoolAddr] = LiquidityPool;
-        balanceOf[PublicSaleAddr] = PublicSale;
-        balanceOf[AdvisorsAddr] = Advisors;
-        balanceOf[SeedInvestmentAddr] = SeedInvestment;
-        balanceOf[PrivateSaleAddr] = PrivateSale;
-        balanceOf[TeamAllocationAddr] = TeamAllocation;
-
-        // correction for accounts with bblocked tokens
-        balanceOf[PrivateSaleAddr] -=
-            (balanceOf[PrivateSaleAddr] * PrivateSaleBlockValue) /
-            100;
-        balanceOf[SeedInvestmentAddr] -=
-            (balanceOf[SeedInvestmentAddr] * SeedInvestmentBlockValue) /
-            100;
-        balanceOf[TeamAllocationAddr] -=
-            (balanceOf[TeamAllocationAddr] * TeamAllocationBlockValue) /
-            100;
-        balanceOf[AdvisorsAddr] -=
-            (balanceOf[AdvisorsAddr] * AdvisorsBlockValue) /
-            100;
-
-        totalSupply =
-            totalSupply -
-            CommunityDevelopment -
-            StakingRewards -
-            LiquidityPool -
-            PublicSale;
-        totalSupply =
-            totalSupply -
-            balanceOf[PrivateSaleAddr] -
-            balanceOf[SeedInvestmentAddr] -
-            balanceOf[TeamAllocationAddr] -
-            balanceOf[AdvisorsAddr];
+        CommunityDevelopmentAmount =
+            (_initialSupply / 1000) *
+            COMMUNITY_DEVELOPMENT;
+        StakingRewardsAmount = (_initialSupply / 1000) * STAKING_REWARDS;
+        LiquidityPoolAmount = (_initialSupply / 1000) * LIQUIDITY_POOL;
+        PublicSaleAmount = (_initialSupply / 1000) * PUBLIC_SALE;
+        AdvisorsAmount = (_initialSupply / 1000) * ADVISORS;
+        SeedInvestmentAmount = (_initialSupply / 1000) * SEED_INVESTMENT;
+        PrivateSaleAmount = (_initialSupply / 1000) * PRIVATE_SALE;
+        TeamAllocationAmount = (_initialSupply / 1000) * TEAM_ALLOCATION;
+        StrategicRoundAmount = (_initialSupply / 1000) * STRATEGIC_ROUND;
 
         balanceOf[msg.sender] = totalSupply;
 
@@ -219,23 +127,44 @@ contract TotemToken {
         return true;
     }
 
-    function addNextBlockedTokens() public returns (bool success) {
-        uint256 monthsElapsed = (block.timestamp - _startTokenDate) / ONE_MONTH;
+    function setDistributionTeamsAddresses(
+        address _CommunityDevelopmentAddr,
+        address _StakingRewardsAddr,
+        address _LiquidityPoolAddr,
+        address _PublicSaleAddr,
+        address _AdvisorsAddr,
+        address _SeedInvestmentAddr,
+        address _PrivateSaleAddr,
+        address _TeamAllocationAddr,
+        address _StrategicRoundAddr
+    ) public onlyOwner {
+        require(!_isDispributionComplete);
 
-        if (monthsElapsed > _currentMonthOfBlockedTokens) {
-            _currentMonthOfBlockedTokens += 1;
-            balanceOf[PrivateSaleAddr] +=
-                (PrivateSale / 10000) *
-                PrivateSalePayOuts[_currentMonthOfBlockedTokens];
-            balanceOf[SeedInvestmentAddr] +=
-                (SeedInvestment / 10000) *
-                SeedTeamAdvisorsPayOuts[_currentMonthOfBlockedTokens];
-            balanceOf[TeamAllocationAddr] +=
-                (TeamAllocation / 10000) *
-                SeedTeamAdvisorsPayOuts[_currentMonthOfBlockedTokens];
-            balanceOf[AdvisorsAddr] +=
-                (Advisors / 10000) *
-                SeedTeamAdvisorsPayOuts[_currentMonthOfBlockedTokens];
-        }
+        // set parnters addresses
+        CommunityDevelopmentAddr = _CommunityDevelopmentAddr;
+        StakingRewardsAddr = _StakingRewardsAddr;
+        LiquidityPoolAddr = _LiquidityPoolAddr;
+        PublicSaleAddr = _PublicSaleAddr;
+        AdvisorsAddr = _AdvisorsAddr;
+        SeedInvestmentAddr = _SeedInvestmentAddr;
+        PrivateSaleAddr = _PrivateSaleAddr;
+        TeamAllocationAddr = _TeamAllocationAddr;
+        StrategicRoundAddr = _StrategicRoundAddr;
+    }
+
+    function addTokensToDistrTeams() public onlyOwner {
+        require((!_isDispributionComplete));
+
+        transfer(CommunityDevelopmentAddr, CommunityDevelopmentAmount);
+        transfer(StakingRewardsAddr, StakingRewardsAmount);
+        transfer(LiquidityPoolAddr, LiquidityPoolAmount);
+        transfer(PublicSaleAddr, PublicSaleAmount);
+        transfer(AdvisorsAddr, AdvisorsAmount);
+        transfer(SeedInvestmentAddr, SeedInvestmentAmount);
+        transfer(PrivateSaleAddr, PrivateSaleAmount);
+        transfer(TeamAllocationAddr, TeamAllocationAmount);
+        transfer(StrategicRoundAddr, StrategicRoundAmount);
+
+        _isDispributionComplete = true;
     }
 }
