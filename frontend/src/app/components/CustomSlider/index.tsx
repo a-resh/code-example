@@ -35,14 +35,14 @@ export default function CustomizedSlider({
   const PrettoSlider = withStyles({
     root: {
       color: TotemsData[totem].color,
-      height: 8,
+      height: 12,
     },
     thumb: {
-      height: 8,
-      width: 8,
+      height: 12,
+      width: 12,
       backgroundColor: '#fff',
       marginTop: 0,
-      marginLeft: -8,
+      marginLeft: -12,
       '&:focus, &:hover, &$active': {
         boxShadow: 'inherit',
       },
@@ -52,12 +52,12 @@ export default function CustomizedSlider({
       left: 'calc(-50% + 1px)',
     },
     track: {
-      height: 8,
-      borderRadius: 4,
+      height: 12,
+      borderRadius: 6,
     },
     rail: {
-      height: 8,
-      borderRadius: 4,
+      height: 12,
+      borderRadius: 6,
     },
   })(Slider);
   const [sliderValue, setValue] = useState(value);
@@ -71,6 +71,7 @@ export default function CustomizedSlider({
         onChange={setNewValue}
         valueLabelDisplay="auto"
         aria-label="slider"
+        max={35}
         defaultValue={sliderValue}
       />
     </div>

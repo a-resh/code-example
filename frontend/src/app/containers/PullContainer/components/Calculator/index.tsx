@@ -37,10 +37,11 @@ export function Calculator({
   const [tokensValue, setTokensValue] = useState(0);
   const [dollarsValue, setDollarsValue] = useState(0);
   const selectValues = {
-    1: 30,
+    1: 37.5,
     2: 20,
-    3: 7.5,
-    4: 7.5,
+    3: 11,
+    4: 2.5,
+    5: 1
   };
   const calculate = () => {
     const tokens =
@@ -91,8 +92,9 @@ export function Calculator({
           >
             <option value="1">1st</option>
             <option value="2">2nd</option>
-            <option value="3">4-10th</option>
-            <option value="4">11-25th</option>
+            <option value="3">3rd</option>
+            <option value="4">4-10th</option>
+            <option value="5">11-25th</option>
           </select>
           <p>{t(...messages.place)}...</p>
         </RowCalc>
@@ -200,7 +202,7 @@ const SpaceBetween = styled.div`
 `;
 const RowSmall = styled(Row)`
   align-items: center;
-  height: 20px;
+  height: 24px;
   font-size: 11px;
   ${mediaQueries.lessThan('small')`
     padding: 0 0 0 30px;

@@ -30,22 +30,26 @@ export function Reward({ totem, allPayouts }: Props) {
               <ul>
                 <li>1st</li>
                 <li>2nd</li>
+                <li>3nd</li>
                 <li>4th - 10th</li>
                 <li>11th - 25th</li>
               </ul>
             </LightFont>
             <ul>
               <li>
-                <b>30%</b>
+                <b>37.5%</b>
               </li>
               <li>
                 <b>20%</b>
               </li>
               <li>
-                <b>7.5%</b>
+                <b>11%</b>
               </li>
               <li>
-                <b>7.5%</b>
+                <b>2.5%</b>
+              </li>
+              <li>
+                <b>1%</b>
               </li>
             </ul>
           </Row>
@@ -101,7 +105,7 @@ const ColumnReward = styled(Column)`
   li {
     list-style-type: none;
     font-size: 19px;
-    text-align: right;
+    text-align: left;
     padding-left: 5px;
   }
   ${mediaQueries.lessThan('small')`
@@ -117,6 +121,7 @@ const LightFont = styled.div`
   li {
     border-right: 2px solid white;
     padding-right: 5px;
+    text-align: right;
   }
   ${mediaQueries.greaterThan('large')`
     li {padding-right: 7px}

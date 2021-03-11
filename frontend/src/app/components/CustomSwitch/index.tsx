@@ -17,8 +17,8 @@ interface Props {
 export default function CustomSwitch({ totem, value, onChangeValue }: Props) {
   const OrangeSwitch = withStyles({
     root: {
-      width: 16,
-      height: 8,
+      width: 24,
+      height: 12,
       padding: 0,
       display: 'flex',
     },
@@ -26,7 +26,7 @@ export default function CustomSwitch({ totem, value, onChangeValue }: Props) {
       padding: 0,
       color: TotemsData[totem].color,
       '&$checked': {
-        transform: 'translateX(8px)',
+        transform: 'translateX(12px)',
         color: 'white',
         '& + $track': {
           opacity: 1,
@@ -36,12 +36,12 @@ export default function CustomSwitch({ totem, value, onChangeValue }: Props) {
       },
     },
     thumb: {
-      width: 8,
-      height: 8,
+      width: 12,
+      height: 12,
       boxShadow: 'none',
     },
     track: {
-      borderRadius: 8 / 2,
+      borderRadius: 12 / 2,
       opacity: 1,
       backgroundColor: 'white',
     },

@@ -27,7 +27,6 @@ function* makePredict(action: PayloadAction<MakePredictData>) {
   try {
     yield put({ type: pullContainerActions.loading.type });
     const result = yield call(approve, action);
-    console.log(result);
     if (result) {
       yield call(predict, action);
       yield put({

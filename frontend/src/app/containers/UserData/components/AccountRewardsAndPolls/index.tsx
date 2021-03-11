@@ -21,20 +21,6 @@ interface Props {
 export const AccountRewardsAndPools = memo(({ rewards, payout }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
-  // const totems = ['fox', 'wolf', 'owl'];
-  // const values = Array.apply(null, Array(5))
-  //   .map(() => {
-  //     const totems = ['fox', 'wolf', 'owl'];
-  //     return {
-  //       totem: totems[Math.round(Math.random() + 0.6)],
-  //       stake: Math.ceil(1000 * Math.random() * 100),
-  //       time: new Date(`202${Math.round(Math.random())}-10-20`),
-  //       prediction: Math.ceil(12000 + Math.random() * 100),
-  //       projectedReturns: Math.ceil(1500 * Math.random() * 100),
-  //       actualReturns: Math.ceil(1200 * Math.random() * 100),
-  //     };
-  //   })
-  //   .sort((a, b) => a.time.getTime() - b.time.getTime());
   return (
     <Div>
       <h1>{t('Pools and rewards')}</h1>
