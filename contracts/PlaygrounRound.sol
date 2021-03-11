@@ -12,6 +12,10 @@ contract Draw {
     uint256 poolPrizeTOTM;
     uint256 poolPrizeBTC;
     TotemToken totemToken;
+    uint256 predictionMediana = 0;
+    mapping(uint256 => unit256) public collaborativeBonus;
+
+    address owner;
 
     struct Player {
         address addr;
@@ -97,6 +101,18 @@ contract Draw {
         enhancedRewards[4] = 3;
         enhancedRewards[5] = 4;
         enhancedRewards[6] = 5;
+
+        // collaborative bonus mapping
+        collaborativeBonus[125000] = 20;
+        collaborativeBonus[110000] = 25;
+        collaborativeBonus[90000] = 35;
+
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        require(msg.sender == owner, "Only owner can call this function.");
+        _;
     }
 
     function addNewPlayer(
@@ -112,6 +128,21 @@ contract Draw {
         currentPoolSize = currentPoolSize + _stake;
     }
 
+    function setCollaborativeValues(uint256 poolSize, uint256 bonusValue)
+        public
+        onlyOwner
+    {
+        collaborativeBonus[poolSize] = bonusValue;
+    }
+
+    function calculateCollaborativeIndex() private {
+        uint256 predictionSum = 0;
+        for (uint256 i = 0; i < playersCount; i++) {
+            predictionSum += players[i].prediction;
+        }
+        predictionMediana = predictionSum / playersCount;
+    }
+
     function endDraw(uint256 _finalyBTCPrice) public {
         // 1. Conditions
         require(block.timestamp >= drawEndTime, "Draw not yet ended.");
@@ -122,6 +153,7 @@ contract Draw {
         finalyBTCPrice = _finalyBTCPrice;
         emit DrawEnded(finalyBTCPrice, playersCount);
         createWinnersList();
+        calculateCollaborativeIndex();
     }
 
     function createWinnersList() private {
@@ -152,6 +184,7 @@ contract Draw {
         uint8 _nextWinner = 0;
         while (_nextWinner <= _winnersLength - 1) {
             for (uint8 i = 0; i < _winnersLength; i++) {
+                uint256 collaborativeValue = 100;
                 if (players[i].prediction == sortPrediction[_nextWinner]) {
                     uint256 _totmPay =
                         (poolPrizeTOTM / 1000) * prizes[_nextWinner];
@@ -160,6 +193,22 @@ contract Draw {
                             (players[winners[_nextWinner].addr].stakeTime -
                                 drawStartTime) / ONE_HOUR
                         ]);
+                    // collaborative logic
+                    if (predictionMediana > players[i].prediction) {
+                        collaborativeValue =
+                            predictionMediana -
+                            players[i].prediction;
+                    } else {
+                        collaborativeValue =
+                            players[i].prediction -
+                            predictionMediana;
+                    }
+                    if (predictionMediana < 25) {
+                        _totmPay +=
+                            (_totmPay / 100) *
+                            collaborativeBonus[maxPoolSize];
+                    }
+
                     uint256 _btcPay =
                         (poolPrizeBTC / 1000) * prizes[_nextWinner];
                     winners.push(
