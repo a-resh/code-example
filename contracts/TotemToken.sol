@@ -27,6 +27,11 @@ contract TotemToken {
     uint256 public TeamAllocationAmount;
     uint256 public StrategicRoundAmount;
 
+    // recall functionality
+    address public recallWallet;
+    bool public isTaxEnabled = true;
+    uint8 public taxValue = 3;
+
     uint8 COMMUNITY_DEVELOPMENT = 100; // 10% for Community development
     uint8 STAKING_REWARDS = 165; // 16,5% for Staking Revawards
     uint8 LIQUIDITY_POOL = 25; // 2,5% for Liquidity pool
@@ -90,8 +95,15 @@ contract TotemToken {
     {
         require(balanceOf[msg.sender] >= _value);
 
-        balanceOf[msg.sender] -= _value;
-        balanceOf[_to] += _value;
+        if (isTaxEnabled) {
+            uint256 calculatedTax = (_value / 100) * taxValue;
+            balanceOf[msg.sender] -= _value;
+            balanceOf[_to] += _value - calculatedTax;
+            balanceOf[recallWallet] += calculatedTax;
+        } else {
+            balanceOf[msg.sender] -= _value;
+            balanceOf[_to] += _value;
+        }
 
         emit Transfer(msg.sender, _to, _value);
 
@@ -117,12 +129,20 @@ contract TotemToken {
         require(_value <= balanceOf[_from]);
         require(_value <= allowance[_from][msg.sender]);
 
-        balanceOf[_from] -= _value;
-        balanceOf[_to] += _value;
+        if (isTaxEnabled) {
+            uint256 calculatedTax = (_value / 100) * taxValue;
+            balanceOf[_from] -= _value;
+            balanceOf[_to] += _value - calculatedTax;
+            allowance[_from][msg.sender] -= _value;
+            balanceOf[recallWallet] += calculatedTax;
+        } else {
+            balanceOf[_from] -= _value;
+            balanceOf[_to] += _value;
 
-        allowance[_from][msg.sender] -= _value;
+            allowance[_from][msg.sender] -= _value;
 
-        Transfer(_from, _to, _value);
+            Transfer(_from, _to, _value);
+        }
 
         return true;
     }
@@ -150,6 +170,18 @@ contract TotemToken {
         PrivateSaleAddr = _PrivateSaleAddr;
         TeamAllocationAddr = _TeamAllocationAddr;
         StrategicRoundAddr = _StrategicRoundAddr;
+    }
+
+    function setRecallWallet(address _recallWalletAddr) public onlyOwner {
+        recallWallet = _recallWalletAddr;
+    }
+
+    function setTaxValue(uint8 _newTax) public onlyOwner {
+        taxValue = _newTax;
+    }
+
+    function setTaxFunc(bool _isOnTax) public onlyOwner {
+        isTaxEnabled = _isOnTax;
     }
 
     function addTokensToDistrTeams() public onlyOwner {
