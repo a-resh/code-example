@@ -4,8 +4,7 @@ pragma solidity 0.7.4;
 contract PublicSaleTimeLock {
     address owner;
     bool private _isPublicSaleFilled = false;
-    address[] accounts;
-    mapping(address => uint256) public balanceOf;
+    mapping(address => uint256) public accounts;
     uint256 private _startTime;
     uint8 private _currentMonthOfBlockedTokens;
     uint256 private ONE_MONTH = 2629746; // 1 month in seconds
@@ -28,21 +27,18 @@ contract PublicSaleTimeLock {
     function closePublicSaleList() public onlyOwner {
         _isPublicSaleFilled = true;
         mainBalance = address(this).balance;
-        fillBalances();
     }
 
-    function addNewMember(address newMember) public onlyOwner {
+    function getMainBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
+    function addNewMember(address newMember, uint256 distributionAmount)
+        public
+        onlyOwner
+    {
         require(!_isPublicSaleFilled);
-        accounts.push(newMember);
-    }
-
-    function fillBalances() private {
-        uint256 accountsLength = accounts.length;
-        uint256 balancePerAccount = mainBalance / accountsLength;
-        uint256 index = 0;
-        for (index; index < accountsLength; index++) {
-            balanceOf[accounts[index]] = balancePerAccount;
-        }
+        accounts[newMember] = distributionAmount;
     }
 
     function nextMonth() public onlyOwner {
@@ -55,8 +51,8 @@ contract PublicSaleTimeLock {
             block.timestamp >
                 _startTime + _currentMonthOfBlockedTokens * ONE_MONTH
         );
-        uint256 payoutValue = balanceOf[msg.sender];
-        balanceOf[msg.sender] = 0;
+        uint256 payoutValue = accounts[msg.sender];
+        accounts[msg.sender] = 0;
         msg.sender.transfer(payoutValue);
         return true;
     }
