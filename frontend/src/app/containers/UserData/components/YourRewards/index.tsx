@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { Center, Column, Row } from '../../../../components/blocks';
 import { TotemBackground } from '../../../../../types/interfaces';
 import { Icon } from '../../../../components/Icon';
-import {mediaQueries, TotemsData} from '../../../../../types/constants';
+import { mediaQueries, TotemsData } from '../../../../../types/constants';
 import { Claim } from '../AccountRewardsAndPolls';
 import { TableData } from '../../types';
 
@@ -20,7 +20,12 @@ interface Props {
   payout: () => void;
 }
 
-export function YourRewards({ stakes, payout, btcLastPrice, tokenPrice }: Props) {
+export function YourRewards({
+  stakes,
+  payout,
+  btcLastPrice,
+  tokenPrice,
+}: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   // const values = Array.apply(null, Array(5)).map(() => {

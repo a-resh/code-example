@@ -46,17 +46,28 @@ export function Calculator({
   };
   const calculate = () => {
     const tokens = Math.round(
-        (+inputValue) - (+inputValue * 0.03)
-        + (inputValue * (checkBoxValue? 0: TotemsData[totem.toUpperCase()].collaborateBonus))
-        + (inputValue * sliderValue / 100)
-        + +((TotemsData[totem.toUpperCase()].totemReward * selectValues[+selectValue]) / 100));
+      +inputValue -
+        +inputValue * 0.03 +
+        inputValue *
+          (checkBoxValue
+            ? 0
+            : TotemsData[totem.toUpperCase()].collaborateBonus) +
+        (inputValue * sliderValue) / 100 +
+        +(
+          (TotemsData[totem.toUpperCase()].totemReward *
+            selectValues[+selectValue]) /
+          100
+        ),
+    );
 
     setTokensValue(tokens);
-    setTotemToUsd(Math.round(tokens * tokenPrice))
+    setTotemToUsd(Math.round(tokens * tokenPrice));
 
-    const btcPrice = TotemsData[totem.toUpperCase()].btcReward * selectValues[+selectValue] / 100;
+    const btcPrice =
+      (TotemsData[totem.toUpperCase()].btcReward * selectValues[+selectValue]) /
+      100;
     setBtcValue(+btcPrice.toFixed(5));
-    setBtcToUsd(Math.round(btcPrice * btcLastPrice))
+    setBtcToUsd(Math.round(btcPrice * btcLastPrice));
   };
   useEffect(() => {
     calculate();
