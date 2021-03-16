@@ -18,6 +18,7 @@ export const TotemsData = {
     btcReward: 0.1,
     totemReward: 4500,
     collaborateBonus: 0.2,
+    stakingReward: 0.6,
   },
   WOLF: {
     id: 2,
@@ -30,6 +31,7 @@ export const TotemsData = {
     btcReward: 0.125,
     totemReward: 5500,
     collaborateBonus: 0.25,
+    stakingReward: 0.65,
   },
   OWL: {
     id: 3,
@@ -44,6 +46,7 @@ export const TotemsData = {
     btcReward: 0.15,
     totemReward: 6500,
     collaborateBonus: 0.35,
+    stakingReward: 0.75,
   },
   USER: {
     name: 'My Account',

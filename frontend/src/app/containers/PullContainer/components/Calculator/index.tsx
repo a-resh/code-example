@@ -15,6 +15,7 @@ import { Icon } from 'app/components/Icon';
 import { CtaButton } from '../../../../components/CtaButton';
 import { Center, Column, Row } from '../../../../components/blocks';
 import { TotemBackground } from '../../../../../types/interfaces';
+import moment from "moment";
 
 interface Props {
   showModal: () => void;
@@ -27,7 +28,7 @@ export function Calculator({
   showModal,
   btcLastPrice,
   tokenPrice,
-  totem,
+  totem
 }: Props) {
   const [selectValue, setSelectValue] = useState(1);
   const [inputValue, setInputValue] = useState(1000);
@@ -46,18 +47,15 @@ export function Calculator({
   };
   const calculate = () => {
     const tokens = Math.round(
-      +inputValue -
+        (+inputValue -
         +inputValue * 0.03 +
-        inputValue *
-          (checkBoxValue
-            ? 0
-            : TotemsData[totem.toUpperCase()].collaborateBonus) +
-        (inputValue * sliderValue) / 100 +
-        +(
-          (TotemsData[totem.toUpperCase()].totemReward *
+        +(+inputValue * TotemsData[totem.toUpperCase()].stakingReward) +
+        +(inputValue * sliderValue) / 100 +
+        +((TotemsData[totem.toUpperCase()].totemReward *
             selectValues[+selectValue]) /
           100
-        ),
+        )) *
+        (!checkBoxValue ? 1 + TotemsData[totem.toUpperCase()].collaborateBonus: 1)
     );
 
     setTokensValue(tokens);
@@ -65,7 +63,8 @@ export function Calculator({
 
     const btcPrice =
       (TotemsData[totem.toUpperCase()].btcReward * selectValues[+selectValue]) /
-      100;
+      100 * ((!checkBoxValue
+        ? 1 + TotemsData[totem.toUpperCase()].collaborateBonus: 1));
     setBtcValue(+btcPrice.toFixed(5));
     setBtcToUsd(Math.round(btcPrice * btcLastPrice));
   };
