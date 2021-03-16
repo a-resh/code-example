@@ -43,7 +43,7 @@ export function Header({}: Props) {
           height={15}
           onClick={() =>
             window.open(
-              `https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13`,
+              `https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=${process.env.REACT_APP_UNISWAP_CONTRACT_ADDRESS}`,
               '_blank',
             )
           }

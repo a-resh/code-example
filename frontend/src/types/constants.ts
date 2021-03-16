@@ -15,8 +15,9 @@ export const TotemsData = {
     message: '15 days',
     maxPoolSize: 90000,
     days: 15,
-    btcPrice: 0.1,
-    totemPrice: 4500
+    btcReward: 0.1,
+    totemReward: 4500,
+    collaborateBonus: 0.20
   },
   WOLF: {
     id: 2,
@@ -26,8 +27,9 @@ export const TotemsData = {
     message: '30 days',
     maxPoolSize: 110000,
     days: 30,
-    btcPrice: 0.125,
-    totemPrice: 5500
+    btcReward: 0.125,
+    totemReward: 5500,
+    collaborateBonus: 0.25
   },
   OWL: {
     id: 3,
@@ -39,8 +41,9 @@ export const TotemsData = {
     message: '45 days',
     maxPoolSize: 125000,
     days: 45,
-    btcPrice: 0.15,
-    totemPrice: 6500
+    btcReward: 0.15,
+    totemReward: 6500,
+    collaborateBonus: 0.35
   },
   USER: {
     name: 'My Account',

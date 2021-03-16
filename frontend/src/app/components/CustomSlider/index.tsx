@@ -71,7 +71,7 @@ export default function CustomizedSlider({
         onChange={setNewValue}
         valueLabelDisplay="auto"
         aria-label="slider"
-        max={35}
+        max={5}
         defaultValue={sliderValue}
       />
     </div>

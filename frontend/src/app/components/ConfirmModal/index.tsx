@@ -104,7 +104,7 @@ const ModalContent = styled(Center)`
   width: 100%;
   height: calc(100% - 50px);
   flex-direction: column;
-  padding: 10px 0 ;
+  padding: 10px 0;
 
   p {
     font-family: Lato;

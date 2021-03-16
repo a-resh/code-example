@@ -34,21 +34,29 @@ export function Calculator({
   const [checkBoxValue, setCheckBoxValue] = useState(true);
   const [sliderValue, setSliderValue] = useState(50);
   const [btcValue, setBtcValue] = useState(0);
+  const [btcToUsd, setBtcToUsd] = useState(0);
+  const [totemToUsd, setTotemToUsd] = useState(0);
   const [tokensValue, setTokensValue] = useState(0);
-  const [dollarsValue, setDollarsValue] = useState(0);
   const selectValues = {
     1: 37.5,
     2: 20,
     3: 11,
     4: 2.5,
-    5: 1
+    5: 1,
   };
   const calculate = () => {
-    const tokens =
-      +inputValue + +((inputValue * selectValues[+selectValue]) / 100);
-    setTokensValue(Math.round(tokens));
-    setDollarsValue(Math.round(tokens * tokenPrice));
-    setBtcValue(+((tokens * tokenPrice) / btcLastPrice).toFixed(5));
+    const tokens = Math.round(
+        (+inputValue) - (+inputValue * 0.03)
+        + (inputValue * (checkBoxValue? 0: TotemsData[totem.toUpperCase()].collaborateBonus))
+        + (inputValue * sliderValue / 100)
+        + +((TotemsData[totem.toUpperCase()].totemReward * selectValues[+selectValue]) / 100));
+
+    setTokensValue(tokens);
+    setTotemToUsd(Math.round(tokens * tokenPrice))
+
+    const btcPrice = TotemsData[totem.toUpperCase()].btcReward * selectValues[+selectValue] / 100;
+    setBtcValue(+btcPrice.toFixed(5));
+    setBtcToUsd(Math.round(btcPrice * btcLastPrice))
   };
   useEffect(() => {
     calculate();
@@ -126,18 +134,18 @@ export function Calculator({
           <AmountCurrency>
             <h5>BTC</h5>
             <h3>{btcValue}</h3>
-            <h6>(USD 0.16)</h6>
+            <h6>(USD {btcToUsd})</h6>
           </AmountCurrency>
           <p>&</p>
           <AmountCurrency>
             <h5>TOTM</h5>
             <h3>{tokensValue}</h3>
-            <h6>(USD 0.16)</h6>
+            <h6>(USD {totemToUsd})</h6>
           </AmountCurrency>
         </CurrencyBlock>
         <AmountCurrency>
           <h4>{t(...messages.totalReward)}:</h4>
-          <h2>$ {dollarsValue}</h2>
+          <h2>$ {totemToUsd + btcToUsd}</h2>
         </AmountCurrency>
         <ButtonWrapper
           color={'white'}

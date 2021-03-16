@@ -9,16 +9,18 @@ import { useTranslation } from 'react-i18next';
 import { Center, Column, Row } from '../../../../components/blocks';
 import { TotemBackground } from '../../../../../types/interfaces';
 import { Icon } from '../../../../components/Icon';
-import { TotemsData } from '../../../../../types/constants';
+import {mediaQueries, TotemsData} from '../../../../../types/constants';
 import { Claim } from '../AccountRewardsAndPolls';
 import { TableData } from '../../types';
 
 interface Props {
+  btcLastPrice: number;
+  tokenPrice: number;
   stakes: TableData[];
   payout: () => void;
 }
 
-export function YourRewards({ stakes, payout }: Props) {
+export function YourRewards({ stakes, payout, btcLastPrice, tokenPrice }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, i18n } = useTranslation();
   // const values = Array.apply(null, Array(5)).map(() => {
@@ -70,13 +72,13 @@ export function YourRewards({ stakes, payout }: Props) {
                   )}`}</p>
                 </StakingPool>
                 <TOTM>
-                  <p>100</p>
+                  <p>{v.actualReturns}</p>
                 </TOTM>
                 <BTC>
                   <p>0.03</p>
                 </BTC>
                 <Total>
-                  <p>$300</p>
+                  <p>${Math.round(v.actualReturns * tokenPrice)}</p>
                 </Total>
                 <ButtonBlock>
                   <ClaimMobile totem={v.totem} onClick={payout}>
@@ -107,6 +109,9 @@ const Div = styled.div`
     font-weight: 300;
     font-size: 20px;
   }
+  ${mediaQueries.greaterThan('small')`
+     display: none;
+  `}
 `;
 
 const Table = styled(Column)``;
